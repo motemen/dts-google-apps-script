@@ -1,0 +1,62 @@
+/// <reference path="googleappsscript.types.d.ts" />
+/// <reference path="googleappsscript.base.d.ts" />
+
+declare module GoogleAppsScript {
+  export module Groups {
+    /**
+     * This class provides access to Google Groups information. It can be used to
+     *  query information such as a group's email address, or the list of groups in
+     *  which the user is a direct member.
+     * 
+     *  Here's an example that shows how many groups the current user is a member of:
+     * 
+     *        var groups = GroupsApp.getGroups();
+     *        Logger.log('You belong to ' + groups.length + ' groups.');
+     */
+    export interface GroupsApp {
+      Role: Role
+      getGroupByEmail(email: String): Group;
+      getGroups(): Group[];
+    }
+
+    /**
+     * Possible roles of a user within a group, such as owner or ordinary member.
+     *  Users subscribed to a group have exactly one role within the context of that
+     *  group.
+     * See also
+     * 
+     * Group.getRole(email)
+     */
+    export enum Role { OWNER, MANAGER, MEMBER, INVITED, PENDING }
+
+    /**
+     * A group object whose members and those members' roles within the group
+     *  can be queried.
+     * 
+     *  Here's an example which shows the members of a group. Before running it,
+     *  replace the email address of the group with that of one on your domain.
+     * 
+     *        function listGroupMembers() {
+     *          var group = GroupsApp.getGroupByEmail("example@googlegroups.com");
+     *          var s = group.getEmail() + ': ';
+     *          var users = group.getUsers();
+     *          for (var i = 0; i < users.length; i++) {
+     *            var user = users[i];
+     *            s = s + user.getEmail() + ", ";
+     *          }
+     *          Logger.log(s);
+     *        }
+     */
+    export interface Group {
+      getEmail(): String;
+      getRole(email: String): Role;
+      getRole(user: Base.User): Role;
+      getUsers(): Base.User[];
+      hasUser(email: String): Boolean;
+      hasUser(user: Base.User): Boolean;
+    }
+
+  }
+}
+
+declare var GroupsApp: GoogleAppsScript.Groups.GroupsApp;
