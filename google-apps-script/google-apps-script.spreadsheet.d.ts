@@ -1,7 +1,7 @@
-/// <reference path="googleappsscript.types.d.ts" />
-/// <reference path="googleappsscript.base.d.ts" />
-/// <reference path="googleappsscript.drive.d.ts" />
-/// <reference path="googleappsscript.charts.d.ts" />
+/// <reference path="google-apps-script.types.d.ts" />
+/// <reference path="google-apps-script.base.d.ts" />
+/// <reference path="google-apps-script.drive.d.ts" />
+/// <reference path="google-apps-script.charts.d.ts" />
 
 declare module GoogleAppsScript {
   export module Spreadsheet {

@@ -1,8 +1,8 @@
-/// <reference path="googleappsscript.types.d.ts" />
-/// <reference path="googleappsscript.base.d.ts" />
-/// <reference path="googleappsscript.document.d.ts" />
-/// <reference path="googleappsscript.forms.d.ts" />
-/// <reference path="googleappsscript.spreadsheet.d.ts" />
+/// <reference path="google-apps-script.types.d.ts" />
+/// <reference path="google-apps-script.base.d.ts" />
+/// <reference path="google-apps-script.document.d.ts" />
+/// <reference path="google-apps-script.forms.d.ts" />
+/// <reference path="google-apps-script.spreadsheet.d.ts" />
 
 declare module GoogleAppsScript {
   export module Script {

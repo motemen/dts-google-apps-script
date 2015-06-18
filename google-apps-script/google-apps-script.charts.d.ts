@@ -1,6 +1,6 @@
-/// <reference path="googleappsscript.types.d.ts" />
-/// <reference path="googleappsscript.base.d.ts" />
-/// <reference path="googleappsscript.ui.d.ts" />
+/// <reference path="google-apps-script.types.d.ts" />
+/// <reference path="google-apps-script.base.d.ts" />
+/// <reference path="google-apps-script.ui.d.ts" />
 
 declare module GoogleAppsScript {
   export module Charts {

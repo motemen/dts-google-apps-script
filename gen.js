@@ -102,10 +102,10 @@ process.stdin.on('end', () => {
       }
     }
 
-    result = references.map((ref) => '/// <reference path="googleappsscript.' + ref + '.d.ts" />')
+    result = references.map((ref) => '/// <reference path="google-apps-script.' + ref + '.d.ts" />')
       .concat('', result);
 
-    var file = 'out/googleappsscript.' + cat + '.d.ts';
+    var file = 'google-apps-script/google-apps-script.' + cat + '.d.ts';
     var f = fs.openSync(file, 'w');
     fs.writeSync(f, result.join('\n'));
     console.error('Wrote to ' + file);

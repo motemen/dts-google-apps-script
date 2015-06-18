@@ -1,4 +1,4 @@
-/// <reference path="googleappsscript.types.d.ts" />
+/// <reference path="google-apps-script.types.d.ts" />
 
 declare module GoogleAppsScript {
   export module Language {
