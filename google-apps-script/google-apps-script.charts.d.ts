@@ -46,26 +46,26 @@ declare module GoogleAppsScript {
     export interface AreaChartBuilder {
       build(): Chart;
       reverseCategories(): AreaChartBuilder;
-      setBackgroundColor(cssValue: String): AreaChartBuilder;
+      setBackgroundColor(cssValue: string): AreaChartBuilder;
       setColors(cssValues: String[]): AreaChartBuilder;
-      setDataSourceUrl(url: String): AreaChartBuilder;
+      setDataSourceUrl(url: string): AreaChartBuilder;
       setDataTable(tableBuilder: DataTableBuilder): AreaChartBuilder;
       setDataTable(table: DataTableSource): AreaChartBuilder;
       setDataViewDefinition(dataViewDefinition: DataViewDefinition): AreaChartBuilder;
       setDimensions(width: Integer, height: Integer): AreaChartBuilder;
       setLegendPosition(position: Position): AreaChartBuilder;
       setLegendTextStyle(textStyle: TextStyle): AreaChartBuilder;
-      setOption(option: String, value: Object): AreaChartBuilder;
+      setOption(option: string, value: Object): AreaChartBuilder;
       setPointStyle(style: PointStyle): AreaChartBuilder;
       setRange(start: Number, end: Number): AreaChartBuilder;
       setStacked(): AreaChartBuilder;
-      setTitle(chartTitle: String): AreaChartBuilder;
+      setTitle(chartTitle: string): AreaChartBuilder;
       setTitleTextStyle(textStyle: TextStyle): AreaChartBuilder;
       setXAxisTextStyle(textStyle: TextStyle): AreaChartBuilder;
-      setXAxisTitle(title: String): AreaChartBuilder;
+      setXAxisTitle(title: string): AreaChartBuilder;
       setXAxisTitleTextStyle(textStyle: TextStyle): AreaChartBuilder;
       setYAxisTextStyle(textStyle: TextStyle): AreaChartBuilder;
-      setYAxisTitle(title: String): AreaChartBuilder;
+      setYAxisTitle(title: string): AreaChartBuilder;
       setYAxisTitleTextStyle(textStyle: TextStyle): AreaChartBuilder;
       useLogScale(): AreaChartBuilder;
     }
@@ -99,25 +99,25 @@ declare module GoogleAppsScript {
       build(): Chart;
       reverseCategories(): BarChartBuilder;
       reverseDirection(): BarChartBuilder;
-      setBackgroundColor(cssValue: String): BarChartBuilder;
+      setBackgroundColor(cssValue: string): BarChartBuilder;
       setColors(cssValues: String[]): BarChartBuilder;
-      setDataSourceUrl(url: String): BarChartBuilder;
+      setDataSourceUrl(url: string): BarChartBuilder;
       setDataTable(tableBuilder: DataTableBuilder): BarChartBuilder;
       setDataTable(table: DataTableSource): BarChartBuilder;
       setDataViewDefinition(dataViewDefinition: DataViewDefinition): BarChartBuilder;
       setDimensions(width: Integer, height: Integer): BarChartBuilder;
       setLegendPosition(position: Position): BarChartBuilder;
       setLegendTextStyle(textStyle: TextStyle): BarChartBuilder;
-      setOption(option: String, value: Object): BarChartBuilder;
+      setOption(option: string, value: Object): BarChartBuilder;
       setRange(start: Number, end: Number): BarChartBuilder;
       setStacked(): BarChartBuilder;
-      setTitle(chartTitle: String): BarChartBuilder;
+      setTitle(chartTitle: string): BarChartBuilder;
       setTitleTextStyle(textStyle: TextStyle): BarChartBuilder;
       setXAxisTextStyle(textStyle: TextStyle): BarChartBuilder;
-      setXAxisTitle(title: String): BarChartBuilder;
+      setXAxisTitle(title: string): BarChartBuilder;
       setXAxisTitleTextStyle(textStyle: TextStyle): BarChartBuilder;
       setYAxisTextStyle(textStyle: TextStyle): BarChartBuilder;
-      setYAxisTitle(title: String): BarChartBuilder;
+      setYAxisTitle(title: string): BarChartBuilder;
       setYAxisTitleTextStyle(textStyle: TextStyle): BarChartBuilder;
       useLogScale(): BarChartBuilder;
     }
@@ -181,19 +181,19 @@ declare module GoogleAppsScript {
      */
     export interface CategoryFilterBuilder {
       build(): Control;
-      setAllowMultiple(allowMultiple: Boolean): CategoryFilterBuilder;
-      setAllowNone(allowNone: Boolean): CategoryFilterBuilder;
-      setAllowTyping(allowTyping: Boolean): CategoryFilterBuilder;
-      setCaption(caption: String): CategoryFilterBuilder;
+      setAllowMultiple(allowMultiple: boolean): CategoryFilterBuilder;
+      setAllowNone(allowNone: boolean): CategoryFilterBuilder;
+      setAllowTyping(allowTyping: boolean): CategoryFilterBuilder;
+      setCaption(caption: string): CategoryFilterBuilder;
       setDataTable(tableBuilder: DataTableBuilder): CategoryFilterBuilder;
       setDataTable(table: DataTableSource): CategoryFilterBuilder;
       setFilterColumnIndex(columnIndex: Integer): CategoryFilterBuilder;
-      setFilterColumnLabel(columnLabel: String): CategoryFilterBuilder;
-      setLabel(label: String): CategoryFilterBuilder;
-      setLabelSeparator(labelSeparator: String): CategoryFilterBuilder;
+      setFilterColumnLabel(columnLabel: string): CategoryFilterBuilder;
+      setLabel(label: string): CategoryFilterBuilder;
+      setLabelSeparator(labelSeparator: string): CategoryFilterBuilder;
       setLabelStacking(orientation: Orientation): CategoryFilterBuilder;
       setSelectedValuesLayout(layout: PickerValuesLayout): CategoryFilterBuilder;
-      setSortValues(sortValues: Boolean): CategoryFilterBuilder;
+      setSortValues(sortValues: boolean): CategoryFilterBuilder;
       setValues(values: String[]): CategoryFilterBuilder;
     }
 
@@ -203,12 +203,12 @@ declare module GoogleAppsScript {
      *  EmbeddedChart.
      */
     export interface Chart {
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
-      getId(): String;
+      getId(): string;
       getOptions(): ChartOptions;
-      getType(): String;
-      setId(id: String): Chart;
+      getType(): string;
+      setId(id: string): Chart;
     }
 
     /**
@@ -221,7 +221,7 @@ declare module GoogleAppsScript {
      *  These options are immutable.
      */
     export interface ChartOptions {
-      get(option: String): Object;
+      get(option: string): Object;
     }
 
     /**
@@ -320,25 +320,25 @@ declare module GoogleAppsScript {
     export interface ColumnChartBuilder {
       build(): Chart;
       reverseCategories(): ColumnChartBuilder;
-      setBackgroundColor(cssValue: String): ColumnChartBuilder;
+      setBackgroundColor(cssValue: string): ColumnChartBuilder;
       setColors(cssValues: String[]): ColumnChartBuilder;
-      setDataSourceUrl(url: String): ColumnChartBuilder;
+      setDataSourceUrl(url: string): ColumnChartBuilder;
       setDataTable(tableBuilder: DataTableBuilder): ColumnChartBuilder;
       setDataTable(table: DataTableSource): ColumnChartBuilder;
       setDataViewDefinition(dataViewDefinition: DataViewDefinition): ColumnChartBuilder;
       setDimensions(width: Integer, height: Integer): ColumnChartBuilder;
       setLegendPosition(position: Position): ColumnChartBuilder;
       setLegendTextStyle(textStyle: TextStyle): ColumnChartBuilder;
-      setOption(option: String, value: Object): ColumnChartBuilder;
+      setOption(option: string, value: Object): ColumnChartBuilder;
       setRange(start: Number, end: Number): ColumnChartBuilder;
       setStacked(): ColumnChartBuilder;
-      setTitle(chartTitle: String): ColumnChartBuilder;
+      setTitle(chartTitle: string): ColumnChartBuilder;
       setTitleTextStyle(textStyle: TextStyle): ColumnChartBuilder;
       setXAxisTextStyle(textStyle: TextStyle): ColumnChartBuilder;
-      setXAxisTitle(title: String): ColumnChartBuilder;
+      setXAxisTitle(title: string): ColumnChartBuilder;
       setXAxisTitleTextStyle(textStyle: TextStyle): ColumnChartBuilder;
       setYAxisTextStyle(textStyle: TextStyle): ColumnChartBuilder;
-      setYAxisTitle(title: String): ColumnChartBuilder;
+      setYAxisTitle(title: string): ColumnChartBuilder;
       setYAxisTitleTextStyle(textStyle: TextStyle): ColumnChartBuilder;
       useLogScale(): ColumnChartBuilder;
     }
@@ -365,9 +365,9 @@ declare module GoogleAppsScript {
      *  documentation.
      */
     export interface Control {
-      getId(): String;
-      getType(): String;
-      setId(id: String): Control;
+      getId(): string;
+      getType(): string;
+      setId(id: string): Control;
     }
 
     /**
@@ -442,9 +442,9 @@ declare module GoogleAppsScript {
      */
     export interface DashboardPanel {
       add(widget: UI.Widget): DashboardPanel;
-      getId(): String;
-      getType(): String;
-      setId(id: String): DashboardPanel;
+      getId(): string;
+      getType(): string;
+      setId(id: string): DashboardPanel;
     }
 
     /**
@@ -487,7 +487,7 @@ declare module GoogleAppsScript {
      *          .build();
      */
     export interface DataTableBuilder {
-      addColumn(type: ColumnType, label: String): DataTableBuilder;
+      addColumn(type: ColumnType, label: string): DataTableBuilder;
       addRow(values: Object[]): DataTableBuilder;
       build(): DataTable;
       setValue(row: Integer, column: Integer, value: Object): DataTableBuilder;
@@ -584,26 +584,26 @@ declare module GoogleAppsScript {
     export interface LineChartBuilder {
       build(): Chart;
       reverseCategories(): LineChartBuilder;
-      setBackgroundColor(cssValue: String): LineChartBuilder;
+      setBackgroundColor(cssValue: string): LineChartBuilder;
       setColors(cssValues: String[]): LineChartBuilder;
       setCurveStyle(style: CurveStyle): LineChartBuilder;
-      setDataSourceUrl(url: String): LineChartBuilder;
+      setDataSourceUrl(url: string): LineChartBuilder;
       setDataTable(tableBuilder: DataTableBuilder): LineChartBuilder;
       setDataTable(table: DataTableSource): LineChartBuilder;
       setDataViewDefinition(dataViewDefinition: DataViewDefinition): LineChartBuilder;
       setDimensions(width: Integer, height: Integer): LineChartBuilder;
       setLegendPosition(position: Position): LineChartBuilder;
       setLegendTextStyle(textStyle: TextStyle): LineChartBuilder;
-      setOption(option: String, value: Object): LineChartBuilder;
+      setOption(option: string, value: Object): LineChartBuilder;
       setPointStyle(style: PointStyle): LineChartBuilder;
       setRange(start: Number, end: Number): LineChartBuilder;
-      setTitle(chartTitle: String): LineChartBuilder;
+      setTitle(chartTitle: string): LineChartBuilder;
       setTitleTextStyle(textStyle: TextStyle): LineChartBuilder;
       setXAxisTextStyle(textStyle: TextStyle): LineChartBuilder;
-      setXAxisTitle(title: String): LineChartBuilder;
+      setXAxisTitle(title: string): LineChartBuilder;
       setXAxisTitleTextStyle(textStyle: TextStyle): LineChartBuilder;
       setYAxisTextStyle(textStyle: TextStyle): LineChartBuilder;
-      setYAxisTitle(title: String): LineChartBuilder;
+      setYAxisTitle(title: string): LineChartBuilder;
       setYAxisTitleTextStyle(textStyle: TextStyle): LineChartBuilder;
       useLogScale(): LineChartBuilder;
     }
@@ -670,14 +670,14 @@ declare module GoogleAppsScript {
       setDataTable(tableBuilder: DataTableBuilder): NumberRangeFilterBuilder;
       setDataTable(table: DataTableSource): NumberRangeFilterBuilder;
       setFilterColumnIndex(columnIndex: Integer): NumberRangeFilterBuilder;
-      setFilterColumnLabel(columnLabel: String): NumberRangeFilterBuilder;
-      setLabel(label: String): NumberRangeFilterBuilder;
-      setLabelSeparator(labelSeparator: String): NumberRangeFilterBuilder;
+      setFilterColumnLabel(columnLabel: string): NumberRangeFilterBuilder;
+      setLabel(label: string): NumberRangeFilterBuilder;
+      setLabelSeparator(labelSeparator: string): NumberRangeFilterBuilder;
       setLabelStacking(orientation: Orientation): NumberRangeFilterBuilder;
       setMaxValue(maxValue: Integer): NumberRangeFilterBuilder;
       setMinValue(minValue: Integer): NumberRangeFilterBuilder;
       setOrientation(orientation: Orientation): NumberRangeFilterBuilder;
-      setShowRangeValues(showRangeValues: Boolean): NumberRangeFilterBuilder;
+      setShowRangeValues(showRangeValues: boolean): NumberRangeFilterBuilder;
       setTicks(ticks: Integer): NumberRangeFilterBuilder;
     }
 
@@ -717,17 +717,17 @@ declare module GoogleAppsScript {
       build(): Chart;
       reverseCategories(): PieChartBuilder;
       set3D(): PieChartBuilder;
-      setBackgroundColor(cssValue: String): PieChartBuilder;
+      setBackgroundColor(cssValue: string): PieChartBuilder;
       setColors(cssValues: String[]): PieChartBuilder;
-      setDataSourceUrl(url: String): PieChartBuilder;
+      setDataSourceUrl(url: string): PieChartBuilder;
       setDataTable(tableBuilder: DataTableBuilder): PieChartBuilder;
       setDataTable(table: DataTableSource): PieChartBuilder;
       setDataViewDefinition(dataViewDefinition: DataViewDefinition): PieChartBuilder;
       setDimensions(width: Integer, height: Integer): PieChartBuilder;
       setLegendPosition(position: Position): PieChartBuilder;
       setLegendTextStyle(textStyle: TextStyle): PieChartBuilder;
-      setOption(option: String, value: Object): PieChartBuilder;
-      setTitle(chartTitle: String): PieChartBuilder;
+      setOption(option: string, value: Object): PieChartBuilder;
+      setTitle(chartTitle: string): PieChartBuilder;
       setTitleTextStyle(textStyle: TextStyle): PieChartBuilder;
     }
 
@@ -767,28 +767,28 @@ declare module GoogleAppsScript {
      */
     export interface ScatterChartBuilder {
       build(): Chart;
-      setBackgroundColor(cssValue: String): ScatterChartBuilder;
+      setBackgroundColor(cssValue: string): ScatterChartBuilder;
       setColors(cssValues: String[]): ScatterChartBuilder;
-      setDataSourceUrl(url: String): ScatterChartBuilder;
+      setDataSourceUrl(url: string): ScatterChartBuilder;
       setDataTable(tableBuilder: DataTableBuilder): ScatterChartBuilder;
       setDataTable(table: DataTableSource): ScatterChartBuilder;
       setDataViewDefinition(dataViewDefinition: DataViewDefinition): ScatterChartBuilder;
       setDimensions(width: Integer, height: Integer): ScatterChartBuilder;
       setLegendPosition(position: Position): ScatterChartBuilder;
       setLegendTextStyle(textStyle: TextStyle): ScatterChartBuilder;
-      setOption(option: String, value: Object): ScatterChartBuilder;
+      setOption(option: string, value: Object): ScatterChartBuilder;
       setPointStyle(style: PointStyle): ScatterChartBuilder;
-      setTitle(chartTitle: String): ScatterChartBuilder;
+      setTitle(chartTitle: string): ScatterChartBuilder;
       setTitleTextStyle(textStyle: TextStyle): ScatterChartBuilder;
       setXAxisLogScale(): ScatterChartBuilder;
       setXAxisRange(start: Number, end: Number): ScatterChartBuilder;
       setXAxisTextStyle(textStyle: TextStyle): ScatterChartBuilder;
-      setXAxisTitle(title: String): ScatterChartBuilder;
+      setXAxisTitle(title: string): ScatterChartBuilder;
       setXAxisTitleTextStyle(textStyle: TextStyle): ScatterChartBuilder;
       setYAxisLogScale(): ScatterChartBuilder;
       setYAxisRange(start: Number, end: Number): ScatterChartBuilder;
       setYAxisTextStyle(textStyle: TextStyle): ScatterChartBuilder;
-      setYAxisTitle(title: String): ScatterChartBuilder;
+      setYAxisTitle(title: string): ScatterChartBuilder;
       setYAxisTitleTextStyle(textStyle: TextStyle): ScatterChartBuilder;
     }
 
@@ -851,16 +851,16 @@ declare module GoogleAppsScript {
      */
     export interface StringFilterBuilder {
       build(): Control;
-      setCaseSensitive(caseSensitive: Boolean): StringFilterBuilder;
+      setCaseSensitive(caseSensitive: boolean): StringFilterBuilder;
       setDataTable(tableBuilder: DataTableBuilder): StringFilterBuilder;
       setDataTable(table: DataTableSource): StringFilterBuilder;
       setFilterColumnIndex(columnIndex: Integer): StringFilterBuilder;
-      setFilterColumnLabel(columnLabel: String): StringFilterBuilder;
-      setLabel(label: String): StringFilterBuilder;
-      setLabelSeparator(labelSeparator: String): StringFilterBuilder;
+      setFilterColumnLabel(columnLabel: string): StringFilterBuilder;
+      setLabel(label: string): StringFilterBuilder;
+      setLabelSeparator(labelSeparator: string): StringFilterBuilder;
       setLabelStacking(orientation: Orientation): StringFilterBuilder;
       setMatchType(matchType: MatchType): StringFilterBuilder;
-      setRealtimeTrigger(realtimeTrigger: Boolean): StringFilterBuilder;
+      setRealtimeTrigger(realtimeTrigger: boolean): StringFilterBuilder;
     }
 
     /**
@@ -886,12 +886,12 @@ declare module GoogleAppsScript {
      */
     export interface TableChartBuilder {
       build(): Chart;
-      enablePaging(enablePaging: Boolean): TableChartBuilder;
+      enablePaging(enablePaging: boolean): TableChartBuilder;
       enablePaging(pageSize: Integer): TableChartBuilder;
       enablePaging(pageSize: Integer, startPage: Integer): TableChartBuilder;
-      enableRtlTable(rtlEnabled: Boolean): TableChartBuilder;
-      enableSorting(enableSorting: Boolean): TableChartBuilder;
-      setDataSourceUrl(url: String): TableChartBuilder;
+      enableRtlTable(rtlEnabled: boolean): TableChartBuilder;
+      enableSorting(enableSorting: boolean): TableChartBuilder;
+      setDataSourceUrl(url: string): TableChartBuilder;
       setDataTable(tableBuilder: DataTableBuilder): TableChartBuilder;
       setDataTable(table: DataTableSource): TableChartBuilder;
       setDataViewDefinition(dataViewDefinition: DataViewDefinition): TableChartBuilder;
@@ -899,9 +899,9 @@ declare module GoogleAppsScript {
       setFirstRowNumber(number: Integer): TableChartBuilder;
       setInitialSortingAscending(column: Integer): TableChartBuilder;
       setInitialSortingDescending(column: Integer): TableChartBuilder;
-      setOption(option: String, value: Object): TableChartBuilder;
-      showRowNumberColumn(showRowNumber: Boolean): TableChartBuilder;
-      useAlternatingRowStyle(alternate: Boolean): TableChartBuilder;
+      setOption(option: string, value: Object): TableChartBuilder;
+      showRowNumberColumn(showRowNumber: boolean): TableChartBuilder;
+      useAlternatingRowStyle(alternate: boolean): TableChartBuilder;
     }
 
     /**
@@ -940,8 +940,8 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface TextStyle {
-      getColor(): String;
-      getFontName(): String;
+      getColor(): string;
+      getFontName(): string;
       getFontSize(): Number;
     }
 
@@ -959,8 +959,8 @@ declare module GoogleAppsScript {
      */
     export interface TextStyleBuilder {
       build(): TextStyle;
-      setColor(cssValue: String): TextStyleBuilder;
-      setFontName(fontName: String): TextStyleBuilder;
+      setColor(cssValue: string): TextStyleBuilder;
+      setFontName(fontName: string): TextStyleBuilder;
       setFontSize(fontSize: Number): TextStyleBuilder;
     }
 

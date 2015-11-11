@@ -8,13 +8,13 @@ declare module GoogleAppsScript {
      */
     export interface AddressField {
       deleteAddressField(): void;
-      getAddress(): String;
+      getAddress(): string;
       getLabel(): Object;
-      isPrimary(): Boolean;
-      setAddress(address: String): AddressField;
+      isPrimary(): boolean;
+      setAddress(address: string): AddressField;
       setAsPrimary(): AddressField;
       setLabel(field: Field): AddressField;
-      setLabel(label: String): AddressField;
+      setLabel(label: string): AddressField;
     }
 
     /**
@@ -22,27 +22,27 @@ declare module GoogleAppsScript {
      */
     export interface CompanyField {
       deleteCompanyField(): void;
-      getCompanyName(): String;
-      getJobTitle(): String;
-      isPrimary(): Boolean;
+      getCompanyName(): string;
+      getJobTitle(): string;
+      isPrimary(): boolean;
       setAsPrimary(): CompanyField;
-      setCompanyName(company: String): CompanyField;
-      setJobTitle(title: String): CompanyField;
+      setCompanyName(company: string): CompanyField;
+      setJobTitle(title: string): CompanyField;
     }
 
     /**
      * A Contact contains the name, address, and various contact details of a contact.
      */
     export interface Contact {
-      addAddress(label: Object, address: String): AddressField;
-      addCompany(company: String, title: String): CompanyField;
+      addAddress(label: Object, address: string): AddressField;
+      addCompany(company: string, title: string): CompanyField;
       addCustomField(label: Object, content: Object): CustomField;
       addDate(label: Object, month: Base.Month, day: Integer, year: Integer): DateField;
-      addEmail(label: Object, address: String): EmailField;
-      addIM(label: Object, address: String): IMField;
-      addPhone(label: Object, number: String): PhoneField;
+      addEmail(label: Object, address: string): EmailField;
+      addIM(label: Object, address: string): IMField;
+      addPhone(label: Object, number: string): PhoneField;
       addToGroup(group: ContactGroup): Contact;
-      addUrl(label: Object, url: String): UrlField;
+      addUrl(label: Object, url: string): UrlField;
       deleteContact(): void;
       getAddresses(): AddressField[];
       getAddresses(label: Object): AddressField[];
@@ -54,60 +54,60 @@ declare module GoogleAppsScript {
       getDates(label: Object): DateField[];
       getEmails(): EmailField[];
       getEmails(label: Object): EmailField[];
-      getFamilyName(): String;
-      getFullName(): String;
-      getGivenName(): String;
+      getFamilyName(): string;
+      getFullName(): string;
+      getGivenName(): string;
       getIMs(): IMField[];
       getIMs(label: Object): IMField[];
-      getId(): String;
-      getInitials(): String;
+      getId(): string;
+      getInitials(): string;
       getLastUpdated(): Date;
-      getMaidenName(): String;
-      getMiddleName(): String;
-      getNickname(): String;
-      getNotes(): String;
+      getMaidenName(): string;
+      getMiddleName(): string;
+      getNickname(): string;
+      getNotes(): string;
       getPhones(): PhoneField[];
       getPhones(label: Object): PhoneField[];
-      getPrefix(): String;
-      getPrimaryEmail(): String;
-      getShortName(): String;
-      getSuffix(): String;
+      getPrefix(): string;
+      getPrimaryEmail(): string;
+      getShortName(): string;
+      getSuffix(): string;
       getUrls(): UrlField[];
       getUrls(label: Object): UrlField[];
       removeFromGroup(group: ContactGroup): Contact;
-      setFamilyName(familyName: String): Contact;
-      setFullName(fullName: String): Contact;
-      setGivenName(givenName: String): Contact;
-      setInitials(initials: String): Contact;
-      setMaidenName(maidenName: String): Contact;
-      setMiddleName(middleName: String): Contact;
-      setNickname(nickname: String): Contact;
-      setNotes(notes: String): Contact;
-      setPrefix(prefix: String): Contact;
-      setShortName(shortName: String): Contact;
-      setSuffix(suffix: String): Contact;
+      setFamilyName(familyName: string): Contact;
+      setFullName(fullName: string): Contact;
+      setGivenName(givenName: string): Contact;
+      setInitials(initials: string): Contact;
+      setMaidenName(maidenName: string): Contact;
+      setMiddleName(middleName: string): Contact;
+      setNickname(nickname: string): Contact;
+      setNotes(notes: string): Contact;
+      setPrefix(prefix: string): Contact;
+      setShortName(shortName: string): Contact;
+      setSuffix(suffix: string): Contact;
       getEmailAddresses(): String[];
-      getHomeAddress(): String;
-      getHomeFax(): String;
-      getHomePhone(): String;
-      getMobilePhone(): String;
-      getPager(): String;
-      getUserDefinedField(key: String): String;
+      getHomeAddress(): string;
+      getHomeFax(): string;
+      getHomePhone(): string;
+      getMobilePhone(): string;
+      getPager(): string;
+      getUserDefinedField(key: string): string;
       getUserDefinedFields(): Object;
-      getWorkAddress(): String;
-      getWorkFax(): String;
-      getWorkPhone(): String;
-      setHomeAddress(addr: String): void;
-      setHomeFax(phone: String): void;
-      setHomePhone(phone: String): void;
-      setMobilePhone(phone: String): void;
-      setPager(phone: String): void;
-      setPrimaryEmail(primaryEmail: String): void;
-      setUserDefinedField(key: String, value: String): void;
+      getWorkAddress(): string;
+      getWorkFax(): string;
+      getWorkPhone(): string;
+      setHomeAddress(addr: string): void;
+      setHomeFax(phone: string): void;
+      setHomePhone(phone: string): void;
+      setMobilePhone(phone: string): void;
+      setPager(phone: string): void;
+      setPrimaryEmail(primaryEmail: string): void;
+      setUserDefinedField(key: string, value: string): void;
       setUserDefinedFields(o: Object): void;
-      setWorkAddress(addr: String): void;
-      setWorkFax(phone: String): void;
-      setWorkPhone(phone: String): void;
+      setWorkAddress(addr: string): void;
+      setWorkFax(phone: string): void;
+      setWorkPhone(phone: string): void;
     }
 
     /**
@@ -117,13 +117,13 @@ declare module GoogleAppsScript {
       addContact(contact: Contact): ContactGroup;
       deleteGroup(): void;
       getContacts(): Contact[];
-      getId(): String;
-      getName(): String;
-      isSystemGroup(): Boolean;
+      getId(): string;
+      getName(): string;
+      isSystemGroup(): boolean;
       removeContact(contact: Contact): ContactGroup;
-      setName(name: String): ContactGroup;
-      getGroupName(): String;
-      setGroupName(name: String): void;
+      setName(name: string): ContactGroup;
+      getGroupName(): string;
+      setGroupName(name: string): void;
     }
 
     /**
@@ -137,44 +137,44 @@ declare module GoogleAppsScript {
       Month: Base.Month
       Priority: Priority
       Sensitivity: Sensitivity
-      createContact(givenName: String, familyName: String, email: String): Contact;
-      createContactGroup(name: String): ContactGroup;
+      createContact(givenName: string, familyName: string, email: string): Contact;
+      createContactGroup(name: string): ContactGroup;
       deleteContact(contact: Contact): void;
       deleteContactGroup(group: ContactGroup): void;
-      getContact(emailAddress: String): Contact;
-      getContactById(id: String): Contact;
-      getContactGroup(name: String): ContactGroup;
-      getContactGroupById(id: String): ContactGroup;
+      getContact(emailAddress: string): Contact;
+      getContactById(id: string): Contact;
+      getContactGroup(name: string): ContactGroup;
+      getContactGroupById(id: string): ContactGroup;
       getContactGroups(): ContactGroup[];
       getContacts(): Contact[];
-      getContactsByAddress(query: String): Contact[];
-      getContactsByAddress(query: String, label: Field): Contact[];
-      getContactsByAddress(query: String, label: String): Contact[];
-      getContactsByCompany(query: String): Contact[];
+      getContactsByAddress(query: string): Contact[];
+      getContactsByAddress(query: string, label: Field): Contact[];
+      getContactsByAddress(query: string, label: string): Contact[];
+      getContactsByCompany(query: string): Contact[];
       getContactsByCustomField(query: Object, label: ExtendedField): Contact[];
       getContactsByDate(month: Base.Month, day: Integer, label: Field): Contact[];
       getContactsByDate(month: Base.Month, day: Integer, year: Integer, label: Field): Contact[];
-      getContactsByDate(month: Base.Month, day: Integer, year: Integer, label: String): Contact[];
-      getContactsByDate(month: Base.Month, day: Integer, label: String): Contact[];
-      getContactsByEmailAddress(query: String): Contact[];
-      getContactsByEmailAddress(query: String, label: Field): Contact[];
-      getContactsByEmailAddress(query: String, label: String): Contact[];
+      getContactsByDate(month: Base.Month, day: Integer, year: Integer, label: string): Contact[];
+      getContactsByDate(month: Base.Month, day: Integer, label: string): Contact[];
+      getContactsByEmailAddress(query: string): Contact[];
+      getContactsByEmailAddress(query: string, label: Field): Contact[];
+      getContactsByEmailAddress(query: string, label: string): Contact[];
       getContactsByGroup(group: ContactGroup): Contact[];
-      getContactsByIM(query: String): Contact[];
-      getContactsByIM(query: String, label: Field): Contact[];
-      getContactsByIM(query: String, label: String): Contact[];
-      getContactsByJobTitle(query: String): Contact[];
-      getContactsByName(query: String): Contact[];
-      getContactsByName(query: String, label: Field): Contact[];
-      getContactsByNotes(query: String): Contact[];
-      getContactsByPhone(query: String): Contact[];
-      getContactsByPhone(query: String, label: Field): Contact[];
-      getContactsByPhone(query: String, label: String): Contact[];
-      getContactsByUrl(query: String): Contact[];
-      getContactsByUrl(query: String, label: Field): Contact[];
-      getContactsByUrl(query: String, label: String): Contact[];
-      findByEmailAddress(email: String): Contact;
-      findContactGroup(name: String): ContactGroup;
+      getContactsByIM(query: string): Contact[];
+      getContactsByIM(query: string, label: Field): Contact[];
+      getContactsByIM(query: string, label: string): Contact[];
+      getContactsByJobTitle(query: string): Contact[];
+      getContactsByName(query: string): Contact[];
+      getContactsByName(query: string, label: Field): Contact[];
+      getContactsByNotes(query: string): Contact[];
+      getContactsByPhone(query: string): Contact[];
+      getContactsByPhone(query: string, label: Field): Contact[];
+      getContactsByPhone(query: string, label: string): Contact[];
+      getContactsByUrl(query: string): Contact[];
+      getContactsByUrl(query: string, label: Field): Contact[];
+      getContactsByUrl(query: string, label: string): Contact[];
+      findByEmailAddress(email: string): Contact;
+      findContactGroup(name: string): ContactGroup;
       getAllContacts(): Contact[];
     }
 
@@ -186,7 +186,7 @@ declare module GoogleAppsScript {
       getLabel(): Object;
       getValue(): Object;
       setLabel(field: ExtendedField): CustomField;
-      setLabel(label: String): CustomField;
+      setLabel(label: string): CustomField;
       setValue(value: Object): CustomField;
     }
 
@@ -202,7 +202,7 @@ declare module GoogleAppsScript {
       setDate(month: Base.Month, day: Integer): DateField;
       setDate(month: Base.Month, day: Integer, year: Integer): DateField;
       setLabel(label: Field): DateField;
-      setLabel(label: String): DateField;
+      setLabel(label: string): DateField;
     }
 
     /**
@@ -210,15 +210,15 @@ declare module GoogleAppsScript {
      */
     export interface EmailField {
       deleteEmailField(): void;
-      getAddress(): String;
-      getDisplayName(): String;
+      getAddress(): string;
+      getDisplayName(): string;
       getLabel(): Object;
-      isPrimary(): Boolean;
-      setAddress(address: String): EmailField;
+      isPrimary(): boolean;
+      setAddress(address: string): EmailField;
       setAsPrimary(): EmailField;
-      setDisplayName(name: String): EmailField;
+      setDisplayName(name: string): EmailField;
       setLabel(field: Field): EmailField;
-      setLabel(label: String): EmailField;
+      setLabel(label: string): EmailField;
     }
 
     /**
@@ -241,13 +241,13 @@ declare module GoogleAppsScript {
      */
     export interface IMField {
       deleteIMField(): void;
-      getAddress(): String;
+      getAddress(): string;
       getLabel(): Object;
-      isPrimary(): Boolean;
-      setAddress(address: String): IMField;
+      isPrimary(): boolean;
+      setAddress(address: string): IMField;
       setAsPrimary(): IMField;
       setLabel(field: Field): IMField;
-      setLabel(label: String): IMField;
+      setLabel(label: string): IMField;
     }
 
     /**
@@ -256,12 +256,12 @@ declare module GoogleAppsScript {
     export interface PhoneField {
       deletePhoneField(): void;
       getLabel(): Object;
-      getPhoneNumber(): String;
-      isPrimary(): Boolean;
+      getPhoneNumber(): string;
+      isPrimary(): boolean;
       setAsPrimary(): PhoneField;
       setLabel(field: Field): PhoneField;
-      setLabel(label: String): PhoneField;
-      setPhoneNumber(number: String): PhoneField;
+      setLabel(label: string): PhoneField;
+      setPhoneNumber(number: string): PhoneField;
     }
 
     /**
@@ -279,13 +279,13 @@ declare module GoogleAppsScript {
      */
     export interface UrlField {
       deleteUrlField(): void;
-      getAddress(): String;
+      getAddress(): string;
       getLabel(): Object;
-      isPrimary(): Boolean;
-      setAddress(address: String): UrlField;
+      isPrimary(): boolean;
+      setAddress(address: string): UrlField;
       setAsPrimary(): UrlField;
       setLabel(field: Field): UrlField;
-      setLabel(label: String): UrlField;
+      setLabel(label: string): UrlField;
     }
 
   }

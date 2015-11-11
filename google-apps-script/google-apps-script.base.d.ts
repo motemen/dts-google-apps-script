@@ -7,19 +7,19 @@ declare module GoogleAppsScript {
      */
     export interface Blob {
       copyBlob(): Blob;
-      getAs(contentType: String): Blob;
+      getAs(contentType: string): Blob;
       getBytes(): Byte[];
-      getContentType(): String;
-      getDataAsString(): String;
-      getDataAsString(charset: String): String;
-      getName(): String;
-      isGoogleType(): Boolean;
+      getContentType(): string;
+      getDataAsString(): string;
+      getDataAsString(charset: string): string;
+      getName(): string;
+      isGoogleType(): boolean;
       setBytes(data: Byte[]): Blob;
-      setContentType(contentType: String): Blob;
+      setContentType(contentType: string): Blob;
       setContentTypeFromExtension(): Blob;
-      setDataFromString(string: String): Blob;
-      setDataFromString(string: String, charset: String): Blob;
-      setName(name: String): Blob;
+      setDataFromString(string: string): Blob;
+      setDataFromString(string: string, charset: string): Blob;
+      setName(name: string): Blob;
       getAllBlobs(): Blob[];
     }
 
@@ -58,7 +58,7 @@ declare module GoogleAppsScript {
      * StaticMapAllows for the creation and decoration of static map images.
      */
     export interface BlobSource {
-      getAs(contentType: String): Blob;
+      getAs(contentType: string): Blob;
       getBlob(): Blob;
     }
 
@@ -72,12 +72,12 @@ declare module GoogleAppsScript {
      */
     export interface Browser {
       Buttons: ButtonSet
-      inputBox(prompt: String): String;
-      inputBox(prompt: String, buttons: ButtonSet): String;
-      inputBox(title: String, prompt: String, buttons: ButtonSet): String;
-      msgBox(prompt: String): String;
-      msgBox(prompt: String, buttons: ButtonSet): String;
-      msgBox(title: String, prompt: String, buttons: ButtonSet): String;
+      inputBox(prompt: string): string;
+      inputBox(prompt: string, buttons: ButtonSet): string;
+      inputBox(title: string, prompt: string, buttons: ButtonSet): string;
+      msgBox(prompt: string): string;
+      msgBox(prompt: string, buttons: ButtonSet): string;
+      msgBox(title: string, prompt: string, buttons: ButtonSet): string;
     }
 
     /**
@@ -124,9 +124,9 @@ declare module GoogleAppsScript {
      */
     export interface Logger {
       clear(): void;
-      getLog(): String;
+      getLog(): string;
       log(data: Object): Logger;
-      log(format: String, ...values: Object[]): Logger;
+      log(format: string, ...values: Object[]): Logger;
     }
 
     /**
@@ -148,7 +148,7 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface Menu {
-      addItem(caption: String, functionName: String): Menu;
+      addItem(caption: string, functionName: string): Menu;
       addSeparator(): Menu;
       addSubMenu(menu: Menu): Menu;
       addToUi(): void;
@@ -201,7 +201,7 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface PromptResponse {
-      getResponseText(): String;
+      getResponseText(): string;
       getSelectedButton(): Button;
     }
 
@@ -211,10 +211,10 @@ declare module GoogleAppsScript {
      */
     export interface Session {
       getActiveUser(): User;
-      getActiveUserLocale(): String;
+      getActiveUserLocale(): string;
       getEffectiveUser(): User;
-      getScriptTimeZone(): String;
-      getTimeZone(): String;
+      getScriptTimeZone(): string;
+      getTimeZone(): string;
       getUser(): User;
     }
 
@@ -241,16 +241,16 @@ declare module GoogleAppsScript {
     export interface Ui {
       Button: Button
       ButtonSet: ButtonSet
-      alert(prompt: String): Button;
-      alert(prompt: String, buttons: ButtonSet): Button;
-      alert(title: String, prompt: String, buttons: ButtonSet): Button;
+      alert(prompt: string): Button;
+      alert(prompt: string, buttons: ButtonSet): Button;
+      alert(title: string, prompt: string, buttons: ButtonSet): Button;
       createAddonMenu(): Menu;
-      createMenu(caption: String): Menu;
-      prompt(prompt: String): PromptResponse;
-      prompt(prompt: String, buttons: ButtonSet): PromptResponse;
-      prompt(title: String, prompt: String, buttons: ButtonSet): PromptResponse;
-      showModalDialog(userInterface: Object, title: String): void;
-      showModelessDialog(userInterface: Object, title: String): void;
+      createMenu(caption: string): Menu;
+      prompt(prompt: string): PromptResponse;
+      prompt(prompt: string, buttons: ButtonSet): PromptResponse;
+      prompt(title: string, prompt: string, buttons: ButtonSet): PromptResponse;
+      showModalDialog(userInterface: Object, title: string): void;
+      showModelessDialog(userInterface: Object, title: string): void;
       showSidebar(userInterface: Object): void;
       showDialog(userInterface: Object): void;
     }
@@ -259,8 +259,8 @@ declare module GoogleAppsScript {
      * Representation of a user, suitable for scripting.
      */
     export interface User {
-      getEmail(): String;
-      getUserLoginId(): String;
+      getEmail(): string;
+      getUserLoginId(): string;
     }
 
     /**

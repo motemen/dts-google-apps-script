@@ -17,22 +17,22 @@ declare module GoogleAppsScript {
      */
     export interface Attachment {
       deleteAttachment(): void;
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getAttachmentType(): AttachmentType;
       getBlob(): Base.Blob;
-      getContentType(): String;
+      getContentType(): string;
       getDatePublished(): Date;
-      getDescription(): String;
+      getDescription(): string;
       getLastUpdated(): Date;
       getParent(): Page;
-      getTitle(): String;
-      getUrl(): String;
-      setContentType(contentType: String): Attachment;
-      setDescription(description: String): Attachment;
+      getTitle(): string;
+      getUrl(): string;
+      setContentType(contentType: string): Attachment;
+      setDescription(description: string): Attachment;
       setFrom(blob: Base.BlobSource): Attachment;
       setParent(parent: Page): Attachment;
-      setTitle(title: String): Attachment;
-      setUrl(url: String): Attachment;
+      setTitle(title: string): Attachment;
+      setUrl(url: string): Attachment;
     }
 
     /**
@@ -45,9 +45,9 @@ declare module GoogleAppsScript {
      */
     export interface Column {
       deleteColumn(): void;
-      getName(): String;
+      getName(): string;
       getParent(): Page;
-      setName(name: String): Column;
+      setName(name: string): Column;
     }
 
     /**
@@ -55,13 +55,13 @@ declare module GoogleAppsScript {
      */
     export interface Comment {
       deleteComment(): void;
-      getAuthorEmail(): String;
-      getAuthorName(): String;
-      getContent(): String;
+      getAuthorEmail(): string;
+      getAuthorName(): string;
+      getContent(): string;
       getDatePublished(): Date;
       getLastUpdated(): Date;
       getParent(): Page;
-      setContent(content: String): Comment;
+      setContent(content: string): Comment;
       setParent(parent: Page): Comment;
     }
 
@@ -73,29 +73,29 @@ declare module GoogleAppsScript {
       getDatePublished(): Date;
       getLastUpdated(): Date;
       getParent(): Page;
-      getValueByIndex(index: Integer): String;
-      getValueByName(name: String): String;
+      getValueByIndex(index: Integer): string;
+      getValueByName(name: string): string;
       setParent(parent: Page): ListItem;
-      setValueByIndex(index: Integer, value: String): ListItem;
-      setValueByName(name: String, value: String): ListItem;
+      setValueByIndex(index: Integer, value: string): ListItem;
+      setValueByName(name: string, value: string): ListItem;
     }
 
     /**
      * A Page on a Google Site.
      */
     export interface Page {
-      addColumn(name: String): Column;
+      addColumn(name: string): Column;
       addHostedAttachment(blob: Base.BlobSource): Attachment;
-      addHostedAttachment(blob: Base.BlobSource, description: String): Attachment;
+      addHostedAttachment(blob: Base.BlobSource, description: string): Attachment;
       addListItem(values: String[]): ListItem;
-      addWebAttachment(title: String, description: String, url: String): Attachment;
-      createAnnouncement(title: String, html: String): Page;
-      createAnnouncement(title: String, html: String, asDraft: Boolean): Page;
-      createAnnouncementsPage(title: String, name: String, html: String): Page;
-      createFileCabinetPage(title: String, name: String, html: String): Page;
-      createListPage(title: String, name: String, html: String, columnNames: String[]): Page;
-      createPageFromTemplate(title: String, name: String, template: Page): Page;
-      createWebPage(title: String, name: String, html: String): Page;
+      addWebAttachment(title: string, description: string, url: string): Attachment;
+      createAnnouncement(title: string, html: string): Page;
+      createAnnouncement(title: string, html: string, asDraft: boolean): Page;
+      createAnnouncementsPage(title: string, name: string, html: string): Page;
+      createFileCabinetPage(title: string, name: string, html: string): Page;
+      createListPage(title: string, name: string, html: string, columnNames: String[]): Page;
+      createPageFromTemplate(title: string, name: string, template: Page): Page;
+      createWebPage(title: string, name: string, html: string): Page;
       deletePage(): void;
       getAllDescendants(): Page[];
       getAllDescendants(options: Object): Page[];
@@ -104,38 +104,38 @@ declare module GoogleAppsScript {
       getAttachments(): Attachment[];
       getAttachments(optOptions: Object): Attachment[];
       getAuthors(): String[];
-      getChildByName(name: String): Page;
+      getChildByName(name: string): Page;
       getChildren(): Page[];
       getChildren(options: Object): Page[];
       getColumns(): Column[];
       getComments(): Comment[];
       getComments(optOptions: Object): Comment[];
       getDatePublished(): Date;
-      getHtmlContent(): String;
-      getIsDraft(): Boolean;
+      getHtmlContent(): string;
+      getIsDraft(): boolean;
       getLastEdited(): Date;
       getLastUpdated(): Date;
       getListItems(): ListItem[];
       getListItems(optOptions: Object): ListItem[];
-      getName(): String;
+      getName(): string;
       getPageType(): PageType;
       getParent(): Page;
-      getTextContent(): String;
-      getTitle(): String;
-      getUrl(): String;
-      isDeleted(): Boolean;
-      isTemplate(): Boolean;
-      publishAsTemplate(name: String): Page;
-      search(query: String): Page[];
-      search(query: String, options: Object): Page[];
-      setHtmlContent(html: String): Page;
-      setIsDraft(draft: Boolean): Page;
-      setName(name: String): Page;
+      getTextContent(): string;
+      getTitle(): string;
+      getUrl(): string;
+      isDeleted(): boolean;
+      isTemplate(): boolean;
+      publishAsTemplate(name: string): Page;
+      search(query: string): Page[];
+      search(query: string, options: Object): Page[];
+      setHtmlContent(html: string): Page;
+      setIsDraft(draft: boolean): Page;
+      setName(name: string): Page;
       setParent(parent: Page): Page;
-      setTitle(title: String): Page;
-      addComment(content: String): Comment;
-      getPageName(): String;
-      getSelfLink(): String;
+      setTitle(title: string): Page;
+      addComment(content: string): Comment;
+      getPageName(): string;
+      getSelfLink(): string;
     }
 
     /**
@@ -147,50 +147,50 @@ declare module GoogleAppsScript {
      * An object representing a Google Site.
      */
     export interface Site {
-      addEditor(emailAddress: String): Site;
+      addEditor(emailAddress: string): Site;
       addEditor(user: Base.User): Site;
       addEditors(emailAddresses: String[]): Site;
-      addOwner(email: String): Site;
+      addOwner(email: string): Site;
       addOwner(user: Base.User): Site;
-      addViewer(emailAddress: String): Site;
+      addViewer(emailAddress: string): Site;
       addViewer(user: Base.User): Site;
       addViewers(emailAddresses: String[]): Site;
-      createAnnouncementsPage(title: String, name: String, html: String): Page;
-      createFileCabinetPage(title: String, name: String, html: String): Page;
-      createListPage(title: String, name: String, html: String, columnNames: String[]): Page;
-      createPageFromTemplate(title: String, name: String, template: Page): Page;
-      createWebPage(title: String, name: String, html: String): Page;
+      createAnnouncementsPage(title: string, name: string, html: string): Page;
+      createFileCabinetPage(title: string, name: string, html: string): Page;
+      createListPage(title: string, name: string, html: string, columnNames: String[]): Page;
+      createPageFromTemplate(title: string, name: string, template: Page): Page;
+      createWebPage(title: string, name: string, html: string): Page;
       getAllDescendants(): Page[];
       getAllDescendants(options: Object): Page[];
-      getChildByName(name: String): Page;
+      getChildByName(name: string): Page;
       getChildren(): Page[];
       getChildren(options: Object): Page[];
       getEditors(): Base.User[];
-      getName(): String;
+      getName(): string;
       getOwners(): Base.User[];
-      getSummary(): String;
+      getSummary(): string;
       getTemplates(): Page[];
-      getTheme(): String;
-      getTitle(): String;
-      getUrl(): String;
+      getTheme(): string;
+      getTitle(): string;
+      getUrl(): string;
       getViewers(): Base.User[];
-      removeEditor(emailAddress: String): Site;
+      removeEditor(emailAddress: string): Site;
       removeEditor(user: Base.User): Site;
-      removeOwner(email: String): Site;
+      removeOwner(email: string): Site;
       removeOwner(user: Base.User): Site;
-      removeViewer(emailAddress: String): Site;
+      removeViewer(emailAddress: string): Site;
       removeViewer(user: Base.User): Site;
-      search(query: String): Page[];
-      search(query: String, options: Object): Page[];
-      setSummary(summary: String): Site;
-      setTheme(theme: String): Site;
-      setTitle(title: String): Site;
-      addCollaborator(email: String): Site;
+      search(query: string): Page[];
+      search(query: string, options: Object): Page[];
+      setSummary(summary: string): Site;
+      setTheme(theme: string): Site;
+      setTitle(title: string): Site;
+      addCollaborator(email: string): Site;
       addCollaborator(user: Base.User): Site;
-      createAnnouncement(title: String, html: String, parent: Page): Page;
-      createComment(inReplyTo: String, html: String, parent: Page): Comment;
-      createListItem(html: String, columnNames: String[], values: String[], parent: Page): ListItem;
-      createWebAttachment(title: String, url: String, parent: Page): Attachment;
+      createAnnouncement(title: string, html: string, parent: Page): Page;
+      createComment(inReplyTo: string, html: string, parent: Page): Comment;
+      createListItem(html: string, columnNames: String[], values: String[], parent: Page): ListItem;
+      createWebAttachment(title: string, url: string, parent: Page): Attachment;
       deleteSite(): void;
       getAnnouncements(): Page[];
       getAnnouncementsPages(): Page[];
@@ -200,11 +200,11 @@ declare module GoogleAppsScript {
       getFileCabinetPages(): Page[];
       getListItems(): ListItem[];
       getListPages(): Page[];
-      getSelfLink(): String;
-      getSiteName(): String;
+      getSelfLink(): string;
+      getSiteName(): string;
       getWebAttachments(): Attachment[];
       getWebPages(): Page[];
-      removeCollaborator(email: String): Site;
+      removeCollaborator(email: string): Site;
       removeCollaborator(user: Base.User): Site;
     }
 
@@ -214,20 +214,20 @@ declare module GoogleAppsScript {
     export interface SitesApp {
       AttachmentType: AttachmentType
       PageType: PageType
-      copySite(domain: String, name: String, title: String, summary: String, site: Site): Site;
-      createSite(domain: String, name: String, title: String, summary: String): Site;
+      copySite(domain: string, name: string, title: string, summary: string, site: Site): Site;
+      createSite(domain: string, name: string, title: string, summary: string): Site;
       getActivePage(): Page;
       getActiveSite(): Site;
-      getAllSites(domain: String): Site[];
-      getAllSites(domain: String, start: Integer, max: Integer): Site[];
-      getPageByUrl(url: String): Page;
-      getSite(name: String): Site;
-      getSite(domain: String, name: String): Site;
-      getSiteByUrl(url: String): Site;
+      getAllSites(domain: string): Site[];
+      getAllSites(domain: string, start: Integer, max: Integer): Site[];
+      getPageByUrl(url: string): Page;
+      getSite(name: string): Site;
+      getSite(domain: string, name: string): Site;
+      getSiteByUrl(url: string): Site;
       getSites(): Site[];
       getSites(start: Integer, max: Integer): Site[];
-      getSites(domain: String): Site[];
-      getSites(domain: String, start: Integer, max: Integer): Site[];
+      getSites(domain: string): Site[];
+      getSites(domain: string, start: Integer, max: Integer): Site[];
     }
 
   }

@@ -17,20 +17,20 @@ declare module GoogleAppsScript {
      * guide to restrictions in HTML service
      */
     export interface HtmlOutput {
-      append(addedContent: String): HtmlOutput;
-      appendUntrusted(addedContent: String): HtmlOutput;
+      append(addedContent: string): HtmlOutput;
+      appendUntrusted(addedContent: string): HtmlOutput;
       asTemplate(): HtmlTemplate;
       clear(): HtmlOutput;
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
-      getContent(): String;
+      getContent(): string;
       getHeight(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getWidth(): Integer;
-      setContent(content: String): HtmlOutput;
+      setContent(content: string): HtmlOutput;
       setHeight(height: Integer): HtmlOutput;
       setSandboxMode(mode: SandboxMode): HtmlOutput;
-      setTitle(title: String): HtmlOutput;
+      setTitle(title: string): HtmlOutput;
       setWidth(width: Integer): HtmlOutput;
     }
 
@@ -45,12 +45,12 @@ declare module GoogleAppsScript {
       SandboxMode: SandboxMode
       createHtmlOutput(): HtmlOutput;
       createHtmlOutput(blob: Base.BlobSource): HtmlOutput;
-      createHtmlOutput(html: String): HtmlOutput;
-      createHtmlOutputFromFile(filename: String): HtmlOutput;
+      createHtmlOutput(html: string): HtmlOutput;
+      createHtmlOutputFromFile(filename: string): HtmlOutput;
       createTemplate(blob: Base.BlobSource): HtmlTemplate;
-      createTemplate(html: String): HtmlTemplate;
-      createTemplateFromFile(filename: String): HtmlTemplate;
-      getUserAgent(): String;
+      createTemplate(html: string): HtmlTemplate;
+      createTemplateFromFile(filename: string): HtmlTemplate;
+      getUserAgent(): string;
     }
 
     /**
@@ -59,9 +59,9 @@ declare module GoogleAppsScript {
      */
     export interface HtmlTemplate {
       evaluate(): HtmlOutput;
-      getCode(): String;
-      getCodeWithComments(): String;
-      getRawContent(): String;
+      getCode(): string;
+      getCodeWithComments(): string;
+      getRawContent(): string;
     }
 
     /**

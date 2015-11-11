@@ -11,11 +11,11 @@ declare module GoogleAppsScript {
      */
     export interface HTTPResponse {
       getAllHeaders(): Object;
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
       getContent(): Byte[];
-      getContentText(): String;
-      getContentText(charset: String): String;
+      getContentText(): string;
+      getContentText(charset: string): string;
       getHeaders(): Object;
       getResponseCode(): Integer;
     }
@@ -29,19 +29,19 @@ declare module GoogleAppsScript {
      * UrlFetchApp
      */
     export interface OAuthConfig {
-      getAccessTokenUrl(): String;
-      getAuthorizationUrl(): String;
-      getMethod(): String;
-      getParamLocation(): String;
-      getRequestTokenUrl(): String;
-      getServiceName(): String;
-      setAccessTokenUrl(url: String): void;
-      setAuthorizationUrl(url: String): void;
-      setConsumerKey(consumerKey: String): void;
-      setConsumerSecret(consumerSecret: String): void;
-      setMethod(method: String): void;
-      setParamLocation(location: String): void;
-      setRequestTokenUrl(url: String): void;
+      getAccessTokenUrl(): string;
+      getAuthorizationUrl(): string;
+      getMethod(): string;
+      getParamLocation(): string;
+      getRequestTokenUrl(): string;
+      getServiceName(): string;
+      setAccessTokenUrl(url: string): void;
+      setAuthorizationUrl(url: string): void;
+      setConsumerKey(consumerKey: string): void;
+      setConsumerSecret(consumerSecret: string): void;
+      setMethod(method: string): void;
+      setParamLocation(location: string): void;
+      setRequestTokenUrl(url: string): void;
     }
 
     /**
@@ -58,12 +58,12 @@ declare module GoogleAppsScript {
      * HTTPResponse
      */
     export interface UrlFetchApp {
-      fetch(url: String): HTTPResponse;
-      fetch(url: String, params: Object): HTTPResponse;
-      getRequest(url: String): Object;
-      getRequest(url: String, params: Object): Object;
-      addOAuthService(serviceName: String): OAuthConfig;
-      removeOAuthService(serviceName: String): void;
+      fetch(url: string): HTTPResponse;
+      fetch(url: string, params: Object): HTTPResponse;
+      getRequest(url: string): Object;
+      getRequest(url: string, params: Object): Object;
+      addOAuthService(serviceName: string): OAuthConfig;
+      removeOAuthService(serviceName: string): void;
     }
 
   }

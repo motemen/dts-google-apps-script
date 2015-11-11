@@ -23,13 +23,13 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface Cache {
-      get(key: String): String;
+      get(key: string): string;
       getAll(keys: String[]): Object;
-      put(key: String, value: String): void;
-      put(key: String, value: String, expirationInSeconds: Integer): void;
+      put(key: string, value: string): void;
+      put(key: string, value: string, expirationInSeconds: Integer): void;
       putAll(values: Object): void;
       putAll(values: Object, expirationInSeconds: Integer): void;
-      remove(key: String): void;
+      remove(key: string): void;
       removeAll(keys: String[]): void;
     }
 

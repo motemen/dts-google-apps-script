@@ -22,12 +22,12 @@ declare module GoogleAppsScript {
      *      Logger.log(xml);
      */
     export interface Attribute {
-      getName(): String;
+      getName(): string;
       getNamespace(): Namespace;
-      getValue(): String;
-      setName(name: String): Attribute;
+      getValue(): string;
+      setName(name: string): Attribute;
       setNamespace(namespace: Namespace): Attribute;
-      setValue(value: String): Attribute;
+      setValue(value: string): Attribute;
     }
 
     /**
@@ -44,12 +44,12 @@ declare module GoogleAppsScript {
      *      Logger.log(xml);
      */
     export interface Cdata {
-      append(text: String): Text;
+      append(text: string): Text;
       detach(): Content;
       getParentElement(): Element;
-      getText(): String;
-      getValue(): String;
-      setText(text: String): Text;
+      getText(): string;
+      getValue(): string;
+      setText(text: string): Text;
     }
 
     /**
@@ -58,9 +58,9 @@ declare module GoogleAppsScript {
     export interface Comment {
       detach(): Content;
       getParentElement(): Element;
-      getText(): String;
-      getValue(): String;
-      setText(text: String): Comment;
+      getText(): string;
+      getValue(): string;
+      setText(text: string): Comment;
     }
 
     /**
@@ -94,7 +94,7 @@ declare module GoogleAppsScript {
       detach(): Content;
       getParentElement(): Element;
       getType(): ContentType;
-      getValue(): String;
+      getValue(): string;
     }
 
     /**
@@ -107,16 +107,16 @@ declare module GoogleAppsScript {
      */
     export interface DocType {
       detach(): Content;
-      getElementName(): String;
-      getInternalSubset(): String;
+      getElementName(): string;
+      getInternalSubset(): string;
       getParentElement(): Element;
-      getPublicId(): String;
-      getSystemId(): String;
-      getValue(): String;
-      setElementName(name: String): DocType;
-      setInternalSubset(data: String): DocType;
-      setPublicId(id: String): DocType;
-      setSystemId(id: String): DocType;
+      getPublicId(): string;
+      getSystemId(): string;
+      getValue(): string;
+      setElementName(name: string): DocType;
+      setInternalSubset(data: string): DocType;
+      setPublicId(id: string): DocType;
+      setSystemId(id: string): DocType;
     }
 
     /**
@@ -133,9 +133,9 @@ declare module GoogleAppsScript {
       getDescendants(): Content[];
       getDocType(): DocType;
       getRootElement(): Element;
-      hasRootElement(): Boolean;
+      hasRootElement(): boolean;
       removeContent(): Content[];
-      removeContent(content: Content): Boolean;
+      removeContent(content: Content): boolean;
       removeContent(index: Integer): Content;
       setDocType(docType: DocType): Document;
       setRootElement(element: Element): Document;
@@ -168,41 +168,41 @@ declare module GoogleAppsScript {
       cloneContent(): Content[];
       detach(): Content;
       getAllContent(): Content[];
-      getAttribute(name: String): Attribute;
-      getAttribute(name: String, namespace: Namespace): Attribute;
+      getAttribute(name: string): Attribute;
+      getAttribute(name: string, namespace: Namespace): Attribute;
       getAttributes(): Attribute[];
-      getChild(name: String): Element;
-      getChild(name: String, namespace: Namespace): Element;
-      getChildText(name: String): String;
-      getChildText(name: String, namespace: Namespace): String;
+      getChild(name: string): Element;
+      getChild(name: string, namespace: Namespace): Element;
+      getChildText(name: string): string;
+      getChildText(name: string, namespace: Namespace): string;
       getChildren(): Element[];
-      getChildren(name: String): Element[];
-      getChildren(name: String, namespace: Namespace): Element[];
+      getChildren(name: string): Element[];
+      getChildren(name: string, namespace: Namespace): Element[];
       getContent(index: Integer): Content;
       getContentSize(): Integer;
       getDescendants(): Content[];
       getDocument(): Document;
-      getName(): String;
+      getName(): string;
       getNamespace(): Namespace;
-      getNamespace(prefix: String): Namespace;
+      getNamespace(prefix: string): Namespace;
       getParentElement(): Element;
-      getQualifiedName(): String;
-      getText(): String;
-      getValue(): String;
-      isAncestorOf(other: Element): Boolean;
-      isRootElement(): Boolean;
-      removeAttribute(attribute: Attribute): Boolean;
-      removeAttribute(attributeName: String): Boolean;
-      removeAttribute(attributeName: String, namespace: Namespace): Boolean;
+      getQualifiedName(): string;
+      getText(): string;
+      getValue(): string;
+      isAncestorOf(other: Element): boolean;
+      isRootElement(): boolean;
+      removeAttribute(attribute: Attribute): boolean;
+      removeAttribute(attributeName: string): boolean;
+      removeAttribute(attributeName: string, namespace: Namespace): boolean;
       removeContent(): Content[];
-      removeContent(content: Content): Boolean;
+      removeContent(content: Content): boolean;
       removeContent(index: Integer): Content;
       setAttribute(attribute: Attribute): Element;
-      setAttribute(name: String, value: String): Element;
-      setAttribute(name: String, value: String, namespace: Namespace): Element;
-      setName(name: String): Element;
+      setAttribute(name: string, value: string): Element;
+      setAttribute(name: string, value: string, namespace: Namespace): Element;
+      setName(name: string): Element;
       setNamespace(namespace: Namespace): Element;
-      setText(text: String): Element;
+      setText(text: string): Element;
     }
 
     /**
@@ -210,14 +210,14 @@ declare module GoogleAppsScript {
      */
     export interface EntityRef {
       detach(): Content;
-      getName(): String;
+      getName(): string;
       getParentElement(): Element;
-      getPublicId(): String;
-      getSystemId(): String;
-      getValue(): String;
-      setName(name: String): EntityRef;
-      setPublicId(id: String): EntityRef;
-      setSystemId(id: String): EntityRef;
+      getPublicId(): string;
+      getSystemId(): string;
+      getValue(): string;
+      setName(name: string): EntityRef;
+      setPublicId(id: string): EntityRef;
+      setSystemId(id: string): EntityRef;
     }
 
     /**
@@ -235,21 +235,21 @@ declare module GoogleAppsScript {
      *      Logger.log(output);
      */
     export interface Format {
-      format(document: Document): String;
-      format(element: Element): String;
-      setEncoding(encoding: String): Format;
-      setIndent(indent: String): Format;
-      setLineSeparator(separator: String): Format;
-      setOmitDeclaration(omitDeclaration: Boolean): Format;
-      setOmitEncoding(omitEncoding: Boolean): Format;
+      format(document: Document): string;
+      format(element: Element): string;
+      setEncoding(encoding: string): Format;
+      setIndent(indent: string): Format;
+      setLineSeparator(separator: string): Format;
+      setOmitDeclaration(omitDeclaration: boolean): Format;
+      setOmitEncoding(omitEncoding: boolean): Format;
     }
 
     /**
      * A representation of an XML namespace.
      */
     export interface Namespace {
-      getPrefix(): String;
-      getURI(): String;
+      getPrefix(): string;
+      getURI(): string;
     }
 
     /**
@@ -257,22 +257,22 @@ declare module GoogleAppsScript {
      */
     export interface ProcessingInstruction {
       detach(): Content;
-      getData(): String;
+      getData(): string;
       getParentElement(): Element;
-      getTarget(): String;
-      getValue(): String;
+      getTarget(): string;
+      getValue(): string;
     }
 
     /**
      * A representation of an XML Text node.
      */
     export interface Text {
-      append(text: String): Text;
+      append(text: string): Text;
       detach(): Content;
       getParentElement(): Element;
-      getText(): String;
-      getValue(): String;
-      setText(text: String): Text;
+      getText(): string;
+      getValue(): string;
+      setText(text: string): Text;
     }
 
     /**
@@ -316,24 +316,24 @@ declare module GoogleAppsScript {
      */
     export interface XmlService {
       ContentTypes: ContentType
-      createCdata(text: String): Cdata;
-      createComment(text: String): Comment;
-      createDocType(elementName: String): DocType;
-      createDocType(elementName: String, systemId: String): DocType;
-      createDocType(elementName: String, publicId: String, systemId: String): DocType;
+      createCdata(text: string): Cdata;
+      createComment(text: string): Comment;
+      createDocType(elementName: string): DocType;
+      createDocType(elementName: string, systemId: string): DocType;
+      createDocType(elementName: string, publicId: string, systemId: string): DocType;
       createDocument(): Document;
       createDocument(rootElement: Element): Document;
-      createElement(name: String): Element;
-      createElement(name: String, namespace: Namespace): Element;
-      createText(text: String): Text;
+      createElement(name: string): Element;
+      createElement(name: string, namespace: Namespace): Element;
+      createText(text: string): Text;
       getCompactFormat(): Format;
-      getNamespace(uri: String): Namespace;
-      getNamespace(prefix: String, uri: String): Namespace;
+      getNamespace(uri: string): Namespace;
+      getNamespace(prefix: string, uri: string): Namespace;
       getNoNamespace(): Namespace;
       getPrettyFormat(): Format;
       getRawFormat(): Format;
       getXmlNamespace(): Namespace;
-      parse(xml: String): Document;
+      parse(xml: string): Document;
     }
 
   }

@@ -41,11 +41,11 @@ declare module GoogleAppsScript {
       appendImage(image: Base.BlobSource): InlineImage;
       appendImage(image: InlineImage): InlineImage;
       appendListItem(listItem: ListItem): ListItem;
-      appendListItem(text: String): ListItem;
+      appendListItem(text: string): ListItem;
       appendPageBreak(): PageBreak;
       appendPageBreak(pageBreak: PageBreak): PageBreak;
       appendParagraph(paragraph: Paragraph): Paragraph;
-      appendParagraph(text: String): Paragraph;
+      appendParagraph(text: string): Paragraph;
       appendTable(): Table;
       appendTable(cells: String[][]): Table;
       appendTable(table: Table): Table;
@@ -54,8 +54,8 @@ declare module GoogleAppsScript {
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
@@ -71,23 +71,23 @@ declare module GoogleAppsScript {
       getParagraphs(): Paragraph[];
       getParent(): ContainerElement;
       getTables(): Table[];
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
       insertHorizontalRule(childIndex: Integer): HorizontalRule;
       insertImage(childIndex: Integer, image: Base.BlobSource): InlineImage;
       insertImage(childIndex: Integer, image: InlineImage): InlineImage;
       insertListItem(childIndex: Integer, listItem: ListItem): ListItem;
-      insertListItem(childIndex: Integer, text: String): ListItem;
+      insertListItem(childIndex: Integer, text: string): ListItem;
       insertPageBreak(childIndex: Integer): PageBreak;
       insertPageBreak(childIndex: Integer, pageBreak: PageBreak): PageBreak;
       insertParagraph(childIndex: Integer, paragraph: Paragraph): Paragraph;
-      insertParagraph(childIndex: Integer, text: String): Paragraph;
+      insertParagraph(childIndex: Integer, text: string): Paragraph;
       insertTable(childIndex: Integer): Table;
       insertTable(childIndex: Integer, cells: String[][]): Table;
       insertTable(childIndex: Integer, table: Table): Table;
       removeChild(child: Element): Body;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): Body;
       setMarginBottom(marginBottom: Number): Body;
       setMarginLeft(marginLeft: Number): Body;
@@ -95,14 +95,14 @@ declare module GoogleAppsScript {
       setMarginTop(marginTop: Number): Body;
       setPageHeight(pageHeight: Number): Body;
       setPageWidth(pageWidth: Number): Body;
-      setText(text: String): Body;
+      setText(text: string): Body;
       setTextAlignment(textAlignment: TextAlignment): Body;
       getFootnotes(): Footnote[];
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getPreviousSibling(): Element;
-      isAtDocumentEnd(): Boolean;
-      setLinkUrl(url: String): Body;
+      isAtDocumentEnd(): boolean;
+      setLinkUrl(url: string): Body;
     }
 
     /**
@@ -115,7 +115,7 @@ declare module GoogleAppsScript {
      *      Logger.log(bookmark.getId());
      */
     export interface Bookmark {
-      getId(): String;
+      getId(): string;
       getPosition(): Position;
       remove(): void;
     }
@@ -141,25 +141,25 @@ declare module GoogleAppsScript {
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getNumChildren(): Integer;
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): ContainerElement;
       removeFromParent(): ContainerElement;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): ContainerElement;
-      setLinkUrl(url: String): ContainerElement;
+      setLinkUrl(url: string): ContainerElement;
       setTextAlignment(textAlignment: TextAlignment): ContainerElement;
     }
 
@@ -176,42 +176,42 @@ declare module GoogleAppsScript {
      */
     export interface Document {
       addBookmark(position: Position): Bookmark;
-      addEditor(emailAddress: String): Document;
+      addEditor(emailAddress: string): Document;
       addEditor(user: Base.User): Document;
       addEditors(emailAddresses: String[]): Document;
       addFooter(): FooterSection;
       addHeader(): HeaderSection;
-      addNamedRange(name: String, range: Range): NamedRange;
-      addViewer(emailAddress: String): Document;
+      addNamedRange(name: string, range: Range): NamedRange;
+      addViewer(emailAddress: string): Document;
       addViewer(user: Base.User): Document;
       addViewers(emailAddresses: String[]): Document;
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
       getBody(): Body;
-      getBookmark(id: String): Bookmark;
+      getBookmark(id: string): Bookmark;
       getBookmarks(): Bookmark[];
       getCursor(): Position;
       getEditors(): Base.User[];
       getFooter(): FooterSection;
       getFootnotes(): Footnote[];
       getHeader(): HeaderSection;
-      getId(): String;
-      getName(): String;
-      getNamedRangeById(id: String): NamedRange;
+      getId(): string;
+      getName(): string;
+      getNamedRangeById(id: string): NamedRange;
       getNamedRanges(): NamedRange[];
-      getNamedRanges(name: String): NamedRange[];
+      getNamedRanges(name: string): NamedRange[];
       getSelection(): Range;
-      getUrl(): String;
+      getUrl(): string;
       getViewers(): Base.User[];
       newPosition(element: Element, offset: Integer): Position;
       newRange(): RangeBuilder;
-      removeEditor(emailAddress: String): Document;
+      removeEditor(emailAddress: string): Document;
       removeEditor(user: Base.User): Document;
-      removeViewer(emailAddress: String): Document;
+      removeViewer(emailAddress: string): Document;
       removeViewer(user: Base.User): Document;
       saveAndClose(): void;
       setCursor(position: Position): Document;
-      setName(name: String): Document;
+      setName(name: string): Document;
       setSelection(range: Range): Document;
     }
 
@@ -233,11 +233,11 @@ declare module GoogleAppsScript {
       ParagraphHeading: ParagraphHeading
       TextAlignment: TextAlignment
       VerticalAlignment: VerticalAlignment
-      create(name: String): Document;
+      create(name: string): Document;
       getActiveDocument(): Document;
       getUi(): Base.Ui;
-      openById(id: String): Document;
-      openByUrl(url: String): Document;
+      openById(id: string): Document;
+      openByUrl(url: string): Document;
     }
 
     /**
@@ -321,7 +321,7 @@ declare module GoogleAppsScript {
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): Element;
       removeFromParent(): Element;
       setAttributes(attributes: Object): Element;
@@ -353,25 +353,25 @@ declare module GoogleAppsScript {
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getNumChildren(): Integer;
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): Equation;
       removeFromParent(): Equation;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): Equation;
-      setLinkUrl(url: String): Equation;
+      setLinkUrl(url: string): Equation;
       setTextAlignment(textAlignment: TextAlignment): Equation;
     }
 
@@ -388,26 +388,26 @@ declare module GoogleAppsScript {
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
-      getCode(): String;
-      getLinkUrl(): String;
+      getCode(): string;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getNumChildren(): Integer;
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): EquationFunction;
       removeFromParent(): EquationFunction;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): EquationFunction;
-      setLinkUrl(url: String): EquationFunction;
+      setLinkUrl(url: string): EquationFunction;
       setTextAlignment(textAlignment: TextAlignment): EquationFunction;
     }
 
@@ -424,7 +424,7 @@ declare module GoogleAppsScript {
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): EquationFunctionArgumentSeparator;
       removeFromParent(): EquationFunctionArgumentSeparator;
       setAttributes(attributes: Object): EquationFunctionArgumentSeparator;
@@ -438,12 +438,12 @@ declare module GoogleAppsScript {
     export interface EquationSymbol {
       copy(): EquationSymbol;
       getAttributes(): Object;
-      getCode(): String;
+      getCode(): string;
       getNextSibling(): Element;
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): EquationSymbol;
       removeFromParent(): EquationSymbol;
       setAttributes(attributes: Object): EquationSymbol;
@@ -490,9 +490,9 @@ declare module GoogleAppsScript {
       appendImage(image: Base.BlobSource): InlineImage;
       appendImage(image: InlineImage): InlineImage;
       appendListItem(listItem: ListItem): ListItem;
-      appendListItem(text: String): ListItem;
+      appendListItem(text: string): ListItem;
       appendParagraph(paragraph: Paragraph): Paragraph;
-      appendParagraph(text: String): Paragraph;
+      appendParagraph(text: string): Paragraph;
       appendTable(): Table;
       appendTable(cells: String[][]): Table;
       appendTable(table: Table): Table;
@@ -501,8 +501,8 @@ declare module GoogleAppsScript {
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
@@ -512,31 +512,31 @@ declare module GoogleAppsScript {
       getParagraphs(): Paragraph[];
       getParent(): ContainerElement;
       getTables(): Table[];
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
       insertHorizontalRule(childIndex: Integer): HorizontalRule;
       insertImage(childIndex: Integer, image: Base.BlobSource): InlineImage;
       insertImage(childIndex: Integer, image: InlineImage): InlineImage;
       insertListItem(childIndex: Integer, listItem: ListItem): ListItem;
-      insertListItem(childIndex: Integer, text: String): ListItem;
+      insertListItem(childIndex: Integer, text: string): ListItem;
       insertParagraph(childIndex: Integer, paragraph: Paragraph): Paragraph;
-      insertParagraph(childIndex: Integer, text: String): Paragraph;
+      insertParagraph(childIndex: Integer, text: string): Paragraph;
       insertTable(childIndex: Integer): Table;
       insertTable(childIndex: Integer, cells: String[][]): Table;
       insertTable(childIndex: Integer, table: Table): Table;
       removeChild(child: Element): FooterSection;
       removeFromParent(): FooterSection;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): FooterSection;
-      setText(text: String): FooterSection;
+      setText(text: string): FooterSection;
       setTextAlignment(textAlignment: TextAlignment): FooterSection;
       getFootnotes(): Footnote[];
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getPreviousSibling(): Element;
-      isAtDocumentEnd(): Boolean;
-      setLinkUrl(url: String): FooterSection;
+      isAtDocumentEnd(): boolean;
+      setLinkUrl(url: string): FooterSection;
     }
 
     /**
@@ -554,7 +554,7 @@ declare module GoogleAppsScript {
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       removeFromParent(): Footnote;
       setAttributes(attributes: Object): Footnote;
     }
@@ -567,14 +567,14 @@ declare module GoogleAppsScript {
      */
     export interface FootnoteSection {
       appendParagraph(paragraph: Paragraph): Paragraph;
-      appendParagraph(text: String): Paragraph;
+      appendParagraph(text: string): Paragraph;
       clear(): FootnoteSection;
       copy(): FootnoteSection;
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
@@ -583,21 +583,21 @@ declare module GoogleAppsScript {
       getParagraphs(): Paragraph[];
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
       insertParagraph(childIndex: Integer, paragraph: Paragraph): Paragraph;
-      insertParagraph(childIndex: Integer, text: String): Paragraph;
+      insertParagraph(childIndex: Integer, text: string): Paragraph;
       removeChild(child: Element): FootnoteSection;
       removeFromParent(): FootnoteSection;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): FootnoteSection;
-      setText(text: String): FootnoteSection;
+      setText(text: string): FootnoteSection;
       setTextAlignment(textAlignment: TextAlignment): FootnoteSection;
       getFootnotes(): Footnote[];
-      getLinkUrl(): String;
-      isAtDocumentEnd(): Boolean;
-      setLinkUrl(url: String): FootnoteSection;
+      getLinkUrl(): string;
+      isAtDocumentEnd(): boolean;
+      setLinkUrl(url: string): FootnoteSection;
     }
 
     /**
@@ -631,9 +631,9 @@ declare module GoogleAppsScript {
       appendImage(image: Base.BlobSource): InlineImage;
       appendImage(image: InlineImage): InlineImage;
       appendListItem(listItem: ListItem): ListItem;
-      appendListItem(text: String): ListItem;
+      appendListItem(text: string): ListItem;
       appendParagraph(paragraph: Paragraph): Paragraph;
-      appendParagraph(text: String): Paragraph;
+      appendParagraph(text: string): Paragraph;
       appendTable(): Table;
       appendTable(cells: String[][]): Table;
       appendTable(table: Table): Table;
@@ -642,8 +642,8 @@ declare module GoogleAppsScript {
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
@@ -653,31 +653,31 @@ declare module GoogleAppsScript {
       getParagraphs(): Paragraph[];
       getParent(): ContainerElement;
       getTables(): Table[];
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
       insertHorizontalRule(childIndex: Integer): HorizontalRule;
       insertImage(childIndex: Integer, image: Base.BlobSource): InlineImage;
       insertImage(childIndex: Integer, image: InlineImage): InlineImage;
       insertListItem(childIndex: Integer, listItem: ListItem): ListItem;
-      insertListItem(childIndex: Integer, text: String): ListItem;
+      insertListItem(childIndex: Integer, text: string): ListItem;
       insertParagraph(childIndex: Integer, paragraph: Paragraph): Paragraph;
-      insertParagraph(childIndex: Integer, text: String): Paragraph;
+      insertParagraph(childIndex: Integer, text: string): Paragraph;
       insertTable(childIndex: Integer): Table;
       insertTable(childIndex: Integer, cells: String[][]): Table;
       insertTable(childIndex: Integer, table: Table): Table;
       removeChild(child: Element): HeaderSection;
       removeFromParent(): HeaderSection;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): HeaderSection;
-      setText(text: String): HeaderSection;
+      setText(text: string): HeaderSection;
       setTextAlignment(textAlignment: TextAlignment): HeaderSection;
       getFootnotes(): Footnote[];
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getPreviousSibling(): Element;
-      isAtDocumentEnd(): Boolean;
-      setLinkUrl(url: String): HeaderSection;
+      isAtDocumentEnd(): boolean;
+      setLinkUrl(url: string): HeaderSection;
     }
 
     /**
@@ -718,7 +718,7 @@ declare module GoogleAppsScript {
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       removeFromParent(): HorizontalRule;
       setAttributes(attributes: Object): HorizontalRule;
     }
@@ -737,7 +737,7 @@ declare module GoogleAppsScript {
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): InlineDrawing;
       removeFromParent(): InlineDrawing;
       setAttributes(attributes: Object): InlineDrawing;
@@ -752,22 +752,22 @@ declare module GoogleAppsScript {
      */
     export interface InlineImage {
       copy(): InlineImage;
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getAttributes(): Object;
       getBlob(): Base.Blob;
       getHeight(): Integer;
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getType(): ElementType;
       getWidth(): Integer;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): InlineImage;
       removeFromParent(): InlineImage;
       setAttributes(attributes: Object): InlineImage;
       setHeight(height: Integer): InlineImage;
-      setLinkUrl(url: String): InlineImage;
+      setLinkUrl(url: string): InlineImage;
       setWidth(width: Integer): InlineImage;
     }
 
@@ -810,15 +810,15 @@ declare module GoogleAppsScript {
       appendInlineImage(image: InlineImage): InlineImage;
       appendPageBreak(): PageBreak;
       appendPageBreak(pageBreak: PageBreak): PageBreak;
-      appendText(text: String): Text;
+      appendText(text: string): Text;
       appendText(text: Text): Text;
       clear(): ListItem;
       copy(): ListItem;
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAlignment(): HorizontalAlignment;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
@@ -829,8 +829,8 @@ declare module GoogleAppsScript {
       getIndentFirstLine(): Number;
       getIndentStart(): Number;
       getLineSpacing(): Number;
-      getLinkUrl(): String;
-      getListId(): String;
+      getLinkUrl(): string;
+      getListId(): string;
       getNestingLevel(): Integer;
       getNextSibling(): Element;
       getNumChildren(): Integer;
@@ -838,7 +838,7 @@ declare module GoogleAppsScript {
       getPreviousSibling(): Element;
       getSpacingAfter(): Number;
       getSpacingBefore(): Number;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
       insertHorizontalRule(childIndex: Integer): HorizontalRule;
@@ -846,14 +846,14 @@ declare module GoogleAppsScript {
       insertInlineImage(childIndex: Integer, image: InlineImage): InlineImage;
       insertPageBreak(childIndex: Integer): PageBreak;
       insertPageBreak(childIndex: Integer, pageBreak: PageBreak): PageBreak;
-      insertText(childIndex: Integer, text: String): Text;
+      insertText(childIndex: Integer, text: string): Text;
       insertText(childIndex: Integer, text: Text): Text;
-      isAtDocumentEnd(): Boolean;
-      isLeftToRight(): Boolean;
+      isAtDocumentEnd(): boolean;
+      isLeftToRight(): boolean;
       merge(): ListItem;
       removeChild(child: Element): ListItem;
       removeFromParent(): ListItem;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAlignment(alignment: HorizontalAlignment): ListItem;
       setAttributes(attributes: Object): ListItem;
       setGlyphType(glyphType: GlyphType): ListItem;
@@ -861,14 +861,14 @@ declare module GoogleAppsScript {
       setIndentEnd(indentEnd: Number): ListItem;
       setIndentFirstLine(indentFirstLine: Number): ListItem;
       setIndentStart(indentStart: Number): ListItem;
-      setLeftToRight(leftToRight: Boolean): ListItem;
+      setLeftToRight(leftToRight: boolean): ListItem;
       setLineSpacing(multiplier: Number): ListItem;
-      setLinkUrl(url: String): ListItem;
+      setLinkUrl(url: string): ListItem;
       setListId(listItem: ListItem): ListItem;
       setNestingLevel(nestingLevel: Integer): ListItem;
       setSpacingAfter(spacingAfter: Number): ListItem;
       setSpacingBefore(spacingBefore: Number): ListItem;
-      setText(text: String): void;
+      setText(text: string): void;
       setTextAlignment(textAlignment: TextAlignment): ListItem;
     }
 
@@ -891,8 +891,8 @@ declare module GoogleAppsScript {
      *      doc.addNamedRange('myUniquePrefix-tables', rangeBuilder.build());
      */
     export interface NamedRange {
-      getId(): String;
-      getName(): String;
+      getId(): string;
+      getName(): string;
       getRange(): Range;
       remove(): void;
     }
@@ -912,7 +912,7 @@ declare module GoogleAppsScript {
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       removeFromParent(): PageBreak;
       setAttributes(attributes: Object): PageBreak;
     }
@@ -945,15 +945,15 @@ declare module GoogleAppsScript {
       appendInlineImage(image: InlineImage): InlineImage;
       appendPageBreak(): PageBreak;
       appendPageBreak(pageBreak: PageBreak): PageBreak;
-      appendText(text: String): Text;
+      appendText(text: string): Text;
       appendText(text: Text): Text;
       clear(): Paragraph;
       copy(): Paragraph;
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAlignment(): HorizontalAlignment;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
@@ -963,14 +963,14 @@ declare module GoogleAppsScript {
       getIndentFirstLine(): Number;
       getIndentStart(): Number;
       getLineSpacing(): Number;
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getNumChildren(): Integer;
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getSpacingAfter(): Number;
       getSpacingBefore(): Number;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
       insertHorizontalRule(childIndex: Integer): HorizontalRule;
@@ -978,26 +978,26 @@ declare module GoogleAppsScript {
       insertInlineImage(childIndex: Integer, image: InlineImage): InlineImage;
       insertPageBreak(childIndex: Integer): PageBreak;
       insertPageBreak(childIndex: Integer, pageBreak: PageBreak): PageBreak;
-      insertText(childIndex: Integer, text: String): Text;
+      insertText(childIndex: Integer, text: string): Text;
       insertText(childIndex: Integer, text: Text): Text;
-      isAtDocumentEnd(): Boolean;
-      isLeftToRight(): Boolean;
+      isAtDocumentEnd(): boolean;
+      isLeftToRight(): boolean;
       merge(): Paragraph;
       removeChild(child: Element): Paragraph;
       removeFromParent(): Paragraph;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAlignment(alignment: HorizontalAlignment): Paragraph;
       setAttributes(attributes: Object): Paragraph;
       setHeading(heading: ParagraphHeading): Paragraph;
       setIndentEnd(indentEnd: Number): Paragraph;
       setIndentFirstLine(indentFirstLine: Number): Paragraph;
       setIndentStart(indentStart: Number): Paragraph;
-      setLeftToRight(leftToRight: Boolean): Paragraph;
+      setLeftToRight(leftToRight: boolean): Paragraph;
       setLineSpacing(multiplier: Number): Paragraph;
-      setLinkUrl(url: String): Paragraph;
+      setLinkUrl(url: string): Paragraph;
       setSpacingAfter(spacingAfter: Number): Paragraph;
       setSpacingBefore(spacingBefore: Number): Paragraph;
-      setText(text: String): void;
+      setText(text: string): void;
       setTextAlignment(textAlignment: TextAlignment): Paragraph;
     }
 
@@ -1051,7 +1051,7 @@ declare module GoogleAppsScript {
       getSurroundingTextOffset(): Integer;
       insertBookmark(): Bookmark;
       insertInlineImage(image: Base.BlobSource): InlineImage;
-      insertText(text: String): Text;
+      insertText(text: string): Text;
     }
 
     /**
@@ -1118,7 +1118,7 @@ declare module GoogleAppsScript {
       getElement(): Element;
       getEndOffsetInclusive(): Integer;
       getStartOffset(): Integer;
-      isPartial(): Boolean;
+      isPartial(): boolean;
     }
 
     /**
@@ -1148,37 +1148,37 @@ declare module GoogleAppsScript {
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
-      getBorderColor(): String;
+      getBorderColor(): string;
       getBorderWidth(): Number;
       getCell(rowIndex: Integer, cellIndex: Integer): TableCell;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
       getColumnWidth(columnIndex: Integer): Number;
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getNumChildren(): Integer;
       getNumRows(): Integer;
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getRow(rowIndex: Integer): TableRow;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
       insertTableRow(childIndex: Integer): TableRow;
       insertTableRow(childIndex: Integer, tableRow: TableRow): TableRow;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       removeChild(child: Element): Table;
       removeFromParent(): Table;
       removeRow(rowIndex: Integer): TableRow;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): Table;
-      setBorderColor(color: String): Table;
+      setBorderColor(color: string): Table;
       setBorderWidth(width: Number): Table;
       setColumnWidth(columnIndex: Integer, width: Number): Table;
-      setLinkUrl(url: String): Table;
+      setLinkUrl(url: string): Table;
       setTextAlignment(textAlignment: TextAlignment): Table;
     }
 
@@ -1193,9 +1193,9 @@ declare module GoogleAppsScript {
       appendImage(image: Base.BlobSource): InlineImage;
       appendImage(image: InlineImage): InlineImage;
       appendListItem(listItem: ListItem): ListItem;
-      appendListItem(text: String): ListItem;
+      appendListItem(text: string): ListItem;
       appendParagraph(paragraph: Paragraph): Paragraph;
-      appendParagraph(text: String): Paragraph;
+      appendParagraph(text: string): Paragraph;
       appendTable(): Table;
       appendTable(cells: String[][]): Table;
       appendTable(table: Table): Table;
@@ -1204,13 +1204,13 @@ declare module GoogleAppsScript {
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
-      getBackgroundColor(): String;
+      getBackgroundColor(): string;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getNumChildren(): Integer;
       getPaddingBottom(): Number;
@@ -1221,7 +1221,7 @@ declare module GoogleAppsScript {
       getParentRow(): TableRow;
       getParentTable(): Table;
       getPreviousSibling(): Element;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
       getVerticalAlignment(): VerticalAlignment;
@@ -1230,25 +1230,25 @@ declare module GoogleAppsScript {
       insertImage(childIndex: Integer, image: Base.BlobSource): InlineImage;
       insertImage(childIndex: Integer, image: InlineImage): InlineImage;
       insertListItem(childIndex: Integer, listItem: ListItem): ListItem;
-      insertListItem(childIndex: Integer, text: String): ListItem;
+      insertListItem(childIndex: Integer, text: string): ListItem;
       insertParagraph(childIndex: Integer, paragraph: Paragraph): Paragraph;
-      insertParagraph(childIndex: Integer, text: String): Paragraph;
+      insertParagraph(childIndex: Integer, text: string): Paragraph;
       insertTable(childIndex: Integer): Table;
       insertTable(childIndex: Integer, cells: String[][]): Table;
       insertTable(childIndex: Integer, table: Table): Table;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): TableCell;
       removeChild(child: Element): TableCell;
       removeFromParent(): TableCell;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): TableCell;
-      setBackgroundColor(color: String): TableCell;
-      setLinkUrl(url: String): TableCell;
+      setBackgroundColor(color: string): TableCell;
+      setLinkUrl(url: string): TableCell;
       setPaddingBottom(paddingBottom: Number): TableCell;
       setPaddingLeft(paddingLeft: Number): TableCell;
       setPaddingRight(paddingTop: Number): TableCell;
       setPaddingTop(paddingTop: Number): TableCell;
-      setText(text: String): TableCell;
+      setText(text: string): TableCell;
       setTextAlignment(textAlignment: TextAlignment): TableCell;
       setVerticalAlignment(alignment: VerticalAlignment): TableCell;
       setWidth(width: Number): TableCell;
@@ -1267,24 +1267,24 @@ declare module GoogleAppsScript {
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getNextSibling(): Element;
       getNumChildren(): Integer;
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       removeFromParent(): TableOfContents;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): TableOfContents;
-      setLinkUrl(url: String): TableOfContents;
+      setLinkUrl(url: string): TableOfContents;
       setTextAlignment(textAlignment: TextAlignment): TableOfContents;
     }
 
@@ -1296,20 +1296,20 @@ declare module GoogleAppsScript {
      */
     export interface TableRow {
       appendTableCell(): TableCell;
-      appendTableCell(textContents: String): TableCell;
+      appendTableCell(textContents: string): TableCell;
       appendTableCell(tableCell: TableCell): TableCell;
       clear(): TableRow;
       copy(): TableRow;
       editAsText(): Text;
       findElement(elementType: ElementType): RangeElement;
       findElement(elementType: ElementType, from: RangeElement): RangeElement;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getCell(cellIndex: Integer): TableCell;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
-      getLinkUrl(): String;
+      getLinkUrl(): string;
       getMinimumHeight(): Integer;
       getNextSibling(): Element;
       getNumCells(): Integer;
@@ -1317,20 +1317,20 @@ declare module GoogleAppsScript {
       getParent(): ContainerElement;
       getParentTable(): Table;
       getPreviousSibling(): Element;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;
       insertTableCell(childIndex: Integer): TableCell;
-      insertTableCell(childIndex: Integer, textContents: String): TableCell;
+      insertTableCell(childIndex: Integer, textContents: string): TableCell;
       insertTableCell(childIndex: Integer, tableCell: TableCell): TableCell;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): TableRow;
       removeCell(cellIndex: Integer): TableCell;
       removeChild(child: Element): TableRow;
       removeFromParent(): TableRow;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): TableRow;
-      setLinkUrl(url: String): TableRow;
+      setLinkUrl(url: string): TableRow;
       setMinimumHeight(minHeight: Integer): TableRow;
       setTextAlignment(textAlignment: TextAlignment): TableRow;
     }
@@ -1359,68 +1359,68 @@ declare module GoogleAppsScript {
      *      text.setForegroundColor(0, text.getText().length / 2, '#00FFFF');
      */
     export interface Text {
-      appendText(text: String): Text;
+      appendText(text: string): Text;
       copy(): Text;
       deleteText(startOffset: Integer, endOffsetInclusive: Integer): Text;
       editAsText(): Text;
-      findText(searchPattern: String): RangeElement;
-      findText(searchPattern: String, from: RangeElement): RangeElement;
+      findText(searchPattern: string): RangeElement;
+      findText(searchPattern: string, from: RangeElement): RangeElement;
       getAttributes(): Object;
       getAttributes(offset: Integer): Object;
-      getBackgroundColor(): String;
-      getBackgroundColor(offset: Integer): String;
-      getFontFamily(): String;
-      getFontFamily(offset: Integer): String;
+      getBackgroundColor(): string;
+      getBackgroundColor(offset: Integer): string;
+      getFontFamily(): string;
+      getFontFamily(offset: Integer): string;
       getFontSize(): Integer;
       getFontSize(offset: Integer): Integer;
-      getForegroundColor(): String;
-      getForegroundColor(offset: Integer): String;
-      getLinkUrl(): String;
-      getLinkUrl(offset: Integer): String;
+      getForegroundColor(): string;
+      getForegroundColor(offset: Integer): string;
+      getLinkUrl(): string;
+      getLinkUrl(offset: Integer): string;
       getNextSibling(): Element;
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
-      getText(): String;
+      getText(): string;
       getTextAlignment(): TextAlignment;
       getTextAlignment(offset: Integer): TextAlignment;
       getTextAttributeIndices(): Integer[];
       getType(): ElementType;
-      insertText(offset: Integer, text: String): Text;
-      isAtDocumentEnd(): Boolean;
-      isBold(): Boolean;
-      isBold(offset: Integer): Boolean;
-      isItalic(): Boolean;
-      isItalic(offset: Integer): Boolean;
-      isStrikethrough(): Boolean;
-      isStrikethrough(offset: Integer): Boolean;
-      isUnderline(): Boolean;
-      isUnderline(offset: Integer): Boolean;
+      insertText(offset: Integer, text: string): Text;
+      isAtDocumentEnd(): boolean;
+      isBold(): boolean;
+      isBold(offset: Integer): boolean;
+      isItalic(): boolean;
+      isItalic(offset: Integer): boolean;
+      isStrikethrough(): boolean;
+      isStrikethrough(offset: Integer): boolean;
+      isUnderline(): boolean;
+      isUnderline(offset: Integer): boolean;
       merge(): Text;
       removeFromParent(): Text;
-      replaceText(searchPattern: String, replacement: String): Element;
+      replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(startOffset: Integer, endOffsetInclusive: Integer, attributes: Object): Text;
       setAttributes(attributes: Object): Text;
-      setBackgroundColor(startOffset: Integer, endOffsetInclusive: Integer, color: String): Text;
-      setBackgroundColor(color: String): Text;
-      setBold(bold: Boolean): Text;
-      setBold(startOffset: Integer, endOffsetInclusive: Integer, bold: Boolean): Text;
-      setFontFamily(startOffset: Integer, endOffsetInclusive: Integer, fontFamilyName: String): Text;
-      setFontFamily(fontFamilyName: String): Text;
+      setBackgroundColor(startOffset: Integer, endOffsetInclusive: Integer, color: string): Text;
+      setBackgroundColor(color: string): Text;
+      setBold(bold: boolean): Text;
+      setBold(startOffset: Integer, endOffsetInclusive: Integer, bold: boolean): Text;
+      setFontFamily(startOffset: Integer, endOffsetInclusive: Integer, fontFamilyName: string): Text;
+      setFontFamily(fontFamilyName: string): Text;
       setFontSize(size: Integer): Text;
       setFontSize(startOffset: Integer, endOffsetInclusive: Integer, size: Integer): Text;
-      setForegroundColor(startOffset: Integer, endOffsetInclusive: Integer, color: String): Text;
-      setForegroundColor(color: String): Text;
-      setItalic(italic: Boolean): Text;
-      setItalic(startOffset: Integer, endOffsetInclusive: Integer, italic: Boolean): Text;
-      setLinkUrl(startOffset: Integer, endOffsetInclusive: Integer, url: String): Text;
-      setLinkUrl(url: String): Text;
-      setStrikethrough(strikethrough: Boolean): Text;
-      setStrikethrough(startOffset: Integer, endOffsetInclusive: Integer, strikethrough: Boolean): Text;
-      setText(text: String): Text;
+      setForegroundColor(startOffset: Integer, endOffsetInclusive: Integer, color: string): Text;
+      setForegroundColor(color: string): Text;
+      setItalic(italic: boolean): Text;
+      setItalic(startOffset: Integer, endOffsetInclusive: Integer, italic: boolean): Text;
+      setLinkUrl(startOffset: Integer, endOffsetInclusive: Integer, url: string): Text;
+      setLinkUrl(url: string): Text;
+      setStrikethrough(strikethrough: boolean): Text;
+      setStrikethrough(startOffset: Integer, endOffsetInclusive: Integer, strikethrough: boolean): Text;
+      setText(text: string): Text;
       setTextAlignment(startOffset: Integer, endOffsetInclusive: Integer, textAlignment: TextAlignment): Text;
       setTextAlignment(textAlignment: TextAlignment): Text;
-      setUnderline(underline: Boolean): Text;
-      setUnderline(startOffset: Integer, endOffsetInclusive: Integer, underline: Boolean): Text;
+      setUnderline(underline: boolean): Text;
+      setUnderline(startOffset: Integer, endOffsetInclusive: Integer, underline: boolean): Text;
     }
 
     /**
@@ -1443,7 +1443,7 @@ declare module GoogleAppsScript {
       getParent(): ContainerElement;
       getPreviousSibling(): Element;
       getType(): ElementType;
-      isAtDocumentEnd(): Boolean;
+      isAtDocumentEnd(): boolean;
       merge(): UnsupportedElement;
       removeFromParent(): UnsupportedElement;
       setAttributes(attributes: Object): UnsupportedElement;

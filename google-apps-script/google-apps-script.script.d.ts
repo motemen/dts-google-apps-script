@@ -53,7 +53,7 @@ declare module GoogleAppsScript {
      */
     export interface AuthorizationInfo {
       getAuthorizationStatus(): AuthorizationStatus;
-      getAuthorizationUrl(): String;
+      getAuthorizationUrl(): string;
     }
 
     /**
@@ -74,7 +74,7 @@ declare module GoogleAppsScript {
       everyHours(n: Integer): ClockTriggerBuilder;
       everyMinutes(n: Integer): ClockTriggerBuilder;
       everyWeeks(n: Integer): ClockTriggerBuilder;
-      inTimezone(timezone: String): ClockTriggerBuilder;
+      inTimezone(timezone: string): ClockTriggerBuilder;
       nearMinute(minute: Integer): ClockTriggerBuilder;
       onMonthDay(day: Integer): ClockTriggerBuilder;
       onWeekDay(day: Base.Weekday): ClockTriggerBuilder;
@@ -122,8 +122,8 @@ declare module GoogleAppsScript {
       deleteTrigger(trigger: Trigger): void;
       getAuthorizationInfo(authMode: AuthMode): AuthorizationInfo;
       getInstallationSource(): InstallationSource;
-      getOAuthToken(): String;
-      getProjectKey(): String;
+      getOAuthToken(): string;
+      getProjectKey(): string;
       getProjectTriggers(): Trigger[];
       getService(): Service;
       getUserTriggers(document: Document.Document): Trigger[];
@@ -131,7 +131,7 @@ declare module GoogleAppsScript {
       getUserTriggers(spreadsheet: Spreadsheet.Spreadsheet): Trigger[];
       invalidateAuth(): void;
       newStateToken(): StateTokenBuilder;
-      newTrigger(functionName: String): TriggerBuilder;
+      newTrigger(functionName: string): TriggerBuilder;
       getScriptTriggers(): Trigger[];
     }
 
@@ -169,9 +169,9 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface StateTokenBuilder {
-      createToken(): String;
-      withArgument(name: String, value: String): StateTokenBuilder;
-      withMethod(method: String): StateTokenBuilder;
+      createToken(): string;
+      withArgument(name: string, value: string): StateTokenBuilder;
+      withMethod(method: string): StateTokenBuilder;
       withTimeout(seconds: Integer): StateTokenBuilder;
     }
 
@@ -180,10 +180,10 @@ declare module GoogleAppsScript {
      */
     export interface Trigger {
       getEventType(): EventType;
-      getHandlerFunction(): String;
+      getHandlerFunction(): string;
       getTriggerSource(): TriggerSource;
-      getTriggerSourceId(): String;
-      getUniqueId(): String;
+      getTriggerSourceId(): string;
+      getUniqueId(): string;
     }
 
     /**
@@ -191,11 +191,11 @@ declare module GoogleAppsScript {
      */
     export interface TriggerBuilder {
       forDocument(document: Document.Document): DocumentTriggerBuilder;
-      forDocument(key: String): DocumentTriggerBuilder;
+      forDocument(key: string): DocumentTriggerBuilder;
       forForm(form: Forms.Form): FormTriggerBuilder;
-      forForm(key: String): FormTriggerBuilder;
+      forForm(key: string): FormTriggerBuilder;
       forSpreadsheet(sheet: Spreadsheet.Spreadsheet): SpreadsheetTriggerBuilder;
-      forSpreadsheet(key: String): SpreadsheetTriggerBuilder;
+      forSpreadsheet(key: string): SpreadsheetTriggerBuilder;
       timeBased(): ClockTriggerBuilder;
     }
 

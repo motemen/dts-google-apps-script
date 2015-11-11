@@ -37,10 +37,10 @@ declare module GoogleAppsScript {
      */
     export interface DataValidation {
       copy(): DataValidationBuilder;
-      getAllowInvalid(): Boolean;
+      getAllowInvalid(): boolean;
       getCriteriaType(): DataValidationCriteria;
       getCriteriaValues(): Object[];
-      getHelpText(): String;
+      getHelpText(): string;
     }
 
     /**
@@ -55,10 +55,10 @@ declare module GoogleAppsScript {
     export interface DataValidationBuilder {
       build(): DataValidation;
       copy(): DataValidationBuilder;
-      getAllowInvalid(): Boolean;
+      getAllowInvalid(): boolean;
       getCriteriaType(): DataValidationCriteria;
       getCriteriaValues(): Object[];
-      getHelpText(): String;
+      getHelpText(): string;
       requireDate(): DataValidationBuilder;
       requireDateAfter(date: Date): DataValidationBuilder;
       requireDateBefore(date: Date): DataValidationBuilder;
@@ -67,7 +67,7 @@ declare module GoogleAppsScript {
       requireDateNotBetween(start: Date, end: Date): DataValidationBuilder;
       requireDateOnOrAfter(date: Date): DataValidationBuilder;
       requireDateOnOrBefore(date: Date): DataValidationBuilder;
-      requireFormulaSatisfied(formula: String): DataValidationBuilder;
+      requireFormulaSatisfied(formula: string): DataValidationBuilder;
       requireNumberBetween(start: Number, end: Number): DataValidationBuilder;
       requireNumberEqualTo(number: Number): DataValidationBuilder;
       requireNumberGreaterThan(number: Number): DataValidationBuilder;
@@ -76,17 +76,17 @@ declare module GoogleAppsScript {
       requireNumberLessThanOrEqualTo(number: Number): DataValidationBuilder;
       requireNumberNotBetween(start: Number, end: Number): DataValidationBuilder;
       requireNumberNotEqualTo(number: Number): DataValidationBuilder;
-      requireTextContains(text: String): DataValidationBuilder;
-      requireTextDoesNotContain(text: String): DataValidationBuilder;
-      requireTextEqualTo(text: String): DataValidationBuilder;
+      requireTextContains(text: string): DataValidationBuilder;
+      requireTextDoesNotContain(text: string): DataValidationBuilder;
+      requireTextEqualTo(text: string): DataValidationBuilder;
       requireTextIsEmail(): DataValidationBuilder;
       requireTextIsUrl(): DataValidationBuilder;
       requireValueInList(values: String[]): DataValidationBuilder;
-      requireValueInList(values: String[], showDropdown: Boolean): DataValidationBuilder;
+      requireValueInList(values: String[], showDropdown: boolean): DataValidationBuilder;
       requireValueInRange(range: Range): DataValidationBuilder;
-      requireValueInRange(range: Range, showDropdown: Boolean): DataValidationBuilder;
-      setAllowInvalid(allowInvalidData: Boolean): DataValidationBuilder;
-      setHelpText(helpText: String): DataValidationBuilder;
+      requireValueInRange(range: Range, showDropdown: boolean): DataValidationBuilder;
+      setAllowInvalid(allowInvalidData: boolean): DataValidationBuilder;
+      setHelpText(helpText: string): DataValidationBuilder;
       withCriteria(criteria: DataValidationCriteria, args: Object[]): DataValidationBuilder;
     }
 
@@ -140,23 +140,23 @@ declare module GoogleAppsScript {
       getRanges(): Range[];
       removeRange(range: Range): EmbeddedChartBuilder;
       reverseCategories(): EmbeddedAreaChartBuilder;
-      setBackgroundColor(cssValue: String): EmbeddedAreaChartBuilder;
+      setBackgroundColor(cssValue: string): EmbeddedAreaChartBuilder;
       setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
       setColors(cssValues: String[]): EmbeddedAreaChartBuilder;
       setLegendPosition(position: Charts.Position): EmbeddedAreaChartBuilder;
       setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedAreaChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setOption(option: string, value: Object): EmbeddedChartBuilder;
       setPointStyle(style: Charts.PointStyle): EmbeddedAreaChartBuilder;
       setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
       setRange(start: Number, end: Number): EmbeddedAreaChartBuilder;
       setStacked(): EmbeddedAreaChartBuilder;
-      setTitle(chartTitle: String): EmbeddedAreaChartBuilder;
+      setTitle(chartTitle: string): EmbeddedAreaChartBuilder;
       setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedAreaChartBuilder;
       setXAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedAreaChartBuilder;
-      setXAxisTitle(title: String): EmbeddedAreaChartBuilder;
+      setXAxisTitle(title: string): EmbeddedAreaChartBuilder;
       setXAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedAreaChartBuilder;
       setYAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedAreaChartBuilder;
-      setYAxisTitle(title: String): EmbeddedAreaChartBuilder;
+      setYAxisTitle(title: string): EmbeddedAreaChartBuilder;
       setYAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedAreaChartBuilder;
       useLogScale(): EmbeddedAreaChartBuilder;
     }
@@ -181,22 +181,22 @@ declare module GoogleAppsScript {
       removeRange(range: Range): EmbeddedChartBuilder;
       reverseCategories(): EmbeddedBarChartBuilder;
       reverseDirection(): EmbeddedBarChartBuilder;
-      setBackgroundColor(cssValue: String): EmbeddedBarChartBuilder;
+      setBackgroundColor(cssValue: string): EmbeddedBarChartBuilder;
       setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
       setColors(cssValues: String[]): EmbeddedBarChartBuilder;
       setLegendPosition(position: Charts.Position): EmbeddedBarChartBuilder;
       setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setOption(option: string, value: Object): EmbeddedChartBuilder;
       setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
       setRange(start: Number, end: Number): EmbeddedBarChartBuilder;
       setStacked(): EmbeddedBarChartBuilder;
-      setTitle(chartTitle: String): EmbeddedBarChartBuilder;
+      setTitle(chartTitle: string): EmbeddedBarChartBuilder;
       setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
       setXAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
-      setXAxisTitle(title: String): EmbeddedBarChartBuilder;
+      setXAxisTitle(title: string): EmbeddedBarChartBuilder;
       setXAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
       setYAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
-      setYAxisTitle(title: String): EmbeddedBarChartBuilder;
+      setYAxisTitle(title: string): EmbeddedBarChartBuilder;
       setYAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
       useLogScale(): EmbeddedBarChartBuilder;
     }
@@ -229,15 +229,15 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface EmbeddedChart {
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
       getContainerInfo(): ContainerInfo;
-      getId(): String;
+      getId(): string;
       getOptions(): Charts.ChartOptions;
       getRanges(): Range[];
-      getType(): String;
+      getType(): string;
       modify(): EmbeddedChartBuilder;
-      setId(id: String): Charts.Chart;
+      setId(id: string): Charts.Chart;
     }
 
     /**
@@ -270,7 +270,7 @@ declare module GoogleAppsScript {
       getRanges(): Range[];
       removeRange(range: Range): EmbeddedChartBuilder;
       setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setOption(option: string, value: Object): EmbeddedChartBuilder;
       setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
     }
 
@@ -293,22 +293,22 @@ declare module GoogleAppsScript {
       getRanges(): Range[];
       removeRange(range: Range): EmbeddedChartBuilder;
       reverseCategories(): EmbeddedColumnChartBuilder;
-      setBackgroundColor(cssValue: String): EmbeddedColumnChartBuilder;
+      setBackgroundColor(cssValue: string): EmbeddedColumnChartBuilder;
       setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
       setColors(cssValues: String[]): EmbeddedColumnChartBuilder;
       setLegendPosition(position: Charts.Position): EmbeddedColumnChartBuilder;
       setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedColumnChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setOption(option: string, value: Object): EmbeddedChartBuilder;
       setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
       setRange(start: Number, end: Number): EmbeddedColumnChartBuilder;
       setStacked(): EmbeddedColumnChartBuilder;
-      setTitle(chartTitle: String): EmbeddedColumnChartBuilder;
+      setTitle(chartTitle: string): EmbeddedColumnChartBuilder;
       setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedColumnChartBuilder;
       setXAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedColumnChartBuilder;
-      setXAxisTitle(title: String): EmbeddedColumnChartBuilder;
+      setXAxisTitle(title: string): EmbeddedColumnChartBuilder;
       setXAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedColumnChartBuilder;
       setYAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedColumnChartBuilder;
-      setYAxisTitle(title: String): EmbeddedColumnChartBuilder;
+      setYAxisTitle(title: string): EmbeddedColumnChartBuilder;
       setYAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedColumnChartBuilder;
       useLogScale(): EmbeddedColumnChartBuilder;
     }
@@ -332,23 +332,23 @@ declare module GoogleAppsScript {
       getRanges(): Range[];
       removeRange(range: Range): EmbeddedChartBuilder;
       reverseCategories(): EmbeddedLineChartBuilder;
-      setBackgroundColor(cssValue: String): EmbeddedLineChartBuilder;
+      setBackgroundColor(cssValue: string): EmbeddedLineChartBuilder;
       setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
       setColors(cssValues: String[]): EmbeddedLineChartBuilder;
       setCurveStyle(style: Charts.CurveStyle): EmbeddedLineChartBuilder;
       setLegendPosition(position: Charts.Position): EmbeddedLineChartBuilder;
       setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedLineChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setOption(option: string, value: Object): EmbeddedChartBuilder;
       setPointStyle(style: Charts.PointStyle): EmbeddedLineChartBuilder;
       setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
       setRange(start: Number, end: Number): EmbeddedLineChartBuilder;
-      setTitle(chartTitle: String): EmbeddedLineChartBuilder;
+      setTitle(chartTitle: string): EmbeddedLineChartBuilder;
       setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedLineChartBuilder;
       setXAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedLineChartBuilder;
-      setXAxisTitle(title: String): EmbeddedLineChartBuilder;
+      setXAxisTitle(title: string): EmbeddedLineChartBuilder;
       setXAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedLineChartBuilder;
       setYAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedLineChartBuilder;
-      setYAxisTitle(title: String): EmbeddedLineChartBuilder;
+      setYAxisTitle(title: string): EmbeddedLineChartBuilder;
       setYAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedLineChartBuilder;
       useLogScale(): EmbeddedLineChartBuilder;
     }
@@ -373,14 +373,14 @@ declare module GoogleAppsScript {
       removeRange(range: Range): EmbeddedChartBuilder;
       reverseCategories(): EmbeddedPieChartBuilder;
       set3D(): EmbeddedPieChartBuilder;
-      setBackgroundColor(cssValue: String): EmbeddedPieChartBuilder;
+      setBackgroundColor(cssValue: string): EmbeddedPieChartBuilder;
       setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
       setColors(cssValues: String[]): EmbeddedPieChartBuilder;
       setLegendPosition(position: Charts.Position): EmbeddedPieChartBuilder;
       setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedPieChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setOption(option: string, value: Object): EmbeddedChartBuilder;
       setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
-      setTitle(chartTitle: String): EmbeddedPieChartBuilder;
+      setTitle(chartTitle: string): EmbeddedPieChartBuilder;
       setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedPieChartBuilder;
     }
 
@@ -402,25 +402,25 @@ declare module GoogleAppsScript {
       getContainer(): ContainerInfo;
       getRanges(): Range[];
       removeRange(range: Range): EmbeddedChartBuilder;
-      setBackgroundColor(cssValue: String): EmbeddedScatterChartBuilder;
+      setBackgroundColor(cssValue: string): EmbeddedScatterChartBuilder;
       setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
       setColors(cssValues: String[]): EmbeddedScatterChartBuilder;
       setLegendPosition(position: Charts.Position): EmbeddedScatterChartBuilder;
       setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setOption(option: string, value: Object): EmbeddedChartBuilder;
       setPointStyle(style: Charts.PointStyle): EmbeddedScatterChartBuilder;
       setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
-      setTitle(chartTitle: String): EmbeddedScatterChartBuilder;
+      setTitle(chartTitle: string): EmbeddedScatterChartBuilder;
       setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
       setXAxisLogScale(): EmbeddedScatterChartBuilder;
       setXAxisRange(start: Number, end: Number): EmbeddedScatterChartBuilder;
       setXAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
-      setXAxisTitle(title: String): EmbeddedScatterChartBuilder;
+      setXAxisTitle(title: string): EmbeddedScatterChartBuilder;
       setXAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
       setYAxisLogScale(): EmbeddedScatterChartBuilder;
       setYAxisRange(start: Number, end: Number): EmbeddedScatterChartBuilder;
       setYAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
-      setYAxisTitle(title: String): EmbeddedScatterChartBuilder;
+      setYAxisTitle(title: string): EmbeddedScatterChartBuilder;
       setYAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
     }
 
@@ -438,11 +438,11 @@ declare module GoogleAppsScript {
       asScatterChart(): EmbeddedScatterChartBuilder;
       asTableChart(): EmbeddedTableChartBuilder;
       build(): EmbeddedChart;
-      enablePaging(enablePaging: Boolean): EmbeddedTableChartBuilder;
+      enablePaging(enablePaging: boolean): EmbeddedTableChartBuilder;
       enablePaging(pageSize: Integer): EmbeddedTableChartBuilder;
       enablePaging(pageSize: Integer, startPage: Integer): EmbeddedTableChartBuilder;
-      enableRtlTable(rtlEnabled: Boolean): EmbeddedTableChartBuilder;
-      enableSorting(enableSorting: Boolean): EmbeddedTableChartBuilder;
+      enableRtlTable(rtlEnabled: boolean): EmbeddedTableChartBuilder;
+      enableSorting(enableSorting: boolean): EmbeddedTableChartBuilder;
       getChartType(): Charts.ChartType;
       getContainer(): ContainerInfo;
       getRanges(): Range[];
@@ -451,10 +451,10 @@ declare module GoogleAppsScript {
       setFirstRowNumber(number: Integer): EmbeddedTableChartBuilder;
       setInitialSortingAscending(column: Integer): EmbeddedTableChartBuilder;
       setInitialSortingDescending(column: Integer): EmbeddedTableChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setOption(option: string, value: Object): EmbeddedChartBuilder;
       setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
-      showRowNumberColumn(showRowNumber: Boolean): EmbeddedTableChartBuilder;
-      useAlternatingRowStyle(alternate: Boolean): EmbeddedTableChartBuilder;
+      showRowNumberColumn(showRowNumber: boolean): EmbeddedTableChartBuilder;
+      useAlternatingRowStyle(alternate: boolean): EmbeddedTableChartBuilder;
     }
 
     /**
@@ -465,11 +465,11 @@ declare module GoogleAppsScript {
      * Access and modify protected sheets in the older version of Google Sheets.
      */
     export interface PageProtection {
-      addUser(email: String): void;
+      addUser(email: string): void;
       getUsers(): String[];
-      isProtected(): Boolean;
-      removeUser(user: String): void;
-      setProtected(protection: Boolean): void;
+      isProtected(): boolean;
+      removeUser(user: string): void;
+      setProtected(protection: boolean): void;
     }
 
     /**
@@ -516,28 +516,28 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface Protection {
-      addEditor(emailAddress: String): Protection;
+      addEditor(emailAddress: string): Protection;
       addEditor(user: Base.User): Protection;
       addEditors(emailAddresses: String[]): Protection;
-      canDomainEdit(): Boolean;
-      canEdit(): Boolean;
-      getDescription(): String;
+      canDomainEdit(): boolean;
+      canEdit(): boolean;
+      getDescription(): string;
       getEditors(): Base.User[];
       getProtectionType(): ProtectionType;
       getRange(): Range;
-      getRangeName(): String;
+      getRangeName(): string;
       getUnprotectedRanges(): Range[];
-      isWarningOnly(): Boolean;
+      isWarningOnly(): boolean;
       remove(): void;
-      removeEditor(emailAddress: String): Protection;
+      removeEditor(emailAddress: string): Protection;
       removeEditor(user: Base.User): Protection;
       removeEditors(emailAddresses: String[]): Protection;
-      setDescription(description: String): Protection;
-      setDomainEdit(editable: Boolean): Protection;
+      setDescription(description: string): Protection;
+      setDomainEdit(editable: boolean): Protection;
       setRange(range: Range): Protection;
-      setRangeName(rangeName: String): Protection;
+      setRangeName(rangeName: string): Protection;
       setUnprotectedRanges(ranges: Range[]): Protection;
-      setWarningOnly(warningOnly: Boolean): Protection;
+      setWarningOnly(warningOnly: boolean): Protection;
     }
 
     /**
@@ -571,7 +571,7 @@ declare module GoogleAppsScript {
     export interface Range {
       activate(): Range;
       breakApart(): Range;
-      canEdit(): Boolean;
+      canEdit(): boolean;
       clear(): Range;
       clear(options: Object): Range;
       clearContent(): Range;
@@ -584,59 +584,59 @@ declare module GoogleAppsScript {
       copyTo(destination: Range, options: Object): void;
       copyValuesToRange(gridId: Integer, column: Integer, columnEnd: Integer, row: Integer, rowEnd: Integer): void;
       copyValuesToRange(sheet: Sheet, column: Integer, columnEnd: Integer, row: Integer, rowEnd: Integer): void;
-      getA1Notation(): String;
-      getBackground(): String;
+      getA1Notation(): string;
+      getBackground(): string;
       getBackgrounds(): String[][];
       getCell(row: Integer, column: Integer): Range;
       getColumn(): Integer;
-      getDataSourceUrl(): String;
+      getDataSourceUrl(): string;
       getDataTable(): Charts.DataTable;
-      getDataTable(firstRowIsHeader: Boolean): Charts.DataTable;
+      getDataTable(firstRowIsHeader: boolean): Charts.DataTable;
       getDataValidation(): DataValidation;
       getDataValidations(): DataValidation[][];
-      getFontColor(): String;
+      getFontColor(): string;
       getFontColors(): String[][];
       getFontFamilies(): String[][];
-      getFontFamily(): String;
-      getFontLine(): String;
+      getFontFamily(): string;
+      getFontLine(): string;
       getFontLines(): String[][];
       getFontSize(): Integer;
       getFontSizes(): Integer[][];
-      getFontStyle(): String;
+      getFontStyle(): string;
       getFontStyles(): String[][];
-      getFontWeight(): String;
+      getFontWeight(): string;
       getFontWeights(): String[][];
-      getFormula(): String;
-      getFormulaR1C1(): String;
+      getFormula(): string;
+      getFormulaR1C1(): string;
       getFormulas(): String[][];
       getFormulasR1C1(): String[][];
       getGridId(): Integer;
       getHeight(): Integer;
-      getHorizontalAlignment(): String;
+      getHorizontalAlignment(): string;
       getHorizontalAlignments(): String[][];
       getLastColumn(): Integer;
       getLastRow(): Integer;
-      getNote(): String;
+      getNote(): string;
       getNotes(): String[][];
       getNumColumns(): Integer;
       getNumRows(): Integer;
-      getNumberFormat(): String;
+      getNumberFormat(): string;
       getNumberFormats(): String[][];
       getRow(): Integer;
       getRowIndex(): Integer;
       getSheet(): Sheet;
       getValue(): Object;
       getValues(): Object[][];
-      getVerticalAlignment(): String;
+      getVerticalAlignment(): string;
       getVerticalAlignments(): String[][];
       getWidth(): Integer;
-      getWrap(): Boolean;
+      getWrap(): boolean;
       getWraps(): Boolean[][];
-      isBlank(): Boolean;
-      isEndColumnBounded(): Boolean;
-      isEndRowBounded(): Boolean;
-      isStartColumnBounded(): Boolean;
-      isStartRowBounded(): Boolean;
+      isBlank(): boolean;
+      isEndColumnBounded(): boolean;
+      isEndRowBounded(): boolean;
+      isStartColumnBounded(): boolean;
+      isStartRowBounded(): boolean;
       merge(): Range;
       mergeAcross(): Range;
       mergeVertically(): Range;
@@ -645,39 +645,39 @@ declare module GoogleAppsScript {
       offset(rowOffset: Integer, columnOffset: Integer, numRows: Integer): Range;
       offset(rowOffset: Integer, columnOffset: Integer, numRows: Integer, numColumns: Integer): Range;
       protect(): Protection;
-      setBackground(color: String): Range;
+      setBackground(color: string): Range;
       setBackgroundRGB(red: Integer, green: Integer, blue: Integer): Range;
       setBackgrounds(color: String[][]): Range;
-      setBorder(top: Boolean, left: Boolean, bottom: Boolean, right: Boolean, vertical: Boolean, horizontal: Boolean): Range;
+      setBorder(top: boolean, left: boolean, bottom: boolean, right: boolean, vertical: boolean, horizontal: boolean): Range;
       setDataValidation(rule: DataValidation): Range;
       setDataValidations(rules: DataValidation[][]): Range;
-      setFontColor(color: String): Range;
+      setFontColor(color: string): Range;
       setFontColors(colors: Object[][]): Range;
       setFontFamilies(fontFamilies: Object[][]): Range;
-      setFontFamily(fontFamily: String): Range;
-      setFontLine(fontLine: String): Range;
+      setFontFamily(fontFamily: string): Range;
+      setFontLine(fontLine: string): Range;
       setFontLines(fontLines: Object[][]): Range;
       setFontSize(size: Integer): Range;
       setFontSizes(sizes: Object[][]): Range;
-      setFontStyle(fontStyle: String): Range;
+      setFontStyle(fontStyle: string): Range;
       setFontStyles(fontStyles: Object[][]): Range;
-      setFontWeight(fontWeight: String): Range;
+      setFontWeight(fontWeight: string): Range;
       setFontWeights(fontWeights: Object[][]): Range;
-      setFormula(formula: String): Range;
-      setFormulaR1C1(formula: String): Range;
+      setFormula(formula: string): Range;
+      setFormulaR1C1(formula: string): Range;
       setFormulas(formulas: String[][]): Range;
       setFormulasR1C1(formulas: String[][]): Range;
-      setHorizontalAlignment(alignment: String): Range;
+      setHorizontalAlignment(alignment: string): Range;
       setHorizontalAlignments(alignments: Object[][]): Range;
-      setNote(note: String): Range;
+      setNote(note: string): Range;
       setNotes(notes: Object[][]): Range;
-      setNumberFormat(numberFormat: String): Range;
+      setNumberFormat(numberFormat: string): Range;
       setNumberFormats(numberFormats: Object[][]): Range;
       setValue(value: Object): Range;
       setValues(values: Object[][]): Range;
-      setVerticalAlignment(alignment: String): Range;
+      setVerticalAlignment(alignment: string): Range;
       setVerticalAlignments(alignments: Object[][]): Range;
-      setWrap(isWrapEnabled: Boolean): Range;
+      setWrap(isWrapEnabled: boolean): Range;
       setWraps(isWrapEnabled: Object[][]): Range;
       sort(sortSpecObj: Object): Range;
     }
@@ -712,16 +712,16 @@ declare module GoogleAppsScript {
       getLastRow(): Integer;
       getMaxColumns(): Integer;
       getMaxRows(): Integer;
-      getName(): String;
+      getName(): string;
       getParent(): Spreadsheet;
       getProtections(type: ProtectionType): Protection[];
       getRange(row: Integer, column: Integer): Range;
       getRange(row: Integer, column: Integer, numRows: Integer): Range;
       getRange(row: Integer, column: Integer, numRows: Integer, numColumns: Integer): Range;
-      getRange(a1Notation: String): Range;
+      getRange(a1Notation: string): Range;
       getRowHeight(rowPosition: Integer): Integer;
       getSheetId(): Integer;
-      getSheetName(): String;
+      getSheetName(): string;
       getSheetValues(startRow: Integer, startColumn: Integer, numRows: Integer, numColumns: Integer): Object[][];
       hideColumn(column: Range): void;
       hideColumns(columnIndex: Integer): void;
@@ -739,25 +739,25 @@ declare module GoogleAppsScript {
       insertColumnsBefore(beforePosition: Integer, howMany: Integer): Sheet;
       insertImage(blob: Base.Blob, column: Integer, row: Integer): void;
       insertImage(blob: Base.Blob, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
-      insertImage(url: String, column: Integer, row: Integer): void;
-      insertImage(url: String, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
+      insertImage(url: string, column: Integer, row: Integer): void;
+      insertImage(url: string, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
       insertRowAfter(afterPosition: Integer): Sheet;
       insertRowBefore(beforePosition: Integer): Sheet;
       insertRows(rowIndex: Integer): void;
       insertRows(rowIndex: Integer, numRows: Integer): void;
       insertRowsAfter(afterPosition: Integer, howMany: Integer): Sheet;
       insertRowsBefore(beforePosition: Integer, howMany: Integer): Sheet;
-      isSheetHidden(): Boolean;
+      isSheetHidden(): boolean;
       newChart(): EmbeddedChartBuilder;
       protect(): Protection;
       removeChart(chart: EmbeddedChart): void;
       setActiveRange(range: Range): Range;
       setActiveSelection(range: Range): Range;
-      setActiveSelection(a1Notation: String): Range;
+      setActiveSelection(a1Notation: string): Range;
       setColumnWidth(columnPosition: Integer, width: Integer): Sheet;
       setFrozenColumns(columns: Integer): void;
       setFrozenRows(rows: Integer): void;
-      setName(name: String): Sheet;
+      setName(name: string): Sheet;
       setRowHeight(rowPosition: Integer, height: Integer): Sheet;
       showColumns(columnIndex: Integer): void;
       showColumns(columnIndex: Integer, numColumns: Integer): void;
@@ -765,7 +765,7 @@ declare module GoogleAppsScript {
       showRows(rowIndex: Integer, numRows: Integer): void;
       showSheet(): Sheet;
       sort(columnPosition: Integer): Sheet;
-      sort(columnPosition: Integer, ascending: Boolean): Sheet;
+      sort(columnPosition: Integer, ascending: boolean): Sheet;
       unhideColumn(column: Range): void;
       unhideRow(row: Range): void;
       updateChart(chart: EmbeddedChart): void;
@@ -778,16 +778,16 @@ declare module GoogleAppsScript {
      *  new sheets and adding collaborators.
      */
     export interface Spreadsheet {
-      addEditor(emailAddress: String): Spreadsheet;
+      addEditor(emailAddress: string): Spreadsheet;
       addEditor(user: Base.User): Spreadsheet;
       addEditors(emailAddresses: String[]): Spreadsheet;
-      addMenu(name: String, subMenus: Object[]): void;
-      addViewer(emailAddress: String): Spreadsheet;
+      addMenu(name: string, subMenus: Object[]): void;
+      addViewer(emailAddress: string): Spreadsheet;
       addViewer(user: Base.User): Spreadsheet;
       addViewers(emailAddresses: String[]): Spreadsheet;
       appendRow(rowContents: Object[]): Sheet;
       autoResizeColumn(columnPosition: Integer): Sheet;
-      copy(name: String): Spreadsheet;
+      copy(name: string): Spreadsheet;
       deleteActiveSheet(): Sheet;
       deleteColumn(columnPosition: Integer): Sheet;
       deleteColumns(columnPosition: Integer, howMany: Integer): void;
@@ -798,32 +798,32 @@ declare module GoogleAppsScript {
       getActiveCell(): Range;
       getActiveRange(): Range;
       getActiveSheet(): Sheet;
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
       getColumnWidth(columnPosition: Integer): Integer;
       getDataRange(): Range;
       getEditors(): Base.User[];
-      getFormUrl(): String;
+      getFormUrl(): string;
       getFrozenColumns(): Integer;
       getFrozenRows(): Integer;
-      getId(): String;
+      getId(): string;
       getLastColumn(): Integer;
       getLastRow(): Integer;
-      getName(): String;
+      getName(): string;
       getNumSheets(): Integer;
       getOwner(): Base.User;
       getProtections(type: ProtectionType): Protection[];
-      getRange(a1Notation: String): Range;
-      getRangeByName(name: String): Range;
+      getRange(a1Notation: string): Range;
+      getRangeByName(name: string): Range;
       getRowHeight(rowPosition: Integer): Integer;
-      getSheetByName(name: String): Sheet;
+      getSheetByName(name: string): Sheet;
       getSheetId(): Integer;
-      getSheetName(): String;
+      getSheetName(): string;
       getSheetValues(startRow: Integer, startColumn: Integer, numRows: Integer, numColumns: Integer): Object[][];
       getSheets(): Sheet[];
-      getSpreadsheetLocale(): String;
-      getSpreadsheetTimeZone(): String;
-      getUrl(): String;
+      getSpreadsheetLocale(): string;
+      getSpreadsheetTimeZone(): string;
+      getUrl(): string;
       getViewers(): Base.User[];
       hideColumn(column: Range): void;
       hideRow(row: Range): void;
@@ -833,8 +833,8 @@ declare module GoogleAppsScript {
       insertColumnsBefore(beforePosition: Integer, howMany: Integer): Sheet;
       insertImage(blob: Base.Blob, column: Integer, row: Integer): void;
       insertImage(blob: Base.Blob, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
-      insertImage(url: String, column: Integer, row: Integer): void;
-      insertImage(url: String, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
+      insertImage(url: string, column: Integer, row: Integer): void;
+      insertImage(url: string, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
       insertRowAfter(afterPosition: Integer): Sheet;
       insertRowBefore(beforePosition: Integer): Sheet;
       insertRowsAfter(afterPosition: Integer, howMany: Integer): Sheet;
@@ -843,43 +843,43 @@ declare module GoogleAppsScript {
       insertSheet(sheetIndex: Integer): Sheet;
       insertSheet(sheetIndex: Integer, options: Object): Sheet;
       insertSheet(options: Object): Sheet;
-      insertSheet(sheetName: String): Sheet;
-      insertSheet(sheetName: String, sheetIndex: Integer): Sheet;
-      insertSheet(sheetName: String, sheetIndex: Integer, options: Object): Sheet;
-      insertSheet(sheetName: String, options: Object): Sheet;
+      insertSheet(sheetName: string): Sheet;
+      insertSheet(sheetName: string, sheetIndex: Integer): Sheet;
+      insertSheet(sheetName: string, sheetIndex: Integer, options: Object): Sheet;
+      insertSheet(sheetName: string, options: Object): Sheet;
       moveActiveSheet(pos: Integer): void;
-      removeEditor(emailAddress: String): Spreadsheet;
+      removeEditor(emailAddress: string): Spreadsheet;
       removeEditor(user: Base.User): Spreadsheet;
-      removeMenu(name: String): void;
-      removeNamedRange(name: String): void;
-      removeViewer(emailAddress: String): Spreadsheet;
+      removeMenu(name: string): void;
+      removeNamedRange(name: string): void;
+      removeViewer(emailAddress: string): Spreadsheet;
       removeViewer(user: Base.User): Spreadsheet;
-      rename(newName: String): void;
-      renameActiveSheet(newName: String): void;
+      rename(newName: string): void;
+      renameActiveSheet(newName: string): void;
       setActiveRange(range: Range): Range;
       setActiveSelection(range: Range): Range;
-      setActiveSelection(a1Notation: String): Range;
+      setActiveSelection(a1Notation: string): Range;
       setActiveSheet(sheet: Sheet): Sheet;
       setColumnWidth(columnPosition: Integer, width: Integer): Sheet;
       setFrozenColumns(columns: Integer): void;
       setFrozenRows(rows: Integer): void;
-      setNamedRange(name: String, range: Range): void;
+      setNamedRange(name: string, range: Range): void;
       setRowHeight(rowPosition: Integer, height: Integer): Sheet;
-      setSpreadsheetLocale(locale: String): void;
-      setSpreadsheetTimeZone(timezone: String): void;
+      setSpreadsheetLocale(locale: string): void;
+      setSpreadsheetTimeZone(timezone: string): void;
       show(userInterface: Object): void;
       sort(columnPosition: Integer): Sheet;
-      sort(columnPosition: Integer, ascending: Boolean): Sheet;
-      toast(msg: String): void;
-      toast(msg: String, title: String): void;
-      toast(msg: String, title: String, timeoutSeconds: Number): void;
+      sort(columnPosition: Integer, ascending: boolean): Sheet;
+      toast(msg: string): void;
+      toast(msg: string, title: string): void;
+      toast(msg: string, title: string, timeoutSeconds: Number): void;
       unhideColumn(column: Range): void;
       unhideRow(row: Range): void;
-      updateMenu(name: String, subMenus: Object[]): void;
+      updateMenu(name: string, subMenus: Object[]): void;
       getSheetProtection(): PageProtection;
-      isAnonymousView(): Boolean;
-      isAnonymousWrite(): Boolean;
-      setAnonymousAccess(anonymousReadAllowed: Boolean, anonymousWriteAllowed: Boolean): void;
+      isAnonymousView(): boolean;
+      isAnonymousWrite(): boolean;
+      setAnonymousAccess(anonymousReadAllowed: boolean, anonymousWriteAllowed: boolean): void;
       setSheetProtection(permissions: PageProtection): void;
     }
 
@@ -890,8 +890,8 @@ declare module GoogleAppsScript {
     export interface SpreadsheetApp {
       DataValidationCriteria: DataValidationCriteria
       ProtectionType: ProtectionType
-      create(name: String): Spreadsheet;
-      create(name: String, rows: Integer, columns: Integer): Spreadsheet;
+      create(name: string): Spreadsheet;
+      create(name: string, rows: Integer, columns: Integer): Spreadsheet;
       flush(): void;
       getActive(): Spreadsheet;
       getActiveRange(): Range;
@@ -900,8 +900,8 @@ declare module GoogleAppsScript {
       getUi(): Base.Ui;
       newDataValidation(): DataValidationBuilder;
       open(file: Drive.File): Spreadsheet;
-      openById(id: String): Spreadsheet;
-      openByUrl(url: String): Spreadsheet;
+      openById(id: string): Spreadsheet;
+      openByUrl(url: string): Spreadsheet;
       setActiveRange(range: Range): Range;
       setActiveSheet(sheet: Sheet): Sheet;
       setActiveSpreadsheet(newActiveSpreadsheet: Spreadsheet): void;

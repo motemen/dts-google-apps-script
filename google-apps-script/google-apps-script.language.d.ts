@@ -10,8 +10,8 @@ declare module GoogleAppsScript {
      *      Logger.log(spanish);
      */
     export interface LanguageApp {
-      translate(text: String, sourceLanguage: String, targetLanguage: String): String;
-      translate(text: String, sourceLanguage: String, targetLanguage: String, advancedArgs: Object): String;
+      translate(text: string, sourceLanguage: string, targetLanguage: string): string;
+      translate(text: string, sourceLanguage: string, targetLanguage: string, advancedArgs: Object): string;
     }
 
   }

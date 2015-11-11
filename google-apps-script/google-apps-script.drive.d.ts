@@ -31,19 +31,19 @@ declare module GoogleAppsScript {
       Permission: Permission
       addFile(child: File): Folder;
       addFolder(child: Folder): Folder;
-      continueFileIterator(continuationToken: String): FileIterator;
-      continueFolderIterator(continuationToken: String): FolderIterator;
+      continueFileIterator(continuationToken: string): FileIterator;
+      continueFolderIterator(continuationToken: string): FolderIterator;
       createFile(blob: Base.BlobSource): File;
-      createFile(name: String, content: String): File;
-      createFile(name: String, content: String, mimeType: String): File;
-      createFolder(name: String): Folder;
-      getFileById(id: String): File;
+      createFile(name: string, content: string): File;
+      createFile(name: string, content: string, mimeType: string): File;
+      createFolder(name: string): Folder;
+      getFileById(id: string): File;
       getFiles(): FileIterator;
-      getFilesByName(name: String): FileIterator;
-      getFilesByType(mimeType: String): FileIterator;
-      getFolderById(id: String): Folder;
+      getFilesByName(name: string): FileIterator;
+      getFilesByType(mimeType: string): FileIterator;
+      getFolderById(id: string): Folder;
       getFolders(): FolderIterator;
-      getFoldersByName(name: String): FolderIterator;
+      getFoldersByName(name: string): FolderIterator;
       getRootFolder(): Folder;
       getStorageLimit(): Integer;
       getStorageUsed(): Integer;
@@ -51,8 +51,8 @@ declare module GoogleAppsScript {
       getTrashedFolders(): FolderIterator;
       removeFile(child: File): Folder;
       removeFolder(child: Folder): Folder;
-      searchFiles(params: String): FileIterator;
-      searchFolders(params: String): FolderIterator;
+      searchFiles(params: string): FileIterator;
+      searchFolders(params: string): FolderIterator;
     }
 
     /**
@@ -68,59 +68,59 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface File {
-      addCommenter(emailAddress: String): File;
+      addCommenter(emailAddress: string): File;
       addCommenter(user: Base.User): File;
       addCommenters(emailAddresses: String[]): File;
-      addEditor(emailAddress: String): File;
+      addEditor(emailAddress: string): File;
       addEditor(user: Base.User): File;
       addEditors(emailAddresses: String[]): File;
-      addViewer(emailAddress: String): File;
+      addViewer(emailAddress: string): File;
       addViewer(user: Base.User): File;
       addViewers(emailAddresses: String[]): File;
-      getAccess(email: String): Permission;
+      getAccess(email: string): Permission;
       getAccess(user: Base.User): Permission;
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
       getDateCreated(): Date;
-      getDescription(): String;
-      getDownloadUrl(): String;
+      getDescription(): string;
+      getDownloadUrl(): string;
       getEditors(): User[];
-      getId(): String;
+      getId(): string;
       getLastUpdated(): Date;
-      getMimeType(): String;
-      getName(): String;
+      getMimeType(): string;
+      getName(): string;
       getOwner(): User;
       getParents(): FolderIterator;
       getSharingAccess(): Access;
       getSharingPermission(): Permission;
       getSize(): Integer;
       getThumbnail(): Base.Blob;
-      getUrl(): String;
+      getUrl(): string;
       getViewers(): User[];
-      isShareableByEditors(): Boolean;
-      isStarred(): Boolean;
-      isTrashed(): Boolean;
+      isShareableByEditors(): boolean;
+      isStarred(): boolean;
+      isTrashed(): boolean;
       makeCopy(): File;
       makeCopy(destination: Folder): File;
-      makeCopy(name: String): File;
-      makeCopy(name: String, destination: Folder): File;
-      removeCommenter(emailAddress: String): File;
+      makeCopy(name: string): File;
+      makeCopy(name: string, destination: Folder): File;
+      removeCommenter(emailAddress: string): File;
       removeCommenter(user: Base.User): File;
-      removeEditor(emailAddress: String): File;
+      removeEditor(emailAddress: string): File;
       removeEditor(user: Base.User): File;
-      removeViewer(emailAddress: String): File;
+      removeViewer(emailAddress: string): File;
       removeViewer(user: Base.User): File;
-      revokePermissions(user: String): File;
+      revokePermissions(user: string): File;
       revokePermissions(user: Base.User): File;
-      setContent(content: String): File;
-      setDescription(description: String): File;
-      setName(name: String): File;
-      setOwner(emailAddress: String): File;
+      setContent(content: string): File;
+      setDescription(description: string): File;
+      setName(name: string): File;
+      setOwner(emailAddress: string): File;
       setOwner(user: Base.User): File;
-      setShareableByEditors(shareable: Boolean): File;
+      setShareableByEditors(shareable: boolean): File;
       setSharing(accessType: Access, permissionType: Permission): File;
-      setStarred(starred: Boolean): File;
-      setTrashed(trashed: Boolean): File;
+      setStarred(starred: boolean): File;
+      setTrashed(trashed: boolean): File;
     }
 
     /**
@@ -135,8 +135,8 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface FileIterator {
-      getContinuationToken(): String;
-      hasNext(): Boolean;
+      getContinuationToken(): string;
+      hasNext(): boolean;
       next(): File;
     }
 
@@ -151,59 +151,59 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface Folder {
-      addEditor(emailAddress: String): Folder;
+      addEditor(emailAddress: string): Folder;
       addEditor(user: Base.User): Folder;
       addEditors(emailAddresses: String[]): Folder;
       addFile(child: File): Folder;
       addFolder(child: Folder): Folder;
-      addViewer(emailAddress: String): Folder;
+      addViewer(emailAddress: string): Folder;
       addViewer(user: Base.User): Folder;
       addViewers(emailAddresses: String[]): Folder;
       createFile(blob: Base.BlobSource): File;
-      createFile(name: String, content: String): File;
-      createFile(name: String, content: String, mimeType: String): File;
-      createFolder(name: String): Folder;
-      getAccess(email: String): Permission;
+      createFile(name: string, content: string): File;
+      createFile(name: string, content: string, mimeType: string): File;
+      createFolder(name: string): Folder;
+      getAccess(email: string): Permission;
       getAccess(user: Base.User): Permission;
       getDateCreated(): Date;
-      getDescription(): String;
+      getDescription(): string;
       getEditors(): User[];
       getFiles(): FileIterator;
-      getFilesByName(name: String): FileIterator;
-      getFilesByType(mimeType: String): FileIterator;
+      getFilesByName(name: string): FileIterator;
+      getFilesByType(mimeType: string): FileIterator;
       getFolders(): FolderIterator;
-      getFoldersByName(name: String): FolderIterator;
-      getId(): String;
+      getFoldersByName(name: string): FolderIterator;
+      getId(): string;
       getLastUpdated(): Date;
-      getName(): String;
+      getName(): string;
       getOwner(): User;
       getParents(): FolderIterator;
       getSharingAccess(): Access;
       getSharingPermission(): Permission;
       getSize(): Integer;
-      getUrl(): String;
+      getUrl(): string;
       getViewers(): User[];
-      isShareableByEditors(): Boolean;
-      isStarred(): Boolean;
-      isTrashed(): Boolean;
-      removeEditor(emailAddress: String): Folder;
+      isShareableByEditors(): boolean;
+      isStarred(): boolean;
+      isTrashed(): boolean;
+      removeEditor(emailAddress: string): Folder;
       removeEditor(user: Base.User): Folder;
       removeFile(child: File): Folder;
       removeFolder(child: Folder): Folder;
-      removeViewer(emailAddress: String): Folder;
+      removeViewer(emailAddress: string): Folder;
       removeViewer(user: Base.User): Folder;
-      revokePermissions(user: String): Folder;
+      revokePermissions(user: string): Folder;
       revokePermissions(user: Base.User): Folder;
-      searchFiles(params: String): FileIterator;
-      searchFolders(params: String): FolderIterator;
-      setDescription(description: String): Folder;
-      setName(name: String): Folder;
-      setOwner(emailAddress: String): Folder;
+      searchFiles(params: string): FileIterator;
+      searchFolders(params: string): FolderIterator;
+      setDescription(description: string): Folder;
+      setName(name: string): Folder;
+      setOwner(emailAddress: string): Folder;
       setOwner(user: Base.User): Folder;
-      setShareableByEditors(shareable: Boolean): Folder;
+      setShareableByEditors(shareable: boolean): Folder;
       setSharing(accessType: Access, permissionType: Permission): Folder;
-      setStarred(starred: Boolean): Folder;
-      setTrashed(trashed: Boolean): Folder;
+      setStarred(starred: boolean): Folder;
+      setTrashed(trashed: boolean): Folder;
     }
 
     /**
@@ -218,8 +218,8 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface FolderIterator {
-      getContinuationToken(): String;
-      hasNext(): Boolean;
+      getContinuationToken(): string;
+      hasNext(): boolean;
       next(): Folder;
     }
 
@@ -248,11 +248,11 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface User {
-      getDomain(): String;
-      getEmail(): String;
-      getName(): String;
-      getPhotoUrl(): String;
-      getUserLoginId(): String;
+      getDomain(): string;
+      getEmail(): string;
+      getName(): string;
+      getPhotoUrl(): string;
+      getUserLoginId(): string;
     }
 
   }

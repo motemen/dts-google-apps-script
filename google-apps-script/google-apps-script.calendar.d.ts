@@ -7,36 +7,36 @@ declare module GoogleAppsScript {
      * Represents a calendar that the user owns or is subscribed to.
      */
     export interface Calendar {
-      createAllDayEvent(title: String, date: Date): CalendarEvent;
-      createAllDayEvent(title: String, date: Date, options: Object): CalendarEvent;
-      createAllDayEventSeries(title: String, startDate: Date, recurrence: EventRecurrence): CalendarEventSeries;
-      createAllDayEventSeries(title: String, startDate: Date, recurrence: EventRecurrence, options: Object): CalendarEventSeries;
-      createEvent(title: String, startTime: Date, endTime: Date): CalendarEvent;
-      createEvent(title: String, startTime: Date, endTime: Date, options: Object): CalendarEvent;
-      createEventFromDescription(description: String): CalendarEvent;
-      createEventSeries(title: String, startTime: Date, endTime: Date, recurrence: EventRecurrence): CalendarEventSeries;
-      createEventSeries(title: String, startTime: Date, endTime: Date, recurrence: EventRecurrence, options: Object): CalendarEventSeries;
+      createAllDayEvent(title: string, date: Date): CalendarEvent;
+      createAllDayEvent(title: string, date: Date, options: Object): CalendarEvent;
+      createAllDayEventSeries(title: string, startDate: Date, recurrence: EventRecurrence): CalendarEventSeries;
+      createAllDayEventSeries(title: string, startDate: Date, recurrence: EventRecurrence, options: Object): CalendarEventSeries;
+      createEvent(title: string, startTime: Date, endTime: Date): CalendarEvent;
+      createEvent(title: string, startTime: Date, endTime: Date, options: Object): CalendarEvent;
+      createEventFromDescription(description: string): CalendarEvent;
+      createEventSeries(title: string, startTime: Date, endTime: Date, recurrence: EventRecurrence): CalendarEventSeries;
+      createEventSeries(title: string, startTime: Date, endTime: Date, recurrence: EventRecurrence, options: Object): CalendarEventSeries;
       deleteCalendar(): void;
-      getColor(): String;
-      getDescription(): String;
-      getEventSeriesById(iCalId: String): CalendarEventSeries;
+      getColor(): string;
+      getDescription(): string;
+      getEventSeriesById(iCalId: string): CalendarEventSeries;
       getEvents(startTime: Date, endTime: Date): CalendarEvent[];
       getEvents(startTime: Date, endTime: Date, options: Object): CalendarEvent[];
       getEventsForDay(date: Date): CalendarEvent[];
       getEventsForDay(date: Date, options: Object): CalendarEvent[];
-      getId(): String;
-      getName(): String;
-      getTimeZone(): String;
-      isHidden(): Boolean;
-      isMyPrimaryCalendar(): Boolean;
-      isOwnedByMe(): Boolean;
-      isSelected(): Boolean;
-      setColor(color: String): Calendar;
-      setDescription(description: String): Calendar;
-      setHidden(hidden: Boolean): Calendar;
-      setName(name: String): Calendar;
-      setSelected(selected: Boolean): Calendar;
-      setTimeZone(timeZone: String): Calendar;
+      getId(): string;
+      getName(): string;
+      getTimeZone(): string;
+      isHidden(): boolean;
+      isMyPrimaryCalendar(): boolean;
+      isOwnedByMe(): boolean;
+      isSelected(): boolean;
+      setColor(color: string): Calendar;
+      setDescription(description: string): Calendar;
+      setHidden(hidden: boolean): Calendar;
+      setName(name: string): Calendar;
+      setSelected(selected: boolean): Calendar;
+      setTimeZone(timeZone: string): Calendar;
       unsubscribeFromCalendar(): void;
     }
 
@@ -51,47 +51,47 @@ declare module GoogleAppsScript {
       Month: Base.Month
       Visibility: Visibility
       Weekday: Base.Weekday
-      createAllDayEvent(title: String, date: Date): CalendarEvent;
-      createAllDayEvent(title: String, date: Date, options: Object): CalendarEvent;
-      createAllDayEventSeries(title: String, startDate: Date, recurrence: EventRecurrence): CalendarEventSeries;
-      createAllDayEventSeries(title: String, startDate: Date, recurrence: EventRecurrence, options: Object): CalendarEventSeries;
-      createCalendar(name: String): Calendar;
-      createCalendar(name: String, options: Object): Calendar;
-      createEvent(title: String, startTime: Date, endTime: Date): CalendarEvent;
-      createEvent(title: String, startTime: Date, endTime: Date, options: Object): CalendarEvent;
-      createEventFromDescription(description: String): CalendarEvent;
-      createEventSeries(title: String, startTime: Date, endTime: Date, recurrence: EventRecurrence): CalendarEventSeries;
-      createEventSeries(title: String, startTime: Date, endTime: Date, recurrence: EventRecurrence, options: Object): CalendarEventSeries;
+      createAllDayEvent(title: string, date: Date): CalendarEvent;
+      createAllDayEvent(title: string, date: Date, options: Object): CalendarEvent;
+      createAllDayEventSeries(title: string, startDate: Date, recurrence: EventRecurrence): CalendarEventSeries;
+      createAllDayEventSeries(title: string, startDate: Date, recurrence: EventRecurrence, options: Object): CalendarEventSeries;
+      createCalendar(name: string): Calendar;
+      createCalendar(name: string, options: Object): Calendar;
+      createEvent(title: string, startTime: Date, endTime: Date): CalendarEvent;
+      createEvent(title: string, startTime: Date, endTime: Date, options: Object): CalendarEvent;
+      createEventFromDescription(description: string): CalendarEvent;
+      createEventSeries(title: string, startTime: Date, endTime: Date, recurrence: EventRecurrence): CalendarEventSeries;
+      createEventSeries(title: string, startTime: Date, endTime: Date, recurrence: EventRecurrence, options: Object): CalendarEventSeries;
       getAllCalendars(): Calendar[];
       getAllOwnedCalendars(): Calendar[];
-      getCalendarById(id: String): Calendar;
-      getCalendarsByName(name: String): Calendar[];
-      getColor(): String;
+      getCalendarById(id: string): Calendar;
+      getCalendarsByName(name: string): Calendar[];
+      getColor(): string;
       getDefaultCalendar(): Calendar;
-      getDescription(): String;
-      getEventSeriesById(iCalId: String): CalendarEventSeries;
+      getDescription(): string;
+      getEventSeriesById(iCalId: string): CalendarEventSeries;
       getEvents(startTime: Date, endTime: Date): CalendarEvent[];
       getEvents(startTime: Date, endTime: Date, options: Object): CalendarEvent[];
       getEventsForDay(date: Date): CalendarEvent[];
       getEventsForDay(date: Date, options: Object): CalendarEvent[];
-      getId(): String;
-      getName(): String;
-      getOwnedCalendarById(id: String): Calendar;
-      getOwnedCalendarsByName(name: String): Calendar[];
-      getTimeZone(): String;
-      isHidden(): Boolean;
-      isMyPrimaryCalendar(): Boolean;
-      isOwnedByMe(): Boolean;
-      isSelected(): Boolean;
+      getId(): string;
+      getName(): string;
+      getOwnedCalendarById(id: string): Calendar;
+      getOwnedCalendarsByName(name: string): Calendar[];
+      getTimeZone(): string;
+      isHidden(): boolean;
+      isMyPrimaryCalendar(): boolean;
+      isOwnedByMe(): boolean;
+      isSelected(): boolean;
       newRecurrence(): EventRecurrence;
-      setColor(color: String): Calendar;
-      setDescription(description: String): Calendar;
-      setHidden(hidden: Boolean): Calendar;
-      setName(name: String): Calendar;
-      setSelected(selected: Boolean): Calendar;
-      setTimeZone(timeZone: String): Calendar;
-      subscribeToCalendar(id: String): Calendar;
-      subscribeToCalendar(id: String, options: Object): Calendar;
+      setColor(color: string): Calendar;
+      setDescription(description: string): Calendar;
+      setHidden(hidden: boolean): Calendar;
+      setName(name: string): Calendar;
+      setSelected(selected: boolean): Calendar;
+      setTimeZone(timeZone: string): Calendar;
+      subscribeToCalendar(id: string): Calendar;
+      subscribeToCalendar(id: string, options: Object): Calendar;
     }
 
     /**
@@ -99,55 +99,55 @@ declare module GoogleAppsScript {
      */
     export interface CalendarEvent {
       addEmailReminder(minutesBefore: Integer): CalendarEvent;
-      addGuest(email: String): CalendarEvent;
+      addGuest(email: string): CalendarEvent;
       addPopupReminder(minutesBefore: Integer): CalendarEvent;
       addSmsReminder(minutesBefore: Integer): CalendarEvent;
-      anyoneCanAddSelf(): Boolean;
+      anyoneCanAddSelf(): boolean;
       deleteEvent(): void;
-      deleteTag(key: String): CalendarEvent;
+      deleteTag(key: string): CalendarEvent;
       getAllDayEndDate(): Date;
       getAllDayStartDate(): Date;
       getAllTagKeys(): String[];
       getCreators(): String[];
       getDateCreated(): Date;
-      getDescription(): String;
+      getDescription(): string;
       getEmailReminders(): Integer[];
       getEndTime(): Date;
       getEventSeries(): CalendarEventSeries;
-      getGuestByEmail(email: String): EventGuest;
+      getGuestByEmail(email: string): EventGuest;
       getGuestList(): EventGuest[];
-      getGuestList(includeOwner: Boolean): EventGuest[];
-      getId(): String;
+      getGuestList(includeOwner: boolean): EventGuest[];
+      getId(): string;
       getLastUpdated(): Date;
-      getLocation(): String;
+      getLocation(): string;
       getMyStatus(): GuestStatus;
-      getOriginalCalendarId(): String;
+      getOriginalCalendarId(): string;
       getPopupReminders(): Integer[];
       getSmsReminders(): Integer[];
       getStartTime(): Date;
-      getTag(key: String): String;
-      getTitle(): String;
+      getTag(key: string): string;
+      getTitle(): string;
       getVisibility(): Visibility;
-      guestsCanInviteOthers(): Boolean;
-      guestsCanModify(): Boolean;
-      guestsCanSeeGuests(): Boolean;
-      isAllDayEvent(): Boolean;
-      isOwnedByMe(): Boolean;
-      isRecurringEvent(): Boolean;
+      guestsCanInviteOthers(): boolean;
+      guestsCanModify(): boolean;
+      guestsCanSeeGuests(): boolean;
+      isAllDayEvent(): boolean;
+      isOwnedByMe(): boolean;
+      isRecurringEvent(): boolean;
       removeAllReminders(): CalendarEvent;
-      removeGuest(email: String): CalendarEvent;
+      removeGuest(email: string): CalendarEvent;
       resetRemindersToDefault(): CalendarEvent;
       setAllDayDate(date: Date): CalendarEvent;
-      setAnyoneCanAddSelf(anyoneCanAddSelf: Boolean): CalendarEvent;
-      setDescription(description: String): CalendarEvent;
-      setGuestsCanInviteOthers(guestsCanInviteOthers: Boolean): CalendarEvent;
-      setGuestsCanModify(guestsCanModify: Boolean): CalendarEvent;
-      setGuestsCanSeeGuests(guestsCanSeeGuests: Boolean): CalendarEvent;
-      setLocation(location: String): CalendarEvent;
+      setAnyoneCanAddSelf(anyoneCanAddSelf: boolean): CalendarEvent;
+      setDescription(description: string): CalendarEvent;
+      setGuestsCanInviteOthers(guestsCanInviteOthers: boolean): CalendarEvent;
+      setGuestsCanModify(guestsCanModify: boolean): CalendarEvent;
+      setGuestsCanSeeGuests(guestsCanSeeGuests: boolean): CalendarEvent;
+      setLocation(location: string): CalendarEvent;
       setMyStatus(status: GuestStatus): CalendarEvent;
-      setTag(key: String, value: String): CalendarEvent;
+      setTag(key: string, value: string): CalendarEvent;
       setTime(startTime: Date, endTime: Date): CalendarEvent;
-      setTitle(title: String): CalendarEvent;
+      setTitle(title: string): CalendarEvent;
       setVisibility(visibility: Visibility): CalendarEvent;
     }
 
@@ -156,48 +156,48 @@ declare module GoogleAppsScript {
      */
     export interface CalendarEventSeries {
       addEmailReminder(minutesBefore: Integer): CalendarEventSeries;
-      addGuest(email: String): CalendarEventSeries;
+      addGuest(email: string): CalendarEventSeries;
       addPopupReminder(minutesBefore: Integer): CalendarEventSeries;
       addSmsReminder(minutesBefore: Integer): CalendarEventSeries;
-      anyoneCanAddSelf(): Boolean;
+      anyoneCanAddSelf(): boolean;
       deleteEventSeries(): void;
-      deleteTag(key: String): CalendarEventSeries;
+      deleteTag(key: string): CalendarEventSeries;
       getAllTagKeys(): String[];
       getCreators(): String[];
       getDateCreated(): Date;
-      getDescription(): String;
+      getDescription(): string;
       getEmailReminders(): Integer[];
-      getGuestByEmail(email: String): EventGuest;
+      getGuestByEmail(email: string): EventGuest;
       getGuestList(): EventGuest[];
-      getGuestList(includeOwner: Boolean): EventGuest[];
-      getId(): String;
+      getGuestList(includeOwner: boolean): EventGuest[];
+      getId(): string;
       getLastUpdated(): Date;
-      getLocation(): String;
+      getLocation(): string;
       getMyStatus(): GuestStatus;
-      getOriginalCalendarId(): String;
+      getOriginalCalendarId(): string;
       getPopupReminders(): Integer[];
       getSmsReminders(): Integer[];
-      getTag(key: String): String;
-      getTitle(): String;
+      getTag(key: string): string;
+      getTitle(): string;
       getVisibility(): Visibility;
-      guestsCanInviteOthers(): Boolean;
-      guestsCanModify(): Boolean;
-      guestsCanSeeGuests(): Boolean;
-      isOwnedByMe(): Boolean;
+      guestsCanInviteOthers(): boolean;
+      guestsCanModify(): boolean;
+      guestsCanSeeGuests(): boolean;
+      isOwnedByMe(): boolean;
       removeAllReminders(): CalendarEventSeries;
-      removeGuest(email: String): CalendarEventSeries;
+      removeGuest(email: string): CalendarEventSeries;
       resetRemindersToDefault(): CalendarEventSeries;
-      setAnyoneCanAddSelf(anyoneCanAddSelf: Boolean): CalendarEventSeries;
-      setDescription(description: String): CalendarEventSeries;
-      setGuestsCanInviteOthers(guestsCanInviteOthers: Boolean): CalendarEventSeries;
-      setGuestsCanModify(guestsCanModify: Boolean): CalendarEventSeries;
-      setGuestsCanSeeGuests(guestsCanSeeGuests: Boolean): CalendarEventSeries;
-      setLocation(location: String): CalendarEventSeries;
+      setAnyoneCanAddSelf(anyoneCanAddSelf: boolean): CalendarEventSeries;
+      setDescription(description: string): CalendarEventSeries;
+      setGuestsCanInviteOthers(guestsCanInviteOthers: boolean): CalendarEventSeries;
+      setGuestsCanModify(guestsCanModify: boolean): CalendarEventSeries;
+      setGuestsCanSeeGuests(guestsCanSeeGuests: boolean): CalendarEventSeries;
+      setLocation(location: string): CalendarEventSeries;
       setMyStatus(status: GuestStatus): CalendarEventSeries;
       setRecurrence(recurrence: EventRecurrence, startDate: Date): CalendarEventSeries;
       setRecurrence(recurrence: EventRecurrence, startTime: Date, endTime: Date): CalendarEventSeries;
-      setTag(key: String, value: String): CalendarEventSeries;
-      setTitle(title: String): CalendarEventSeries;
+      setTag(key: string, value: string): CalendarEventSeries;
+      setTitle(title: string): CalendarEventSeries;
       setVisibility(visibility: Visibility): CalendarEventSeries;
     }
 
@@ -211,10 +211,10 @@ declare module GoogleAppsScript {
      */
     export interface EventGuest {
       getAdditionalGuests(): Integer;
-      getEmail(): String;
+      getEmail(): string;
       getGuestStatus(): GuestStatus;
-      getName(): String;
-      getStatus(): String;
+      getName(): string;
+      getStatus(): string;
     }
 
     /**
@@ -231,7 +231,7 @@ declare module GoogleAppsScript {
       addWeeklyRule(): RecurrenceRule;
       addYearlyExclusion(): RecurrenceRule;
       addYearlyRule(): RecurrenceRule;
-      setTimeZone(timeZone: String): EventRecurrence;
+      setTimeZone(timeZone: string): EventRecurrence;
     }
 
     /**
@@ -272,7 +272,7 @@ declare module GoogleAppsScript {
       onlyOnWeeks(weeks: Integer[]): RecurrenceRule;
       onlyOnYearDay(day: Integer): RecurrenceRule;
       onlyOnYearDays(days: Integer[]): RecurrenceRule;
-      setTimeZone(timeZone: String): EventRecurrence;
+      setTimeZone(timeZone: string): EventRecurrence;
       times(times: Integer): RecurrenceRule;
       until(endDate: Date): RecurrenceRule;
       weekStartsOn(day: Base.Weekday): RecurrenceRule;

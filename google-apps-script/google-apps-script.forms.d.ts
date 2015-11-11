@@ -32,23 +32,23 @@ declare module GoogleAppsScript {
      *          .showOtherOption(true);
      */
     export interface CheckboxItem {
-      createChoice(value: String): Choice;
+      createChoice(value: string): Choice;
       createResponse(responses: String[]): ItemResponse;
       duplicate(): CheckboxItem;
       getChoices(): Choice[];
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      hasOtherOption(): Boolean;
-      isRequired(): Boolean;
+      hasOtherOption(): boolean;
+      isRequired(): boolean;
       setChoiceValues(values: String[]): CheckboxItem;
       setChoices(choices: Choice[]): CheckboxItem;
-      setHelpText(text: String): CheckboxItem;
-      setRequired(enabled: Boolean): CheckboxItem;
-      setTitle(title: String): CheckboxItem;
-      showOtherOption(enabled: Boolean): CheckboxItem;
+      setHelpText(text: string): CheckboxItem;
+      setRequired(enabled: boolean): CheckboxItem;
+      setTitle(title: string): CheckboxItem;
+      showOtherOption(enabled: boolean): CheckboxItem;
     }
 
     /**
@@ -78,7 +78,7 @@ declare module GoogleAppsScript {
     export interface Choice {
       getGotoPage(): PageBreakItem;
       getPageNavigationType(): PageNavigationType;
-      getValue(): String;
+      getValue(): string;
     }
 
     /**
@@ -93,17 +93,17 @@ declare module GoogleAppsScript {
     export interface DateItem {
       createResponse(response: Date): ItemResponse;
       duplicate(): DateItem;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      includesYear(): Boolean;
-      isRequired(): Boolean;
-      setHelpText(text: String): DateItem;
-      setIncludesYear(enableYear: Boolean): DateItem;
-      setRequired(enabled: Boolean): DateItem;
-      setTitle(title: String): DateItem;
+      includesYear(): boolean;
+      isRequired(): boolean;
+      setHelpText(text: string): DateItem;
+      setIncludesYear(enableYear: boolean): DateItem;
+      setRequired(enabled: boolean): DateItem;
+      setTitle(title: string): DateItem;
     }
 
     /**
@@ -118,17 +118,17 @@ declare module GoogleAppsScript {
     export interface DateTimeItem {
       createResponse(response: Date): ItemResponse;
       duplicate(): DateTimeItem;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      includesYear(): Boolean;
-      isRequired(): Boolean;
-      setHelpText(text: String): DateTimeItem;
-      setIncludesYear(enableYear: Boolean): DateTimeItem;
-      setRequired(enabled: Boolean): DateTimeItem;
-      setTitle(title: String): DateTimeItem;
+      includesYear(): boolean;
+      isRequired(): boolean;
+      setHelpText(text: string): DateTimeItem;
+      setIncludesYear(enableYear: boolean): DateTimeItem;
+      setRequired(enabled: boolean): DateTimeItem;
+      setTitle(title: string): DateTimeItem;
     }
 
     /**
@@ -159,15 +159,15 @@ declare module GoogleAppsScript {
     export interface DurationItem {
       createResponse(hours: Integer, minutes: Integer, seconds: Integer): ItemResponse;
       duplicate(): DurationItem;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      isRequired(): Boolean;
-      setHelpText(text: String): DurationItem;
-      setRequired(enabled: Boolean): DurationItem;
-      setTitle(title: String): DurationItem;
+      isRequired(): boolean;
+      setHelpText(text: string): DurationItem;
+      setRequired(enabled: boolean): DurationItem;
+      setTitle(title: string): DurationItem;
     }
 
     /**
@@ -194,7 +194,7 @@ declare module GoogleAppsScript {
       addDateItem(): DateItem;
       addDateTimeItem(): DateTimeItem;
       addDurationItem(): DurationItem;
-      addEditor(emailAddress: String): Form;
+      addEditor(emailAddress: string): Form;
       addEditor(user: Base.User): Form;
       addEditors(emailAddresses: String[]): Form;
       addGridItem(): GridItem;
@@ -208,56 +208,56 @@ declare module GoogleAppsScript {
       addTextItem(): TextItem;
       addTimeItem(): TimeItem;
       addVideoItem(): VideoItem;
-      canEditResponse(): Boolean;
-      collectsEmail(): Boolean;
+      canEditResponse(): boolean;
+      collectsEmail(): boolean;
       createResponse(): FormResponse;
       deleteAllResponses(): Form;
       deleteItem(index: Integer): void;
       deleteItem(item: Item): void;
-      getConfirmationMessage(): String;
-      getCustomClosedFormMessage(): String;
-      getDescription(): String;
-      getDestinationId(): String;
+      getConfirmationMessage(): string;
+      getCustomClosedFormMessage(): string;
+      getDescription(): string;
+      getDestinationId(): string;
       getDestinationType(): DestinationType;
-      getEditUrl(): String;
+      getEditUrl(): string;
       getEditors(): Base.User[];
-      getId(): String;
+      getId(): string;
       getItemById(id: Integer): Item;
       getItems(): Item[];
       getItems(itemType: ItemType): Item[];
-      getPublishedUrl(): String;
-      getResponse(responseId: String): FormResponse;
+      getPublishedUrl(): string;
+      getResponse(responseId: string): FormResponse;
       getResponses(): FormResponse[];
       getResponses(timestamp: Date): FormResponse[];
-      getShuffleQuestions(): Boolean;
-      getSummaryUrl(): String;
-      getTitle(): String;
-      hasLimitOneResponsePerUser(): Boolean;
-      hasProgressBar(): Boolean;
-      hasRespondAgainLink(): Boolean;
-      isAcceptingResponses(): Boolean;
-      isPublishingSummary(): Boolean;
+      getShuffleQuestions(): boolean;
+      getSummaryUrl(): string;
+      getTitle(): string;
+      hasLimitOneResponsePerUser(): boolean;
+      hasProgressBar(): boolean;
+      hasRespondAgainLink(): boolean;
+      isAcceptingResponses(): boolean;
+      isPublishingSummary(): boolean;
       moveItem(from: Integer, to: Integer): Item;
       moveItem(item: Item, toIndex: Integer): Item;
       removeDestination(): Form;
-      removeEditor(emailAddress: String): Form;
+      removeEditor(emailAddress: string): Form;
       removeEditor(user: Base.User): Form;
-      requiresLogin(): Boolean;
-      setAcceptingResponses(enabled: Boolean): Form;
-      setAllowResponseEdits(enabled: Boolean): Form;
-      setCollectEmail(collect: Boolean): Form;
-      setConfirmationMessage(message: String): Form;
-      setCustomClosedFormMessage(message: String): Form;
-      setDescription(description: String): Form;
-      setDestination(type: DestinationType, id: String): Form;
-      setLimitOneResponsePerUser(enabled: Boolean): Form;
-      setProgressBar(enabled: Boolean): Form;
-      setPublishingSummary(enabled: Boolean): Form;
-      setRequireLogin(requireLogin: Boolean): Form;
-      setShowLinkToRespondAgain(enabled: Boolean): Form;
-      setShuffleQuestions(shuffle: Boolean): Form;
-      setTitle(title: String): Form;
-      shortenFormUrl(url: String): String;
+      requiresLogin(): boolean;
+      setAcceptingResponses(enabled: boolean): Form;
+      setAllowResponseEdits(enabled: boolean): Form;
+      setCollectEmail(collect: boolean): Form;
+      setConfirmationMessage(message: string): Form;
+      setCustomClosedFormMessage(message: string): Form;
+      setDescription(description: string): Form;
+      setDestination(type: DestinationType, id: string): Form;
+      setLimitOneResponsePerUser(enabled: boolean): Form;
+      setProgressBar(enabled: boolean): Form;
+      setPublishingSummary(enabled: boolean): Form;
+      setRequireLogin(requireLogin: boolean): Form;
+      setShowLinkToRespondAgain(enabled: boolean): Form;
+      setShuffleQuestions(shuffle: boolean): Form;
+      setTitle(title: string): Form;
+      shortenFormUrl(url: string): string;
     }
 
     /**
@@ -274,11 +274,11 @@ declare module GoogleAppsScript {
       DestinationType: DestinationType
       ItemType: ItemType
       PageNavigationType: PageNavigationType
-      create(title: String): Form;
+      create(title: string): Form;
       getActiveForm(): Form;
       getUi(): Base.Ui;
-      openById(id: String): Form;
-      openByUrl(url: String): Form;
+      openById(id: string): Form;
+      openByUrl(url: string): Form;
     }
 
     /**
@@ -304,14 +304,14 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface FormResponse {
-      getEditResponseUrl(): String;
-      getId(): String;
+      getEditResponseUrl(): string;
+      getId(): string;
       getItemResponses(): ItemResponse[];
-      getRespondentEmail(): String;
+      getRespondentEmail(): string;
       getResponseForItem(item: Item): ItemResponse;
       getTimestamp(): Date;
       submit(): FormResponse;
-      toPrefilledUrl(): String;
+      toPrefilledUrl(): string;
       withItemResponse(response: ItemResponse): FormResponse;
     }
 
@@ -331,18 +331,18 @@ declare module GoogleAppsScript {
       createResponse(responses: String[]): ItemResponse;
       duplicate(): GridItem;
       getColumns(): String[];
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
       getRows(): String[];
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      isRequired(): Boolean;
+      isRequired(): boolean;
       setColumns(columns: String[]): GridItem;
-      setHelpText(text: String): GridItem;
-      setRequired(enabled: Boolean): GridItem;
+      setHelpText(text: string): GridItem;
+      setRequired(enabled: boolean): GridItem;
       setRows(rows: String[]): GridItem;
-      setTitle(title: String): GridItem;
+      setTitle(title: string): GridItem;
     }
 
     /**
@@ -359,17 +359,17 @@ declare module GoogleAppsScript {
     export interface ImageItem {
       duplicate(): ImageItem;
       getAlignment(): Alignment;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getImage(): Base.Blob;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
       getWidth(): Integer;
       setAlignment(alignment: Alignment): ImageItem;
-      setHelpText(text: String): ImageItem;
+      setHelpText(text: string): ImageItem;
       setImage(image: Base.BlobSource): ImageItem;
-      setTitle(title: String): ImageItem;
+      setTitle(title: string): ImageItem;
       setWidth(width: Integer): ImageItem;
     }
 
@@ -412,13 +412,13 @@ declare module GoogleAppsScript {
       asTimeItem(): TimeItem;
       asVideoItem(): VideoItem;
       duplicate(): Item;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      setHelpText(text: String): Item;
-      setTitle(title: String): Item;
+      setHelpText(text: string): Item;
+      setTitle(title: string): Item;
     }
 
     /**
@@ -476,23 +476,23 @@ declare module GoogleAppsScript {
      *          ]);
      */
     export interface ListItem {
-      createChoice(value: String): Choice;
-      createChoice(value: String, navigationItem: PageBreakItem): Choice;
-      createChoice(value: String, navigationType: PageNavigationType): Choice;
-      createResponse(response: String): ItemResponse;
+      createChoice(value: string): Choice;
+      createChoice(value: string, navigationItem: PageBreakItem): Choice;
+      createChoice(value: string, navigationType: PageNavigationType): Choice;
+      createResponse(response: string): ItemResponse;
       duplicate(): ListItem;
       getChoices(): Choice[];
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      isRequired(): Boolean;
+      isRequired(): boolean;
       setChoiceValues(values: String[]): ListItem;
       setChoices(choices: Choice[]): ListItem;
-      setHelpText(text: String): ListItem;
-      setRequired(enabled: Boolean): ListItem;
-      setTitle(title: String): ListItem;
+      setHelpText(text: string): ListItem;
+      setRequired(enabled: boolean): ListItem;
+      setTitle(title: string): ListItem;
     }
 
     /**
@@ -510,25 +510,25 @@ declare module GoogleAppsScript {
      *          .showOtherOption(true);
      */
     export interface MultipleChoiceItem {
-      createChoice(value: String): Choice;
-      createChoice(value: String, navigationItem: PageBreakItem): Choice;
-      createChoice(value: String, navigationType: PageNavigationType): Choice;
-      createResponse(response: String): ItemResponse;
+      createChoice(value: string): Choice;
+      createChoice(value: string, navigationItem: PageBreakItem): Choice;
+      createChoice(value: string, navigationType: PageNavigationType): Choice;
+      createResponse(response: string): ItemResponse;
       duplicate(): MultipleChoiceItem;
       getChoices(): Choice[];
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      hasOtherOption(): Boolean;
-      isRequired(): Boolean;
+      hasOtherOption(): boolean;
+      isRequired(): boolean;
       setChoiceValues(values: String[]): MultipleChoiceItem;
       setChoices(choices: Choice[]): MultipleChoiceItem;
-      setHelpText(text: String): MultipleChoiceItem;
-      setRequired(enabled: Boolean): MultipleChoiceItem;
-      setTitle(title: String): MultipleChoiceItem;
-      showOtherOption(enabled: Boolean): MultipleChoiceItem;
+      setHelpText(text: string): MultipleChoiceItem;
+      setRequired(enabled: boolean): MultipleChoiceItem;
+      setTitle(title: string): MultipleChoiceItem;
+      showOtherOption(enabled: boolean): MultipleChoiceItem;
     }
 
     /**
@@ -547,16 +547,16 @@ declare module GoogleAppsScript {
     export interface PageBreakItem {
       duplicate(): PageBreakItem;
       getGoToPage(): PageBreakItem;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
       getPageNavigationType(): PageNavigationType;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
       setGoToPage(goToPageItem: PageBreakItem): PageBreakItem;
       setGoToPage(navigationType: PageNavigationType): PageBreakItem;
-      setHelpText(text: String): PageBreakItem;
-      setTitle(title: String): PageBreakItem;
+      setHelpText(text: string): PageBreakItem;
+      setTitle(title: string): PageBreakItem;
     }
 
     /**
@@ -597,17 +597,17 @@ declare module GoogleAppsScript {
      *      item.setTitle('What is your address?');
      */
     export interface ParagraphTextItem {
-      createResponse(response: String): ItemResponse;
+      createResponse(response: string): ItemResponse;
       duplicate(): ParagraphTextItem;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      isRequired(): Boolean;
-      setHelpText(text: String): ParagraphTextItem;
-      setRequired(enabled: Boolean): ParagraphTextItem;
-      setTitle(title: String): ParagraphTextItem;
+      isRequired(): boolean;
+      setHelpText(text: string): ParagraphTextItem;
+      setRequired(enabled: boolean): ParagraphTextItem;
+      setTitle(title: string): ParagraphTextItem;
     }
 
     /**
@@ -623,21 +623,21 @@ declare module GoogleAppsScript {
     export interface ScaleItem {
       createResponse(response: Integer): ItemResponse;
       duplicate(): ScaleItem;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getLeftLabel(): String;
+      getLeftLabel(): string;
       getLowerBound(): Integer;
-      getRightLabel(): String;
-      getTitle(): String;
+      getRightLabel(): string;
+      getTitle(): string;
       getType(): ItemType;
       getUpperBound(): Integer;
-      isRequired(): Boolean;
+      isRequired(): boolean;
       setBounds(lower: Integer, upper: Integer): ScaleItem;
-      setHelpText(text: String): ScaleItem;
-      setLabels(lower: String, upper: String): ScaleItem;
-      setRequired(enabled: Boolean): ScaleItem;
-      setTitle(title: String): ScaleItem;
+      setHelpText(text: string): ScaleItem;
+      setLabels(lower: string, upper: string): ScaleItem;
+      setRequired(enabled: boolean): ScaleItem;
+      setTitle(title: string): ScaleItem;
     }
 
     /**
@@ -651,13 +651,13 @@ declare module GoogleAppsScript {
      */
     export interface SectionHeaderItem {
       duplicate(): SectionHeaderItem;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      setHelpText(text: String): SectionHeaderItem;
-      setTitle(title: String): SectionHeaderItem;
+      setHelpText(text: string): SectionHeaderItem;
+      setTitle(title: string): SectionHeaderItem;
     }
 
     /**
@@ -670,17 +670,17 @@ declare module GoogleAppsScript {
      *      item.setTitle('What is your name?');
      */
     export interface TextItem {
-      createResponse(response: String): ItemResponse;
+      createResponse(response: string): ItemResponse;
       duplicate(): TextItem;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      isRequired(): Boolean;
-      setHelpText(text: String): TextItem;
-      setRequired(enabled: Boolean): TextItem;
-      setTitle(title: String): TextItem;
+      isRequired(): boolean;
+      setHelpText(text: string): TextItem;
+      setRequired(enabled: boolean): TextItem;
+      setTitle(title: string): TextItem;
     }
 
     /**
@@ -695,15 +695,15 @@ declare module GoogleAppsScript {
     export interface TimeItem {
       createResponse(hour: Integer, minute: Integer): ItemResponse;
       duplicate(): TimeItem;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
-      isRequired(): Boolean;
-      setHelpText(text: String): TimeItem;
-      setRequired(enabled: Boolean): TimeItem;
-      setTitle(title: String): TimeItem;
+      isRequired(): boolean;
+      setHelpText(text: string): TimeItem;
+      setRequired(enabled: boolean): TimeItem;
+      setTitle(title: string): TimeItem;
     }
 
     /**
@@ -730,16 +730,16 @@ declare module GoogleAppsScript {
     export interface VideoItem {
       duplicate(): VideoItem;
       getAlignment(): Alignment;
-      getHelpText(): String;
+      getHelpText(): string;
       getId(): Integer;
       getIndex(): Integer;
-      getTitle(): String;
+      getTitle(): string;
       getType(): ItemType;
       getWidth(): Integer;
       setAlignment(alignment: Alignment): VideoItem;
-      setHelpText(text: String): VideoItem;
-      setTitle(title: String): VideoItem;
-      setVideoUrl(youtubeUrl: String): VideoItem;
+      setHelpText(text: string): VideoItem;
+      setTitle(title: string): VideoItem;
+      setVideoUrl(youtubeUrl: string): VideoItem;
       setWidth(width: Integer): VideoItem;
     }
 

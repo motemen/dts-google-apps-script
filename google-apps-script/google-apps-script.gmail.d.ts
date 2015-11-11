@@ -7,7 +7,7 @@ declare module GoogleAppsScript {
      * Provides access to Gmail threads, messages, and labels.
      */
     export interface GmailApp {
-      createLabel(name: String): GmailLabel;
+      createLabel(name: string): GmailLabel;
       deleteLabel(label: GmailLabel): GmailApp;
       getAliases(): String[];
       getChatThreads(): GmailThread[];
@@ -16,7 +16,7 @@ declare module GoogleAppsScript {
       getInboxThreads(): GmailThread[];
       getInboxThreads(start: Integer, max: Integer): GmailThread[];
       getInboxUnreadCount(): Integer;
-      getMessageById(id: String): GmailMessage;
+      getMessageById(id: string): GmailMessage;
       getMessagesForThread(thread: GmailThread): GmailMessage[];
       getMessagesForThreads(threads: GmailThread[]): GmailMessage[][];
       getPriorityInboxThreads(): GmailThread[];
@@ -28,10 +28,10 @@ declare module GoogleAppsScript {
       getStarredThreads(): GmailThread[];
       getStarredThreads(start: Integer, max: Integer): GmailThread[];
       getStarredUnreadCount(): Integer;
-      getThreadById(id: String): GmailThread;
+      getThreadById(id: string): GmailThread;
       getTrashThreads(): GmailThread[];
       getTrashThreads(start: Integer, max: Integer): GmailThread[];
-      getUserLabelByName(name: String): GmailLabel;
+      getUserLabelByName(name: string): GmailLabel;
       getUserLabels(): GmailLabel[];
       markMessageRead(message: GmailMessage): GmailApp;
       markMessageUnread(message: GmailMessage): GmailApp;
@@ -59,10 +59,10 @@ declare module GoogleAppsScript {
       refreshMessages(messages: GmailMessage[]): GmailApp;
       refreshThread(thread: GmailThread): GmailApp;
       refreshThreads(threads: GmailThread[]): GmailApp;
-      search(query: String): GmailThread[];
-      search(query: String, start: Integer, max: Integer): GmailThread[];
-      sendEmail(recipient: String, subject: String, body: String): GmailApp;
-      sendEmail(recipient: String, subject: String, body: String, options: Object): GmailApp;
+      search(query: string): GmailThread[];
+      search(query: string, start: Integer, max: Integer): GmailThread[];
+      sendEmail(recipient: string, subject: string, body: string): GmailApp;
+      sendEmail(recipient: string, subject: string, body: string, options: Object): GmailApp;
       starMessage(message: GmailMessage): GmailApp;
       starMessages(messages: GmailMessage[]): GmailApp;
       unstarMessage(message: GmailMessage): GmailApp;
@@ -90,20 +90,20 @@ declare module GoogleAppsScript {
      */
     export interface GmailAttachment {
       copyBlob(): Base.Blob;
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getBytes(): Byte[];
-      getContentType(): String;
-      getDataAsString(): String;
-      getDataAsString(charset: String): String;
-      getName(): String;
+      getContentType(): string;
+      getDataAsString(): string;
+      getDataAsString(charset: string): string;
+      getName(): string;
       getSize(): Integer;
-      isGoogleType(): Boolean;
+      isGoogleType(): boolean;
       setBytes(data: Byte[]): Base.Blob;
-      setContentType(contentType: String): Base.Blob;
+      setContentType(contentType: string): Base.Blob;
       setContentTypeFromExtension(): Base.Blob;
-      setDataFromString(string: String): Base.Blob;
-      setDataFromString(string: String, charset: String): Base.Blob;
-      setName(name: String): Base.Blob;
+      setDataFromString(string: string): Base.Blob;
+      setDataFromString(string: string, charset: string): Base.Blob;
+      setName(name: string): Base.Blob;
       getAllBlobs(): Base.Blob[];
     }
 
@@ -114,7 +114,7 @@ declare module GoogleAppsScript {
       addToThread(thread: GmailThread): GmailLabel;
       addToThreads(threads: GmailThread[]): GmailLabel;
       deleteLabel(): void;
-      getName(): String;
+      getName(): string;
       getThreads(): GmailThread[];
       getThreads(start: Integer, max: Integer): GmailThread[];
       getUnreadCount(): Integer;
@@ -126,35 +126,35 @@ declare module GoogleAppsScript {
      * A message in a user's Gmail account.
      */
     export interface GmailMessage {
-      forward(recipient: String): GmailMessage;
-      forward(recipient: String, options: Object): GmailMessage;
+      forward(recipient: string): GmailMessage;
+      forward(recipient: string, options: Object): GmailMessage;
       getAttachments(): GmailAttachment[];
-      getBcc(): String;
-      getBody(): String;
-      getCc(): String;
+      getBcc(): string;
+      getBody(): string;
+      getCc(): string;
       getDate(): Date;
-      getFrom(): String;
-      getId(): String;
-      getPlainBody(): String;
-      getRawContent(): String;
-      getReplyTo(): String;
-      getSubject(): String;
+      getFrom(): string;
+      getId(): string;
+      getPlainBody(): string;
+      getRawContent(): string;
+      getReplyTo(): string;
+      getSubject(): string;
       getThread(): GmailThread;
-      getTo(): String;
-      isDraft(): Boolean;
-      isInChats(): Boolean;
-      isInInbox(): Boolean;
-      isInTrash(): Boolean;
-      isStarred(): Boolean;
-      isUnread(): Boolean;
+      getTo(): string;
+      isDraft(): boolean;
+      isInChats(): boolean;
+      isInInbox(): boolean;
+      isInTrash(): boolean;
+      isStarred(): boolean;
+      isUnread(): boolean;
       markRead(): GmailMessage;
       markUnread(): GmailMessage;
       moveToTrash(): GmailMessage;
       refresh(): GmailMessage;
-      reply(body: String): GmailMessage;
-      reply(body: String, options: Object): GmailMessage;
-      replyAll(body: String): GmailMessage;
-      replyAll(body: String, options: Object): GmailMessage;
+      reply(body: string): GmailMessage;
+      reply(body: string, options: Object): GmailMessage;
+      replyAll(body: string): GmailMessage;
+      replyAll(body: string, options: Object): GmailMessage;
       star(): GmailMessage;
       unstar(): GmailMessage;
     }
@@ -164,20 +164,20 @@ declare module GoogleAppsScript {
      */
     export interface GmailThread {
       addLabel(label: GmailLabel): GmailThread;
-      getFirstMessageSubject(): String;
-      getId(): String;
+      getFirstMessageSubject(): string;
+      getId(): string;
       getLabels(): GmailLabel[];
       getLastMessageDate(): Date;
       getMessageCount(): Integer;
       getMessages(): GmailMessage[];
-      getPermalink(): String;
-      hasStarredMessages(): Boolean;
-      isImportant(): Boolean;
-      isInChats(): Boolean;
-      isInInbox(): Boolean;
-      isInSpam(): Boolean;
-      isInTrash(): Boolean;
-      isUnread(): Boolean;
+      getPermalink(): string;
+      hasStarredMessages(): boolean;
+      isImportant(): boolean;
+      isInChats(): boolean;
+      isInInbox(): boolean;
+      isInSpam(): boolean;
+      isInTrash(): boolean;
+      isUnread(): boolean;
       markImportant(): GmailThread;
       markRead(): GmailThread;
       markUnimportant(): GmailThread;
@@ -188,10 +188,10 @@ declare module GoogleAppsScript {
       moveToTrash(): GmailThread;
       refresh(): GmailThread;
       removeLabel(label: GmailLabel): GmailThread;
-      reply(body: String): GmailThread;
-      reply(body: String, options: Object): GmailThread;
-      replyAll(body: String): GmailThread;
-      replyAll(body: String, options: Object): GmailThread;
+      reply(body: string): GmailThread;
+      reply(body: string, options: Object): GmailThread;
+      replyAll(body: string): GmailThread;
+      replyAll(body: string, options: Object): GmailThread;
     }
 
   }

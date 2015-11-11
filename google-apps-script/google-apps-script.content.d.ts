@@ -14,7 +14,7 @@ declare module GoogleAppsScript {
     export interface ContentService {
       MimeType: MimeType
       createTextOutput(): TextOutput;
-      createTextOutput(content: String): TextOutput;
+      createTextOutput(content: string): TextOutput;
     }
 
     /**
@@ -38,13 +38,13 @@ declare module GoogleAppsScript {
      * ContentService
      */
     export interface TextOutput {
-      append(addedContent: String): TextOutput;
+      append(addedContent: string): TextOutput;
       clear(): TextOutput;
-      downloadAsFile(filename: String): TextOutput;
-      getContent(): String;
-      getFileName(): String;
+      downloadAsFile(filename: string): TextOutput;
+      getContent(): string;
+      getFileName(): string;
       getMimeType(): MimeType;
-      setContent(content: String): TextOutput;
+      setContent(content: string): TextOutput;
       setMimeType(mimeType: MimeType): TextOutput;
     }
 

@@ -15,9 +15,9 @@ declare module GoogleAppsScript {
     export interface MailApp {
       getRemainingDailyQuota(): Integer;
       sendEmail(message: Object): void;
-      sendEmail(recipient: String, subject: String, body: String): void;
-      sendEmail(recipient: String, subject: String, body: String, options: Object): void;
-      sendEmail(to: String, replyTo: String, subject: String, body: String): void;
+      sendEmail(recipient: string, subject: string, body: string): void;
+      sendEmail(recipient: string, subject: string, body: string, options: Object): void;
+      sendEmail(to: string, replyTo: string, subject: string, body: string): void;
     }
 
   }

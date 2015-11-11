@@ -44,6 +44,10 @@ process.stdin.on('end', () => {
         name = '...' + o.name;
       }
 
+      if (typeName === 'String' || typeName === 'Boolean') {
+        typeName = typeName.toLowerCase();
+      }
+
       return name + ': ' + typeName;
     }
 

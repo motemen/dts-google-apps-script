@@ -33,9 +33,9 @@ declare module GoogleAppsScript {
      * ScriptProperties
      */
     export interface Lock {
-      hasLock(): Boolean;
+      hasLock(): boolean;
       releaseLock(): void;
-      tryLock(timeoutInMillis: Integer): Boolean;
+      tryLock(timeoutInMillis: Integer): boolean;
       waitLock(timeoutInMillis: Integer): void;
     }
 

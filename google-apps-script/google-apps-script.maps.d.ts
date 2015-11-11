@@ -67,21 +67,21 @@ declare module GoogleAppsScript {
      */
     export interface DirectionFinder {
       addWaypoint(latitude: Number, longitude: Number): DirectionFinder;
-      addWaypoint(address: String): DirectionFinder;
+      addWaypoint(address: string): DirectionFinder;
       clearWaypoints(): DirectionFinder;
       getDirections(): Object;
-      setAlternatives(useAlternatives: Boolean): DirectionFinder;
+      setAlternatives(useAlternatives: boolean): DirectionFinder;
       setArrive(time: Date): DirectionFinder;
-      setAvoid(avoid: String): DirectionFinder;
+      setAvoid(avoid: string): DirectionFinder;
       setDepart(time: Date): DirectionFinder;
       setDestination(latitude: Number, longitude: Number): DirectionFinder;
-      setDestination(address: String): DirectionFinder;
-      setLanguage(language: String): DirectionFinder;
-      setMode(mode: String): DirectionFinder;
-      setOptimizeWaypoints(optimizeOrder: Boolean): DirectionFinder;
+      setDestination(address: string): DirectionFinder;
+      setLanguage(language: string): DirectionFinder;
+      setMode(mode: string): DirectionFinder;
+      setOptimizeWaypoints(optimizeOrder: boolean): DirectionFinder;
       setOrigin(latitude: Number, longitude: Number): DirectionFinder;
-      setOrigin(address: String): DirectionFinder;
-      setRegion(region: String): DirectionFinder;
+      setOrigin(address: string): DirectionFinder;
+      setRegion(region: string): DirectionFinder;
     }
 
     /**
@@ -137,9 +137,9 @@ declare module GoogleAppsScript {
     export interface ElevationSampler {
       sampleLocation(latitude: Number, longitude: Number): Object;
       sampleLocations(points: Number[]): Object;
-      sampleLocations(encodedPolyline: String): Object;
+      sampleLocations(encodedPolyline: string): Object;
       samplePath(points: Number[], numSamples: Integer): Object;
-      samplePath(encodedPolyline: String, numSamples: Integer): Object;
+      samplePath(encodedPolyline: string, numSamples: Integer): Object;
     }
 
     /**
@@ -182,12 +182,12 @@ declare module GoogleAppsScript {
      * Google Geocoding API
      */
     export interface Geocoder {
-      geocode(address: String): Object;
+      geocode(address: string): Object;
       reverseGeocode(latitude: Number, longitude: Number): Object;
       reverseGeocode(swLatitude: Number, swLongitude: Number, neLatitude: Number, neLongitude: Number): Object;
       setBounds(swLatitude: Number, swLongitude: Number, neLatitude: Number, neLongitude: Number): Geocoder;
-      setLanguage(language: String): Geocoder;
-      setRegion(region: String): Geocoder;
+      setLanguage(language: string): Geocoder;
+      setRegion(region: string): Geocoder;
     }
 
     /**
@@ -197,13 +197,13 @@ declare module GoogleAppsScript {
     export interface Maps {
       DirectionFinder: DirectionFinderEnums
       StaticMap: StaticMapEnums
-      decodePolyline(polyline: String): Number[];
-      encodePolyline(points: Number[]): String;
+      decodePolyline(polyline: string): Number[];
+      encodePolyline(points: Number[]): string;
       newDirectionFinder(): DirectionFinder;
       newElevationSampler(): ElevationSampler;
       newGeocoder(): Geocoder;
       newStaticMap(): StaticMap;
-      setAuthentication(clientId: String, signingKey: String): void;
+      setAuthentication(clientId: string, signingKey: string): void;
     }
 
     /**
@@ -260,32 +260,32 @@ declare module GoogleAppsScript {
      * Google Static Maps API
      */
     export interface StaticMap {
-      addAddress(address: String): StaticMap;
+      addAddress(address: string): StaticMap;
       addMarker(latitude: Number, longitude: Number): StaticMap;
-      addMarker(address: String): StaticMap;
+      addMarker(address: string): StaticMap;
       addPath(points: Number[]): StaticMap;
-      addPath(polyline: String): StaticMap;
+      addPath(polyline: string): StaticMap;
       addPoint(latitude: Number, longitude: Number): StaticMap;
       addVisible(latitude: Number, longitude: Number): StaticMap;
-      addVisible(address: String): StaticMap;
+      addVisible(address: string): StaticMap;
       beginPath(): StaticMap;
       clearMarkers(): StaticMap;
       clearPaths(): StaticMap;
       clearVisibles(): StaticMap;
       endPath(): StaticMap;
-      getAs(contentType: String): Base.Blob;
+      getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
       getMapImage(): Byte[];
-      getMapUrl(): String;
+      getMapUrl(): string;
       setCenter(latitude: Number, longitude: Number): StaticMap;
-      setCenter(address: String): StaticMap;
-      setCustomMarkerStyle(imageUrl: String, useShadow: Boolean): StaticMap;
-      setFormat(format: String): StaticMap;
-      setLanguage(language: String): StaticMap;
-      setMapType(mapType: String): StaticMap;
-      setMarkerStyle(size: String, color: String, label: String): StaticMap;
-      setMobile(useMobileTiles: Boolean): StaticMap;
-      setPathStyle(weight: Integer, color: String, fillColor: String): StaticMap;
+      setCenter(address: string): StaticMap;
+      setCustomMarkerStyle(imageUrl: string, useShadow: boolean): StaticMap;
+      setFormat(format: string): StaticMap;
+      setLanguage(language: string): StaticMap;
+      setMapType(mapType: string): StaticMap;
+      setMarkerStyle(size: string, color: string, label: string): StaticMap;
+      setMobile(useMobileTiles: boolean): StaticMap;
+      setPathStyle(weight: Integer, color: string, fillColor: string): StaticMap;
       setSize(width: Integer, height: Integer): StaticMap;
       setZoom(zoom: Integer): StaticMap;
     }

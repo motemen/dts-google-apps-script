@@ -14,13 +14,13 @@ declare module GoogleAppsScript {
      */
     export interface Properties {
       deleteAllProperties(): Properties;
-      deleteProperty(key: String): Properties;
+      deleteProperty(key: string): Properties;
       getKeys(): String[];
       getProperties(): Object;
-      getProperty(key: String): String;
+      getProperty(key: string): string;
       setProperties(properties: Object): Properties;
-      setProperties(properties: Object, deleteAllOthers: Boolean): Properties;
-      setProperty(key: String, value: String): Properties;
+      setProperties(properties: Object, deleteAllOthers: boolean): Properties;
+      setProperty(key: string, value: string): Properties;
     }
 
     /**
@@ -52,13 +52,13 @@ declare module GoogleAppsScript {
      */
     export interface ScriptProperties {
       deleteAllProperties(): ScriptProperties;
-      deleteProperty(key: String): ScriptProperties;
+      deleteProperty(key: string): ScriptProperties;
       getKeys(): String[];
       getProperties(): Object;
-      getProperty(key: String): String;
+      getProperty(key: string): string;
       setProperties(properties: Object): ScriptProperties;
-      setProperties(properties: Object, deleteAllOthers: Boolean): ScriptProperties;
-      setProperty(key: String, value: String): ScriptProperties;
+      setProperties(properties: Object, deleteAllOthers: boolean): ScriptProperties;
+      setProperty(key: string, value: string): ScriptProperties;
     }
 
     /**
@@ -69,13 +69,13 @@ declare module GoogleAppsScript {
      */
     export interface UserProperties {
       deleteAllProperties(): UserProperties;
-      deleteProperty(key: String): UserProperties;
+      deleteProperty(key: string): UserProperties;
       getKeys(): String[];
       getProperties(): Object;
-      getProperty(key: String): String;
+      getProperty(key: string): string;
       setProperties(properties: Object): UserProperties;
-      setProperties(properties: Object, deleteAllOthers: Boolean): UserProperties;
-      setProperty(key: String, value: String): UserProperties;
+      setProperties(properties: Object, deleteAllOthers: boolean): UserProperties;
+      setProperty(key: string, value: string): UserProperties;
     }
 
   }

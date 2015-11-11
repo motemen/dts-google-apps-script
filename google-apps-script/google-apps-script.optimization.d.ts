@@ -22,7 +22,7 @@ declare module GoogleAppsScript {
      *       constraint.setCoefficient('x', 2);
      */
     export interface LinearOptimizationConstraint {
-      setCoefficient(variableName: String, coefficient: Number): LinearOptimizationConstraint;
+      setCoefficient(variableName: string, coefficient: Number): LinearOptimizationConstraint;
     }
 
     /**
@@ -79,11 +79,11 @@ declare module GoogleAppsScript {
      */
     export interface LinearOptimizationEngine {
       addConstraint(lowerBound: Number, upperBound: Number): LinearOptimizationConstraint;
-      addVariable(name: String, lowerBound: Number, upperBound: Number): LinearOptimizationEngine;
-      addVariable(name: String, lowerBound: Number, upperBound: Number, type: VariableType): LinearOptimizationEngine;
+      addVariable(name: string, lowerBound: Number, upperBound: Number): LinearOptimizationEngine;
+      addVariable(name: string, lowerBound: Number, upperBound: Number, type: VariableType): LinearOptimizationEngine;
       setMaximization(): LinearOptimizationEngine;
       setMinimization(): LinearOptimizationEngine;
-      setObjectiveCoefficient(variableName: String, coefficient: Number): LinearOptimizationEngine;
+      setObjectiveCoefficient(variableName: string, coefficient: Number): LinearOptimizationEngine;
       solve(): LinearOptimizationSolution;
       solve(seconds: Number): LinearOptimizationSolution;
     }
@@ -201,8 +201,8 @@ declare module GoogleAppsScript {
     export interface LinearOptimizationSolution {
       getObjectiveValue(): Number;
       getStatus(): Status;
-      getVariableValue(variableName: String): Number;
-      isValid(): Boolean;
+      getVariableValue(variableName: string): Number;
+      isValid(): boolean;
     }
 
     /**
