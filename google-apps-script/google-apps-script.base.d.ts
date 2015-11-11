@@ -3,39 +3,121 @@
 declare module GoogleAppsScript {
   export module Base {
     /**
-     * The Session class provides access to session information, such as the user's email address (in
-     *  some circumstances) and language setting.
+     * A data interchange object for Apps Script services.
      */
-    export interface Session {
-      getActiveUser(): User;
-      getActiveUserLocale(): String;
-      getEffectiveUser(): User;
-      getScriptTimeZone(): String;
-      getTimeZone(): String;
-      getUser(): User;
+    export interface Blob {
+      copyBlob(): Blob;
+      getAs(contentType: String): Blob;
+      getBytes(): Byte[];
+      getContentType(): String;
+      getDataAsString(): String;
+      getDataAsString(charset: String): String;
+      getName(): String;
+      isGoogleType(): Boolean;
+      setBytes(data: Byte[]): Blob;
+      setContentType(contentType: String): Blob;
+      setContentTypeFromExtension(): Blob;
+      setDataFromString(string: String): Blob;
+      setDataFromString(string: String, charset: String): Blob;
+      setName(name: String): Blob;
+      getAllBlobs(): Blob[];
     }
 
     /**
-     * An enumeration that provides access to MIME-type declarations without typing the strings
-     *  explicitly. Any method that expects a MIME type rendered as a string (for example,
-     *  'image/png') will also accept one of the values below, so long as the method
-     *  supports the underlying MIME type.
+     * Interface for objects that can export their data as a Blob.
+     * Implementing classes
      * 
-     *      // Use MimeType enum to log the name of every Google Doc in the user's Drive.
-     *      var docs = DriveApp.getFilesByType(MimeType.GOOGLE_DOCS);
-     *      while (docs.hasNext()) {
-     *       var doc = docs.next();
-     *       Logger.log(doc.getName())
-     *      }
+     * NameBrief description
+     * 
+     * AttachmentA Sites Attachment such as a file attached to a page.
+     * 
+     * BlobA data interchange object for Apps Script services.
+     * 
+     * ChartA Chart object, which can be embedded into documents, UI elements, or used as a static image.
+     * 
+     * DocumentA document, containing rich text and elements such as tables and lists.
+     * 
+     * EmbeddedChartRepresents a chart that has been embedded into a Spreadsheet.
+     * 
+     * FileA file in Google Drive.
+     * 
+     * GmailAttachmentAn attachment from Gmail.
+     * 
+     * HTTPResponseThis class allows users to access specific information on HTTP responses.
+     * 
+     * HtmlOutputAn HtmlOutput object that can be served from a script.
+     * 
+     * InlineImageAn element representing an embedded image.
+     * 
+     * JdbcBlobA JDBC Blob.
+     * 
+     * JdbcClobA JDBC Clob.
+     * 
+     * SpreadsheetThis class allows users to access and modify Google Sheets files.
+     * 
+     * StaticMapAllows for the creation and decoration of static map images.
+     */
+    export interface BlobSource {
+      getAs(contentType: String): Blob;
+      getBlob(): Blob;
+    }
+
+    /**
+     * This class provides access to Google Apps specific dialog boxes.
+     * 
+     *  The methods in this class are only available for use in the context of a Google Spreadsheet.
+     * See also
+     * 
+     * ButtonSet
+     */
+    export interface Browser {
+      Buttons: ButtonSet
+      inputBox(prompt: String): String;
+      inputBox(prompt: String, buttons: ButtonSet): String;
+      inputBox(title: String, prompt: String, buttons: ButtonSet): String;
+      msgBox(prompt: String): String;
+      msgBox(prompt: String, buttons: ButtonSet): String;
+      msgBox(title: String, prompt: String, buttons: ButtonSet): String;
+    }
+
+    /**
+     * An enum representing predetermined, localized dialog buttons returned by an
+     *  alert or PromptResponse.getSelectedButton() to
+     *  indicate which button in a dialog the user clicked. These values cannot be set; to add buttons to
+     *  an alert or
+     *  prompt, use ButtonSet instead.
+     * 
+     *      // Display a dialog box with a message and "Yes" and "No" buttons.
+     *      var ui = DocumentApp.getUi();
+     *      var response = ui.alert('Are you sure you want to continue?', ui.ButtonSet.YES_NO);
      *     
-     *      // Use plain string to log the size of every PNG in the user's Drive.
-     *      var pngs = DriveApp.getFilesByType('image/png');
-     *      while (pngs.hasNext()) {
-     *       var png = pngs.next();
-     *       Logger.log(png.getSize());
+     *      // Process the user's response.
+     *      if (response == ui.Button.YES) {
+     *        Logger.log('The user clicked "Yes."');
+     *      } else {
+     *        Logger.log('The user clicked "No" or the dialog\'s close button.');
      *      }
      */
-    export enum MimeType { GOOGLE_APPS_SCRIPT, GOOGLE_DRAWINGS, GOOGLE_DOCS, GOOGLE_FORMS, GOOGLE_SHEETS, GOOGLE_SLIDES, FOLDER, BMP, GIF, JPEG, PNG, SVG, PDF, CSS, CSV, HTML, JAVASCRIPT, PLAIN_TEXT, RTF, OPENDOCUMENT_GRAPHICS, OPENDOCUMENT_PRESENTATION, OPENDOCUMENT_SPREADSHEET, OPENDOCUMENT_TEXT, MICROSOFT_EXCEL, MICROSOFT_EXCEL_LEGACY, MICROSOFT_POWERPOINT, MICROSOFT_POWERPOINT_LEGACY, MICROSOFT_WORD, MICROSOFT_WORD_LEGACY, ZIP }
+    export enum Button { CLOSE, OK, CANCEL, YES, NO }
+
+    /**
+     * An enum representing predetermined, localized sets of one or more dialog buttons that can be
+     *  added to an alert or a
+     *  prompt. To determine which button the user
+     *  clicked, use Button.
+     * 
+     *      // Display a dialog box with a message and "Yes" and "No" buttons.
+     *      var ui = DocumentApp.getUi();
+     *      var response = ui.alert('Are you sure you want to continue?', ui.ButtonSet.YES_NO);
+     *     
+     *      // Process the user's response.
+     *      if (response == ui.Button.YES) {
+     *        Logger.log('The user clicked "Yes."');
+     *      } else {
+     *        Logger.log('The user clicked "No" or the dialog\'s close button.');
+     *      }
+     */
+    export enum ButtonSet { OK, OK_CANCEL, YES_NO, YES_NO_CANCEL }
 
     /**
      * This class allows the developer to write out text to the debugging logs.
@@ -73,43 +155,31 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A data interchange object for Apps Script services.
+     * An enumeration that provides access to MIME-type declarations without typing the strings
+     *  explicitly. Any method that expects a MIME type rendered as a string (for example,
+     *  'image/png') will also accept one of the values below, so long as the method
+     *  supports the underlying MIME type.
+     * 
+     *      // Use MimeType enum to log the name of every Google Doc in the user's Drive.
+     *      var docs = DriveApp.getFilesByType(MimeType.GOOGLE_DOCS);
+     *      while (docs.hasNext()) {
+     *       var doc = docs.next();
+     *       Logger.log(doc.getName())
+     *      }
+     *     
+     *      // Use plain string to log the size of every PNG in the user's Drive.
+     *      var pngs = DriveApp.getFilesByType('image/png');
+     *      while (pngs.hasNext()) {
+     *       var png = pngs.next();
+     *       Logger.log(png.getSize());
+     *      }
      */
-    export interface Blob {
-      copyBlob(): Blob;
-      getAs(contentType: String): Blob;
-      getBytes(): Byte[];
-      getContentType(): String;
-      getDataAsString(): String;
-      getDataAsString(charset: String): String;
-      getName(): String;
-      isGoogleType(): Boolean;
-      setBytes(data: Byte[]): Blob;
-      setContentType(contentType: String): Blob;
-      setContentTypeFromExtension(): Blob;
-      setDataFromString(string: String): Blob;
-      setDataFromString(string: String, charset: String): Blob;
-      setName(name: String): Blob;
-      getAllBlobs(): Blob[];
-    }
+    export enum MimeType { GOOGLE_APPS_SCRIPT, GOOGLE_DRAWINGS, GOOGLE_DOCS, GOOGLE_FORMS, GOOGLE_SHEETS, GOOGLE_SLIDES, FOLDER, BMP, GIF, JPEG, PNG, SVG, PDF, CSS, CSV, HTML, JAVASCRIPT, PLAIN_TEXT, RTF, OPENDOCUMENT_GRAPHICS, OPENDOCUMENT_PRESENTATION, OPENDOCUMENT_SPREADSHEET, OPENDOCUMENT_TEXT, MICROSOFT_EXCEL, MICROSOFT_EXCEL_LEGACY, MICROSOFT_POWERPOINT, MICROSOFT_POWERPOINT_LEGACY, MICROSOFT_WORD, MICROSOFT_WORD_LEGACY, ZIP }
 
     /**
-     * This class provides access to Google Apps specific dialog boxes.
-     * 
-     *  The methods in this class are only available for use in the context of a Google Spreadsheet.
-     * See also
-     * 
-     * ButtonSet
+     * An enum representing the months of the year.
      */
-    export interface Browser {
-      Buttons: ButtonSet
-      inputBox(prompt: String): String;
-      inputBox(prompt: String, buttons: ButtonSet): String;
-      inputBox(title: String, prompt: String, buttons: ButtonSet): String;
-      msgBox(prompt: String): String;
-      msgBox(prompt: String, buttons: ButtonSet): String;
-      msgBox(title: String, prompt: String, buttons: ButtonSet): String;
-    }
+    export enum Month { JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER }
 
     /**
      * A response to a prompt dialog displayed in the
@@ -133,6 +203,19 @@ declare module GoogleAppsScript {
     export interface PromptResponse {
       getResponseText(): String;
       getSelectedButton(): Button;
+    }
+
+    /**
+     * The Session class provides access to session information, such as the user's email address (in
+     *  some circumstances) and language setting.
+     */
+    export interface Session {
+      getActiveUser(): User;
+      getActiveUserLocale(): String;
+      getEffectiveUser(): User;
+      getScriptTimeZone(): String;
+      getTimeZone(): String;
+      getUser(): User;
     }
 
     /**
@@ -181,101 +264,15 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * An enum representing predetermined, localized sets of one or more dialog buttons that can be
-     *  added to an alert or a
-     *  prompt. To determine which button the user
-     *  clicked, use Button.
-     * 
-     *      // Display a dialog box with a message and "Yes" and "No" buttons.
-     *      var ui = DocumentApp.getUi();
-     *      var response = ui.alert('Are you sure you want to continue?', ui.ButtonSet.YES_NO);
-     *     
-     *      // Process the user's response.
-     *      if (response == ui.Button.YES) {
-     *        Logger.log('The user clicked "Yes."');
-     *      } else {
-     *        Logger.log('The user clicked "No" or the dialog\'s close button.');
-     *      }
-     */
-    export enum ButtonSet { OK, OK_CANCEL, YES_NO, YES_NO_CANCEL }
-
-    /**
-     * An enum representing predetermined, localized dialog buttons returned by an
-     *  alert or PromptResponse.getSelectedButton() to
-     *  indicate which button in a dialog the user clicked. These values cannot be set; to add buttons to
-     *  an alert or
-     *  prompt, use ButtonSet instead.
-     * 
-     *      // Display a dialog box with a message and "Yes" and "No" buttons.
-     *      var ui = DocumentApp.getUi();
-     *      var response = ui.alert('Are you sure you want to continue?', ui.ButtonSet.YES_NO);
-     *     
-     *      // Process the user's response.
-     *      if (response == ui.Button.YES) {
-     *        Logger.log('The user clicked "Yes."');
-     *      } else {
-     *        Logger.log('The user clicked "No" or the dialog\'s close button.');
-     *      }
-     */
-    export enum Button { CLOSE, OK, CANCEL, YES, NO }
-
-    /**
      * An enum representing the days of the week.
      */
     export enum Weekday { SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY }
 
-    /**
-     * An enum representing the months of the year.
-     */
-    export enum Month { JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY, AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER }
-
-    /**
-     * Interface for objects that can export their data as a Blob.
-     * Implementing classes
-     * 
-     * NameBrief description
-     * 
-     * AttachmentA Sites Attachment such as a file attached to a page.
-     * 
-     * BlobA data interchange object for Apps Script services.
-     * 
-     * ChartA Chart object, which can be embedded into documents, UI elements, or used as a static image.
-     * 
-     * DocumentA document, containing rich text and elements such as tables and lists.
-     * 
-     * EmbeddedChartRepresents a chart that has been embedded into a Spreadsheet.
-     * 
-     * FileThis class contains methods to get information about the file and modify its
-     *  contents.
-     * 
-     * FileA file in Google Drive.
-     * 
-     * GmailAttachmentAn attachment from Gmail.
-     * 
-     * HTTPResponseThis class allows users to access specific information on HTTP responses.
-     * 
-     * HtmlOutputAn HtmlOutput object that can be served from a script.
-     * 
-     * InlineImageAn element representing an embedded image.
-     * 
-     * JdbcBlobA JDBC Blob.
-     * 
-     * JdbcClobA JDBC Clob.
-     * 
-     * SpreadsheetThis class allows users to access and modify Google Sheets files.
-     * 
-     * StaticMapAllows for the creation and decoration of static map images.
-     */
-    export interface BlobSource {
-      getAs(contentType: String): Blob;
-      getBlob(): Blob;
-    }
-
   }
 }
 
-declare var Session: GoogleAppsScript.Base.Session;
+declare var Browser: GoogleAppsScript.Base.Browser;
+declare var Logger: GoogleAppsScript.Base.Logger;
 // conflicts with MimeType in lib.d.ts
 // declare var MimeType: GoogleAppsScript.Base.MimeType;
-declare var Logger: GoogleAppsScript.Base.Logger;
-declare var Browser: GoogleAppsScript.Base.Browser;
+declare var Session: GoogleAppsScript.Base.Session;

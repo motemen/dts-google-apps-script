@@ -3,19 +3,6 @@
 declare module GoogleAppsScript {
   export module Cache {
     /**
-     * CacheService allows you to access a cache for short term storage of data.
-     * 
-     *  This class lets you get a specific cache instance. Public caches are for things that are not
-     *  dependent on which user is accessing your script. Private caches are for things which are
-     *  user-specific, like settings or recent activity.
-     */
-    export interface CacheService {
-      getDocumentCache(): Cache;
-      getScriptCache(): Cache;
-      getUserCache(): Cache;
-    }
-
-    /**
      * A reference to a particular cache.
      * 
      *  This class allows you to insert, retrieve, and remove items from a cache. This can be
@@ -44,6 +31,19 @@ declare module GoogleAppsScript {
       putAll(values: Object, expirationInSeconds: Integer): void;
       remove(key: String): void;
       removeAll(keys: String[]): void;
+    }
+
+    /**
+     * CacheService allows you to access a cache for short term storage of data.
+     * 
+     *  This class lets you get a specific cache instance. Public caches are for things that are not
+     *  dependent on which user is accessing your script. Private caches are for things which are
+     *  user-specific, like settings or recent activity.
+     */
+    export interface CacheService {
+      getDocumentCache(): Cache;
+      getScriptCache(): Cache;
+      getUserCache(): Cache;
     }
 
   }

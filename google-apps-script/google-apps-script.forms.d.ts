@@ -4,49 +4,51 @@
 declare module GoogleAppsScript {
   export module Forms {
     /**
-     * Allows a script to open existing Forms or create new ones.
+     * An enum representing the supported types of image alignment. Alignment types can be accessed from
+     *  FormApp.Alignment.
      * 
-     *      // Open a form by ID.
-     *      var existingForm = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
-     *     
-     *      // Create and open a form.
-     *      var newForm = FormApp.create('Form Name');
+     *      // Open a form by ID and add a new image item with alignment
+     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
+     *      var img = UrlFetchApp.fetch('https://www.google.com/images/srpr/logo4w.png');
+     *      form.addImageItem()
+     *          .setImage(img)
+     *          .setAlignment(FormApp.Alignment.CENTER);
      */
-    export interface FormApp {
-      Alignment: Alignment
-      DestinationType: DestinationType
-      ItemType: ItemType
-      PageNavigationType: PageNavigationType
-      create(title: String): Form;
-      getActiveForm(): Form;
-      getUi(): Base.Ui;
-      openById(id: String): Form;
-      openByUrl(url: String): Form;
-    }
+    export enum Alignment { LEFT, CENTER, RIGHT }
 
     /**
-     * A question item that allows the respondent to indicate a date and time. Items can be accessed or
-     *  created from a Form.
+     * A question item that allows the respondent to select one or more checkboxes, as well as an
+     *  optional "other" field. Items can be accessed or created from a Form.
      * 
-     *      // Open a form by ID and add a new date-time item.
+     *      // Open a form by ID and add a new checkbox item.
      *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
-     *      var item = form.addDateTimeItem();
-     *      item.setTitle('When do you want to meet?');
+     *      var item = form.addCheckboxItem();
+     *      item.setTitle('What condiments would you like on your hot dog?')
+     *          .setChoices([
+     *                item.createChoice('Ketchup'),
+     *                item.createChoice('Mustard'),
+     *                item.createChoice('Relish')
+     *          ])
+     *          .showOtherOption(true);
      */
-    export interface DateTimeItem {
-      createResponse(response: Date): ItemResponse;
-      duplicate(): DateTimeItem;
+    export interface CheckboxItem {
+      createChoice(value: String): Choice;
+      createResponse(responses: String[]): ItemResponse;
+      duplicate(): CheckboxItem;
+      getChoices(): Choice[];
       getHelpText(): String;
       getId(): Integer;
       getIndex(): Integer;
       getTitle(): String;
       getType(): ItemType;
-      includesYear(): Boolean;
+      hasOtherOption(): Boolean;
       isRequired(): Boolean;
-      setHelpText(text: String): DateTimeItem;
-      setIncludesYear(enableYear: Boolean): DateTimeItem;
-      setRequired(enabled: Boolean): DateTimeItem;
-      setTitle(title: String): DateTimeItem;
+      setChoiceValues(values: String[]): CheckboxItem;
+      setChoices(choices: Choice[]): CheckboxItem;
+      setHelpText(text: String): CheckboxItem;
+      setRequired(enabled: Boolean): CheckboxItem;
+      setTitle(title: String): CheckboxItem;
+      showOtherOption(enabled: Boolean): CheckboxItem;
     }
 
     /**
@@ -105,103 +107,45 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A question item that allows the respondent to select one or more checkboxes, as well as an
-     *  optional "other" field. Items can be accessed or created from a Form.
+     * A question item that allows the respondent to indicate a date and time. Items can be accessed or
+     *  created from a Form.
      * 
-     *      // Open a form by ID and add a new checkbox item.
+     *      // Open a form by ID and add a new date-time item.
      *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
-     *      var item = form.addCheckboxItem();
-     *      item.setTitle('What condiments would you like on your hot dog?')
-     *          .setChoices([
-     *                item.createChoice('Ketchup'),
-     *                item.createChoice('Mustard'),
-     *                item.createChoice('Relish')
-     *          ])
-     *          .showOtherOption(true);
+     *      var item = form.addDateTimeItem();
+     *      item.setTitle('When do you want to meet?');
      */
-    export interface CheckboxItem {
-      createChoice(value: String): Choice;
-      createResponse(responses: String[]): ItemResponse;
-      duplicate(): CheckboxItem;
-      getChoices(): Choice[];
+    export interface DateTimeItem {
+      createResponse(response: Date): ItemResponse;
+      duplicate(): DateTimeItem;
       getHelpText(): String;
       getId(): Integer;
       getIndex(): Integer;
       getTitle(): String;
       getType(): ItemType;
-      hasOtherOption(): Boolean;
+      includesYear(): Boolean;
       isRequired(): Boolean;
-      setChoiceValues(values: String[]): CheckboxItem;
-      setChoices(choices: Choice[]): CheckboxItem;
-      setHelpText(text: String): CheckboxItem;
-      setRequired(enabled: Boolean): CheckboxItem;
-      setTitle(title: String): CheckboxItem;
-      showOtherOption(enabled: Boolean): CheckboxItem;
+      setHelpText(text: String): DateTimeItem;
+      setIncludesYear(enableYear: Boolean): DateTimeItem;
+      setRequired(enabled: Boolean): DateTimeItem;
+      setTitle(title: String): DateTimeItem;
     }
 
     /**
-     * A response to the form as a whole. Form responses have three main uses: they contain the answers
-     *  submitted by a respondent (see getItemResponses(), they can be used to programmatically
-     *  respond to the form (see withItemResponse(response) and submit()), and they
-     *  can be used as a template to create a URL for the form with pre-filled answers. Form responses
-     *  can be created or accessed from a Form.
+     * An enum representing the supported types of form-response destinations. All forms, including
+     *  those that do not have a destination set explicitly,
+     *  save
+     *  a copy of responses in the form's response store. Destination types can be accessed from
+     *  FormApp.DestinationType.
      * 
-     *      // Open a form by ID and log the responses to each question.
+     *      // Open a form by ID and create a new spreadsheet.
      *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
-     *      var formResponses = form.getResponses();
-     *      for (var i = 0; i < formResponses.length; i++) {
-     *        var formResponse = formResponses[i];
-     *        var itemResponses = formResponse.getItemResponses();
-     *        for (var j = 0; j < itemResponses.length; j++) {
-     *          var itemResponse = itemResponses[j];
-     *          Logger.log('Response #%s to the question "%s" was "%s"',
-     *              (i + 1).toString(),
-     *              itemResponse.getItem().getTitle(),
-     *              itemResponse.getResponse());
-     *        }
-     *      }
+     *      var ss = SpreadsheetApp.create('Spreadsheet Name');
+     *     
+     *      // Update the form's response destination.
+     *      form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
      */
-    export interface FormResponse {
-      getEditResponseUrl(): String;
-      getId(): String;
-      getItemResponses(): ItemResponse[];
-      getRespondentEmail(): String;
-      getResponseForItem(item: Item): ItemResponse;
-      getTimestamp(): Date;
-      submit(): FormResponse;
-      toPrefilledUrl(): String;
-      withItemResponse(response: ItemResponse): FormResponse;
-    }
-
-    /**
-     * A question item, presented as a grid of columns and rows, that allows the respondent to select
-     *  one choice per row from a sequence of radio buttons. Items can be accessed or created from a
-     *  Form.
-     * 
-     *      // Open a form by ID and add a new grid item.
-     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
-     *      var item = form.addGridItem();
-     *      item.setTitle('Rate your interests')
-     *          .setRows(['Cars', 'Computers', 'Celebrities'])
-     *          .setColumns(['Boring', 'So-so', 'Interesting']);
-     */
-    export interface GridItem {
-      createResponse(responses: String[]): ItemResponse;
-      duplicate(): GridItem;
-      getColumns(): String[];
-      getHelpText(): String;
-      getId(): Integer;
-      getIndex(): Integer;
-      getRows(): String[];
-      getTitle(): String;
-      getType(): ItemType;
-      isRequired(): Boolean;
-      setColumns(columns: String[]): GridItem;
-      setHelpText(text: String): GridItem;
-      setRequired(enabled: Boolean): GridItem;
-      setRows(rows: String[]): GridItem;
-      setTitle(title: String): GridItem;
-    }
+    export enum DestinationType { SPREADSHEET }
 
     /**
      * A question item that allows the respondent to indicate a length of time. Items can be accessed or
@@ -317,9 +261,32 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A response to one question item within a form. Item responses can be accessed from
-     *  FormResponse and created from any Item that asks the respondent to answer a
-     *  question.
+     * Allows a script to open existing Forms or create new ones.
+     * 
+     *      // Open a form by ID.
+     *      var existingForm = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
+     *     
+     *      // Create and open a form.
+     *      var newForm = FormApp.create('Form Name');
+     */
+    export interface FormApp {
+      Alignment: Alignment
+      DestinationType: DestinationType
+      ItemType: ItemType
+      PageNavigationType: PageNavigationType
+      create(title: String): Form;
+      getActiveForm(): Form;
+      getUi(): Base.Ui;
+      openById(id: String): Form;
+      openByUrl(url: String): Form;
+    }
+
+    /**
+     * A response to the form as a whole. Form responses have three main uses: they contain the answers
+     *  submitted by a respondent (see getItemResponses(), they can be used to programmatically
+     *  respond to the form (see withItemResponse(response) and submit()), and they
+     *  can be used as a template to create a URL for the form with pre-filled answers. Form responses
+     *  can be created or accessed from a Form.
      * 
      *      // Open a form by ID and log the responses to each question.
      *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
@@ -336,9 +303,46 @@ declare module GoogleAppsScript {
      *        }
      *      }
      */
-    export interface ItemResponse {
-      getItem(): Item;
-      getResponse(): Object;
+    export interface FormResponse {
+      getEditResponseUrl(): String;
+      getId(): String;
+      getItemResponses(): ItemResponse[];
+      getRespondentEmail(): String;
+      getResponseForItem(item: Item): ItemResponse;
+      getTimestamp(): Date;
+      submit(): FormResponse;
+      toPrefilledUrl(): String;
+      withItemResponse(response: ItemResponse): FormResponse;
+    }
+
+    /**
+     * A question item, presented as a grid of columns and rows, that allows the respondent to select
+     *  one choice per row from a sequence of radio buttons. Items can be accessed or created from a
+     *  Form.
+     * 
+     *      // Open a form by ID and add a new grid item.
+     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
+     *      var item = form.addGridItem();
+     *      item.setTitle('Rate your interests')
+     *          .setRows(['Cars', 'Computers', 'Celebrities'])
+     *          .setColumns(['Boring', 'So-so', 'Interesting']);
+     */
+    export interface GridItem {
+      createResponse(responses: String[]): ItemResponse;
+      duplicate(): GridItem;
+      getColumns(): String[];
+      getHelpText(): String;
+      getId(): Integer;
+      getIndex(): Integer;
+      getRows(): String[];
+      getTitle(): String;
+      getType(): ItemType;
+      isRequired(): Boolean;
+      setColumns(columns: String[]): GridItem;
+      setHelpText(text: String): GridItem;
+      setRequired(enabled: Boolean): GridItem;
+      setRows(rows: String[]): GridItem;
+      setTitle(title: String): GridItem;
     }
 
     /**
@@ -367,65 +371,6 @@ declare module GoogleAppsScript {
       setImage(image: Base.BlobSource): ImageItem;
       setTitle(title: String): ImageItem;
       setWidth(width: Integer): ImageItem;
-    }
-
-    /**
-     * A question item that allows the respondent to select one choice from a list of radio buttons or
-     *  an optional "other" field. Items can be accessed or created from a Form.
-     * 
-     *      // Open a form by ID and add a new multiple choice item.
-     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
-     *      var item = form.addMultipleChoiceItem();
-     *      item.setTitle('Do you prefer cats or dogs?')
-     *          .setChoices([
-     *              item.createChoice('Cats'),
-     *              item.createChoice('Dogs')
-     *           ])
-     *          .showOtherOption(true);
-     */
-    export interface MultipleChoiceItem {
-      createChoice(value: String): Choice;
-      createChoice(value: String, navigationItem: PageBreakItem): Choice;
-      createChoice(value: String, navigationType: PageNavigationType): Choice;
-      createResponse(response: String): ItemResponse;
-      duplicate(): MultipleChoiceItem;
-      getChoices(): Choice[];
-      getHelpText(): String;
-      getId(): Integer;
-      getIndex(): Integer;
-      getTitle(): String;
-      getType(): ItemType;
-      hasOtherOption(): Boolean;
-      isRequired(): Boolean;
-      setChoiceValues(values: String[]): MultipleChoiceItem;
-      setChoices(choices: Choice[]): MultipleChoiceItem;
-      setHelpText(text: String): MultipleChoiceItem;
-      setRequired(enabled: Boolean): MultipleChoiceItem;
-      setTitle(title: String): MultipleChoiceItem;
-      showOtherOption(enabled: Boolean): MultipleChoiceItem;
-    }
-
-    /**
-     * A question item that allows the respondent to enter a block of text. Items can be accessed or
-     *  created from a Form.
-     * 
-     *      // Open a form by ID and add a new paragraph text item.
-     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
-     *      var item = form.addParagraphTextItem();
-     *      item.setTitle('What is your address?');
-     */
-    export interface ParagraphTextItem {
-      createResponse(response: String): ItemResponse;
-      duplicate(): ParagraphTextItem;
-      getHelpText(): String;
-      getId(): Integer;
-      getIndex(): Integer;
-      getTitle(): String;
-      getType(): ItemType;
-      isRequired(): Boolean;
-      setHelpText(text: String): ParagraphTextItem;
-      setRequired(enabled: Boolean): ParagraphTextItem;
-      setTitle(title: String): ParagraphTextItem;
     }
 
     /**
@@ -477,32 +422,45 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A layout item that marks the start of a page. Items can be accessed or
-     *  created from a Form.
+     * A response to one question item within a form. Item responses can be accessed from
+     *  FormResponse and created from any Item that asks the respondent to answer a
+     *  question.
      * 
-     *      // Create a form and add three page-break items.
-     *      var form = FormApp.create('Form Name');
-     *      var pageTwo = form.addPageBreakItem().setTitle('Page Two');
-     *      var pageThree = form.addPageBreakItem().setTitle('Page Three');
-     *     
-     *      // Make the first two pages navigate elsewhere upon completion. 
-     *      pageTwo.setGoToPage(pageThree); // At end of page one (start of page two), jump to page three
-     *      pageThree.setGoToPage(FormApp.PageNavigationType.RESTART); // At end of page two, restart form
+     *      // Open a form by ID and log the responses to each question.
+     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
+     *      var formResponses = form.getResponses();
+     *      for (var i = 0; i < formResponses.length; i++) {
+     *        var formResponse = formResponses[i];
+     *        var itemResponses = formResponse.getItemResponses();
+     *        for (var j = 0; j < itemResponses.length; j++) {
+     *          var itemResponse = itemResponses[j];
+     *          Logger.log('Response #%s to the question "%s" was "%s"',
+     *              (i + 1).toString(),
+     *              itemResponse.getItem().getTitle(),
+     *              itemResponse.getResponse());
+     *        }
+     *      }
      */
-    export interface PageBreakItem {
-      duplicate(): PageBreakItem;
-      getGoToPage(): PageBreakItem;
-      getHelpText(): String;
-      getId(): Integer;
-      getIndex(): Integer;
-      getPageNavigationType(): PageNavigationType;
-      getTitle(): String;
-      getType(): ItemType;
-      setGoToPage(goToPageItem: PageBreakItem): PageBreakItem;
-      setGoToPage(navigationType: PageNavigationType): PageBreakItem;
-      setHelpText(text: String): PageBreakItem;
-      setTitle(title: String): PageBreakItem;
+    export interface ItemResponse {
+      getItem(): Item;
+      getResponse(): Object;
     }
+
+    /**
+     * An enum representing the supported types of form items. Item types can be accessed from
+     *  FormApp.ItemType.
+     * 
+     *      // Open a form by ID and add a new section header.
+     *      var form = FormApp.create('Form Name');
+     *      var item = form.addSectionHeaderItem();
+     *      item.setTitle('Title of new section');
+     *     
+     *      // Check the item type.
+     *      if (item.getType() == FormApp.ItemType.SECTION_HEADER) {
+     *        item.setHelpText('Description of new section.');
+     *      }
+     */
+    export enum ItemType { CHECKBOX, DATE, DATETIME, DURATION, GRID, IMAGE, LIST, MULTIPLE_CHOICE, PAGE_BREAK, PARAGRAPH_TEXT, SCALE, SECTION_HEADER, TEXT, TIME }
 
     /**
      * A question item that allows the respondent to select one choice from a drop-down list. Items can
@@ -535,6 +493,121 @@ declare module GoogleAppsScript {
       setHelpText(text: String): ListItem;
       setRequired(enabled: Boolean): ListItem;
       setTitle(title: String): ListItem;
+    }
+
+    /**
+     * A question item that allows the respondent to select one choice from a list of radio buttons or
+     *  an optional "other" field. Items can be accessed or created from a Form.
+     * 
+     *      // Open a form by ID and add a new multiple choice item.
+     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
+     *      var item = form.addMultipleChoiceItem();
+     *      item.setTitle('Do you prefer cats or dogs?')
+     *          .setChoices([
+     *              item.createChoice('Cats'),
+     *              item.createChoice('Dogs')
+     *           ])
+     *          .showOtherOption(true);
+     */
+    export interface MultipleChoiceItem {
+      createChoice(value: String): Choice;
+      createChoice(value: String, navigationItem: PageBreakItem): Choice;
+      createChoice(value: String, navigationType: PageNavigationType): Choice;
+      createResponse(response: String): ItemResponse;
+      duplicate(): MultipleChoiceItem;
+      getChoices(): Choice[];
+      getHelpText(): String;
+      getId(): Integer;
+      getIndex(): Integer;
+      getTitle(): String;
+      getType(): ItemType;
+      hasOtherOption(): Boolean;
+      isRequired(): Boolean;
+      setChoiceValues(values: String[]): MultipleChoiceItem;
+      setChoices(choices: Choice[]): MultipleChoiceItem;
+      setHelpText(text: String): MultipleChoiceItem;
+      setRequired(enabled: Boolean): MultipleChoiceItem;
+      setTitle(title: String): MultipleChoiceItem;
+      showOtherOption(enabled: Boolean): MultipleChoiceItem;
+    }
+
+    /**
+     * A layout item that marks the start of a page. Items can be accessed or
+     *  created from a Form.
+     * 
+     *      // Create a form and add three page-break items.
+     *      var form = FormApp.create('Form Name');
+     *      var pageTwo = form.addPageBreakItem().setTitle('Page Two');
+     *      var pageThree = form.addPageBreakItem().setTitle('Page Three');
+     *     
+     *      // Make the first two pages navigate elsewhere upon completion. 
+     *      pageTwo.setGoToPage(pageThree); // At end of page one (start of page two), jump to page three
+     *      pageThree.setGoToPage(FormApp.PageNavigationType.RESTART); // At end of page two, restart form
+     */
+    export interface PageBreakItem {
+      duplicate(): PageBreakItem;
+      getGoToPage(): PageBreakItem;
+      getHelpText(): String;
+      getId(): Integer;
+      getIndex(): Integer;
+      getPageNavigationType(): PageNavigationType;
+      getTitle(): String;
+      getType(): ItemType;
+      setGoToPage(goToPageItem: PageBreakItem): PageBreakItem;
+      setGoToPage(navigationType: PageNavigationType): PageBreakItem;
+      setHelpText(text: String): PageBreakItem;
+      setTitle(title: String): PageBreakItem;
+    }
+
+    /**
+     * An enum representing the supported types of page navigation. Page navigation types can be
+     *  accessed from FormApp.PageNavigationType.
+     * 
+     * The page navigation occurs after the respondent completes a page that contains the option, and
+     *  only if the respondent chose that option. If the respondent chose multiple options with
+     *  page-navigation instructions on the same page, only the last navigation option has any effect.
+     *  Page navigation also has no effect on the last page of a form.
+     * Choices that use page navigation cannot be combined in the same item with choices that do not
+     *  use page navigation.
+     * 
+     *      // Create a form and add a new multiple-choice item and a page-break item.
+     *      var form = FormApp.create('Form Name');
+     *      var item = form.addMultipleChoiceItem();
+     *      var pageBreak = form.addPageBreakItem();
+     *     
+     *      // Set some choices with go-to-page logic.
+     *      var rightChoice = item.createChoice('Vanilla', FormApp.PageNavigationType.SUBMIT);
+     *      var wrongChoice = item.createChoice('Chocolate', FormApp.PageNavigationType.RESTART);
+     *     
+     *      // For GO_TO_PAGE, just pass in the page break item. For CONTINUE (normally the default), pass in
+     *      // CONTINUE explicitly because page navigation cannot be mixed with non-navigation choices.
+     *      var iffyChoice = item.createChoice('Peanut', pageBreak);
+     *      var otherChoice = item.createChoice('Strawberry', FormApp.PageNavigationType.CONTINUE);
+     *      item.setChoices([rightChoice, wrongChoice, iffyChoice, otherChoice]);
+     */
+    export enum PageNavigationType { CONTINUE, GO_TO_PAGE, RESTART, SUBMIT }
+
+    /**
+     * A question item that allows the respondent to enter a block of text. Items can be accessed or
+     *  created from a Form.
+     * 
+     *      // Open a form by ID and add a new paragraph text item.
+     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
+     *      var item = form.addParagraphTextItem();
+     *      item.setTitle('What is your address?');
+     */
+    export interface ParagraphTextItem {
+      createResponse(response: String): ItemResponse;
+      duplicate(): ParagraphTextItem;
+      getHelpText(): String;
+      getId(): Integer;
+      getIndex(): Integer;
+      getTitle(): String;
+      getType(): ItemType;
+      isRequired(): Boolean;
+      setHelpText(text: String): ParagraphTextItem;
+      setRequired(enabled: Boolean): ParagraphTextItem;
+      setTitle(title: String): ParagraphTextItem;
     }
 
     /**
@@ -588,35 +661,6 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * An enum representing the supported types of image alignment. Alignment types can be accessed from
-     *  FormApp.Alignment.
-     * 
-     *      // Open a form by ID and add a new image item with alignment
-     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
-     *      var img = UrlFetchApp.fetch('https://www.google.com/images/srpr/logo4w.png');
-     *      form.addImageItem()
-     *          .setImage(img)
-     *          .setAlignment(FormApp.Alignment.CENTER);
-     */
-    export enum Alignment { LEFT, CENTER, RIGHT }
-
-    /**
-     * An enum representing the supported types of form-response destinations. All forms, including
-     *  those that do not have a destination set explicitly,
-     *  save
-     *  a copy of responses in the form's response store. Destination types can be accessed from
-     *  FormApp.DestinationType.
-     * 
-     *      // Open a form by ID and create a new spreadsheet.
-     *      var form = FormApp.openById('1234567890abcdefghijklmnopqrstuvwxyz');
-     *      var ss = SpreadsheetApp.create('Spreadsheet Name');
-     *     
-     *      // Update the form's response destination.
-     *      form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
-     */
-    export enum DestinationType { SPREADSHEET }
-
-    /**
      * A question item that allows the respondent to enter a single line of text. Items can be accessed
      *  or created from a Form.
      * 
@@ -638,50 +682,6 @@ declare module GoogleAppsScript {
       setRequired(enabled: Boolean): TextItem;
       setTitle(title: String): TextItem;
     }
-
-    /**
-     * An enum representing the supported types of page navigation. Page navigation types can be
-     *  accessed from FormApp.PageNavigationType.
-     * 
-     * The page navigation occurs after the respondent completes a page that contains the option, and
-     *  only if the respondent chose that option. If the respondent chose multiple options with
-     *  page-navigation instructions on the same page, only the last navigation option has any effect.
-     *  Page navigation also has no effect on the last page of a form.
-     * Choices that use page navigation cannot be combined in the same item with choices that do not
-     *  use page navigation.
-     * 
-     *      // Create a form and add a new multiple-choice item and a page-break item.
-     *      var form = FormApp.create('Form Name');
-     *      var item = form.addMultipleChoiceItem();
-     *      var pageBreak = form.addPageBreakItem();
-     *     
-     *      // Set some choices with go-to-page logic.
-     *      var rightChoice = item.createChoice('Vanilla', FormApp.PageNavigationType.SUBMIT);
-     *      var wrongChoice = item.createChoice('Chocolate', FormApp.PageNavigationType.RESTART);
-     *     
-     *      // For GO_TO_PAGE, just pass in the page break item. For CONTINUE (normally the default), pass in
-     *      // CONTINUE explicitly because page navigation cannot be mixed with non-navigation choices.
-     *      var iffyChoice = item.createChoice('Peanut', pageBreak);
-     *      var otherChoice = item.createChoice('Strawberry', FormApp.PageNavigationType.CONTINUE);
-     *      item.setChoices([rightChoice, wrongChoice, iffyChoice, otherChoice]);
-     */
-    export enum PageNavigationType { CONTINUE, GO_TO_PAGE, RESTART, SUBMIT }
-
-    /**
-     * An enum representing the supported types of form items. Item types can be accessed from
-     *  FormApp.ItemType.
-     * 
-     *      // Open a form by ID and add a new section header.
-     *      var form = FormApp.create('Form Name');
-     *      var item = form.addSectionHeaderItem();
-     *      item.setTitle('Title of new section');
-     *     
-     *      // Check the item type.
-     *      if (item.getType() == FormApp.ItemType.SECTION_HEADER) {
-     *        item.setHelpText('Description of new section.');
-     *      }
-     */
-    export enum ItemType { CHECKBOX, DATE, DATETIME, DURATION, GRID, IMAGE, LIST, MULTIPLE_CHOICE, PAGE_BREAK, PARAGRAPH_TEXT, SCALE, SECTION_HEADER, TEXT, TIME }
 
     /**
      * A question item that allows the respondent to indicate a time of day. Items can be accessed or

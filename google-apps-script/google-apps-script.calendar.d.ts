@@ -95,23 +95,6 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Represents the recurrence settings for an event series.
-     */
-    export interface EventRecurrence {
-      addDailyExclusion(): RecurrenceRule;
-      addDailyRule(): RecurrenceRule;
-      addDate(date: Date): EventRecurrence;
-      addDateExclusion(date: Date): EventRecurrence;
-      addMonthlyExclusion(): RecurrenceRule;
-      addMonthlyRule(): RecurrenceRule;
-      addWeeklyExclusion(): RecurrenceRule;
-      addWeeklyRule(): RecurrenceRule;
-      addYearlyExclusion(): RecurrenceRule;
-      addYearlyRule(): RecurrenceRule;
-      setTimeZone(timeZone: String): EventRecurrence;
-    }
-
-    /**
      * Represents a single calendar event.
      */
     export interface CalendarEvent {
@@ -219,6 +202,11 @@ declare module GoogleAppsScript {
     }
 
     /**
+     * An enum representing the named colors available in the Calendar service.
+     */
+    export enum Color { BLUE, BROWN, CHARCOAL, CHESTNUT, GRAY, GREEN, INDIGO, LIME, MUSTARD, OLIVE, ORANGE, PINK, PLUM, PURPLE, RED, RED_ORANGE, SEA_BLUE, SLATE, TEAL, TURQOISE, YELLOW }
+
+    /**
      * Represents a guest of an event.
      */
     export interface EventGuest {
@@ -228,6 +216,28 @@ declare module GoogleAppsScript {
       getName(): String;
       getStatus(): String;
     }
+
+    /**
+     * Represents the recurrence settings for an event series.
+     */
+    export interface EventRecurrence {
+      addDailyExclusion(): RecurrenceRule;
+      addDailyRule(): RecurrenceRule;
+      addDate(date: Date): EventRecurrence;
+      addDateExclusion(date: Date): EventRecurrence;
+      addMonthlyExclusion(): RecurrenceRule;
+      addMonthlyRule(): RecurrenceRule;
+      addWeeklyExclusion(): RecurrenceRule;
+      addWeeklyRule(): RecurrenceRule;
+      addYearlyExclusion(): RecurrenceRule;
+      addYearlyRule(): RecurrenceRule;
+      setTimeZone(timeZone: String): EventRecurrence;
+    }
+
+    /**
+     * An enum representing the statuses a guest can have for an event.
+     */
+    export enum GuestStatus { INVITED, MAYBE, NO, OWNER, YES }
 
     /**
      * Represents a recurrence rule for an event series.
@@ -267,16 +277,6 @@ declare module GoogleAppsScript {
       until(endDate: Date): RecurrenceRule;
       weekStartsOn(day: Base.Weekday): RecurrenceRule;
     }
-
-    /**
-     * An enum representing the named colors available in the Calendar service.
-     */
-    export enum Color { BLUE, BROWN, CHARCOAL, CHESTNUT, GRAY, GREEN, INDIGO, LIME, MUSTARD, OLIVE, ORANGE, PINK, PLUM, PURPLE, RED, RED_ORANGE, SEA_BLUE, SLATE, TEAL, TURQOISE, YELLOW }
-
-    /**
-     * An enum representing the statuses a guest can have for an event.
-     */
-    export enum GuestStatus { INVITED, MAYBE, NO, OWNER, YES }
 
     /**
      * An enum representing the visibility of an event.

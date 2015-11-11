@@ -4,32 +4,6 @@
 declare module GoogleAppsScript {
   export module Groups {
     /**
-     * This class provides access to Google Groups information. It can be used to
-     *  query information such as a group's email address, or the list of groups in
-     *  which the user is a direct member.
-     * 
-     *  Here's an example that shows how many groups the current user is a member of:
-     * 
-     *        var groups = GroupsApp.getGroups();
-     *        Logger.log('You belong to ' + groups.length + ' groups.');
-     */
-    export interface GroupsApp {
-      Role: Role
-      getGroupByEmail(email: String): Group;
-      getGroups(): Group[];
-    }
-
-    /**
-     * Possible roles of a user within a group, such as owner or ordinary member.
-     *  Users subscribed to a group have exactly one role within the context of that
-     *  group.
-     * See also
-     * 
-     * Group.getRole(email)
-     */
-    export enum Role { OWNER, MANAGER, MEMBER, INVITED, PENDING }
-
-    /**
      * A group object whose members and those members' roles within the group
      *  can be queried.
      * 
@@ -55,6 +29,32 @@ declare module GoogleAppsScript {
       hasUser(email: String): Boolean;
       hasUser(user: Base.User): Boolean;
     }
+
+    /**
+     * This class provides access to Google Groups information. It can be used to
+     *  query information such as a group's email address, or the list of groups in
+     *  which the user is a direct member.
+     * 
+     *  Here's an example that shows how many groups the current user is a member of:
+     * 
+     *        var groups = GroupsApp.getGroups();
+     *        Logger.log('You belong to ' + groups.length + ' groups.');
+     */
+    export interface GroupsApp {
+      Role: Role
+      getGroupByEmail(email: String): Group;
+      getGroups(): Group[];
+    }
+
+    /**
+     * Possible roles of a user within a group, such as owner or ordinary member.
+     *  Users subscribed to a group have exactly one role within the context of that
+     *  group.
+     * See also
+     * 
+     * Group.getRole(email)
+     */
+    export enum Role { OWNER, MANAGER, MEMBER, INVITED, PENDING }
 
   }
 }

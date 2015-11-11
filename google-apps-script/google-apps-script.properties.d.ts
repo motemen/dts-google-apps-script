@@ -3,20 +3,24 @@
 declare module GoogleAppsScript {
   export module Properties {
     /**
-     * 
-     * Deprecated. This class is deprecated and should not be used in new scripts.
-     * Script Properties are key-value pairs stored by a script in a persistent store. Script Properties
-     *  are scoped per script, regardless of which user runs the script.
+     * The properties object acts as the interface to access user, document, or script properties.
+     *  The specific property type depends on which of the three methods of
+     *  PropertiesService the script called:
+     *  PropertiesService.getDocumentProperties(),
+     *  PropertiesService.getUserProperties(), or
+     *  PropertiesService.getScriptProperties(). Properties cannot be shared between scripts. For
+     *  more information about property types, see the
+     *  guide to the Properties service.
      */
-    export interface ScriptProperties {
-      deleteAllProperties(): ScriptProperties;
-      deleteProperty(key: String): ScriptProperties;
+    export interface Properties {
+      deleteAllProperties(): Properties;
+      deleteProperty(key: String): Properties;
       getKeys(): String[];
       getProperties(): Object;
       getProperty(key: String): String;
-      setProperties(properties: Object): ScriptProperties;
-      setProperties(properties: Object, deleteAllOthers: Boolean): ScriptProperties;
-      setProperty(key: String, value: String): ScriptProperties;
+      setProperties(properties: Object): Properties;
+      setProperties(properties: Object, deleteAllOthers: Boolean): Properties;
+      setProperty(key: String, value: String): Properties;
     }
 
     /**
@@ -41,24 +45,20 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * The properties object acts as the interface to access user, document, or script properties.
-     *  The specific property type depends on which of the three methods of
-     *  PropertiesService the script called:
-     *  PropertiesService.getDocumentProperties(),
-     *  PropertiesService.getUserProperties(), or
-     *  PropertiesService.getScriptProperties(). Properties cannot be shared between scripts. For
-     *  more information about property types, see the
-     *  guide to the Properties service.
+     * 
+     * Deprecated. This class is deprecated and should not be used in new scripts.
+     * Script Properties are key-value pairs stored by a script in a persistent store. Script Properties
+     *  are scoped per script, regardless of which user runs the script.
      */
-    export interface Properties {
-      deleteAllProperties(): Properties;
-      deleteProperty(key: String): Properties;
+    export interface ScriptProperties {
+      deleteAllProperties(): ScriptProperties;
+      deleteProperty(key: String): ScriptProperties;
       getKeys(): String[];
       getProperties(): Object;
       getProperty(key: String): String;
-      setProperties(properties: Object): Properties;
-      setProperties(properties: Object, deleteAllOthers: Boolean): Properties;
-      setProperty(key: String, value: String): Properties;
+      setProperties(properties: Object): ScriptProperties;
+      setProperties(properties: Object, deleteAllOthers: Boolean): ScriptProperties;
+      setProperty(key: String, value: String): ScriptProperties;
     }
 
     /**
@@ -81,6 +81,6 @@ declare module GoogleAppsScript {
   }
 }
 
-declare var ScriptProperties: GoogleAppsScript.Properties.ScriptProperties;
 declare var PropertiesService: GoogleAppsScript.Properties.PropertiesService;
+declare var ScriptProperties: GoogleAppsScript.Properties.ScriptProperties;
 declare var UserProperties: GoogleAppsScript.Properties.UserProperties;

@@ -4,21 +4,6 @@
 declare module GoogleAppsScript {
   export module Sites {
     /**
-     * A Comment attached to any Sites page.
-     */
-    export interface Comment {
-      deleteComment(): void;
-      getAuthorEmail(): String;
-      getAuthorName(): String;
-      getContent(): String;
-      getDatePublished(): Date;
-      getLastUpdated(): Date;
-      getParent(): Page;
-      setContent(content: String): Comment;
-      setParent(parent: Page): Comment;
-    }
-
-    /**
      * A Sites Attachment such as a file attached to a page.
      * 
      *  Note that an Attachment is a Blob and can be used anywhere Blob input is expected.
@@ -51,6 +36,36 @@ declare module GoogleAppsScript {
     }
 
     /**
+     * A typesafe enum for sites attachment type.
+     */
+    export enum AttachmentType { WEB, HOSTED }
+
+    /**
+     * A Sites Column - a column from a Sites List page.
+     */
+    export interface Column {
+      deleteColumn(): void;
+      getName(): String;
+      getParent(): Page;
+      setName(name: String): Column;
+    }
+
+    /**
+     * A Comment attached to any Sites page.
+     */
+    export interface Comment {
+      deleteComment(): void;
+      getAuthorEmail(): String;
+      getAuthorName(): String;
+      getContent(): String;
+      getDatePublished(): Date;
+      getLastUpdated(): Date;
+      getParent(): Page;
+      setContent(content: String): Comment;
+      setParent(parent: Page): Comment;
+    }
+
+    /**
      * A Sites ListItem - a list element from a Sites List page.
      */
     export interface ListItem {
@@ -64,48 +79,6 @@ declare module GoogleAppsScript {
       setValueByIndex(index: Integer, value: String): ListItem;
       setValueByName(name: String, value: String): ListItem;
     }
-
-    /**
-     * Create and access Google Sites.
-     */
-    export interface SitesApp {
-      AttachmentType: AttachmentType
-      PageType: PageType
-      copySite(domain: String, name: String, title: String, summary: String, site: Site): Site;
-      createSite(domain: String, name: String, title: String, summary: String): Site;
-      getActivePage(): Page;
-      getActiveSite(): Site;
-      getAllSites(domain: String): Site[];
-      getAllSites(domain: String, start: Integer, max: Integer): Site[];
-      getPageByUrl(url: String): Page;
-      getSite(name: String): Site;
-      getSite(domain: String, name: String): Site;
-      getSiteByUrl(url: String): Site;
-      getSites(): Site[];
-      getSites(start: Integer, max: Integer): Site[];
-      getSites(domain: String): Site[];
-      getSites(domain: String, start: Integer, max: Integer): Site[];
-    }
-
-    /**
-     * A Sites Column - a column from a Sites List page.
-     */
-    export interface Column {
-      deleteColumn(): void;
-      getName(): String;
-      getParent(): Page;
-      setName(name: String): Column;
-    }
-
-    /**
-     * A typesafe enum for sites page type.
-     */
-    export enum PageType { WEB_PAGE, LIST_PAGE, ANNOUNCEMENT, ANNOUNCEMENTS_PAGE, FILE_CABINET_PAGE }
-
-    /**
-     * A typesafe enum for sites attachment type.
-     */
-    export enum AttachmentType { WEB, HOSTED }
 
     /**
      * A Page on a Google Site.
@@ -164,6 +137,11 @@ declare module GoogleAppsScript {
       getPageName(): String;
       getSelfLink(): String;
     }
+
+    /**
+     * A typesafe enum for sites page type.
+     */
+    export enum PageType { WEB_PAGE, LIST_PAGE, ANNOUNCEMENT, ANNOUNCEMENTS_PAGE, FILE_CABINET_PAGE }
 
     /**
      * An object representing a Google Site.
@@ -228,6 +206,28 @@ declare module GoogleAppsScript {
       getWebPages(): Page[];
       removeCollaborator(email: String): Site;
       removeCollaborator(user: Base.User): Site;
+    }
+
+    /**
+     * Create and access Google Sites.
+     */
+    export interface SitesApp {
+      AttachmentType: AttachmentType
+      PageType: PageType
+      copySite(domain: String, name: String, title: String, summary: String, site: Site): Site;
+      createSite(domain: String, name: String, title: String, summary: String): Site;
+      getActivePage(): Page;
+      getActiveSite(): Site;
+      getAllSites(domain: String): Site[];
+      getAllSites(domain: String, start: Integer, max: Integer): Site[];
+      getPageByUrl(url: String): Page;
+      getSite(name: String): Site;
+      getSite(domain: String, name: String): Site;
+      getSiteByUrl(url: String): Site;
+      getSites(): Site[];
+      getSites(start: Integer, max: Integer): Site[];
+      getSites(domain: String): Site[];
+      getSites(domain: String, start: Integer, max: Integer): Site[];
     }
 
   }

@@ -1,34 +1,10 @@
 /// <reference path="google-apps-script.types.d.ts" />
+/// <reference path="google-apps-script.charts.d.ts" />
 /// <reference path="google-apps-script.base.d.ts" />
 /// <reference path="google-apps-script.drive.d.ts" />
-/// <reference path="google-apps-script.charts.d.ts" />
 
 declare module GoogleAppsScript {
   export module Spreadsheet {
-    /**
-     * This class allows users to open Google Sheets files and to create new ones. This class is
-     *  the parent class for the Spreadsheet service.
-     */
-    export interface SpreadsheetApp {
-      DataValidationCriteria: DataValidationCriteria
-      ProtectionType: ProtectionType
-      create(name: String): Spreadsheet;
-      create(name: String, rows: Integer, columns: Integer): Spreadsheet;
-      flush(): void;
-      getActive(): Spreadsheet;
-      getActiveRange(): Range;
-      getActiveSheet(): Sheet;
-      getActiveSpreadsheet(): Spreadsheet;
-      getUi(): Base.Ui;
-      newDataValidation(): DataValidationBuilder;
-      open(file: Drive.File): Spreadsheet;
-      openById(id: String): Spreadsheet;
-      openByUrl(url: String): Spreadsheet;
-      setActiveRange(range: Range): Range;
-      setActiveSheet(sheet: Sheet): Sheet;
-      setActiveSpreadsheet(newActiveSpreadsheet: Spreadsheet): void;
-    }
-
     /**
      * The chart's position within a sheet.  Can be updated using the EmbeddedChart.modify()
      *  function.
@@ -65,46 +41,6 @@ declare module GoogleAppsScript {
       getCriteriaType(): DataValidationCriteria;
       getCriteriaValues(): Object[];
       getHelpText(): String;
-    }
-
-    /**
-     * Builder for bar charts. For more details, see the Gviz 
-     *  documentation.
-     */
-    export interface EmbeddedBarChartBuilder {
-      addRange(range: Range): EmbeddedChartBuilder;
-      asAreaChart(): EmbeddedAreaChartBuilder;
-      asBarChart(): EmbeddedBarChartBuilder;
-      asColumnChart(): EmbeddedColumnChartBuilder;
-      asLineChart(): EmbeddedLineChartBuilder;
-      asPieChart(): EmbeddedPieChartBuilder;
-      asScatterChart(): EmbeddedScatterChartBuilder;
-      asTableChart(): EmbeddedTableChartBuilder;
-      build(): EmbeddedChart;
-      getChartType(): Charts.ChartType;
-      getContainer(): ContainerInfo;
-      getRanges(): Range[];
-      removeRange(range: Range): EmbeddedChartBuilder;
-      reverseCategories(): EmbeddedBarChartBuilder;
-      reverseDirection(): EmbeddedBarChartBuilder;
-      setBackgroundColor(cssValue: String): EmbeddedBarChartBuilder;
-      setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
-      setColors(cssValues: String[]): EmbeddedBarChartBuilder;
-      setLegendPosition(position: Charts.Position): EmbeddedBarChartBuilder;
-      setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
-      setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
-      setRange(start: Number, end: Number): EmbeddedBarChartBuilder;
-      setStacked(): EmbeddedBarChartBuilder;
-      setTitle(chartTitle: String): EmbeddedBarChartBuilder;
-      setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
-      setXAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
-      setXAxisTitle(title: String): EmbeddedBarChartBuilder;
-      setXAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
-      setYAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
-      setYAxisTitle(title: String): EmbeddedBarChartBuilder;
-      setYAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
-      useLogScale(): EmbeddedBarChartBuilder;
     }
 
     /**
@@ -155,43 +91,35 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Represents a chart that has been embedded into a Spreadsheet.
+     * An enumeration representing the data-validation criteria that can be set on a range.
      * 
-     * This example shows how to modify an existing chart:
-     * 
+     *      // Change existing data-validation rules that require a date in 2013 to require a date in 2014.
+     *      var oldDates = [new Date('1/1/2013'), new Date('12/31/2013')];
+     *      var newDates = [new Date('1/1/2014'), new Date('12/31/2014')];
      *      var sheet = SpreadsheetApp.getActiveSheet();
-     *      var range = sheet.getRange("A2:B8")
-     *      var chart = sheet.getCharts()[0];
-     *      chart = chart.modify()
-     *          .addRange(range)
-     *          .setOption('title', 'Updated!')
-     *          .setOption('animation.duration', 500)
-     *          .setPosition(2,2,0,0)
-     *          .build();
-     *      sheet.updateChart(chart);
-     * 
-     * This example shows how to create a new chart:
-     * 
-     *      function newChart(range, sheet) {
-     *        var sheet = SpreadsheetApp.getActiveSheet();
-     *        var chartBuilder = sheet.newChart();
-     *        chartBuilder.addRange(range)
-     *            .setChartType(Charts.ChartType.LINE)
-     *            .setOption('title', 'My Line Chart!');
-     *        sheet.insertChart(chartBuilder.build());
+     *      var range = sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns());
+     *      var rules = range.getDataValidations();
+     *     
+     *      for (var i = 0; i < rules.length; i++) {
+     *        for (var j = 0; j < rules[i].length; j++) {
+     *          var rule = rules[i][j];
+     *     
+     *          if (rule != null) {
+     *            var criteria = rule.getCriteriaType();
+     *            var args = rule.getCriteriaValues();
+     *      
+     *            if (criteria == SpreadsheetApp.DataValidationCriteria.DATE_BETWEEN
+     *                && args[0].getTime() == oldDates[0].getTime()
+     *                && args[1].getTime() == oldDates[1].getTime()) {
+     *              // Create a builder from the existing rule, then change the dates.
+     *              rules[i][j] = rule.copy().withCriteria(criteria, newDates).build();
+     *            }
+     *          }
+     *        }
      *      }
+     *      range.setDataValidations(rules);
      */
-    export interface EmbeddedChart {
-      getAs(contentType: String): Base.Blob;
-      getBlob(): Base.Blob;
-      getContainerInfo(): ContainerInfo;
-      getId(): String;
-      getOptions(): Charts.ChartOptions;
-      getRanges(): Range[];
-      getType(): String;
-      modify(): EmbeddedChartBuilder;
-      setId(id: String): Charts.Chart;
-    }
+    export enum DataValidationCriteria { DATE_AFTER, DATE_BEFORE, DATE_BETWEEN, DATE_EQUAL_TO, DATE_IS_VALID_DATE, DATE_NOT_BETWEEN, DATE_ON_OR_AFTER, DATE_ON_OR_BEFORE, NUMBER_BETWEEN, NUMBER_EQUAL_TO, NUMBER_GREATER_THAN, NUMBER_GREATER_THAN_OR_EQUAL_TO, NUMBER_LESS_THAN, NUMBER_LESS_THAN_OR_EQUAL_TO, NUMBER_NOT_BETWEEN, NUMBER_NOT_EQUAL_TO, TEXT_CONTAINS, TEXT_DOES_NOT_CONTAIN, TEXT_EQUAL_TO, TEXT_IS_VALID_EMAIL, TEXT_IS_VALID_URL, VALUE_IN_LIST, VALUE_IN_RANGE, CUSTOM_FORMULA }
 
     /**
      * Builder for area charts. For more details, see the Gviz 
@@ -234,10 +162,10 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for pie charts. For more details, see the Gviz 
+     * Builder for bar charts. For more details, see the Gviz 
      *  documentation.
      */
-    export interface EmbeddedPieChartBuilder {
+    export interface EmbeddedBarChartBuilder {
       addRange(range: Range): EmbeddedChartBuilder;
       asAreaChart(): EmbeddedAreaChartBuilder;
       asBarChart(): EmbeddedBarChartBuilder;
@@ -251,17 +179,65 @@ declare module GoogleAppsScript {
       getContainer(): ContainerInfo;
       getRanges(): Range[];
       removeRange(range: Range): EmbeddedChartBuilder;
-      reverseCategories(): EmbeddedPieChartBuilder;
-      set3D(): EmbeddedPieChartBuilder;
-      setBackgroundColor(cssValue: String): EmbeddedPieChartBuilder;
+      reverseCategories(): EmbeddedBarChartBuilder;
+      reverseDirection(): EmbeddedBarChartBuilder;
+      setBackgroundColor(cssValue: String): EmbeddedBarChartBuilder;
       setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
-      setColors(cssValues: String[]): EmbeddedPieChartBuilder;
-      setLegendPosition(position: Charts.Position): EmbeddedPieChartBuilder;
-      setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedPieChartBuilder;
+      setColors(cssValues: String[]): EmbeddedBarChartBuilder;
+      setLegendPosition(position: Charts.Position): EmbeddedBarChartBuilder;
+      setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
       setOption(option: String, value: Object): EmbeddedChartBuilder;
       setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
-      setTitle(chartTitle: String): EmbeddedPieChartBuilder;
-      setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedPieChartBuilder;
+      setRange(start: Number, end: Number): EmbeddedBarChartBuilder;
+      setStacked(): EmbeddedBarChartBuilder;
+      setTitle(chartTitle: String): EmbeddedBarChartBuilder;
+      setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
+      setXAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
+      setXAxisTitle(title: String): EmbeddedBarChartBuilder;
+      setXAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
+      setYAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
+      setYAxisTitle(title: String): EmbeddedBarChartBuilder;
+      setYAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedBarChartBuilder;
+      useLogScale(): EmbeddedBarChartBuilder;
+    }
+
+    /**
+     * Represents a chart that has been embedded into a Spreadsheet.
+     * 
+     * This example shows how to modify an existing chart:
+     * 
+     *      var sheet = SpreadsheetApp.getActiveSheet();
+     *      var range = sheet.getRange("A2:B8")
+     *      var chart = sheet.getCharts()[0];
+     *      chart = chart.modify()
+     *          .addRange(range)
+     *          .setOption('title', 'Updated!')
+     *          .setOption('animation.duration', 500)
+     *          .setPosition(2,2,0,0)
+     *          .build();
+     *      sheet.updateChart(chart);
+     * 
+     * This example shows how to create a new chart:
+     * 
+     *      function newChart(range, sheet) {
+     *        var sheet = SpreadsheetApp.getActiveSheet();
+     *        var chartBuilder = sheet.newChart();
+     *        chartBuilder.addRange(range)
+     *            .setChartType(Charts.ChartType.LINE)
+     *            .setOption('title', 'My Line Chart!');
+     *        sheet.insertChart(chartBuilder.build());
+     *      }
+     */
+    export interface EmbeddedChart {
+      getAs(contentType: String): Base.Blob;
+      getBlob(): Base.Blob;
+      getContainerInfo(): ContainerInfo;
+      getId(): String;
+      getOptions(): Charts.ChartOptions;
+      getRanges(): Range[];
+      getType(): String;
+      modify(): EmbeddedChartBuilder;
+      setId(id: String): Charts.Chart;
     }
 
     /**
@@ -378,109 +354,74 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * 
-     * Deprecated. For spreadsheets created in the newer version of Google Sheets, use the more powerful
-     *      Protection class instead. Although this class is deprecated, it will remain
-     *      available for compatibility with the older version of Sheets.
-     * Access and modify protected sheets in the older version of Google Sheets.
+     * Builder for pie charts. For more details, see the Gviz 
+     *  documentation.
      */
-    export interface PageProtection {
-      addUser(email: String): void;
-      getUsers(): String[];
-      isProtected(): Boolean;
-      removeUser(user: String): void;
-      setProtected(protection: Boolean): void;
+    export interface EmbeddedPieChartBuilder {
+      addRange(range: Range): EmbeddedChartBuilder;
+      asAreaChart(): EmbeddedAreaChartBuilder;
+      asBarChart(): EmbeddedBarChartBuilder;
+      asColumnChart(): EmbeddedColumnChartBuilder;
+      asLineChart(): EmbeddedLineChartBuilder;
+      asPieChart(): EmbeddedPieChartBuilder;
+      asScatterChart(): EmbeddedScatterChartBuilder;
+      asTableChart(): EmbeddedTableChartBuilder;
+      build(): EmbeddedChart;
+      getChartType(): Charts.ChartType;
+      getContainer(): ContainerInfo;
+      getRanges(): Range[];
+      removeRange(range: Range): EmbeddedChartBuilder;
+      reverseCategories(): EmbeddedPieChartBuilder;
+      set3D(): EmbeddedPieChartBuilder;
+      setBackgroundColor(cssValue: String): EmbeddedPieChartBuilder;
+      setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
+      setColors(cssValues: String[]): EmbeddedPieChartBuilder;
+      setLegendPosition(position: Charts.Position): EmbeddedPieChartBuilder;
+      setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedPieChartBuilder;
+      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
+      setTitle(chartTitle: String): EmbeddedPieChartBuilder;
+      setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedPieChartBuilder;
     }
 
     /**
-     * Access and modify spreadsheet sheets. Common operations
-     *  are renaming a sheet and accessing range objects from the sheet.
+     * Builder for scatter charts. For more details, see the Gviz 
+     *  documentation.
      */
-    export interface Sheet {
-      activate(): Sheet;
-      appendRow(rowContents: Object[]): Sheet;
-      autoResizeColumn(columnPosition: Integer): Sheet;
-      clear(): Sheet;
-      clear(options: Object): Sheet;
-      clearContents(): Sheet;
-      clearFormats(): Sheet;
-      clearNotes(): Sheet;
-      copyTo(spreadsheet: Spreadsheet): Sheet;
-      deleteColumn(columnPosition: Integer): Sheet;
-      deleteColumns(columnPosition: Integer, howMany: Integer): void;
-      deleteRow(rowPosition: Integer): Sheet;
-      deleteRows(rowPosition: Integer, howMany: Integer): void;
-      getActiveCell(): Range;
-      getActiveRange(): Range;
-      getCharts(): EmbeddedChart[];
-      getColumnWidth(columnPosition: Integer): Integer;
-      getDataRange(): Range;
-      getFrozenColumns(): Integer;
-      getFrozenRows(): Integer;
-      getIndex(): Integer;
-      getLastColumn(): Integer;
-      getLastRow(): Integer;
-      getMaxColumns(): Integer;
-      getMaxRows(): Integer;
-      getName(): String;
-      getParent(): Spreadsheet;
-      getProtections(type: ProtectionType): Protection[];
-      getRange(row: Integer, column: Integer): Range;
-      getRange(row: Integer, column: Integer, numRows: Integer): Range;
-      getRange(row: Integer, column: Integer, numRows: Integer, numColumns: Integer): Range;
-      getRange(a1Notation: String): Range;
-      getRowHeight(rowPosition: Integer): Integer;
-      getSheetId(): Integer;
-      getSheetName(): String;
-      getSheetValues(startRow: Integer, startColumn: Integer, numRows: Integer, numColumns: Integer): Object[][];
-      hideColumn(column: Range): void;
-      hideColumns(columnIndex: Integer): void;
-      hideColumns(columnIndex: Integer, numColumns: Integer): void;
-      hideRow(row: Range): void;
-      hideRows(rowIndex: Integer): void;
-      hideRows(rowIndex: Integer, numRows: Integer): void;
-      hideSheet(): Sheet;
-      insertChart(chart: EmbeddedChart): void;
-      insertColumnAfter(afterPosition: Integer): Sheet;
-      insertColumnBefore(beforePosition: Integer): Sheet;
-      insertColumns(columnIndex: Integer): void;
-      insertColumns(columnIndex: Integer, numColumns: Integer): void;
-      insertColumnsAfter(afterPosition: Integer, howMany: Integer): Sheet;
-      insertColumnsBefore(beforePosition: Integer, howMany: Integer): Sheet;
-      insertImage(blob: Base.Blob, column: Integer, row: Integer): void;
-      insertImage(blob: Base.Blob, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
-      insertImage(url: String, column: Integer, row: Integer): void;
-      insertImage(url: String, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
-      insertRowAfter(afterPosition: Integer): Sheet;
-      insertRowBefore(beforePosition: Integer): Sheet;
-      insertRows(rowIndex: Integer): void;
-      insertRows(rowIndex: Integer, numRows: Integer): void;
-      insertRowsAfter(afterPosition: Integer, howMany: Integer): Sheet;
-      insertRowsBefore(beforePosition: Integer, howMany: Integer): Sheet;
-      isSheetHidden(): Boolean;
-      newChart(): EmbeddedChartBuilder;
-      protect(): Protection;
-      removeChart(chart: EmbeddedChart): void;
-      setActiveRange(range: Range): Range;
-      setActiveSelection(range: Range): Range;
-      setActiveSelection(a1Notation: String): Range;
-      setColumnWidth(columnPosition: Integer, width: Integer): Sheet;
-      setFrozenColumns(columns: Integer): void;
-      setFrozenRows(rows: Integer): void;
-      setName(name: String): Sheet;
-      setRowHeight(rowPosition: Integer, height: Integer): Sheet;
-      showColumns(columnIndex: Integer): void;
-      showColumns(columnIndex: Integer, numColumns: Integer): void;
-      showRows(rowIndex: Integer): void;
-      showRows(rowIndex: Integer, numRows: Integer): void;
-      showSheet(): Sheet;
-      sort(columnPosition: Integer): Sheet;
-      sort(columnPosition: Integer, ascending: Boolean): Sheet;
-      unhideColumn(column: Range): void;
-      unhideRow(row: Range): void;
-      updateChart(chart: EmbeddedChart): void;
-      getSheetProtection(): PageProtection;
-      setSheetProtection(permissions: PageProtection): void;
+    export interface EmbeddedScatterChartBuilder {
+      addRange(range: Range): EmbeddedChartBuilder;
+      asAreaChart(): EmbeddedAreaChartBuilder;
+      asBarChart(): EmbeddedBarChartBuilder;
+      asColumnChart(): EmbeddedColumnChartBuilder;
+      asLineChart(): EmbeddedLineChartBuilder;
+      asPieChart(): EmbeddedPieChartBuilder;
+      asScatterChart(): EmbeddedScatterChartBuilder;
+      asTableChart(): EmbeddedTableChartBuilder;
+      build(): EmbeddedChart;
+      getChartType(): Charts.ChartType;
+      getContainer(): ContainerInfo;
+      getRanges(): Range[];
+      removeRange(range: Range): EmbeddedChartBuilder;
+      setBackgroundColor(cssValue: String): EmbeddedScatterChartBuilder;
+      setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
+      setColors(cssValues: String[]): EmbeddedScatterChartBuilder;
+      setLegendPosition(position: Charts.Position): EmbeddedScatterChartBuilder;
+      setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
+      setOption(option: String, value: Object): EmbeddedChartBuilder;
+      setPointStyle(style: Charts.PointStyle): EmbeddedScatterChartBuilder;
+      setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
+      setTitle(chartTitle: String): EmbeddedScatterChartBuilder;
+      setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
+      setXAxisLogScale(): EmbeddedScatterChartBuilder;
+      setXAxisRange(start: Number, end: Number): EmbeddedScatterChartBuilder;
+      setXAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
+      setXAxisTitle(title: String): EmbeddedScatterChartBuilder;
+      setXAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
+      setYAxisLogScale(): EmbeddedScatterChartBuilder;
+      setYAxisRange(start: Number, end: Number): EmbeddedScatterChartBuilder;
+      setYAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
+      setYAxisTitle(title: String): EmbeddedScatterChartBuilder;
+      setYAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
     }
 
     /**
@@ -517,35 +458,19 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * An enumeration representing the data-validation criteria that can be set on a range.
      * 
-     *      // Change existing data-validation rules that require a date in 2013 to require a date in 2014.
-     *      var oldDates = [new Date('1/1/2013'), new Date('12/31/2013')];
-     *      var newDates = [new Date('1/1/2014'), new Date('12/31/2014')];
-     *      var sheet = SpreadsheetApp.getActiveSheet();
-     *      var range = sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns());
-     *      var rules = range.getDataValidations();
-     *     
-     *      for (var i = 0; i < rules.length; i++) {
-     *        for (var j = 0; j < rules[i].length; j++) {
-     *          var rule = rules[i][j];
-     *     
-     *          if (rule != null) {
-     *            var criteria = rule.getCriteriaType();
-     *            var args = rule.getCriteriaValues();
-     *      
-     *            if (criteria == SpreadsheetApp.DataValidationCriteria.DATE_BETWEEN
-     *                && args[0].getTime() == oldDates[0].getTime()
-     *                && args[1].getTime() == oldDates[1].getTime()) {
-     *              // Create a builder from the existing rule, then change the dates.
-     *              rules[i][j] = rule.copy().withCriteria(criteria, newDates).build();
-     *            }
-     *          }
-     *        }
-     *      }
-     *      range.setDataValidations(rules);
+     * Deprecated. For spreadsheets created in the newer version of Google Sheets, use the more powerful
+     *      Protection class instead. Although this class is deprecated, it will remain
+     *      available for compatibility with the older version of Sheets.
+     * Access and modify protected sheets in the older version of Google Sheets.
      */
-    export enum DataValidationCriteria { DATE_AFTER, DATE_BEFORE, DATE_BETWEEN, DATE_EQUAL_TO, DATE_IS_VALID_DATE, DATE_NOT_BETWEEN, DATE_ON_OR_AFTER, DATE_ON_OR_BEFORE, NUMBER_BETWEEN, NUMBER_EQUAL_TO, NUMBER_GREATER_THAN, NUMBER_GREATER_THAN_OR_EQUAL_TO, NUMBER_LESS_THAN, NUMBER_LESS_THAN_OR_EQUAL_TO, NUMBER_NOT_BETWEEN, NUMBER_NOT_EQUAL_TO, TEXT_CONTAINS, TEXT_DOES_NOT_CONTAIN, TEXT_EQUAL_TO, TEXT_IS_VALID_EMAIL, TEXT_IS_VALID_URL, VALUE_IN_LIST, VALUE_IN_RANGE, CUSTOM_FORMULA }
+    export interface PageProtection {
+      addUser(email: String): void;
+      getUsers(): String[];
+      isProtected(): Boolean;
+      removeUser(user: String): void;
+      setProtected(protection: Boolean): void;
+    }
 
     /**
      * Access and modify protected ranges and sheets. A protected range can protect either a static
@@ -602,6 +527,7 @@ declare module GoogleAppsScript {
       getRange(): Range;
       getRangeName(): String;
       getUnprotectedRanges(): Range[];
+      isWarningOnly(): Boolean;
       remove(): void;
       removeEditor(emailAddress: String): Protection;
       removeEditor(user: Base.User): Protection;
@@ -611,157 +537,30 @@ declare module GoogleAppsScript {
       setRange(range: Range): Protection;
       setRangeName(rangeName: String): Protection;
       setUnprotectedRanges(ranges: Range[]): Protection;
+      setWarningOnly(warningOnly: Boolean): Protection;
     }
 
     /**
-     * Builder for scatter charts. For more details, see the Gviz 
-     *  documentation.
+     * An enumeration representing the parts of a spreadsheet that can be protected from edits.
+     * 
+     *      // Remove all range protections in the spreadsheet that the user has permission to edit.
+     *      var ss = SpreadsheetApp.getActive();
+     *      var protections = ss.getProtections(SpreadsheetApp.ProtectionType.RANGE);
+     *      for (var i = 0; i < protections.length; i++) {
+     *        var protection = protections[i];
+     *        if (protection.canEdit()) {
+     *          protection.remove();
+     *        }
+     *      }
+     * 
+     *      // Removes sheet protection from the active sheet, if the user has permission to edit it.
+     *      var sheet = SpreadsheetApp.getActiveSheet();
+     *      var protection = sheet.getProtections(SpreadsheetApp.ProtectionType.SHEET)[0];
+     *      if (protection && protection.canEdit()) {
+     *        protection.remove();
+     *      }
      */
-    export interface EmbeddedScatterChartBuilder {
-      addRange(range: Range): EmbeddedChartBuilder;
-      asAreaChart(): EmbeddedAreaChartBuilder;
-      asBarChart(): EmbeddedBarChartBuilder;
-      asColumnChart(): EmbeddedColumnChartBuilder;
-      asLineChart(): EmbeddedLineChartBuilder;
-      asPieChart(): EmbeddedPieChartBuilder;
-      asScatterChart(): EmbeddedScatterChartBuilder;
-      asTableChart(): EmbeddedTableChartBuilder;
-      build(): EmbeddedChart;
-      getChartType(): Charts.ChartType;
-      getContainer(): ContainerInfo;
-      getRanges(): Range[];
-      removeRange(range: Range): EmbeddedChartBuilder;
-      setBackgroundColor(cssValue: String): EmbeddedScatterChartBuilder;
-      setChartType(type: Charts.ChartType): EmbeddedChartBuilder;
-      setColors(cssValues: String[]): EmbeddedScatterChartBuilder;
-      setLegendPosition(position: Charts.Position): EmbeddedScatterChartBuilder;
-      setLegendTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
-      setOption(option: String, value: Object): EmbeddedChartBuilder;
-      setPointStyle(style: Charts.PointStyle): EmbeddedScatterChartBuilder;
-      setPosition(anchorRowPos: Integer, anchorColPos: Integer, offsetX: Integer, offsetY: Integer): EmbeddedChartBuilder;
-      setTitle(chartTitle: String): EmbeddedScatterChartBuilder;
-      setTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
-      setXAxisLogScale(): EmbeddedScatterChartBuilder;
-      setXAxisRange(start: Number, end: Number): EmbeddedScatterChartBuilder;
-      setXAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
-      setXAxisTitle(title: String): EmbeddedScatterChartBuilder;
-      setXAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
-      setYAxisLogScale(): EmbeddedScatterChartBuilder;
-      setYAxisRange(start: Number, end: Number): EmbeddedScatterChartBuilder;
-      setYAxisTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
-      setYAxisTitle(title: String): EmbeddedScatterChartBuilder;
-      setYAxisTitleTextStyle(textStyle: Charts.TextStyle): EmbeddedScatterChartBuilder;
-    }
-
-    /**
-     * This class allows users to access and modify Google Sheets files. Common operations are adding
-     *  new sheets and adding collaborators.
-     */
-    export interface Spreadsheet {
-      addEditor(emailAddress: String): Spreadsheet;
-      addEditor(user: Base.User): Spreadsheet;
-      addEditors(emailAddresses: String[]): Spreadsheet;
-      addMenu(name: String, subMenus: Object[]): void;
-      addViewer(emailAddress: String): Spreadsheet;
-      addViewer(user: Base.User): Spreadsheet;
-      addViewers(emailAddresses: String[]): Spreadsheet;
-      appendRow(rowContents: Object[]): Sheet;
-      autoResizeColumn(columnPosition: Integer): Sheet;
-      copy(name: String): Spreadsheet;
-      deleteActiveSheet(): Sheet;
-      deleteColumn(columnPosition: Integer): Sheet;
-      deleteColumns(columnPosition: Integer, howMany: Integer): void;
-      deleteRow(rowPosition: Integer): Sheet;
-      deleteRows(rowPosition: Integer, howMany: Integer): void;
-      deleteSheet(sheet: Sheet): void;
-      duplicateActiveSheet(): Sheet;
-      getActiveCell(): Range;
-      getActiveRange(): Range;
-      getActiveSheet(): Sheet;
-      getAs(contentType: String): Base.Blob;
-      getBlob(): Base.Blob;
-      getColumnWidth(columnPosition: Integer): Integer;
-      getDataRange(): Range;
-      getEditors(): Base.User[];
-      getFormUrl(): String;
-      getFrozenColumns(): Integer;
-      getFrozenRows(): Integer;
-      getId(): String;
-      getLastColumn(): Integer;
-      getLastRow(): Integer;
-      getName(): String;
-      getNumSheets(): Integer;
-      getOwner(): Base.User;
-      getProtections(type: ProtectionType): Protection[];
-      getRange(a1Notation: String): Range;
-      getRangeByName(name: String): Range;
-      getRowHeight(rowPosition: Integer): Integer;
-      getSheetByName(name: String): Sheet;
-      getSheetId(): Integer;
-      getSheetName(): String;
-      getSheetValues(startRow: Integer, startColumn: Integer, numRows: Integer, numColumns: Integer): Object[][];
-      getSheets(): Sheet[];
-      getSpreadsheetLocale(): String;
-      getSpreadsheetTimeZone(): String;
-      getUrl(): String;
-      getViewers(): Base.User[];
-      hideColumn(column: Range): void;
-      hideRow(row: Range): void;
-      insertColumnAfter(afterPosition: Integer): Sheet;
-      insertColumnBefore(beforePosition: Integer): Sheet;
-      insertColumnsAfter(afterPosition: Integer, howMany: Integer): Sheet;
-      insertColumnsBefore(beforePosition: Integer, howMany: Integer): Sheet;
-      insertImage(blob: Base.Blob, column: Integer, row: Integer): void;
-      insertImage(blob: Base.Blob, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
-      insertImage(url: String, column: Integer, row: Integer): void;
-      insertImage(url: String, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
-      insertRowAfter(afterPosition: Integer): Sheet;
-      insertRowBefore(beforePosition: Integer): Sheet;
-      insertRowsAfter(afterPosition: Integer, howMany: Integer): Sheet;
-      insertRowsBefore(beforePosition: Integer, howMany: Integer): Sheet;
-      insertSheet(): Sheet;
-      insertSheet(sheetIndex: Integer): Sheet;
-      insertSheet(sheetIndex: Integer, options: Object): Sheet;
-      insertSheet(options: Object): Sheet;
-      insertSheet(sheetName: String): Sheet;
-      insertSheet(sheetName: String, sheetIndex: Integer): Sheet;
-      insertSheet(sheetName: String, sheetIndex: Integer, options: Object): Sheet;
-      insertSheet(sheetName: String, options: Object): Sheet;
-      moveActiveSheet(pos: Integer): void;
-      removeEditor(emailAddress: String): Spreadsheet;
-      removeEditor(user: Base.User): Spreadsheet;
-      removeMenu(name: String): void;
-      removeNamedRange(name: String): void;
-      removeViewer(emailAddress: String): Spreadsheet;
-      removeViewer(user: Base.User): Spreadsheet;
-      rename(newName: String): void;
-      renameActiveSheet(newName: String): void;
-      setActiveRange(range: Range): Range;
-      setActiveSelection(range: Range): Range;
-      setActiveSelection(a1Notation: String): Range;
-      setActiveSheet(sheet: Sheet): Sheet;
-      setColumnWidth(columnPosition: Integer, width: Integer): Sheet;
-      setFrozenColumns(columns: Integer): void;
-      setFrozenRows(rows: Integer): void;
-      setNamedRange(name: String, range: Range): void;
-      setRowHeight(rowPosition: Integer, height: Integer): Sheet;
-      setSpreadsheetLocale(locale: String): void;
-      setSpreadsheetTimeZone(timezone: String): void;
-      show(userInterface: Object): void;
-      sort(columnPosition: Integer): Sheet;
-      sort(columnPosition: Integer, ascending: Boolean): Sheet;
-      toast(msg: String): void;
-      toast(msg: String, title: String): void;
-      toast(msg: String, title: String, timeoutSeconds: Number): void;
-      unhideColumn(column: Range): void;
-      unhideRow(row: Range): void;
-      updateMenu(name: String, subMenus: Object[]): void;
-      getSheetProtection(): PageProtection;
-      isAnonymousView(): Boolean;
-      isAnonymousWrite(): Boolean;
-      setAnonymousAccess(anonymousReadAllowed: Boolean, anonymousWriteAllowed: Boolean): void;
-      setSheetProtection(permissions: PageProtection): void;
-    }
+    export enum ProtectionType { RANGE, SHEET }
 
     /**
      * Access and modify spreadsheet ranges.
@@ -884,26 +683,229 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * An enumeration representing the parts of a spreadsheet that can be protected from edits.
-     * 
-     *      // Remove all range protections in the spreadsheet that the user has permission to edit.
-     *      var ss = SpreadsheetApp.getActive();
-     *      var protections = ss.getProtections(SpreadsheetApp.ProtectionType.RANGE);
-     *      for (var i = 0; i < protections.length; i++) {
-     *        var protection = protections[i];
-     *        if (protection.canEdit()) {
-     *          protection.remove();
-     *        }
-     *      }
-     * 
-     *      // Removes sheet protection from the active sheet, if the user has permission to edit it.
-     *      var sheet = SpreadsheetApp.getActiveSheet();
-     *      var protection = sheet.getProtections(SpreadsheetApp.ProtectionType.SHEET)[0];
-     *      if (protection && protection.canEdit()) {
-     *        protection.remove();
-     *      }
+     * Access and modify spreadsheet sheets. Common operations
+     *  are renaming a sheet and accessing range objects from the sheet.
      */
-    export enum ProtectionType { RANGE, SHEET }
+    export interface Sheet {
+      activate(): Sheet;
+      appendRow(rowContents: Object[]): Sheet;
+      autoResizeColumn(columnPosition: Integer): Sheet;
+      clear(): Sheet;
+      clear(options: Object): Sheet;
+      clearContents(): Sheet;
+      clearFormats(): Sheet;
+      clearNotes(): Sheet;
+      copyTo(spreadsheet: Spreadsheet): Sheet;
+      deleteColumn(columnPosition: Integer): Sheet;
+      deleteColumns(columnPosition: Integer, howMany: Integer): void;
+      deleteRow(rowPosition: Integer): Sheet;
+      deleteRows(rowPosition: Integer, howMany: Integer): void;
+      getActiveCell(): Range;
+      getActiveRange(): Range;
+      getCharts(): EmbeddedChart[];
+      getColumnWidth(columnPosition: Integer): Integer;
+      getDataRange(): Range;
+      getFrozenColumns(): Integer;
+      getFrozenRows(): Integer;
+      getIndex(): Integer;
+      getLastColumn(): Integer;
+      getLastRow(): Integer;
+      getMaxColumns(): Integer;
+      getMaxRows(): Integer;
+      getName(): String;
+      getParent(): Spreadsheet;
+      getProtections(type: ProtectionType): Protection[];
+      getRange(row: Integer, column: Integer): Range;
+      getRange(row: Integer, column: Integer, numRows: Integer): Range;
+      getRange(row: Integer, column: Integer, numRows: Integer, numColumns: Integer): Range;
+      getRange(a1Notation: String): Range;
+      getRowHeight(rowPosition: Integer): Integer;
+      getSheetId(): Integer;
+      getSheetName(): String;
+      getSheetValues(startRow: Integer, startColumn: Integer, numRows: Integer, numColumns: Integer): Object[][];
+      hideColumn(column: Range): void;
+      hideColumns(columnIndex: Integer): void;
+      hideColumns(columnIndex: Integer, numColumns: Integer): void;
+      hideRow(row: Range): void;
+      hideRows(rowIndex: Integer): void;
+      hideRows(rowIndex: Integer, numRows: Integer): void;
+      hideSheet(): Sheet;
+      insertChart(chart: EmbeddedChart): void;
+      insertColumnAfter(afterPosition: Integer): Sheet;
+      insertColumnBefore(beforePosition: Integer): Sheet;
+      insertColumns(columnIndex: Integer): void;
+      insertColumns(columnIndex: Integer, numColumns: Integer): void;
+      insertColumnsAfter(afterPosition: Integer, howMany: Integer): Sheet;
+      insertColumnsBefore(beforePosition: Integer, howMany: Integer): Sheet;
+      insertImage(blob: Base.Blob, column: Integer, row: Integer): void;
+      insertImage(blob: Base.Blob, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
+      insertImage(url: String, column: Integer, row: Integer): void;
+      insertImage(url: String, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
+      insertRowAfter(afterPosition: Integer): Sheet;
+      insertRowBefore(beforePosition: Integer): Sheet;
+      insertRows(rowIndex: Integer): void;
+      insertRows(rowIndex: Integer, numRows: Integer): void;
+      insertRowsAfter(afterPosition: Integer, howMany: Integer): Sheet;
+      insertRowsBefore(beforePosition: Integer, howMany: Integer): Sheet;
+      isSheetHidden(): Boolean;
+      newChart(): EmbeddedChartBuilder;
+      protect(): Protection;
+      removeChart(chart: EmbeddedChart): void;
+      setActiveRange(range: Range): Range;
+      setActiveSelection(range: Range): Range;
+      setActiveSelection(a1Notation: String): Range;
+      setColumnWidth(columnPosition: Integer, width: Integer): Sheet;
+      setFrozenColumns(columns: Integer): void;
+      setFrozenRows(rows: Integer): void;
+      setName(name: String): Sheet;
+      setRowHeight(rowPosition: Integer, height: Integer): Sheet;
+      showColumns(columnIndex: Integer): void;
+      showColumns(columnIndex: Integer, numColumns: Integer): void;
+      showRows(rowIndex: Integer): void;
+      showRows(rowIndex: Integer, numRows: Integer): void;
+      showSheet(): Sheet;
+      sort(columnPosition: Integer): Sheet;
+      sort(columnPosition: Integer, ascending: Boolean): Sheet;
+      unhideColumn(column: Range): void;
+      unhideRow(row: Range): void;
+      updateChart(chart: EmbeddedChart): void;
+      getSheetProtection(): PageProtection;
+      setSheetProtection(permissions: PageProtection): void;
+    }
+
+    /**
+     * This class allows users to access and modify Google Sheets files. Common operations are adding
+     *  new sheets and adding collaborators.
+     */
+    export interface Spreadsheet {
+      addEditor(emailAddress: String): Spreadsheet;
+      addEditor(user: Base.User): Spreadsheet;
+      addEditors(emailAddresses: String[]): Spreadsheet;
+      addMenu(name: String, subMenus: Object[]): void;
+      addViewer(emailAddress: String): Spreadsheet;
+      addViewer(user: Base.User): Spreadsheet;
+      addViewers(emailAddresses: String[]): Spreadsheet;
+      appendRow(rowContents: Object[]): Sheet;
+      autoResizeColumn(columnPosition: Integer): Sheet;
+      copy(name: String): Spreadsheet;
+      deleteActiveSheet(): Sheet;
+      deleteColumn(columnPosition: Integer): Sheet;
+      deleteColumns(columnPosition: Integer, howMany: Integer): void;
+      deleteRow(rowPosition: Integer): Sheet;
+      deleteRows(rowPosition: Integer, howMany: Integer): void;
+      deleteSheet(sheet: Sheet): void;
+      duplicateActiveSheet(): Sheet;
+      getActiveCell(): Range;
+      getActiveRange(): Range;
+      getActiveSheet(): Sheet;
+      getAs(contentType: String): Base.Blob;
+      getBlob(): Base.Blob;
+      getColumnWidth(columnPosition: Integer): Integer;
+      getDataRange(): Range;
+      getEditors(): Base.User[];
+      getFormUrl(): String;
+      getFrozenColumns(): Integer;
+      getFrozenRows(): Integer;
+      getId(): String;
+      getLastColumn(): Integer;
+      getLastRow(): Integer;
+      getName(): String;
+      getNumSheets(): Integer;
+      getOwner(): Base.User;
+      getProtections(type: ProtectionType): Protection[];
+      getRange(a1Notation: String): Range;
+      getRangeByName(name: String): Range;
+      getRowHeight(rowPosition: Integer): Integer;
+      getSheetByName(name: String): Sheet;
+      getSheetId(): Integer;
+      getSheetName(): String;
+      getSheetValues(startRow: Integer, startColumn: Integer, numRows: Integer, numColumns: Integer): Object[][];
+      getSheets(): Sheet[];
+      getSpreadsheetLocale(): String;
+      getSpreadsheetTimeZone(): String;
+      getUrl(): String;
+      getViewers(): Base.User[];
+      hideColumn(column: Range): void;
+      hideRow(row: Range): void;
+      insertColumnAfter(afterPosition: Integer): Sheet;
+      insertColumnBefore(beforePosition: Integer): Sheet;
+      insertColumnsAfter(afterPosition: Integer, howMany: Integer): Sheet;
+      insertColumnsBefore(beforePosition: Integer, howMany: Integer): Sheet;
+      insertImage(blob: Base.Blob, column: Integer, row: Integer): void;
+      insertImage(blob: Base.Blob, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
+      insertImage(url: String, column: Integer, row: Integer): void;
+      insertImage(url: String, column: Integer, row: Integer, offsetX: Integer, offsetY: Integer): void;
+      insertRowAfter(afterPosition: Integer): Sheet;
+      insertRowBefore(beforePosition: Integer): Sheet;
+      insertRowsAfter(afterPosition: Integer, howMany: Integer): Sheet;
+      insertRowsBefore(beforePosition: Integer, howMany: Integer): Sheet;
+      insertSheet(): Sheet;
+      insertSheet(sheetIndex: Integer): Sheet;
+      insertSheet(sheetIndex: Integer, options: Object): Sheet;
+      insertSheet(options: Object): Sheet;
+      insertSheet(sheetName: String): Sheet;
+      insertSheet(sheetName: String, sheetIndex: Integer): Sheet;
+      insertSheet(sheetName: String, sheetIndex: Integer, options: Object): Sheet;
+      insertSheet(sheetName: String, options: Object): Sheet;
+      moveActiveSheet(pos: Integer): void;
+      removeEditor(emailAddress: String): Spreadsheet;
+      removeEditor(user: Base.User): Spreadsheet;
+      removeMenu(name: String): void;
+      removeNamedRange(name: String): void;
+      removeViewer(emailAddress: String): Spreadsheet;
+      removeViewer(user: Base.User): Spreadsheet;
+      rename(newName: String): void;
+      renameActiveSheet(newName: String): void;
+      setActiveRange(range: Range): Range;
+      setActiveSelection(range: Range): Range;
+      setActiveSelection(a1Notation: String): Range;
+      setActiveSheet(sheet: Sheet): Sheet;
+      setColumnWidth(columnPosition: Integer, width: Integer): Sheet;
+      setFrozenColumns(columns: Integer): void;
+      setFrozenRows(rows: Integer): void;
+      setNamedRange(name: String, range: Range): void;
+      setRowHeight(rowPosition: Integer, height: Integer): Sheet;
+      setSpreadsheetLocale(locale: String): void;
+      setSpreadsheetTimeZone(timezone: String): void;
+      show(userInterface: Object): void;
+      sort(columnPosition: Integer): Sheet;
+      sort(columnPosition: Integer, ascending: Boolean): Sheet;
+      toast(msg: String): void;
+      toast(msg: String, title: String): void;
+      toast(msg: String, title: String, timeoutSeconds: Number): void;
+      unhideColumn(column: Range): void;
+      unhideRow(row: Range): void;
+      updateMenu(name: String, subMenus: Object[]): void;
+      getSheetProtection(): PageProtection;
+      isAnonymousView(): Boolean;
+      isAnonymousWrite(): Boolean;
+      setAnonymousAccess(anonymousReadAllowed: Boolean, anonymousWriteAllowed: Boolean): void;
+      setSheetProtection(permissions: PageProtection): void;
+    }
+
+    /**
+     * This class allows users to open Google Sheets files and to create new ones. This class is
+     *  the parent class for the Spreadsheet service.
+     */
+    export interface SpreadsheetApp {
+      DataValidationCriteria: DataValidationCriteria
+      ProtectionType: ProtectionType
+      create(name: String): Spreadsheet;
+      create(name: String, rows: Integer, columns: Integer): Spreadsheet;
+      flush(): void;
+      getActive(): Spreadsheet;
+      getActiveRange(): Range;
+      getActiveSheet(): Sheet;
+      getActiveSpreadsheet(): Spreadsheet;
+      getUi(): Base.Ui;
+      newDataValidation(): DataValidationBuilder;
+      open(file: Drive.File): Spreadsheet;
+      openById(id: String): Spreadsheet;
+      openByUrl(url: String): Spreadsheet;
+      setActiveRange(range: Range): Range;
+      setActiveSheet(sheet: Sheet): Sheet;
+      setActiveSpreadsheet(newActiveSpreadsheet: Spreadsheet): void;
+    }
 
   }
 }

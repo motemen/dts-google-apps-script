@@ -4,28 +4,14 @@
 declare module GoogleAppsScript {
   export module Maps {
     /**
-     * A collection of enums used by DirectionFinder.
+     * An enum representing the types of restrictions to avoid when finding directions.
      */
-    export interface DirectionFinderEnums {
-      Avoid: Avoid
-      Mode: Mode
-    }
+    export enum Avoid { TOLLS, HIGHWAYS }
 
     /**
-     * Allows for direction finding, geocoding, elevation sampling and the creation of static map
-     *  images.
+     * An enum representing the named colors available to use in map images.
      */
-    export interface Maps {
-      DirectionFinder: DirectionFinderEnums
-      StaticMap: StaticMapEnums
-      decodePolyline(polyline: String): Number[];
-      encodePolyline(points: Number[]): String;
-      newDirectionFinder(): DirectionFinder;
-      newElevationSampler(): ElevationSampler;
-      newGeocoder(): Geocoder;
-      newStaticMap(): StaticMap;
-      setAuthentication(clientId: String, signingKey: String): void;
-    }
+    export enum Color { BLACK, BROWN, GREEN, PURPLE, YELLOW, BLUE, GRAY, ORANGE, RED, WHITE }
 
     /**
      * Allows for the retrieval of directions between locations.
@@ -99,6 +85,72 @@ declare module GoogleAppsScript {
     }
 
     /**
+     * A collection of enums used by DirectionFinder.
+     */
+    export interface DirectionFinderEnums {
+      Avoid: Avoid
+      Mode: Mode
+    }
+
+    /**
+     * Allows for the sampling of elevations at particular locations.
+     *  
+     *  The example below shows how you can use this class to determine the highest point along the route
+     *  from Denver to Grand Junction in Colorado, plot it on a map, and save the map to Google Drive.
+     * 
+     *      // Get directions from Denver to Grand Junction.
+     *      var directions = Maps.newDirectionFinder()
+     *          .setOrigin('Denver, CO')
+     *          .setDestination('Grand Junction, CO')
+     *          .setMode(Maps.DirectionFinder.Mode.DRIVING)
+     *          .getDirections();
+     *      var route = directions.routes[0];
+     *     
+     *      // Get elevation samples along the route.
+     *      var numberOfSamples = 30;
+     *      var response = Maps.newElevationSampler()
+     *          .samplePath(route.overview_polyline.points, numberOfSamples)
+     *     
+     *      // Determine highest point.
+     *      var maxElevation = Number.MIN_VALUE;
+     *      var highestPoint = null;
+     *      for (var i = 0; i < response.results.length; i++) {
+     *        var sample = response.results[i];
+     *        if (sample.elevation > maxElevation) {
+     *          maxElevation = sample.elevation;
+     *          highestPoint = sample.location;
+     *        }
+     *      }
+     *     
+     *      // Add the path and marker to a map.
+     *      var map = Maps.newStaticMap()
+     *          .addPath(route.overview_polyline.points)
+     *          .addMarker(highestPoint.lat, highestPoint.lng);
+     *     
+     *      // Save the map to your drive
+     *      DocsList.createFile(Utilities.newBlob(map.getMapImage(), 'image/png', 'map.png'));
+     * 
+     * See also
+     * 
+     * Google Elevation API
+     */
+    export interface ElevationSampler {
+      sampleLocation(latitude: Number, longitude: Number): Object;
+      sampleLocations(points: Number[]): Object;
+      sampleLocations(encodedPolyline: String): Object;
+      samplePath(points: Number[], numSamples: Integer): Object;
+      samplePath(encodedPolyline: String, numSamples: Integer): Object;
+    }
+
+    /**
+     * An enum representing the format of the map image.
+     * See also
+     * 
+     * Google Static Maps API
+     */
+    export enum Format { PNG, PNG8, PNG32, GIF, JPG, JPG_BASELINE }
+
+    /**
      * Allows for the conversion between an address and geographical coordinates.
      *  
      *  The example below shows how you can use this class find the top nine matches for the location
@@ -139,14 +191,33 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A collection of enums used by StaticMap.
+     * Allows for direction finding, geocoding, elevation sampling and the creation of static map
+     *  images.
      */
-    export interface StaticMapEnums {
-      Color: Color
-      Format: Format
-      MarkerSize: MarkerSize
-      Type: Type
+    export interface Maps {
+      DirectionFinder: DirectionFinderEnums
+      StaticMap: StaticMapEnums
+      decodePolyline(polyline: String): Number[];
+      encodePolyline(points: Number[]): String;
+      newDirectionFinder(): DirectionFinder;
+      newElevationSampler(): ElevationSampler;
+      newGeocoder(): Geocoder;
+      newStaticMap(): StaticMap;
+      setAuthentication(clientId: String, signingKey: String): void;
     }
+
+    /**
+     * An enum representing the size of a marker added to a map.
+     * See also
+     * 
+     * Google Static Maps API
+     */
+    export enum MarkerSize { TINY, MID, SMALL }
+
+    /**
+     * An enum representing the mode of travel to use when finding directions.
+     */
+    export enum Mode { DRIVING, WALKING, BICYCLING, TRANSIT }
 
     /**
      * Allows for the creation and decoration of static map images.
@@ -220,85 +291,14 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * An enum representing the format of the map image.
-     * See also
-     * 
-     * Google Static Maps API
+     * A collection of enums used by StaticMap.
      */
-    export enum Format { PNG, PNG8, PNG32, GIF, JPG, JPG_BASELINE }
-
-    /**
-     * An enum representing the named colors available to use in map images.
-     */
-    export enum Color { BLACK, BROWN, GREEN, PURPLE, YELLOW, BLUE, GRAY, ORANGE, RED, WHITE }
-
-    /**
-     * An enum representing the size of a marker added to a map.
-     * See also
-     * 
-     * Google Static Maps API
-     */
-    export enum MarkerSize { TINY, MID, SMALL }
-
-    /**
-     * An enum representing the types of restrictions to avoid when finding directions.
-     */
-    export enum Avoid { TOLLS, HIGHWAYS }
-
-    /**
-     * Allows for the sampling of elevations at particular locations.
-     *  
-     *  The example below shows how you can use this class to determine the highest point along the route
-     *  from Denver to Grand Junction in Colorado, plot it on a map, and save the map to Google Drive.
-     * 
-     *      // Get directions from Denver to Grand Junction.
-     *      var directions = Maps.newDirectionFinder()
-     *          .setOrigin('Denver, CO')
-     *          .setDestination('Grand Junction, CO')
-     *          .setMode(Maps.DirectionFinder.Mode.DRIVING)
-     *          .getDirections();
-     *      var route = directions.routes[0];
-     *     
-     *      // Get elevation samples along the route.
-     *      var numberOfSamples = 30;
-     *      var response = Maps.newElevationSampler()
-     *          .samplePath(route.overview_polyline.points, numberOfSamples)
-     *     
-     *      // Determine highest point.
-     *      var maxElevation = Number.MIN_VALUE;
-     *      var highestPoint = null;
-     *      for (var i = 0; i < response.results.length; i++) {
-     *        var sample = response.results[i];
-     *        if (sample.elevation > maxElevation) {
-     *          maxElevation = sample.elevation;
-     *          highestPoint = sample.location;
-     *        }
-     *      }
-     *     
-     *      // Add the path and marker to a map.
-     *      var map = Maps.newStaticMap()
-     *          .addPath(route.overview_polyline.points)
-     *          .addMarker(highestPoint.lat, highestPoint.lng);
-     *     
-     *      // Save the map to your drive
-     *      DocsList.createFile(Utilities.newBlob(map.getMapImage(), 'image/png', 'map.png'));
-     * 
-     * See also
-     * 
-     * Google Elevation API
-     */
-    export interface ElevationSampler {
-      sampleLocation(latitude: Number, longitude: Number): Object;
-      sampleLocations(points: Number[]): Object;
-      sampleLocations(encodedPolyline: String): Object;
-      samplePath(points: Number[], numSamples: Integer): Object;
-      samplePath(encodedPolyline: String, numSamples: Integer): Object;
+    export interface StaticMapEnums {
+      Color: Color
+      Format: Format
+      MarkerSize: MarkerSize
+      Type: Type
     }
-
-    /**
-     * An enum representing the mode of travel to use when finding directions.
-     */
-    export enum Mode { DRIVING, WALKING, BICYCLING, TRANSIT }
 
     /**
      * An enum representing the type of map to render.

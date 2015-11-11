@@ -71,72 +71,55 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A Chart object, which can be embedded into documents, UI elements, or used as a static image. For
-     *  charts embedded in spreadsheets, see
-     *  EmbeddedChart.
-     */
-    export interface Chart {
-      getAs(contentType: String): Base.Blob;
-      getBlob(): Base.Blob;
-      getId(): String;
-      getOptions(): ChartOptions;
-      getType(): String;
-      setId(id: String): Chart;
-    }
-
-    /**
-     * Entry point for creating Charts in scripts.
+     * Builder for bar charts. For more details, see the 
+     *  Google Charts documentation.
      * 
-     *  This example creates a basic data table, populates an area chart with the data, and adds it into
-     *  a UiApp:
+     *  Here is an example that shows how to build a bar chart. The data is 
+     *  
+     *  imported from a Google spreadsheet.
      * 
      *      function doGet() {
-     *        var data = Charts.newDataTable()
-     *            .addColumn(Charts.ColumnType.STRING, "Month")
-     *            .addColumn(Charts.ColumnType.NUMBER, "In Store")
-     *            .addColumn(Charts.ColumnType.NUMBER, "Online")
-     *            .addRow(["January", 10, 1])
-     *            .addRow(["February", 12, 1])
-     *            .addRow(["March", 20, 2])
-     *            .addRow(["April", 25, 3])
-     *            .addRow(["May", 30, 4])
-     *            .build();
+     *       // Get sample data from a spreadsheet.
+     *       var dataSourceUrl = 'https://docs.google.com/spreadsheet/tq?range=B1%3AC11' +
+     *           '&key=0Aq4s9w_HxMs7dHpfX05JdmVSb1FpT21sbXd4NVE3UEE&gid=0&headers=-1';
      *     
-     *        var chart = Charts.newAreaChart()
-     *            .setDataTable(data)
-     *            .setStacked()
-     *            .setRange(0, 40)
-     *            .setTitle("Sales per Month")
-     *            .build();
+     *       var chartBuilder = Charts.newBarChart()
+     *           .setTitle('Top Grossing Films in US and Canada')
+     *           .setXAxisTitle('USD')
+     *           .setYAxisTitle('Film')
+     *           .setDimensions(600, 500)
+     *           .setLegendPosition(Charts.Position.BOTTOM)
+     *           .setDataSourceUrl(dataSourceUrl);
      *     
-     *        var uiApp = UiApp.createApplication().setTitle("My Chart");
-     *        uiApp.add(chart);
-     *        return uiApp;
+     *       var chart = chartBuilder.build();
+     *       return UiApp.createApplication().add(chart);
      *      }
      */
-    export interface Charts {
-      ChartType: ChartType
-      ColumnType: ColumnType
-      CurveStyle: CurveStyle
-      MatchType: MatchType
-      Orientation: Orientation
-      PickerValuesLayout: PickerValuesLayout
-      PointStyle: PointStyle
-      Position: Position
-      newAreaChart(): AreaChartBuilder;
-      newBarChart(): BarChartBuilder;
-      newCategoryFilter(): CategoryFilterBuilder;
-      newColumnChart(): ColumnChartBuilder;
-      newDashboardPanel(): DashboardPanelBuilder;
-      newDataTable(): DataTableBuilder;
-      newDataViewDefinition(): DataViewDefinitionBuilder;
-      newLineChart(): LineChartBuilder;
-      newNumberRangeFilter(): NumberRangeFilterBuilder;
-      newPieChart(): PieChartBuilder;
-      newScatterChart(): ScatterChartBuilder;
-      newStringFilter(): StringFilterBuilder;
-      newTableChart(): TableChartBuilder;
-      newTextStyle(): TextStyleBuilder;
+    export interface BarChartBuilder {
+      build(): Chart;
+      reverseCategories(): BarChartBuilder;
+      reverseDirection(): BarChartBuilder;
+      setBackgroundColor(cssValue: String): BarChartBuilder;
+      setColors(cssValues: String[]): BarChartBuilder;
+      setDataSourceUrl(url: String): BarChartBuilder;
+      setDataTable(tableBuilder: DataTableBuilder): BarChartBuilder;
+      setDataTable(table: DataTableSource): BarChartBuilder;
+      setDataViewDefinition(dataViewDefinition: DataViewDefinition): BarChartBuilder;
+      setDimensions(width: Integer, height: Integer): BarChartBuilder;
+      setLegendPosition(position: Position): BarChartBuilder;
+      setLegendTextStyle(textStyle: TextStyle): BarChartBuilder;
+      setOption(option: String, value: Object): BarChartBuilder;
+      setRange(start: Number, end: Number): BarChartBuilder;
+      setStacked(): BarChartBuilder;
+      setTitle(chartTitle: String): BarChartBuilder;
+      setTitleTextStyle(textStyle: TextStyle): BarChartBuilder;
+      setXAxisTextStyle(textStyle: TextStyle): BarChartBuilder;
+      setXAxisTitle(title: String): BarChartBuilder;
+      setXAxisTitleTextStyle(textStyle: TextStyle): BarChartBuilder;
+      setYAxisTextStyle(textStyle: TextStyle): BarChartBuilder;
+      setYAxisTitle(title: String): BarChartBuilder;
+      setYAxisTitleTextStyle(textStyle: TextStyle): BarChartBuilder;
+      useLogScale(): BarChartBuilder;
     }
 
     /**
@@ -215,55 +198,17 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for bar charts. For more details, see the 
-     *  Google Charts documentation.
-     * 
-     *  Here is an example that shows how to build a bar chart. The data is 
-     *  
-     *  imported from a Google spreadsheet.
-     * 
-     *      function doGet() {
-     *       // Get sample data from a spreadsheet.
-     *       var dataSourceUrl = 'https://docs.google.com/spreadsheet/tq?range=B1%3AC11' +
-     *           '&key=0Aq4s9w_HxMs7dHpfX05JdmVSb1FpT21sbXd4NVE3UEE&gid=0&headers=-1';
-     *     
-     *       var chartBuilder = Charts.newBarChart()
-     *           .setTitle('Top Grossing Films in US and Canada')
-     *           .setXAxisTitle('USD')
-     *           .setYAxisTitle('Film')
-     *           .setDimensions(600, 500)
-     *           .setLegendPosition(Charts.Position.BOTTOM)
-     *           .setDataSourceUrl(dataSourceUrl);
-     *     
-     *       var chart = chartBuilder.build();
-     *       return UiApp.createApplication().add(chart);
-     *      }
+     * A Chart object, which can be embedded into documents, UI elements, or used as a static image. For
+     *  charts embedded in spreadsheets, see
+     *  EmbeddedChart.
      */
-    export interface BarChartBuilder {
-      build(): Chart;
-      reverseCategories(): BarChartBuilder;
-      reverseDirection(): BarChartBuilder;
-      setBackgroundColor(cssValue: String): BarChartBuilder;
-      setColors(cssValues: String[]): BarChartBuilder;
-      setDataSourceUrl(url: String): BarChartBuilder;
-      setDataTable(tableBuilder: DataTableBuilder): BarChartBuilder;
-      setDataTable(table: DataTableSource): BarChartBuilder;
-      setDataViewDefinition(dataViewDefinition: DataViewDefinition): BarChartBuilder;
-      setDimensions(width: Integer, height: Integer): BarChartBuilder;
-      setLegendPosition(position: Position): BarChartBuilder;
-      setLegendTextStyle(textStyle: TextStyle): BarChartBuilder;
-      setOption(option: String, value: Object): BarChartBuilder;
-      setRange(start: Number, end: Number): BarChartBuilder;
-      setStacked(): BarChartBuilder;
-      setTitle(chartTitle: String): BarChartBuilder;
-      setTitleTextStyle(textStyle: TextStyle): BarChartBuilder;
-      setXAxisTextStyle(textStyle: TextStyle): BarChartBuilder;
-      setXAxisTitle(title: String): BarChartBuilder;
-      setXAxisTitleTextStyle(textStyle: TextStyle): BarChartBuilder;
-      setYAxisTextStyle(textStyle: TextStyle): BarChartBuilder;
-      setYAxisTitle(title: String): BarChartBuilder;
-      setYAxisTitleTextStyle(textStyle: TextStyle): BarChartBuilder;
-      useLogScale(): BarChartBuilder;
+    export interface Chart {
+      getAs(contentType: String): Base.Blob;
+      getBlob(): Base.Blob;
+      getId(): String;
+      getOptions(): ChartOptions;
+      getType(): String;
+      setId(id: String): Chart;
     }
 
     /**
@@ -278,6 +223,157 @@ declare module GoogleAppsScript {
     export interface ChartOptions {
       get(option: String): Object;
     }
+
+    /**
+     * Chart types supported by the Charts service.
+     */
+    export enum ChartType { AREA, BAR, COLUMN, LINE, PIE, SCATTER, TABLE }
+
+    /**
+     * Entry point for creating Charts in scripts.
+     * 
+     *  This example creates a basic data table, populates an area chart with the data, and adds it into
+     *  a UiApp:
+     * 
+     *      function doGet() {
+     *        var data = Charts.newDataTable()
+     *            .addColumn(Charts.ColumnType.STRING, "Month")
+     *            .addColumn(Charts.ColumnType.NUMBER, "In Store")
+     *            .addColumn(Charts.ColumnType.NUMBER, "Online")
+     *            .addRow(["January", 10, 1])
+     *            .addRow(["February", 12, 1])
+     *            .addRow(["March", 20, 2])
+     *            .addRow(["April", 25, 3])
+     *            .addRow(["May", 30, 4])
+     *            .build();
+     *     
+     *        var chart = Charts.newAreaChart()
+     *            .setDataTable(data)
+     *            .setStacked()
+     *            .setRange(0, 40)
+     *            .setTitle("Sales per Month")
+     *            .build();
+     *     
+     *        var uiApp = UiApp.createApplication().setTitle("My Chart");
+     *        uiApp.add(chart);
+     *        return uiApp;
+     *      }
+     */
+    export interface Charts {
+      ChartType: ChartType
+      ColumnType: ColumnType
+      CurveStyle: CurveStyle
+      MatchType: MatchType
+      Orientation: Orientation
+      PickerValuesLayout: PickerValuesLayout
+      PointStyle: PointStyle
+      Position: Position
+      newAreaChart(): AreaChartBuilder;
+      newBarChart(): BarChartBuilder;
+      newCategoryFilter(): CategoryFilterBuilder;
+      newColumnChart(): ColumnChartBuilder;
+      newDashboardPanel(): DashboardPanelBuilder;
+      newDataTable(): DataTableBuilder;
+      newDataViewDefinition(): DataViewDefinitionBuilder;
+      newLineChart(): LineChartBuilder;
+      newNumberRangeFilter(): NumberRangeFilterBuilder;
+      newPieChart(): PieChartBuilder;
+      newScatterChart(): ScatterChartBuilder;
+      newStringFilter(): StringFilterBuilder;
+      newTableChart(): TableChartBuilder;
+      newTextStyle(): TextStyleBuilder;
+    }
+
+    /**
+     * Builder for column charts. For more details, see the 
+     *  Google Charts documentation.
+     * 
+     *  This example shows how to create a column chart with data from a data table.
+     * 
+     *       function doGet() {
+     *        var sampleData = Charts.newDataTable()
+     *            .addColumn(Charts.ColumnType.STRING, "Year")
+     *            .addColumn(Charts.ColumnType.NUMBER, "Sales")
+     *            .addColumn(Charts.ColumnType.NUMBER, "Expenses")
+     *            .addRow(["2004", 1000, 400])
+     *            .addRow(["2005", 1170, 460])
+     *            .addRow(["2006", 660, 1120])
+     *            .addRow(["2007", 1030, 540])
+     *            .addRow(["2008", 800, 600])
+     *            .addRow(["2009", 943, 678])
+     *            .addRow(["2010", 1020, 550])
+     *            .addRow(["2011", 910, 700])
+     *            .addRow(["2012", 1230, 840])
+     *            .build();
+     *        
+     *        var chart = Charts.newColumnChart()
+     *            .setTitle('Sales vs. Expenses')
+     *            .setXAxisTitle('Year')
+     *            .setYAxisTitle('Amount (USD)')
+     *            .setDimensions(600, 500)
+     *            .setDataTable(sampleData)
+     *            .build();
+     *        
+     *        return UiApp.createApplication().add(chart);
+     *      }
+     */
+    export interface ColumnChartBuilder {
+      build(): Chart;
+      reverseCategories(): ColumnChartBuilder;
+      setBackgroundColor(cssValue: String): ColumnChartBuilder;
+      setColors(cssValues: String[]): ColumnChartBuilder;
+      setDataSourceUrl(url: String): ColumnChartBuilder;
+      setDataTable(tableBuilder: DataTableBuilder): ColumnChartBuilder;
+      setDataTable(table: DataTableSource): ColumnChartBuilder;
+      setDataViewDefinition(dataViewDefinition: DataViewDefinition): ColumnChartBuilder;
+      setDimensions(width: Integer, height: Integer): ColumnChartBuilder;
+      setLegendPosition(position: Position): ColumnChartBuilder;
+      setLegendTextStyle(textStyle: TextStyle): ColumnChartBuilder;
+      setOption(option: String, value: Object): ColumnChartBuilder;
+      setRange(start: Number, end: Number): ColumnChartBuilder;
+      setStacked(): ColumnChartBuilder;
+      setTitle(chartTitle: String): ColumnChartBuilder;
+      setTitleTextStyle(textStyle: TextStyle): ColumnChartBuilder;
+      setXAxisTextStyle(textStyle: TextStyle): ColumnChartBuilder;
+      setXAxisTitle(title: String): ColumnChartBuilder;
+      setXAxisTitleTextStyle(textStyle: TextStyle): ColumnChartBuilder;
+      setYAxisTextStyle(textStyle: TextStyle): ColumnChartBuilder;
+      setYAxisTitle(title: String): ColumnChartBuilder;
+      setYAxisTitleTextStyle(textStyle: TextStyle): ColumnChartBuilder;
+      useLogScale(): ColumnChartBuilder;
+    }
+
+    /**
+     * An enumeration of the valid data types for columns in a DataTable.
+     */
+    export enum ColumnType { DATE, NUMBER, STRING }
+
+    /**
+     * A user interface control object, that drives the data displayed by a DashboardPanel.
+     * 
+     *  A control can be embedded in a UI application. Controls are user interface widgets (category
+     *  pickers, range sliders, autocompleters, etc.) users interact with in order to drive the data
+     *  managed by a dashboard and the charts that are part of it.
+     *  Controls collect user input and use the information to decide which of the data the
+     *  dashboard is managing should be made available to the charts that are part of it.
+     *  Given a data table, a control will filter out the data that doesn't comply with the
+     *  conditions implied by its current state, and will expose the filtered data table as
+     *  an output.
+     * 
+     *  For more details, see the Gviz
+     *  
+     *  documentation.
+     */
+    export interface Control {
+      getId(): String;
+      getType(): String;
+      setId(id: String): Control;
+    }
+
+    /**
+     * An enumeration of the styles for curves in a chart.
+     */
+    export enum CurveStyle { NORMAL, SMOOTH }
 
     /**
      * A dashboard is a visual structure that enables the organization and management
@@ -352,62 +448,75 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for column charts. For more details, see the 
-     *  Google Charts documentation.
+     * A builder for a dashboard panel object. For an example of how to use
+     *  DashboardPanelBuilder, refer to DashboardPanel.
      * 
-     *  This example shows how to create a column chart with data from a data table.
-     * 
-     *       function doGet() {
-     *        var sampleData = Charts.newDataTable()
-     *            .addColumn(Charts.ColumnType.STRING, "Year")
-     *            .addColumn(Charts.ColumnType.NUMBER, "Sales")
-     *            .addColumn(Charts.ColumnType.NUMBER, "Expenses")
-     *            .addRow(["2004", 1000, 400])
-     *            .addRow(["2005", 1170, 460])
-     *            .addRow(["2006", 660, 1120])
-     *            .addRow(["2007", 1030, 540])
-     *            .addRow(["2008", 800, 600])
-     *            .addRow(["2009", 943, 678])
-     *            .addRow(["2010", 1020, 550])
-     *            .addRow(["2011", 910, 700])
-     *            .addRow(["2012", 1230, 840])
-     *            .build();
-     *        
-     *        var chart = Charts.newColumnChart()
-     *            .setTitle('Sales vs. Expenses')
-     *            .setXAxisTitle('Year')
-     *            .setYAxisTitle('Amount (USD)')
-     *            .setDimensions(600, 500)
-     *            .setDataTable(sampleData)
-     *            .build();
-     *        
-     *        return UiApp.createApplication().add(chart);
-     *      }
+     *  For more details, see the Gviz
+     *  
+     *  documentation.
      */
-    export interface ColumnChartBuilder {
-      build(): Chart;
-      reverseCategories(): ColumnChartBuilder;
-      setBackgroundColor(cssValue: String): ColumnChartBuilder;
-      setColors(cssValues: String[]): ColumnChartBuilder;
-      setDataSourceUrl(url: String): ColumnChartBuilder;
-      setDataTable(tableBuilder: DataTableBuilder): ColumnChartBuilder;
-      setDataTable(table: DataTableSource): ColumnChartBuilder;
-      setDataViewDefinition(dataViewDefinition: DataViewDefinition): ColumnChartBuilder;
-      setDimensions(width: Integer, height: Integer): ColumnChartBuilder;
-      setLegendPosition(position: Position): ColumnChartBuilder;
-      setLegendTextStyle(textStyle: TextStyle): ColumnChartBuilder;
-      setOption(option: String, value: Object): ColumnChartBuilder;
-      setRange(start: Number, end: Number): ColumnChartBuilder;
-      setStacked(): ColumnChartBuilder;
-      setTitle(chartTitle: String): ColumnChartBuilder;
-      setTitleTextStyle(textStyle: TextStyle): ColumnChartBuilder;
-      setXAxisTextStyle(textStyle: TextStyle): ColumnChartBuilder;
-      setXAxisTitle(title: String): ColumnChartBuilder;
-      setXAxisTitleTextStyle(textStyle: TextStyle): ColumnChartBuilder;
-      setYAxisTextStyle(textStyle: TextStyle): ColumnChartBuilder;
-      setYAxisTitle(title: String): ColumnChartBuilder;
-      setYAxisTitleTextStyle(textStyle: TextStyle): ColumnChartBuilder;
-      useLogScale(): ColumnChartBuilder;
+    export interface DashboardPanelBuilder {
+      bind(control: Control, chart: Chart, controls: Control[], charts: Chart[]): DashboardPanelBuilder;
+      bind(control: Control, chart: Chart, controls: Control[], charts: Chart[]): DashboardPanelBuilder;
+      build(): DashboardPanel;
+      setDataTable(tableBuilder: DataTableBuilder): DashboardPanelBuilder;
+      setDataTable(source: DataTableSource): DashboardPanelBuilder;
+    }
+
+    /**
+     * A Data Table to be used in charts. A DataTable can come from sources such as Google
+     *  Sheets or specified data-table URLs, or can be filled in by hand. This class intentionally has no
+     *  methods: a DataTable can be passed around, but not manipulated directly.
+     */
+    export interface DataTable {
+    }
+
+    /**
+     * Builder of DataTable objects.  Building a data table consists of first specifying its columns,
+     *  and then adding its rows, one at a time.  Example:
+     * 
+     *      var data = Charts.newDataTable()
+     *          .addColumn(Charts.ColumnType.STRING, "Month")
+     *          .addColumn(Charts.ColumnType.NUMBER, "In Store")
+     *          .addColumn(Charts.ColumnType.NUMBER, "Online")
+     *          .addRow(["January", 10, 1])
+     *          .addRow(["February", 12, 1])
+     *          .addRow(["March", 20, 2])
+     *          .addRow(["April", 25, 3])
+     *          .addRow(["May", 30, 4])
+     *          .build();
+     */
+    export interface DataTableBuilder {
+      addColumn(type: ColumnType, label: String): DataTableBuilder;
+      addRow(values: Object[]): DataTableBuilder;
+      build(): DataTable;
+      setValue(row: Integer, column: Integer, value: Object): DataTableBuilder;
+    }
+
+    /**
+     * Interface for objects that can represent their data as a DataTable.
+     * Implementing classes
+     * 
+     * NameBrief description
+     * 
+     * DataTableA Data Table to be used in charts.
+     * 
+     * RangeAccess and modify spreadsheet ranges.
+     */
+    export interface DataTableSource {
+      getDataTable(): DataTable;
+    }
+
+    /**
+     * A data view definition for visualizing chart data.
+     * 
+     *  Data view definition can be set for charts to visualize a view derived from the given data table
+     *  and not the data table itself. For example if the view definition of a chart states that the view
+     *  columns are [0, 3], only the first and the third columns of the data table will be taken into
+     *  consideration when drawing the chart. See DataViewDefinitionBuilder for an example on how
+     *  to define and use a DataViewDefinition.
+     */
+    export interface DataViewDefinition {
     }
 
     /**
@@ -444,178 +553,7 @@ declare module GoogleAppsScript {
      */
     export interface DataViewDefinitionBuilder {
       build(): DataViewDefinition;
-      setColumns(columns: Integer[]): DataViewDefinitionBuilder;
-    }
-
-    /**
-     * A user interface control object, that drives the data displayed by a DashboardPanel.
-     * 
-     *  A control can be embedded in a UI application. Controls are user interface widgets (category
-     *  pickers, range sliders, autocompleters, etc.) users interact with in order to drive the data
-     *  managed by a dashboard and the charts that are part of it.
-     *  Controls collect user input and use the information to decide which of the data the
-     *  dashboard is managing should be made available to the charts that are part of it.
-     *  Given a data table, a control will filter out the data that doesn't comply with the
-     *  conditions implied by its current state, and will expose the filtered data table as
-     *  an output.
-     * 
-     *  For more details, see the Gviz
-     *  
-     *  documentation.
-     */
-    export interface Control {
-      getId(): String;
-      getType(): String;
-      setId(id: String): Control;
-    }
-
-    /**
-     * A data view definition for visualizing chart data.
-     * 
-     *  Data view definition can be set for charts to visualize a view derived from the given data table
-     *  and not the data table itself. For example if the view definition of a chart states that the view
-     *  columns are [0, 3], only the first and the third columns of the data table will be taken into
-     *  consideration when drawing the chart. See DataViewDefinitionBuilder for an example on how
-     *  to define and use a DataViewDefinition.
-     */
-    export interface DataViewDefinition {
-    }
-
-    /**
-     * A Data Table to be used in charts. A DataTable can come from sources such as Google
-     *  Sheets or specified data-table URLs, or can be filled in by hand. This class intentionally has no
-     *  methods: a DataTable can be passed around, but not manipulated directly.
-     */
-    export interface DataTable {
-    }
-
-    /**
-     * A builder for a dashboard panel object. For an example of how to use
-     *  DashboardPanelBuilder, refer to DashboardPanel.
-     * 
-     *  For more details, see the Gviz
-     *  
-     *  documentation.
-     */
-    export interface DashboardPanelBuilder {
-      bind(control: Control, chart: Chart, controls: Control[], charts: Chart[]): DashboardPanelBuilder;
-      bind(control: Control, chart: Chart, controls: Control[], charts: Chart[]): DashboardPanelBuilder;
-      build(): DashboardPanel;
-      setDataTable(tableBuilder: DataTableBuilder): DashboardPanelBuilder;
-      setDataTable(source: DataTableSource): DashboardPanelBuilder;
-    }
-
-    /**
-     * Builder of DataTable objects.  Building a data table consists of first specifying its columns,
-     *  and then adding its rows, one at a time.  Example:
-     * 
-     *      var data = Charts.newDataTable()
-     *          .addColumn(Charts.ColumnType.STRING, "Month")
-     *          .addColumn(Charts.ColumnType.NUMBER, "In Store")
-     *          .addColumn(Charts.ColumnType.NUMBER, "Online")
-     *          .addRow(["January", 10, 1])
-     *          .addRow(["February", 12, 1])
-     *          .addRow(["March", 20, 2])
-     *          .addRow(["April", 25, 3])
-     *          .addRow(["May", 30, 4])
-     *          .build();
-     */
-    export interface DataTableBuilder {
-      addColumn(type: ColumnType, label: String): DataTableBuilder;
-      addRow(values: Object[]): DataTableBuilder;
-      build(): DataTable;
-      setValue(row: Integer, column: Integer, value: Object): DataTableBuilder;
-    }
-
-    /**
-     * A builder for pie charts. For more details, see the 
-     *  Google Charts documentation.
-     * 
-     *  Here is an example that shows how to build a pie chart. The data is 
-     *  imported from a Google spreadsheet.
-     * 
-     *      function doGet() {
-     *        // Get sample data from a spreadsheet.
-     *        var dataSourceUrl = 'https://docs.google.com/spreadsheet/tq?range=A1%3AB8' +
-     *            '&key=0Aq4s9w_HxMs7dHpfX05JdmVSb1FpT21sbXd4NVE3UEE&gid=3&headers=-1';
-     *        
-     *        var chartBuilder = Charts.newPieChart()
-     *            .setTitle('World Population by Continent')
-     *            .setDimensions(600, 500)
-     *            .set3D()
-     *            .setDataSourceUrl(dataSourceUrl);
-     *        
-     *        var chart = chartBuilder.build();
-     *        return UiApp.createApplication().add(chart);
-     *      }
-     */
-    export interface PieChartBuilder {
-      build(): Chart;
-      reverseCategories(): PieChartBuilder;
-      set3D(): PieChartBuilder;
-      setBackgroundColor(cssValue: String): PieChartBuilder;
-      setColors(cssValues: String[]): PieChartBuilder;
-      setDataSourceUrl(url: String): PieChartBuilder;
-      setDataTable(tableBuilder: DataTableBuilder): PieChartBuilder;
-      setDataTable(table: DataTableSource): PieChartBuilder;
-      setDataViewDefinition(dataViewDefinition: DataViewDefinition): PieChartBuilder;
-      setDimensions(width: Integer, height: Integer): PieChartBuilder;
-      setLegendPosition(position: Position): PieChartBuilder;
-      setLegendTextStyle(textStyle: TextStyle): PieChartBuilder;
-      setOption(option: String, value: Object): PieChartBuilder;
-      setTitle(chartTitle: String): PieChartBuilder;
-      setTitleTextStyle(textStyle: TextStyle): PieChartBuilder;
-    }
-
-    /**
-     * Builder for scatter charts. For more details, see the 
-     *  Google Charts documentation.
-     * 
-     *  Here is an example that shows how to build a scatter chart. The data is
-     *  imported from a Google spreadsheet.
-     * 
-     *      function doGet() {
-     *        // Get sample data from a spreadsheet.
-     *        var dataSourceUrl = 'https://docs.google.com/spreadsheet/tq?range=C1%3AD' +
-     *            '&key=0Aq4s9w_HxMs7dHpfX05JdmVSb1FpT21sbXd4NVE3UEE&gid=4&headers=-1';
-     *        
-     *        var chartBuilder = Charts.newScatterChart()
-     *            .setTitle('Adjusted GDP vs. U.S. Population')
-     *            .setXAxisTitle('U.S. Population (millions)')
-     *            .setYAxisTitle('Adjusted GDP ($ billions)')
-     *            .setDimensions(600, 500)
-     *            .setLegendPosition(Charts.Position.NONE)
-     *            .setDataSourceUrl(dataSourceUrl);
-     *        
-     *        var chart = chartBuilder.build();
-     *        return UiApp.createApplication().add(chart);
-     *      }
-     */
-    export interface ScatterChartBuilder {
-      build(): Chart;
-      setBackgroundColor(cssValue: String): ScatterChartBuilder;
-      setColors(cssValues: String[]): ScatterChartBuilder;
-      setDataSourceUrl(url: String): ScatterChartBuilder;
-      setDataTable(tableBuilder: DataTableBuilder): ScatterChartBuilder;
-      setDataTable(table: DataTableSource): ScatterChartBuilder;
-      setDataViewDefinition(dataViewDefinition: DataViewDefinition): ScatterChartBuilder;
-      setDimensions(width: Integer, height: Integer): ScatterChartBuilder;
-      setLegendPosition(position: Position): ScatterChartBuilder;
-      setLegendTextStyle(textStyle: TextStyle): ScatterChartBuilder;
-      setOption(option: String, value: Object): ScatterChartBuilder;
-      setPointStyle(style: PointStyle): ScatterChartBuilder;
-      setTitle(chartTitle: String): ScatterChartBuilder;
-      setTitleTextStyle(textStyle: TextStyle): ScatterChartBuilder;
-      setXAxisLogScale(): ScatterChartBuilder;
-      setXAxisRange(start: Number, end: Number): ScatterChartBuilder;
-      setXAxisTextStyle(textStyle: TextStyle): ScatterChartBuilder;
-      setXAxisTitle(title: String): ScatterChartBuilder;
-      setXAxisTitleTextStyle(textStyle: TextStyle): ScatterChartBuilder;
-      setYAxisLogScale(): ScatterChartBuilder;
-      setYAxisRange(start: Number, end: Number): ScatterChartBuilder;
-      setYAxisTextStyle(textStyle: TextStyle): ScatterChartBuilder;
-      setYAxisTitle(title: String): ScatterChartBuilder;
-      setYAxisTitleTextStyle(textStyle: TextStyle): ScatterChartBuilder;
+      setColumns(columns: Object[]): DataViewDefinitionBuilder;
     }
 
     /**
@@ -671,45 +609,19 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A builder for table charts. For more details, see the 
-     *  Google Charts documentation.
+     * An enumeration of how a string value should be matched.
+     *  Matching a string is a boolean operation. Given a string, a match term (string), and a match
+     *  type, the operation will output true in the following cases:
      * 
-     *  Here is an example that shows how to build a table chart. The data is
-     *  imported from a Google spreadsheet.
+     * If the match type equals EXACT and the match term equals the string.
+     * If the match type equals PREFIX and the match term is a prefix of the string.
+     * If the match type equals ANY and the match term is a substring of the string.
      * 
-     *      function doGet() {
-     *        // Get sample data from a spreadsheet.
-     *        var dataSourceUrl = 'https://docs.google.com/spreadsheet/tq?range=A1%3AF' +
-     *            '&key=0Aq4s9w_HxMs7dHpfX05JdmVSb1FpT21sbXd4NVE3UEE&gid=4&headers=-1';
-     *        
-     *        var chartBuilder = Charts.newTableChart()
-     *            .setDimensions(600, 500)
-     *            .enablePaging(20)
-     *            .setDataSourceUrl(dataSourceUrl);
-     *        
-     *        var chart = chartBuilder.build();
-     *        return UiApp.createApplication().add(chart);
-     *      }
+     * This enumeration can be used in by a string filter control to decide which rows to filter out
+     *  of the data table. Given a column to filter on, leave only the rows that match the value
+     *  entered in the filter input box, using one of the above matching types.
      */
-    export interface TableChartBuilder {
-      build(): Chart;
-      enablePaging(enablePaging: Boolean): TableChartBuilder;
-      enablePaging(pageSize: Integer): TableChartBuilder;
-      enablePaging(pageSize: Integer, startPage: Integer): TableChartBuilder;
-      enableRtlTable(rtlEnabled: Boolean): TableChartBuilder;
-      enableSorting(enableSorting: Boolean): TableChartBuilder;
-      setDataSourceUrl(url: String): TableChartBuilder;
-      setDataTable(tableBuilder: DataTableBuilder): TableChartBuilder;
-      setDataTable(table: DataTableSource): TableChartBuilder;
-      setDataViewDefinition(dataViewDefinition: DataViewDefinition): TableChartBuilder;
-      setDimensions(width: Integer, height: Integer): TableChartBuilder;
-      setFirstRowNumber(number: Integer): TableChartBuilder;
-      setInitialSortingAscending(column: Integer): TableChartBuilder;
-      setInitialSortingDescending(column: Integer): TableChartBuilder;
-      setOption(option: String, value: Object): TableChartBuilder;
-      showRowNumberColumn(showRowNumber: Boolean): TableChartBuilder;
-      useAlternatingRowStyle(alternate: Boolean): TableChartBuilder;
-    }
+    export enum MatchType { EXACT, PREFIX, ANY }
 
     /**
      * A builder for number range filter controls.
@@ -770,63 +682,114 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A builder used to create TextStyle objects. It allows configuration of the text's
-     *  properties such as name, color, and size.
-     * 
-     *  The following example shows how to create a text style using the builder. For a more complete
-     *  example, refer to the documentation for TextStyle.
-     * 
-     *      // Creates a new text style that uses 26-point, blue, Ariel font.
-     *      var textStyleBuilder = Charts.newTextStyle()
-     *          .setColor('#0000FF').setFontName('Ariel').setFontSize(26);
-     *      var style = textStyleBuilder.build();
+     * An enumeration of the orientation of an object.
      */
-    export interface TextStyleBuilder {
-      build(): TextStyle;
-      setColor(cssValue: String): TextStyleBuilder;
-      setFontName(fontName: String): TextStyleBuilder;
-      setFontSize(fontSize: Number): TextStyleBuilder;
-    }
+    export enum Orientation { HORIZONTAL, VERTICAL }
 
     /**
-     * A text style configuration object. Used in charts options to configure text style for
-     *  elements that accepts it, such as title, horizontal axis, vertical axis, legend and tooltip.
+     * An enumeration of how to display selected values in picker widget.
+     */
+    export enum PickerValuesLayout { ASIDE, BELOW, BELOW_WRAPPING, BELOW_STACKED }
+
+    /**
+     * A builder for pie charts. For more details, see the 
+     *  Google Charts documentation.
      * 
-     *      // This example creates a chart specifying different text styles for the title and axes.
+     *  Here is an example that shows how to build a pie chart. The data is 
+     *  imported from a Google spreadsheet.
+     * 
      *      function doGet() {
-     *        var sampleData = Charts.newDataTable()
-     *            .addColumn(Charts.ColumnType.STRING, "Seasons")
-     *            .addColumn(Charts.ColumnType.NUMBER, "Rainy Days")
-     *            .addRow(["Winter", 5])
-     *            .addRow(["Spring", 12])
-     *            .addRow(["Summer", 8])
-     *            .addRow(["Fall", 8])
-     *            .build();
-     *     
-     *        var titleTextStyleBuilder = Charts.newTextStyle()
-     *            .setColor('#0000FF').setFontSize(26).setFontName('Ariel');
-     *        var axisTextStyleBuilder = Charts.newTextStyle()
-     *            .setColor('#3A3A3A').setFontSize(20).setFontName('Ariel');
-     *        var titleTextStyle = titleTextStyleBuilder.build();
-     *        var axisTextStyle = axisTextStyleBuilder.build();
-     *     
-     *        var chart = Charts.newLineChart()
-     *            .setTitleTextStyle(titleTextStyle)
-     *            .setXAxisTitleTextStyle(axisTextStyle)
-     *            .setYAxisTitleTextStyle(axisTextStyle)
-     *            .setTitle('Rainy Days Per Season')
-     *            .setXAxisTitle('Season')
-     *            .setYAxisTitle('Number of Rainy Days')
-     *            .setDataTable(sampleData)
-     *            .build();
-     *     
+     *        // Get sample data from a spreadsheet.
+     *        var dataSourceUrl = 'https://docs.google.com/spreadsheet/tq?range=A1%3AB8' +
+     *            '&key=0Aq4s9w_HxMs7dHpfX05JdmVSb1FpT21sbXd4NVE3UEE&gid=3&headers=-1';
+     *        
+     *        var chartBuilder = Charts.newPieChart()
+     *            .setTitle('World Population by Continent')
+     *            .setDimensions(600, 500)
+     *            .set3D()
+     *            .setDataSourceUrl(dataSourceUrl);
+     *        
+     *        var chart = chartBuilder.build();
      *        return UiApp.createApplication().add(chart);
      *      }
      */
-    export interface TextStyle {
-      getColor(): String;
-      getFontName(): String;
-      getFontSize(): Number;
+    export interface PieChartBuilder {
+      build(): Chart;
+      reverseCategories(): PieChartBuilder;
+      set3D(): PieChartBuilder;
+      setBackgroundColor(cssValue: String): PieChartBuilder;
+      setColors(cssValues: String[]): PieChartBuilder;
+      setDataSourceUrl(url: String): PieChartBuilder;
+      setDataTable(tableBuilder: DataTableBuilder): PieChartBuilder;
+      setDataTable(table: DataTableSource): PieChartBuilder;
+      setDataViewDefinition(dataViewDefinition: DataViewDefinition): PieChartBuilder;
+      setDimensions(width: Integer, height: Integer): PieChartBuilder;
+      setLegendPosition(position: Position): PieChartBuilder;
+      setLegendTextStyle(textStyle: TextStyle): PieChartBuilder;
+      setOption(option: String, value: Object): PieChartBuilder;
+      setTitle(chartTitle: String): PieChartBuilder;
+      setTitleTextStyle(textStyle: TextStyle): PieChartBuilder;
+    }
+
+    /**
+     * An enumeration of the styles of points in a line.
+     */
+    export enum PointStyle { NONE, TINY, MEDIUM, LARGE, HUGE }
+
+    /**
+     * An enumeration of legend positions within a chart.
+     */
+    export enum Position { TOP, RIGHT, BOTTOM, NONE }
+
+    /**
+     * Builder for scatter charts. For more details, see the 
+     *  Google Charts documentation.
+     * 
+     *  Here is an example that shows how to build a scatter chart. The data is
+     *  imported from a Google spreadsheet.
+     * 
+     *      function doGet() {
+     *        // Get sample data from a spreadsheet.
+     *        var dataSourceUrl = 'https://docs.google.com/spreadsheet/tq?range=C1%3AD' +
+     *            '&key=0Aq4s9w_HxMs7dHpfX05JdmVSb1FpT21sbXd4NVE3UEE&gid=4&headers=-1';
+     *        
+     *        var chartBuilder = Charts.newScatterChart()
+     *            .setTitle('Adjusted GDP vs. U.S. Population')
+     *            .setXAxisTitle('U.S. Population (millions)')
+     *            .setYAxisTitle('Adjusted GDP ($ billions)')
+     *            .setDimensions(600, 500)
+     *            .setLegendPosition(Charts.Position.NONE)
+     *            .setDataSourceUrl(dataSourceUrl);
+     *        
+     *        var chart = chartBuilder.build();
+     *        return UiApp.createApplication().add(chart);
+     *      }
+     */
+    export interface ScatterChartBuilder {
+      build(): Chart;
+      setBackgroundColor(cssValue: String): ScatterChartBuilder;
+      setColors(cssValues: String[]): ScatterChartBuilder;
+      setDataSourceUrl(url: String): ScatterChartBuilder;
+      setDataTable(tableBuilder: DataTableBuilder): ScatterChartBuilder;
+      setDataTable(table: DataTableSource): ScatterChartBuilder;
+      setDataViewDefinition(dataViewDefinition: DataViewDefinition): ScatterChartBuilder;
+      setDimensions(width: Integer, height: Integer): ScatterChartBuilder;
+      setLegendPosition(position: Position): ScatterChartBuilder;
+      setLegendTextStyle(textStyle: TextStyle): ScatterChartBuilder;
+      setOption(option: String, value: Object): ScatterChartBuilder;
+      setPointStyle(style: PointStyle): ScatterChartBuilder;
+      setTitle(chartTitle: String): ScatterChartBuilder;
+      setTitleTextStyle(textStyle: TextStyle): ScatterChartBuilder;
+      setXAxisLogScale(): ScatterChartBuilder;
+      setXAxisRange(start: Number, end: Number): ScatterChartBuilder;
+      setXAxisTextStyle(textStyle: TextStyle): ScatterChartBuilder;
+      setXAxisTitle(title: String): ScatterChartBuilder;
+      setXAxisTitleTextStyle(textStyle: TextStyle): ScatterChartBuilder;
+      setYAxisLogScale(): ScatterChartBuilder;
+      setYAxisRange(start: Number, end: Number): ScatterChartBuilder;
+      setYAxisTextStyle(textStyle: TextStyle): ScatterChartBuilder;
+      setYAxisTitle(title: String): ScatterChartBuilder;
+      setYAxisTitleTextStyle(textStyle: TextStyle): ScatterChartBuilder;
     }
 
     /**
@@ -901,68 +864,105 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Chart types supported by the Charts service.
-     */
-    export enum ChartType { AREA, BAR, COLUMN, LINE, PIE, SCATTER, TABLE }
-
-    /**
-     * An enumeration of the valid data types for columns in a DataTable.
-     */
-    export enum ColumnType { DATE, NUMBER, STRING }
-
-    /**
-     * An enumeration of the styles for curves in a chart.
-     */
-    export enum CurveStyle { NORMAL, SMOOTH }
-
-    /**
-     * Interface for objects that can represent their data as a DataTable.
-     * Implementing classes
+     * A builder for table charts. For more details, see the 
+     *  Google Charts documentation.
      * 
-     * NameBrief description
+     *  Here is an example that shows how to build a table chart. The data is
+     *  imported from a Google spreadsheet.
      * 
-     * DataTableA Data Table to be used in charts.
-     * 
-     * RangeAccess and modify spreadsheet ranges.
+     *      function doGet() {
+     *        // Get sample data from a spreadsheet.
+     *        var dataSourceUrl = 'https://docs.google.com/spreadsheet/tq?range=A1%3AF' +
+     *            '&key=0Aq4s9w_HxMs7dHpfX05JdmVSb1FpT21sbXd4NVE3UEE&gid=4&headers=-1';
+     *        
+     *        var chartBuilder = Charts.newTableChart()
+     *            .setDimensions(600, 500)
+     *            .enablePaging(20)
+     *            .setDataSourceUrl(dataSourceUrl);
+     *        
+     *        var chart = chartBuilder.build();
+     *        return UiApp.createApplication().add(chart);
+     *      }
      */
-    export interface DataTableSource {
-      getDataTable(): DataTable;
+    export interface TableChartBuilder {
+      build(): Chart;
+      enablePaging(enablePaging: Boolean): TableChartBuilder;
+      enablePaging(pageSize: Integer): TableChartBuilder;
+      enablePaging(pageSize: Integer, startPage: Integer): TableChartBuilder;
+      enableRtlTable(rtlEnabled: Boolean): TableChartBuilder;
+      enableSorting(enableSorting: Boolean): TableChartBuilder;
+      setDataSourceUrl(url: String): TableChartBuilder;
+      setDataTable(tableBuilder: DataTableBuilder): TableChartBuilder;
+      setDataTable(table: DataTableSource): TableChartBuilder;
+      setDataViewDefinition(dataViewDefinition: DataViewDefinition): TableChartBuilder;
+      setDimensions(width: Integer, height: Integer): TableChartBuilder;
+      setFirstRowNumber(number: Integer): TableChartBuilder;
+      setInitialSortingAscending(column: Integer): TableChartBuilder;
+      setInitialSortingDescending(column: Integer): TableChartBuilder;
+      setOption(option: String, value: Object): TableChartBuilder;
+      showRowNumberColumn(showRowNumber: Boolean): TableChartBuilder;
+      useAlternatingRowStyle(alternate: Boolean): TableChartBuilder;
     }
 
     /**
-     * An enumeration of how a string value should be matched.
-     *  Matching a string is a boolean operation. Given a string, a match term (string), and a match
-     *  type, the operation will output true in the following cases:
+     * A text style configuration object. Used in charts options to configure text style for
+     *  elements that accepts it, such as title, horizontal axis, vertical axis, legend and tooltip.
      * 
-     * If the match type equals EXACT and the match term equals the string.
-     * If the match type equals PREFIX and the match term is a prefix of the string.
-     * If the match type equals ANY and the match term is a substring of the string.
+     *      // This example creates a chart specifying different text styles for the title and axes.
+     *      function doGet() {
+     *        var sampleData = Charts.newDataTable()
+     *            .addColumn(Charts.ColumnType.STRING, "Seasons")
+     *            .addColumn(Charts.ColumnType.NUMBER, "Rainy Days")
+     *            .addRow(["Winter", 5])
+     *            .addRow(["Spring", 12])
+     *            .addRow(["Summer", 8])
+     *            .addRow(["Fall", 8])
+     *            .build();
+     *     
+     *        var titleTextStyleBuilder = Charts.newTextStyle()
+     *            .setColor('#0000FF').setFontSize(26).setFontName('Ariel');
+     *        var axisTextStyleBuilder = Charts.newTextStyle()
+     *            .setColor('#3A3A3A').setFontSize(20).setFontName('Ariel');
+     *        var titleTextStyle = titleTextStyleBuilder.build();
+     *        var axisTextStyle = axisTextStyleBuilder.build();
+     *     
+     *        var chart = Charts.newLineChart()
+     *            .setTitleTextStyle(titleTextStyle)
+     *            .setXAxisTitleTextStyle(axisTextStyle)
+     *            .setYAxisTitleTextStyle(axisTextStyle)
+     *            .setTitle('Rainy Days Per Season')
+     *            .setXAxisTitle('Season')
+     *            .setYAxisTitle('Number of Rainy Days')
+     *            .setDataTable(sampleData)
+     *            .build();
+     *     
+     *        return UiApp.createApplication().add(chart);
+     *      }
+     */
+    export interface TextStyle {
+      getColor(): String;
+      getFontName(): String;
+      getFontSize(): Number;
+    }
+
+    /**
+     * A builder used to create TextStyle objects. It allows configuration of the text's
+     *  properties such as name, color, and size.
      * 
-     * This enumeration can be used in by a string filter control to decide which rows to filter out
-     *  of the data table. Given a column to filter on, leave only the rows that match the value
-     *  entered in the filter input box, using one of the above matching types.
+     *  The following example shows how to create a text style using the builder. For a more complete
+     *  example, refer to the documentation for TextStyle.
+     * 
+     *      // Creates a new text style that uses 26-point, blue, Ariel font.
+     *      var textStyleBuilder = Charts.newTextStyle()
+     *          .setColor('#0000FF').setFontName('Ariel').setFontSize(26);
+     *      var style = textStyleBuilder.build();
      */
-    export enum MatchType { EXACT, PREFIX, ANY }
-
-    /**
-     * An enumeration of the orientation of an object.
-     */
-    export enum Orientation { HORIZONTAL, VERTICAL }
-
-    /**
-     * An enumeration of the styles of points in a line.
-     */
-    export enum PointStyle { NONE, TINY, MEDIUM, LARGE, HUGE }
-
-    /**
-     * An enumeration of how to display selected values in picker widget.
-     */
-    export enum PickerValuesLayout { ASIDE, BELOW, BELOW_WRAPPING, BELOW_STACKED }
-
-    /**
-     * An enumeration of legend positions within a chart.
-     */
-    export enum Position { TOP, RIGHT, BOTTOM, NONE }
+    export interface TextStyleBuilder {
+      build(): TextStyle;
+      setColor(cssValue: String): TextStyleBuilder;
+      setFontName(fontName: String): TextStyleBuilder;
+      setFontSize(fontSize: Number): TextStyleBuilder;
+    }
 
   }
 }

@@ -7,135 +7,6 @@
 declare module GoogleAppsScript {
   export module Script {
     /**
-     * A builder for document triggers.
-     */
-    export interface DocumentTriggerBuilder {
-      create(): Trigger;
-      onOpen(): DocumentTriggerBuilder;
-    }
-
-    /**
-     * A builder for clock triggers.
-     */
-    export interface ClockTriggerBuilder {
-      after(durationMilliseconds: Integer): ClockTriggerBuilder;
-      at(date: Date): ClockTriggerBuilder;
-      atDate(year: Integer, month: Integer, day: Integer): ClockTriggerBuilder;
-      atHour(hour: Integer): ClockTriggerBuilder;
-      create(): Trigger;
-      everyDays(n: Integer): ClockTriggerBuilder;
-      everyHours(n: Integer): ClockTriggerBuilder;
-      everyMinutes(n: Integer): ClockTriggerBuilder;
-      everyWeeks(n: Integer): ClockTriggerBuilder;
-      inTimezone(timezone: String): ClockTriggerBuilder;
-      nearMinute(minute: Integer): ClockTriggerBuilder;
-      onMonthDay(day: Integer): ClockTriggerBuilder;
-      onWeekDay(day: Base.Weekday): ClockTriggerBuilder;
-    }
-
-    /**
-     * An object used to determine whether the user needs to authorize this script to use
-     *  one or more services, and to provide the URL for an authorization dialog. If the script
-     *  is published as an add-on that uses
-     *  installable triggers, this information
-     *  can be used to control access to sections of code for which the user lacks the necessary
-     *  authorization. Alternately, the add-on can ask the user to open the URL for the
-     *  authorization dialog to resolve the problem.
-     * 
-     * This object is returned by
-     *  ScriptApp.getAuthorizationInfo(authMode). In almost all cases,
-     *  scripts should call
-     *  ScriptApp.getAuthorizationInfo(ScriptApp.AuthMode.FULL), since no other
-     *  authorization mode requires that users grant authorization.
-     */
-    export interface AuthorizationInfo {
-      getAuthorizationStatus(): AuthorizationStatus;
-      getAuthorizationUrl(): String;
-    }
-
-    /**
-     * Access and manipulate script publishing and triggers.
-     * 
-     *  This class allows users to create script triggers and control publishing the script as a service.
-     */
-    export interface ScriptApp {
-      AuthMode: AuthMode
-      AuthorizationStatus: AuthorizationStatus
-      EventType: EventType
-      InstallationSource: InstallationSource
-      TriggerSource: TriggerSource
-      WeekDay: Base.Weekday
-      deleteTrigger(trigger: Trigger): void;
-      getAuthorizationInfo(authMode: AuthMode): AuthorizationInfo;
-      getInstallationSource(): InstallationSource;
-      getOAuthToken(): String;
-      getProjectKey(): String;
-      getProjectTriggers(): Trigger[];
-      getService(): Service;
-      getUserTriggers(document: Document.Document): Trigger[];
-      getUserTriggers(form: Forms.Form): Trigger[];
-      getUserTriggers(spreadsheet: Spreadsheet.Spreadsheet): Trigger[];
-      invalidateAuth(): void;
-      newStateToken(): StateTokenBuilder;
-      newTrigger(functionName: String): TriggerBuilder;
-      getScriptTriggers(): Trigger[];
-    }
-
-    /**
-     * A builder for form triggers.
-     */
-    export interface FormTriggerBuilder {
-      create(): Trigger;
-      onFormSubmit(): FormTriggerBuilder;
-      onOpen(): FormTriggerBuilder;
-    }
-
-    /**
-     * Builder for spreadsheet triggers.
-     */
-    export interface SpreadsheetTriggerBuilder {
-      create(): Trigger;
-      onChange(): SpreadsheetTriggerBuilder;
-      onEdit(): SpreadsheetTriggerBuilder;
-      onFormSubmit(): SpreadsheetTriggerBuilder;
-      onOpen(): SpreadsheetTriggerBuilder;
-    }
-
-    /**
-     * A generic builder for script triggers.
-     */
-    export interface TriggerBuilder {
-      forDocument(document: Document.Document): DocumentTriggerBuilder;
-      forDocument(key: String): DocumentTriggerBuilder;
-      forForm(form: Forms.Form): FormTriggerBuilder;
-      forForm(key: String): FormTriggerBuilder;
-      forSpreadsheet(sheet: Spreadsheet.Spreadsheet): SpreadsheetTriggerBuilder;
-      forSpreadsheet(key: String): SpreadsheetTriggerBuilder;
-      timeBased(): ClockTriggerBuilder;
-    }
-
-    /**
-     * 
-     */
-    export enum Service { MYSELF, DOMAIN, ALL }
-
-    /**
-     * A script trigger.
-     */
-    export interface Trigger {
-      getEventType(): EventType;
-      getHandlerFunction(): String;
-      getTriggerSource(): TriggerSource;
-      getTriggerSourceId(): String;
-      getUniqueId(): String;
-    }
-
-    /**
-     * An enumeration denoting the type of triggered event.
-     */
-    export enum EventType { CLOCK, ON_OPEN, ON_EDIT, ON_FORM_SUBMIT, ON_CHANGE }
-
-    /**
      * An enumeration that identifies which categories of authorized services Apps Script
      *  is able to execute through a triggered function. These values are exposed in
      *  triggered functions as the authMode
@@ -166,6 +37,121 @@ declare module GoogleAppsScript {
     export enum AuthMode { NONE, CUSTOM_FUNCTION, LIMITED, FULL }
 
     /**
+     * An object used to determine whether the user needs to authorize this script to use
+     *  one or more services, and to provide the URL for an authorization dialog. If the script
+     *  is published as an add-on that uses
+     *  installable triggers, this information
+     *  can be used to control access to sections of code for which the user lacks the necessary
+     *  authorization. Alternately, the add-on can ask the user to open the URL for the
+     *  authorization dialog to resolve the problem.
+     * 
+     * This object is returned by
+     *  ScriptApp.getAuthorizationInfo(authMode). In almost all cases,
+     *  scripts should call
+     *  ScriptApp.getAuthorizationInfo(ScriptApp.AuthMode.FULL), since no other
+     *  authorization mode requires that users grant authorization.
+     */
+    export interface AuthorizationInfo {
+      getAuthorizationStatus(): AuthorizationStatus;
+      getAuthorizationUrl(): String;
+    }
+
+    /**
+     * An enumeration denoting the authorization status of a script.
+     */
+    export enum AuthorizationStatus { REQUIRED, NOT_REQUIRED }
+
+    /**
+     * A builder for clock triggers.
+     */
+    export interface ClockTriggerBuilder {
+      after(durationMilliseconds: Integer): ClockTriggerBuilder;
+      at(date: Date): ClockTriggerBuilder;
+      atDate(year: Integer, month: Integer, day: Integer): ClockTriggerBuilder;
+      atHour(hour: Integer): ClockTriggerBuilder;
+      create(): Trigger;
+      everyDays(n: Integer): ClockTriggerBuilder;
+      everyHours(n: Integer): ClockTriggerBuilder;
+      everyMinutes(n: Integer): ClockTriggerBuilder;
+      everyWeeks(n: Integer): ClockTriggerBuilder;
+      inTimezone(timezone: String): ClockTriggerBuilder;
+      nearMinute(minute: Integer): ClockTriggerBuilder;
+      onMonthDay(day: Integer): ClockTriggerBuilder;
+      onWeekDay(day: Base.Weekday): ClockTriggerBuilder;
+    }
+
+    /**
+     * A builder for document triggers.
+     */
+    export interface DocumentTriggerBuilder {
+      create(): Trigger;
+      onOpen(): DocumentTriggerBuilder;
+    }
+
+    /**
+     * An enumeration denoting the type of triggered event.
+     */
+    export enum EventType { CLOCK, ON_OPEN, ON_EDIT, ON_FORM_SUBMIT, ON_CHANGE }
+
+    /**
+     * A builder for form triggers.
+     */
+    export interface FormTriggerBuilder {
+      create(): Trigger;
+      onFormSubmit(): FormTriggerBuilder;
+      onOpen(): FormTriggerBuilder;
+    }
+
+    /**
+     * An enumeration that indicates how the script came to be installed as an add-on for the
+     *  current user.
+     */
+    export enum InstallationSource { APPS_MARKETPLACE_DOMAIN_ADD_ON, NONE, WEB_STORE_ADD_ON }
+
+    /**
+     * Access and manipulate script publishing and triggers. This class allows users to create script
+     *  triggers and control publishing the script as a service.
+     */
+    export interface ScriptApp {
+      AuthMode: AuthMode
+      AuthorizationStatus: AuthorizationStatus
+      EventType: EventType
+      InstallationSource: InstallationSource
+      TriggerSource: TriggerSource
+      WeekDay: Base.Weekday
+      deleteTrigger(trigger: Trigger): void;
+      getAuthorizationInfo(authMode: AuthMode): AuthorizationInfo;
+      getInstallationSource(): InstallationSource;
+      getOAuthToken(): String;
+      getProjectKey(): String;
+      getProjectTriggers(): Trigger[];
+      getService(): Service;
+      getUserTriggers(document: Document.Document): Trigger[];
+      getUserTriggers(form: Forms.Form): Trigger[];
+      getUserTriggers(spreadsheet: Spreadsheet.Spreadsheet): Trigger[];
+      invalidateAuth(): void;
+      newStateToken(): StateTokenBuilder;
+      newTrigger(functionName: String): TriggerBuilder;
+      getScriptTriggers(): Trigger[];
+    }
+
+    /**
+     * 
+     */
+    export enum Service { MYSELF, DOMAIN, ALL }
+
+    /**
+     * Builder for spreadsheet triggers.
+     */
+    export interface SpreadsheetTriggerBuilder {
+      create(): Trigger;
+      onChange(): SpreadsheetTriggerBuilder;
+      onEdit(): SpreadsheetTriggerBuilder;
+      onFormSubmit(): SpreadsheetTriggerBuilder;
+      onOpen(): SpreadsheetTriggerBuilder;
+    }
+
+    /**
      * Allows scripts to create state tokens that can be used in callback APIs (like OAuth flows).
      * 
      *      // Reusable function to generate a callback URL, assuming the script has been published as a
@@ -190,19 +176,33 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * An enumeration denoting the authorization status of a script.
+     * A script trigger.
      */
-    export enum AuthorizationStatus { REQUIRED, NOT_REQUIRED }
+    export interface Trigger {
+      getEventType(): EventType;
+      getHandlerFunction(): String;
+      getTriggerSource(): TriggerSource;
+      getTriggerSourceId(): String;
+      getUniqueId(): String;
+    }
+
+    /**
+     * A generic builder for script triggers.
+     */
+    export interface TriggerBuilder {
+      forDocument(document: Document.Document): DocumentTriggerBuilder;
+      forDocument(key: String): DocumentTriggerBuilder;
+      forForm(form: Forms.Form): FormTriggerBuilder;
+      forForm(key: String): FormTriggerBuilder;
+      forSpreadsheet(sheet: Spreadsheet.Spreadsheet): SpreadsheetTriggerBuilder;
+      forSpreadsheet(key: String): SpreadsheetTriggerBuilder;
+      timeBased(): ClockTriggerBuilder;
+    }
 
     /**
      * An enumeration denoting the source of the event that causes the trigger to fire.
      */
     export enum TriggerSource { SPREADSHEETS, CLOCK, FORMS, DOCUMENTS }
-
-    /**
-     * An enumeration that indicates how the script came to be installed as an add-on for the current user.
-     */
-    export enum InstallationSource { APPS_MARKETPLACE_DOMAIN_ADD_ON, NONE, WEB_STORE_ADD_ON }
 
   }
 }

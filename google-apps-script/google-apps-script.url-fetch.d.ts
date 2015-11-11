@@ -4,28 +4,6 @@
 declare module GoogleAppsScript {
   export module URL_Fetch {
     /**
-     * Fetch resources and communicate with other hosts over the Internet.
-     * 
-     *  This service allows scripts to communicate with other applications or access other resources on
-     *  the web by fetching URLs. A script can use the URL Fetch service to issue HTTP and HTTPS requests
-     *  and receive responses. The URL Fetch service uses Google's network infrastructure for efficiency
-     *  and scaling purposes.
-     * See also
-     * 
-     * OAuthConfig
-     * 
-     * HTTPResponse
-     */
-    export interface UrlFetchApp {
-      fetch(url: String): HTTPResponse;
-      fetch(url: String, params: Object): HTTPResponse;
-      getRequest(url: String): Object;
-      getRequest(url: String, params: Object): Object;
-      addOAuthService(serviceName: String): OAuthConfig;
-      removeOAuthService(serviceName: String): void;
-    }
-
-    /**
      * This class allows users to access specific information on HTTP responses.
      * See also
      * 
@@ -64,6 +42,28 @@ declare module GoogleAppsScript {
       setMethod(method: String): void;
       setParamLocation(location: String): void;
       setRequestTokenUrl(url: String): void;
+    }
+
+    /**
+     * Fetch resources and communicate with other hosts over the Internet.
+     * 
+     *  This service allows scripts to communicate with other applications or access other resources on
+     *  the web by fetching URLs. A script can use the URL Fetch service to issue HTTP and HTTPS requests
+     *  and receive responses. The URL Fetch service uses Google's network infrastructure for efficiency
+     *  and scaling purposes.
+     * See also
+     * 
+     * OAuthConfig
+     * 
+     * HTTPResponse
+     */
+    export interface UrlFetchApp {
+      fetch(url: String): HTTPResponse;
+      fetch(url: String, params: Object): HTTPResponse;
+      getRequest(url: String): Object;
+      getRequest(url: String, params: Object): Object;
+      addOAuthService(serviceName: String): OAuthConfig;
+      removeOAuthService(serviceName: String): void;
     }
 
   }

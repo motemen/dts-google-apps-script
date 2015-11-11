@@ -4,6 +4,21 @@
 declare module GoogleAppsScript {
   export module Utilities {
     /**
+     * A typesafe enum for character sets.
+     */
+    export enum Charset { US_ASCII, UTF_8 }
+
+    /**
+     * Selector of Digest algorithm
+     */
+    export enum DigestAlgorithm { MD2, MD5, SHA_1, SHA_256, SHA_384, SHA_512 }
+
+    /**
+     * Selector of MAC algorithm
+     */
+    export enum MacAlgorithm { HMAC_MD5, HMAC_SHA_1, HMAC_SHA_256, HMAC_SHA_384, HMAC_SHA_512 }
+
+    /**
      * This service provides utilities for string encoding/decoding, date formatting, JSON manipulation,
      *  and other miscellaneous tasks.
      */
@@ -27,6 +42,8 @@ declare module GoogleAppsScript {
       computeHmacSha256Signature(value: String, key: String, charset: Charset): Byte[];
       computeHmacSignature(algorithm: MacAlgorithm, value: String, key: String): Byte[];
       computeHmacSignature(algorithm: MacAlgorithm, value: String, key: String, charset: Charset): Byte[];
+      computeRsaSha256Signature(value: String, key: String): Byte[];
+      computeRsaSha256Signature(value: String, key: String, charset: Charset): Byte[];
       formatDate(date: Date, timeZone: String, format: String): String;
       formatString(template: String, ...args: Object[]): String;
       newBlob(data: Byte[]): Base.Blob;
@@ -45,25 +62,10 @@ declare module GoogleAppsScript {
       jsonStringify(obj: Object): String;
     }
 
-    /**
-     * A typesafe enum for character sets.
-     */
-    export enum Charset { US_ASCII, UTF_8 }
-
-    /**
-     * Selector of MAC algorithm
-     */
-    export enum MacAlgorithm { HMAC_MD5, HMAC_SHA_1, HMAC_SHA_256, HMAC_SHA_384, HMAC_SHA_512 }
-
-    /**
-     * Selector of Digest algorithm
-     */
-    export enum DigestAlgorithm { MD2, MD5, SHA_1, SHA_256, SHA_384, SHA_512 }
-
   }
 }
 
-declare var Utilities: GoogleAppsScript.Utilities.Utilities;
 declare var Charset: GoogleAppsScript.Utilities.Charset;
-declare var MacAlgorithm: GoogleAppsScript.Utilities.MacAlgorithm;
 declare var DigestAlgorithm: GoogleAppsScript.Utilities.DigestAlgorithm;
+declare var MacAlgorithm: GoogleAppsScript.Utilities.MacAlgorithm;
+declare var Utilities: GoogleAppsScript.Utilities.Utilities;

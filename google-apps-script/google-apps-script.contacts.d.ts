@@ -18,55 +18,16 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * This class allows users to access their own Google Contacts and create, remove, and update
-     *  contacts listed therein.
+     * Company field in a Contact.
      */
-    export interface ContactsApp {
-      ExtendedField: ExtendedField
-      Field: Field
-      Gender: Gender
-      Month: Base.Month
-      Priority: Priority
-      Sensitivity: Sensitivity
-      createContact(givenName: String, familyName: String, email: String): Contact;
-      createContactGroup(name: String): ContactGroup;
-      deleteContact(contact: Contact): void;
-      deleteContactGroup(group: ContactGroup): void;
-      getContact(emailAddress: String): Contact;
-      getContactById(id: String): Contact;
-      getContactGroup(name: String): ContactGroup;
-      getContactGroupById(id: String): ContactGroup;
-      getContactGroups(): ContactGroup[];
-      getContacts(): Contact[];
-      getContactsByAddress(query: String): Contact[];
-      getContactsByAddress(query: String, label: Field): Contact[];
-      getContactsByAddress(query: String, label: String): Contact[];
-      getContactsByCompany(query: String): Contact[];
-      getContactsByCustomField(query: Object, label: ExtendedField): Contact[];
-      getContactsByDate(month: Base.Month, day: Integer, label: Field): Contact[];
-      getContactsByDate(month: Base.Month, day: Integer, year: Integer, label: Field): Contact[];
-      getContactsByDate(month: Base.Month, day: Integer, year: Integer, label: String): Contact[];
-      getContactsByDate(month: Base.Month, day: Integer, label: String): Contact[];
-      getContactsByEmailAddress(query: String): Contact[];
-      getContactsByEmailAddress(query: String, label: Field): Contact[];
-      getContactsByEmailAddress(query: String, label: String): Contact[];
-      getContactsByGroup(group: ContactGroup): Contact[];
-      getContactsByIM(query: String): Contact[];
-      getContactsByIM(query: String, label: Field): Contact[];
-      getContactsByIM(query: String, label: String): Contact[];
-      getContactsByJobTitle(query: String): Contact[];
-      getContactsByName(query: String): Contact[];
-      getContactsByName(query: String, label: Field): Contact[];
-      getContactsByNotes(query: String): Contact[];
-      getContactsByPhone(query: String): Contact[];
-      getContactsByPhone(query: String, label: Field): Contact[];
-      getContactsByPhone(query: String, label: String): Contact[];
-      getContactsByUrl(query: String): Contact[];
-      getContactsByUrl(query: String, label: Field): Contact[];
-      getContactsByUrl(query: String, label: String): Contact[];
-      findByEmailAddress(email: String): Contact;
-      findContactGroup(name: String): ContactGroup;
-      getAllContacts(): Contact[];
+    export interface CompanyField {
+      deleteCompanyField(): void;
+      getCompanyName(): String;
+      getJobTitle(): String;
+      isPrimary(): Boolean;
+      setAsPrimary(): CompanyField;
+      setCompanyName(company: String): CompanyField;
+      setJobTitle(title: String): CompanyField;
     }
 
     /**
@@ -150,16 +111,98 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Company field in a Contact.
+     * A ContactGroup is is a group of contacts.
      */
-    export interface CompanyField {
-      deleteCompanyField(): void;
-      getCompanyName(): String;
-      getJobTitle(): String;
-      isPrimary(): Boolean;
-      setAsPrimary(): CompanyField;
-      setCompanyName(company: String): CompanyField;
-      setJobTitle(title: String): CompanyField;
+    export interface ContactGroup {
+      addContact(contact: Contact): ContactGroup;
+      deleteGroup(): void;
+      getContacts(): Contact[];
+      getId(): String;
+      getName(): String;
+      isSystemGroup(): Boolean;
+      removeContact(contact: Contact): ContactGroup;
+      setName(name: String): ContactGroup;
+      getGroupName(): String;
+      setGroupName(name: String): void;
+    }
+
+    /**
+     * This class allows users to access their own Google Contacts and create, remove, and update
+     *  contacts listed therein.
+     */
+    export interface ContactsApp {
+      ExtendedField: ExtendedField
+      Field: Field
+      Gender: Gender
+      Month: Base.Month
+      Priority: Priority
+      Sensitivity: Sensitivity
+      createContact(givenName: String, familyName: String, email: String): Contact;
+      createContactGroup(name: String): ContactGroup;
+      deleteContact(contact: Contact): void;
+      deleteContactGroup(group: ContactGroup): void;
+      getContact(emailAddress: String): Contact;
+      getContactById(id: String): Contact;
+      getContactGroup(name: String): ContactGroup;
+      getContactGroupById(id: String): ContactGroup;
+      getContactGroups(): ContactGroup[];
+      getContacts(): Contact[];
+      getContactsByAddress(query: String): Contact[];
+      getContactsByAddress(query: String, label: Field): Contact[];
+      getContactsByAddress(query: String, label: String): Contact[];
+      getContactsByCompany(query: String): Contact[];
+      getContactsByCustomField(query: Object, label: ExtendedField): Contact[];
+      getContactsByDate(month: Base.Month, day: Integer, label: Field): Contact[];
+      getContactsByDate(month: Base.Month, day: Integer, year: Integer, label: Field): Contact[];
+      getContactsByDate(month: Base.Month, day: Integer, year: Integer, label: String): Contact[];
+      getContactsByDate(month: Base.Month, day: Integer, label: String): Contact[];
+      getContactsByEmailAddress(query: String): Contact[];
+      getContactsByEmailAddress(query: String, label: Field): Contact[];
+      getContactsByEmailAddress(query: String, label: String): Contact[];
+      getContactsByGroup(group: ContactGroup): Contact[];
+      getContactsByIM(query: String): Contact[];
+      getContactsByIM(query: String, label: Field): Contact[];
+      getContactsByIM(query: String, label: String): Contact[];
+      getContactsByJobTitle(query: String): Contact[];
+      getContactsByName(query: String): Contact[];
+      getContactsByName(query: String, label: Field): Contact[];
+      getContactsByNotes(query: String): Contact[];
+      getContactsByPhone(query: String): Contact[];
+      getContactsByPhone(query: String, label: Field): Contact[];
+      getContactsByPhone(query: String, label: String): Contact[];
+      getContactsByUrl(query: String): Contact[];
+      getContactsByUrl(query: String, label: Field): Contact[];
+      getContactsByUrl(query: String, label: String): Contact[];
+      findByEmailAddress(email: String): Contact;
+      findContactGroup(name: String): ContactGroup;
+      getAllContacts(): Contact[];
+    }
+
+    /**
+     * A custom field in a Contact.
+     */
+    export interface CustomField {
+      deleteCustomField(): void;
+      getLabel(): Object;
+      getValue(): Object;
+      setLabel(field: ExtendedField): CustomField;
+      setLabel(label: String): CustomField;
+      setValue(value: Object): CustomField;
+    }
+
+    /**
+     * A date field in a Contact.
+     */
+    export interface DateField {
+      deleteDateField(): void;
+      getDay(): Integer;
+      getLabel(): Object;
+      getMonth(): Base.Month;
+      getYear(): Integer;
+      setDate(month: Base.Month, day: Integer): DateField;
+      setDate(month: Base.Month, day: Integer, year: Integer): DateField;
+      setLabel(label: Field): DateField;
+      setLabel(label: String): DateField;
     }
 
     /**
@@ -179,15 +222,32 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A custom field in a Contact.
+     * An enum for extended contacts fields.
      */
-    export interface CustomField {
-      deleteCustomField(): void;
+    export enum ExtendedField { HOBBY, MILEAGE, LANGUAGE, GENDER, BILLING_INFORMATION, DIRECTORY_SERVER, SENSITIVITY, PRIORITY, HOME, WORK, USER, OTHER }
+
+    /**
+     * An enum for contacts fields.
+     */
+    export enum Field { FULL_NAME, GIVEN_NAME, MIDDLE_NAME, FAMILY_NAME, MAIDEN_NAME, NICKNAME, SHORT_NAME, INITIALS, PREFIX, SUFFIX, HOME_EMAIL, WORK_EMAIL, BIRTHDAY, ANNIVERSARY, HOME_ADDRESS, WORK_ADDRESS, ASSISTANT_PHONE, CALLBACK_PHONE, MAIN_PHONE, PAGER, HOME_FAX, WORK_FAX, HOME_PHONE, WORK_PHONE, MOBILE_PHONE, GOOGLE_VOICE, NOTES, GOOGLE_TALK, AIM, YAHOO, SKYPE, QQ, MSN, ICQ, JABBER, BLOG, FTP, PROFILE, HOME_PAGE, WORK_WEBSITE, HOME_WEBSITE, JOB_TITLE, COMPANY }
+
+    /**
+     * An enum for contact gender.
+     */
+    export enum Gender { MALE, FEMALE }
+
+    /**
+     * An instant messaging field in a Contact.
+     */
+    export interface IMField {
+      deleteIMField(): void;
+      getAddress(): String;
       getLabel(): Object;
-      getValue(): Object;
-      setLabel(field: ExtendedField): CustomField;
-      setLabel(label: String): CustomField;
-      setValue(value: Object): CustomField;
+      isPrimary(): Boolean;
+      setAddress(address: String): IMField;
+      setAsPrimary(): IMField;
+      setLabel(field: Field): IMField;
+      setLabel(label: String): IMField;
     }
 
     /**
@@ -205,40 +265,14 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * A ContactGroup is is a group of contacts.
+     * An enum for contact priority.
      */
-    export interface ContactGroup {
-      addContact(contact: Contact): ContactGroup;
-      deleteGroup(): void;
-      getContacts(): Contact[];
-      getId(): String;
-      getName(): String;
-      isSystemGroup(): Boolean;
-      removeContact(contact: Contact): ContactGroup;
-      setName(name: String): ContactGroup;
-      getGroupName(): String;
-      setGroupName(name: String): void;
-    }
+    export enum Priority { HIGH, LOW, NORMAL }
 
     /**
-     * An enum for extended contacts fields.
+     * An enum for contact sensitivity.
      */
-    export enum ExtendedField { HOBBY, MILEAGE, LANGUAGE, GENDER, BILLING_INFORMATION, DIRECTORY_SERVER, SENSITIVITY, PRIORITY, HOME, WORK, USER, OTHER }
-
-    /**
-     * A date field in a Contact.
-     */
-    export interface DateField {
-      deleteDateField(): void;
-      getDay(): Integer;
-      getLabel(): Object;
-      getMonth(): Base.Month;
-      getYear(): Integer;
-      setDate(month: Base.Month, day: Integer): DateField;
-      setDate(month: Base.Month, day: Integer, year: Integer): DateField;
-      setLabel(label: Field): DateField;
-      setLabel(label: String): DateField;
-    }
+    export enum Sensitivity { CONFIDENTIAL, NORMAL, PERSONAL, PRIVATE }
 
     /**
      * A URL field in a Contact.
@@ -253,40 +287,6 @@ declare module GoogleAppsScript {
       setLabel(field: Field): UrlField;
       setLabel(label: String): UrlField;
     }
-
-    /**
-     * An instant messaging field in a Contact.
-     */
-    export interface IMField {
-      deleteIMField(): void;
-      getAddress(): String;
-      getLabel(): Object;
-      isPrimary(): Boolean;
-      setAddress(address: String): IMField;
-      setAsPrimary(): IMField;
-      setLabel(field: Field): IMField;
-      setLabel(label: String): IMField;
-    }
-
-    /**
-     * An enum for contact sensitivity.
-     */
-    export enum Sensitivity { CONFIDENTIAL, NORMAL, PERSONAL, PRIVATE }
-
-    /**
-     * An enum for contact gender.
-     */
-    export enum Gender { MALE, FEMALE }
-
-    /**
-     * An enum for contact priority.
-     */
-    export enum Priority { HIGH, LOW, NORMAL }
-
-    /**
-     * An enum for contacts fields.
-     */
-    export enum Field { FULL_NAME, GIVEN_NAME, MIDDLE_NAME, FAMILY_NAME, MAIDEN_NAME, NICKNAME, SHORT_NAME, INITIALS, PREFIX, SUFFIX, HOME_EMAIL, WORK_EMAIL, BIRTHDAY, ANNIVERSARY, HOME_ADDRESS, WORK_ADDRESS, ASSISTANT_PHONE, CALLBACK_PHONE, MAIN_PHONE, PAGER, HOME_FAX, WORK_FAX, HOME_PHONE, WORK_PHONE, MOBILE_PHONE, GOOGLE_VOICE, NOTES, GOOGLE_TALK, AIM, YAHOO, SKYPE, QQ, MSN, ICQ, JABBER, BLOG, FTP, PROFILE, HOME_PAGE, WORK_WEBSITE, HOME_WEBSITE, JOB_TITLE, COMPANY }
 
   }
 }
