@@ -9,18 +9,18 @@ process.stdin.on('end', () => {
   var data = JSON.parse(input);
 
   function mkDoc (doc) {
-    var doc = [];
-    doc.push('/**');
-    decl.doc.replace(/( *\n){3,}/g, '\n\n').replace(/\s+$/, '').split(/\n/).forEach((line) => doc.push(' * ' + line));
-    doc.push(' */');
-    return doc;
+    var lines = [];
+    lines.push('/**');
+    doc.replace(/( *\n){3,}/g, '\n\n').replace(/\s+$/, '').split(/\n/).forEach((line) => lines.push(' * ' + line));
+    lines.push(' */');
+    return lines;
   }
 
   function indent (s) {
     return s.replace(/^./, '  $&');
   }
 
-  for (var cat in data.categories) {
+  Object.keys(data.categories).sort().forEach(function (cat) {
     var result = [];
 
     var catName = data.categories[cat].name.replace(/\W/g, '_');
@@ -53,9 +53,9 @@ process.stdin.on('end', () => {
       '  export module ' + catName + ' {'
     );
 
-    for (var name in decls) {
+    Object.keys(decls).sort().forEach(function (name) {
       var decl = decls[name];
-      if (!decl) continue;
+      if (!decl) return;
 
       var lines = mkDoc(decl.doc);
       if (decl.kind === 'enum') {
@@ -84,7 +84,7 @@ process.stdin.on('end', () => {
       }
 
       result = result.concat(lines.map(indent).map(indent));
-    }
+    });
 
     result.push(
       '  }',
@@ -92,7 +92,7 @@ process.stdin.on('end', () => {
       ''
     );
 
-    for (var name in exports) {
+    Object.keys(exports).sort().forEach(function (name) {
       var line = 'declare var ' + name + ': GoogleAppsScript.' + catName + '.' + name + ';'
       if (name === 'MimeType') {
         result.push('// conflicts with MimeType in lib.d.ts');
@@ -100,7 +100,7 @@ process.stdin.on('end', () => {
       } else {
         result.push(line);
       }
-    }
+    });
 
     result = references.map((ref) => '/// <reference path="google-apps-script.' + ref + '.d.ts" />')
       .concat('', result);
@@ -109,5 +109,5 @@ process.stdin.on('end', () => {
     var f = fs.openSync(file, 'w');
     fs.writeSync(f, result.join('\n'));
     console.error('Wrote to ' + file);
-  }
+  });
 });
