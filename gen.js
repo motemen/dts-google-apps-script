@@ -1,6 +1,12 @@
 #!/usr/bin/env node --harmony
 
 var fs = require('fs');
+var header = fs.readFileSync('HEADER', { encoding: 'utf-8' })
+  .replace(/{date}/, function () {
+    var date = new Date();
+    return date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).substr(-2) + '-' + ('0' + date.getDate()).substr(-2)
+  });
+
 var outFiles = {};
 
 var input = '';
@@ -106,7 +112,8 @@ process.stdin.on('end', () => {
       }
     });
 
-    result = references.map((ref) => '/// <reference path="google-apps-script.' + ref + '.d.ts" />')
+    result = [ header ]
+      .concat(references.map((ref) => '/// <reference path="google-apps-script.' + ref + '.d.ts" />'))
       .concat('', result);
 
     var file = 'google-apps-script/google-apps-script.' + cat + '.d.ts';
