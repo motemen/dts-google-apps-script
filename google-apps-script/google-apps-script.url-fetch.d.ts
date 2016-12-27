@@ -14,7 +14,7 @@ declare module GoogleAppsScript {
      * 
      * UrlFetchApp
      */
-    export interface HTTPResponse {
+    export interface HTTPResponse extends Base.BlobSource {
       getAllHeaders(): Object;
       getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
