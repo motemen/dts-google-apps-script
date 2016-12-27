@@ -20,7 +20,7 @@ declare module GoogleAppsScript {
      *      // just pass it directly to that method
      *      var file = DocsList.createFile(attachments[0]);
      */
-    export interface Attachment {
+    export interface Attachment extends Base.BlobSource {
       deleteAttachment(): void;
       getAs(contentType: string): Base.Blob;
       getAttachmentType(): AttachmentType;
