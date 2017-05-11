@@ -1,4 +1,4 @@
-// Type definitions for Google Apps Script 2015-11-12
+// Type definitions for Google Apps Script 2017-05-12
 // Project: https://developers.google.com/apps-script/
 // Definitions by: motemen <https://github.com/motemen/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -36,7 +36,7 @@ declare module GoogleAppsScript {
      * 
      *      var doc = DocumentApp.getActiveDocument();
      *      var body = doc.getBody();
-     *      
+     *     
      *      // Append a paragraph and a page break to the document body section directly.
      *      body.appendParagraph("A paragraph.");
      *      body.appendPageBreak();
@@ -64,6 +64,7 @@ declare module GoogleAppsScript {
       getAttributes(): Object;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
+      getHeadingAttributes(paragraphHeading: ParagraphHeading): Object;
       getImages(): InlineImage[];
       getListItems(): ListItem[];
       getMarginBottom(): Number;
@@ -94,6 +95,7 @@ declare module GoogleAppsScript {
       removeChild(child: Element): Body;
       replaceText(searchPattern: string, replacement: string): Element;
       setAttributes(attributes: Object): Body;
+      setHeadingAttributes(paragraphHeading: ParagraphHeading, attributes: Object): Body;
       setMarginBottom(marginBottom: Number): Body;
       setMarginLeft(marginLeft: Number): Body;
       setMarginRight(marginRight: Number): Body;
@@ -236,6 +238,7 @@ declare module GoogleAppsScript {
       GlyphType: GlyphType
       HorizontalAlignment: HorizontalAlignment
       ParagraphHeading: ParagraphHeading
+      PositionedLayout: PositionedLayout
       TextAlignment: TextAlignment
       VerticalAlignment: VerticalAlignment
       create(name: string): Document;
@@ -737,6 +740,8 @@ declare module GoogleAppsScript {
      */
     export interface InlineDrawing {
       copy(): InlineDrawing;
+      getAltDescription(): string;
+      getAltTitle(): string;
       getAttributes(): Object;
       getNextSibling(): Element;
       getParent(): ContainerElement;
@@ -745,6 +750,8 @@ declare module GoogleAppsScript {
       isAtDocumentEnd(): boolean;
       merge(): InlineDrawing;
       removeFromParent(): InlineDrawing;
+      setAltDescription(description: string): InlineDrawing;
+      setAltTitle(title: string): InlineDrawing;
       setAttributes(attributes: Object): InlineDrawing;
     }
 
@@ -757,6 +764,8 @@ declare module GoogleAppsScript {
      */
     export interface InlineImage {
       copy(): InlineImage;
+      getAltDescription(): string;
+      getAltTitle(): string;
       getAs(contentType: string): Base.Blob;
       getAttributes(): Object;
       getBlob(): Base.Blob;
@@ -770,6 +779,8 @@ declare module GoogleAppsScript {
       isAtDocumentEnd(): boolean;
       merge(): InlineImage;
       removeFromParent(): InlineImage;
+      setAltDescription(description: string): InlineImage;
+      setAltTitle(title: string): InlineImage;
       setAttributes(attributes: Object): InlineImage;
       setHeight(height: Integer): InlineImage;
       setLinkUrl(url: string): InlineImage;
@@ -810,6 +821,7 @@ declare module GoogleAppsScript {
      *      item2.setListId(item1);
      */
     export interface ListItem {
+      addPositionedImage(image: Base.BlobSource): PositionedImage;
       appendHorizontalRule(): HorizontalRule;
       appendInlineImage(image: Base.BlobSource): InlineImage;
       appendInlineImage(image: InlineImage): InlineImage;
@@ -840,6 +852,8 @@ declare module GoogleAppsScript {
       getNextSibling(): Element;
       getNumChildren(): Integer;
       getParent(): ContainerElement;
+      getPositionedImage(id: string): PositionedImage;
+      getPositionedImages(): PositionedImage[];
       getPreviousSibling(): Element;
       getSpacingAfter(): Number;
       getSpacingBefore(): Number;
@@ -858,6 +872,7 @@ declare module GoogleAppsScript {
       merge(): ListItem;
       removeChild(child: Element): ListItem;
       removeFromParent(): ListItem;
+      removePositionedImage(id: string): boolean;
       replaceText(searchPattern: string, replacement: string): Element;
       setAlignment(alignment: HorizontalAlignment): ListItem;
       setAttributes(attributes: Object): ListItem;
@@ -945,6 +960,7 @@ declare module GoogleAppsScript {
      *      body.appendParagraph("This is a typical paragraph.");
      */
     export interface Paragraph {
+      addPositionedImage(image: Base.BlobSource): PositionedImage;
       appendHorizontalRule(): HorizontalRule;
       appendInlineImage(image: Base.BlobSource): InlineImage;
       appendInlineImage(image: InlineImage): InlineImage;
@@ -972,6 +988,8 @@ declare module GoogleAppsScript {
       getNextSibling(): Element;
       getNumChildren(): Integer;
       getParent(): ContainerElement;
+      getPositionedImage(id: string): PositionedImage;
+      getPositionedImages(): PositionedImage[];
       getPreviousSibling(): Element;
       getSpacingAfter(): Number;
       getSpacingBefore(): Number;
@@ -990,6 +1008,7 @@ declare module GoogleAppsScript {
       merge(): Paragraph;
       removeChild(child: Element): Paragraph;
       removeFromParent(): Paragraph;
+      removePositionedImage(id: string): boolean;
       replaceText(searchPattern: string, replacement: string): Element;
       setAlignment(alignment: HorizontalAlignment): Paragraph;
       setAttributes(attributes: Object): Paragraph;
@@ -1058,6 +1077,54 @@ declare module GoogleAppsScript {
       insertInlineImage(image: Base.BlobSource): InlineImage;
       insertText(text: string): Text;
     }
+
+    /**
+     * Fixed position image anchored to a Paragraph.
+     *  Unlike an InlineImage,
+     *  a PositionedImage is not an
+     *  Element.
+     *  It does not have a parent or sibling
+     *  Element.
+     *  Instead, it is anchored to a Paragraph
+     *  or ListItem,
+     *  and is placed via offsets from that anchor. A PositionedImage
+     *  has an ID that can be used to reference it.
+     * 
+     *      var body = DocumentApp.getActiveDocument().getBody();
+     *     
+     *      // Append a new paragraph.
+     *      var paragraph = body.appendParagraph("New paragraph to anchor the image to.");
+     *      
+     *      // Get an image in Drive from its ID.
+     *      var image = DriveApp.getFileById('ENTER_IMAGE_FILE_ID_HERE').getBlob();
+     *      
+     *      // Add the PositionedImage with offsets (in points).
+     *      var posImage = paragraph.addPositionedImage(image)
+     *          .setTopOffset(60)
+     *          .setLeftOffset(40);
+     */
+    export interface PositionedImage {
+      getAs(contentType: string): Base.Blob;
+      getBlob(): Base.Blob;
+      getHeight(): Integer;
+      getId(): string;
+      getLayout(): PositionedLayout;
+      getLeftOffset(): Number;
+      getParagraph(): Paragraph;
+      getTopOffset(): Number;
+      getWidth(): Integer;
+      setHeight(height: Integer): PositionedImage;
+      setLayout(layout: PositionedLayout): PositionedImage;
+      setLeftOffset(offset: Number): PositionedImage;
+      setTopOffset(offset: Number): PositionedImage;
+      setWidth(width: Integer): PositionedImage;
+    }
+
+    /**
+     * An enumeration that specifies how to lay out a PositionedImage in
+     *  relation to surrounding text.
+     */
+    export enum PositionedLayout { ABOVE_TEXT, BREAK_BOTH, BREAK_LEFT, BREAK_RIGHT, WRAP_TEXT }
 
     /**
      * A range of elements in a document. The user's selection is represented as a
@@ -1215,6 +1282,7 @@ declare module GoogleAppsScript {
       getBackgroundColor(): string;
       getChild(childIndex: Integer): Element;
       getChildIndex(child: Element): Integer;
+      getColSpan(): Integer;
       getLinkUrl(): string;
       getNextSibling(): Element;
       getNumChildren(): Integer;
@@ -1226,6 +1294,7 @@ declare module GoogleAppsScript {
       getParentRow(): TableRow;
       getParentTable(): Table;
       getPreviousSibling(): Element;
+      getRowSpan(): Integer;
       getText(): string;
       getTextAlignment(): TextAlignment;
       getType(): ElementType;

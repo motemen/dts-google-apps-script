@@ -1,4 +1,4 @@
-// Type definitions for Google Apps Script 2015-11-12
+// Type definitions for Google Apps Script 2017-05-12
 // Project: https://developers.google.com/apps-script/
 // Definitions by: motemen <https://github.com/motemen/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -31,7 +31,7 @@ declare module GoogleAppsScript {
     /**
      * Allows scripts to store simple data in key-value pairs scoped to one script, one user of a
      *  script, or one document in which an add-on is used. Properties cannot be shared between scripts.
-     *  For more information about when to use each type of property, see the 
+     *  For more information about when to use each type of property, see the
      *  guide to the Properties service.
      * 
      *      // Sets three properties of different types.

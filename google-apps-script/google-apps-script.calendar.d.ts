@@ -1,4 +1,4 @@
-// Type definitions for Google Apps Script 2015-11-12
+// Type definitions for Google Apps Script 2017-05-12
 // Project: https://developers.google.com/apps-script/
 // Definitions by: motemen <https://github.com/motemen/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -52,6 +52,7 @@ declare module GoogleAppsScript {
      */
     export interface CalendarApp {
       Color: Color
+      EventColor: EventColor
       GuestStatus: GuestStatus
       Month: Base.Month
       Visibility: Visibility
@@ -113,6 +114,7 @@ declare module GoogleAppsScript {
       getAllDayEndDate(): Date;
       getAllDayStartDate(): Date;
       getAllTagKeys(): String[];
+      getColor(): string;
       getCreators(): String[];
       getDateCreated(): Date;
       getDescription(): string;
@@ -144,6 +146,7 @@ declare module GoogleAppsScript {
       resetRemindersToDefault(): CalendarEvent;
       setAllDayDate(date: Date): CalendarEvent;
       setAnyoneCanAddSelf(anyoneCanAddSelf: boolean): CalendarEvent;
+      setColor(color: string): CalendarEvent;
       setDescription(description: string): CalendarEvent;
       setGuestsCanInviteOthers(guestsCanInviteOthers: boolean): CalendarEvent;
       setGuestsCanModify(guestsCanModify: boolean): CalendarEvent;
@@ -168,6 +171,7 @@ declare module GoogleAppsScript {
       deleteEventSeries(): void;
       deleteTag(key: string): CalendarEventSeries;
       getAllTagKeys(): String[];
+      getColor(): string;
       getCreators(): String[];
       getDateCreated(): Date;
       getDescription(): string;
@@ -193,6 +197,7 @@ declare module GoogleAppsScript {
       removeGuest(email: string): CalendarEventSeries;
       resetRemindersToDefault(): CalendarEventSeries;
       setAnyoneCanAddSelf(anyoneCanAddSelf: boolean): CalendarEventSeries;
+      setColor(color: string): CalendarEventSeries;
       setDescription(description: string): CalendarEventSeries;
       setGuestsCanInviteOthers(guestsCanInviteOthers: boolean): CalendarEventSeries;
       setGuestsCanModify(guestsCanModify: boolean): CalendarEventSeries;
@@ -210,6 +215,11 @@ declare module GoogleAppsScript {
      * An enum representing the named colors available in the Calendar service.
      */
     export enum Color { BLUE, BROWN, CHARCOAL, CHESTNUT, GRAY, GREEN, INDIGO, LIME, MUSTARD, OLIVE, ORANGE, PINK, PLUM, PURPLE, RED, RED_ORANGE, SEA_BLUE, SLATE, TEAL, TURQOISE, YELLOW }
+
+    /**
+     * An enum representing the named event colors available in the Calendar service.
+     */
+    export enum EventColor { PALE_BLUE, PALE_GREEN, MAUVE, PALE_RED, YELLOW, ORANGE, CYAN, GRAY, BLUE, GREEN, RED }
 
     /**
      * Represents a guest of an event.

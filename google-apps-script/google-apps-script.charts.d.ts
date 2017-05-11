@@ -1,4 +1,4 @@
-// Type definitions for Google Apps Script 2015-11-12
+// Type definitions for Google Apps Script 2017-05-12
 // Project: https://developers.google.com/apps-script/
 // Definitions by: motemen <https://github.com/motemen/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -232,7 +232,7 @@ declare module GoogleAppsScript {
     /**
      * Chart types supported by the Charts service.
      */
-    export enum ChartType { AREA, BAR, COLUMN, LINE, PIE, SCATTER, TABLE }
+    export enum ChartType { AREA, BAR, COLUMN, COMBO, HISTOGRAM, LINE, PIE, SCATTER, TABLE }
 
     /**
      * Entry point for creating Charts in scripts.
@@ -446,10 +446,10 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface DashboardPanel {
-      add(widget: UI.Widget): DashboardPanel;
       getId(): string;
       getType(): string;
       setId(id: string): DashboardPanel;
+      add(widget: UI.Widget): DashboardPanel;
     }
 
     /**

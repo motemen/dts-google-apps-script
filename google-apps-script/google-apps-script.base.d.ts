@@ -1,4 +1,4 @@
-// Type definitions for Google Apps Script 2015-11-12
+// Type definitions for Google Apps Script 2017-05-12
 // Project: https://developers.google.com/apps-script/
 // Definitions by: motemen <https://github.com/motemen/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
@@ -58,6 +58,8 @@ declare module GoogleAppsScript {
      * 
      * JdbcClobA JDBC Clob.
      * 
+     * PositionedImageFixed position image anchored to a Paragraph.
+     * 
      * SpreadsheetThis class allows users to access and modify Google Sheets files.
      * 
      * StaticMapAllows for the creation and decoration of static map images.
@@ -68,7 +70,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * This class provides access to Google Apps specific dialog boxes.
+     * This class provides access to G Suite specific dialog boxes.
      * 
      *  The methods in this class are only available for use in the context of a Google Spreadsheet.
      * See also
@@ -219,6 +221,7 @@ declare module GoogleAppsScript {
       getActiveUserLocale(): string;
       getEffectiveUser(): User;
       getScriptTimeZone(): string;
+      getTemporaryActiveUserKey(): string;
       getTimeZone(): string;
       getUser(): User;
     }
