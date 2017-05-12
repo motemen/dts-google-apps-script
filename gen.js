@@ -33,10 +33,18 @@ process.stdin.on('end', () => {
     var decls = data.categories[cat].decls;
     var exports = {};
 
-    function mkTypedName (o) {
+    function mkTypedName (o, isField) {
       var name = o.name,
           typeName = o.type.name,
           typeCat  = o.type.category;
+
+      if (isField === true) {
+        if (data.categories[typeCat] && data.categories[typeCat].decls[typeName]) {
+          if (data.categories[typeCat].decls[typeName].kind === 'enum') {
+            typeName = 'typeof ' + typeName;
+          }
+        }
+      }
 
       if (typeCat && typeCat !== cat) {
         typeName = data.categories[typeCat].name.replace(/\W/g, '_') + '.' + typeName;
@@ -73,7 +81,7 @@ process.stdin.on('end', () => {
         lines.push('');
       } else {
         lines.push('export interface ' + decl.name + ' {');
-        lines.push.apply(lines, decl.properties.map(mkTypedName).map(indent))
+        lines.push.apply(lines, decl.properties.map(p => mkTypedName(p, true)).map(indent))
         lines.push.apply(lines,
           decl.methods.map((method) =>
             mkTypedName({
