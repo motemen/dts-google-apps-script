@@ -36,12 +36,13 @@ process.stdin.on('end', () => {
     function mkTypedName (o, isField) {
       var name = o.name,
           typeName = o.type.name,
-          typeCat  = o.type.category;
+          typeCat  = o.type.category,
+          isType = false;
 
       if (isField === true) {
         if (data.categories[typeCat] && data.categories[typeCat].decls[typeName]) {
           if (data.categories[typeCat].decls[typeName].kind === 'enum') {
-            typeName = 'typeof ' + typeName;
+            isType = true;
           }
         }
       }
@@ -62,12 +63,12 @@ process.stdin.on('end', () => {
         typeName = typeName.toLowerCase();
       }
 
-      return name + ': ' + typeName;
+      return name + ': ' + (isType ? 'typeof ' : '') + typeName;
     }
 
     var references = [ 'types' ];
     result.push(
-      'declare module GoogleAppsScript {',
+      'declare namespace GoogleAppsScript {',
       '  export module ' + catName + ' {'
     );
 
@@ -87,7 +88,7 @@ process.stdin.on('end', () => {
         lines.push('export enum ' + name + ' { ' + decl.properties.map((p) => p.name).join(', ') + ' }');
       } else {
         lines.push('export interface ' + name + ' {');
-        lines.push.apply(lines, decl.properties.map(p => mkTypedName(p, true)).map(indent))
+        lines.push.apply(lines, decl.properties.map(p => mkTypedName(p, true) + ';').map(indent))
         lines.push.apply(lines,
           decl.methods.map((method) =>
             mkTypedName({
@@ -137,7 +138,7 @@ process.stdin.on('end', () => {
 
     var file = 'google-apps-script/google-apps-script.' + cat + '.d.ts';
     var f = fs.openSync(file, 'w');
-    fs.writeSync(f, result.join('\n'));
+    fs.writeSync(f, result.join('\n').replace(/ +$/mg, '') + '\n');
     console.error('Wrote to ' + file);
   });
 });

@@ -6,7 +6,7 @@
 /// <reference path="google-apps-script.types.d.ts" />
 /// <reference path="google-apps-script.base.d.ts" />
 
-declare module GoogleAppsScript {
+declare namespace GoogleAppsScript {
   export module Contacts {
     /**
      * Address field in a contact.
@@ -136,12 +136,12 @@ declare module GoogleAppsScript {
      *  contacts listed therein.
      */
     export interface ContactsApp {
-      ExtendedField: typeof ExtendedField
-      Field: typeof Field
-      Gender: typeof Gender
-      Month: Base.typeof Month
-      Priority: typeof Priority
-      Sensitivity: typeof Sensitivity
+      ExtendedField: typeof ExtendedField;
+      Field: typeof Field;
+      Gender: typeof Gender;
+      Month: typeof Base.Month;
+      Priority: typeof Priority;
+      Sensitivity: typeof Sensitivity;
       createContact(givenName: string, familyName: string, email: string): Contact;
       createContactGroup(name: string): ContactGroup;
       deleteContact(contact: Contact): void;
@@ -197,10 +197,10 @@ declare module GoogleAppsScript {
 
     /**
      * A date field in a Contact.
-     * 
+     *
      * This class is only used by the Contacts service, and dates used elsewhere in App Script use
      *  JavaScript's standard
-     *  
+     *
      *  Date object.
      */
     export interface DateField {

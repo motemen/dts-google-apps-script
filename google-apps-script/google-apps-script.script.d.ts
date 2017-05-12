@@ -9,7 +9,7 @@
 /// <reference path="google-apps-script.forms.d.ts" />
 /// <reference path="google-apps-script.spreadsheet.d.ts" />
 
-declare module GoogleAppsScript {
+declare namespace GoogleAppsScript {
   export module Script {
     /**
      * An enumeration that identifies which categories of authorized services Apps Script
@@ -18,7 +18,7 @@ declare module GoogleAppsScript {
      *  property of the event parameter, e. For
      *  more information, see the
      *  guide to the authorization lifecycle for add-ons.
-     * 
+     *
      *      function onOpen(e) {
      *        var menu = SpreadsheetApp.getUi().createAddonMenu();
      *        if (e && e.authMode == ScriptApp.AuthMode.NONE) {
@@ -49,7 +49,7 @@ declare module GoogleAppsScript {
      *  can be used to control access to sections of code for which the user lacks the necessary
      *  authorization. Alternately, the add-on can ask the user to open the URL for the
      *  authorization dialog to resolve the problem.
-     * 
+     *
      * This object is returned by
      *  ScriptApp.getAuthorizationInfo(authMode). In almost all cases,
      *  scripts should call
@@ -118,12 +118,12 @@ declare module GoogleAppsScript {
      *  triggers and control publishing the script as a service.
      */
     export interface ScriptApp {
-      AuthMode: typeof AuthMode
-      AuthorizationStatus: typeof AuthorizationStatus
-      EventType: typeof EventType
-      InstallationSource: typeof InstallationSource
-      TriggerSource: typeof TriggerSource
-      WeekDay: Base.typeof Weekday
+      AuthMode: typeof AuthMode;
+      AuthorizationStatus: typeof AuthorizationStatus;
+      EventType: typeof EventType;
+      InstallationSource: typeof InstallationSource;
+      TriggerSource: typeof TriggerSource;
+      WeekDay: typeof Base.Weekday;
       deleteTrigger(trigger: Trigger): void;
       getAuthorizationInfo(authMode: AuthMode): AuthorizationInfo;
       getInstallationSource(): InstallationSource;
@@ -145,7 +145,7 @@ declare module GoogleAppsScript {
      * Access and manipulate script publishing.
      */
     export interface Service {
-      Restriction: typeof Service.Restriction
+      Restriction: typeof Service.Restriction;
       disable(): void;
       getUrl(): string;
       isEnabled(): boolean;
@@ -153,7 +153,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * 
+     *
      */
     namespace Service {
     export enum Restriction { MYSELF, DOMAIN, ALL }
@@ -172,7 +172,7 @@ declare module GoogleAppsScript {
 
     /**
      * Allows scripts to create state tokens that can be used in callback APIs (like OAuth flows).
-     * 
+     *
      *      // Reusable function to generate a callback URL, assuming the script has been published as a
      *      // web app (necessary to obtain the URL programmatically). If the script has not been published
      *      // as a web app, set `var url` in the first line to the URL of your script project (which

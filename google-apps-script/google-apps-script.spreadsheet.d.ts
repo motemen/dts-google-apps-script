@@ -8,7 +8,7 @@
 /// <reference path="google-apps-script.base.d.ts" />
 /// <reference path="google-apps-script.drive.d.ts" />
 
-declare module GoogleAppsScript {
+declare namespace GoogleAppsScript {
   export module Spreadsheet {
     /**
      * Styles that can be set on a range using
@@ -19,7 +19,7 @@ declare module GoogleAppsScript {
     /**
      * The chart's position within a sheet.  Can be updated using the EmbeddedChart.modify()
      *  function.
-     * 
+     *
      *      chart = chart.modify().setPosition(5, 5, 0, 0).build();
      *      sheet.updateChart(chart);
      */
@@ -34,7 +34,7 @@ declare module GoogleAppsScript {
      * This class allows users to access existing data-validation rules. To create a new rule, see
      *  SpreadsheetApp.newDataValidation(), DataValidationBuilder, and
      *  Range.setDataValidation(rule).
-     * 
+     *
      *      // Log information about the data-validation rule for cell A1.
      *      var cell = SpreadsheetApp.getActive().getRange('A1');
      *      var rule = cell.getDataValidation();
@@ -56,7 +56,7 @@ declare module GoogleAppsScript {
 
     /**
      * Builder for data-validation rules.
-     * 
+     *
      *      // Set the data validation for cell A1 to require a value from B1:B10.
      *      var cell = SpreadsheetApp.getActive().getRange('A1');
      *      var range = SpreadsheetApp.getActive().getRange('B1:B10');
@@ -103,22 +103,22 @@ declare module GoogleAppsScript {
 
     /**
      * An enumeration representing the data-validation criteria that can be set on a range.
-     * 
+     *
      *      // Change existing data-validation rules that require a date in 2013 to require a date in 2014.
      *      var oldDates = [new Date('1/1/2013'), new Date('12/31/2013')];
      *      var newDates = [new Date('1/1/2014'), new Date('12/31/2014')];
      *      var sheet = SpreadsheetApp.getActiveSheet();
      *      var range = sheet.getRange(1, 1, sheet.getMaxRows(), sheet.getMaxColumns());
      *      var rules = range.getDataValidations();
-     *     
+     *
      *      for (var i = 0; i < rules.length; i++) {
      *        for (var j = 0; j < rules[i].length; j++) {
      *          var rule = rules[i][j];
-     *     
+     *
      *          if (rule != null) {
      *            var criteria = rule.getCriteriaType();
      *            var args = rule.getCriteriaValues();
-     *      
+     *
      *            if (criteria == SpreadsheetApp.DataValidationCriteria.DATE_BETWEEN
      *                && args[0].getTime() == oldDates[0].getTime()
      *                && args[1].getTime() == oldDates[1].getTime()) {
@@ -133,7 +133,7 @@ declare module GoogleAppsScript {
     export enum DataValidationCriteria { DATE_AFTER, DATE_BEFORE, DATE_BETWEEN, DATE_EQUAL_TO, DATE_IS_VALID_DATE, DATE_NOT_BETWEEN, DATE_ON_OR_AFTER, DATE_ON_OR_BEFORE, NUMBER_BETWEEN, NUMBER_EQUAL_TO, NUMBER_GREATER_THAN, NUMBER_GREATER_THAN_OR_EQUAL_TO, NUMBER_LESS_THAN, NUMBER_LESS_THAN_OR_EQUAL_TO, NUMBER_NOT_BETWEEN, NUMBER_NOT_EQUAL_TO, TEXT_CONTAINS, TEXT_DOES_NOT_CONTAIN, TEXT_EQUAL_TO, TEXT_IS_VALID_EMAIL, TEXT_IS_VALID_URL, VALUE_IN_LIST, VALUE_IN_RANGE, CUSTOM_FORMULA }
 
     /**
-     * Builder for area charts. For more details, see the Gviz 
+     * Builder for area charts. For more details, see the Gviz
      *  documentation.
      */
     export interface EmbeddedAreaChartBuilder {
@@ -175,7 +175,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for bar charts. For more details, see the Gviz 
+     * Builder for bar charts. For more details, see the Gviz
      *  documentation.
      */
     export interface EmbeddedBarChartBuilder {
@@ -218,9 +218,9 @@ declare module GoogleAppsScript {
 
     /**
      * Represents a chart that has been embedded into a Spreadsheet.
-     * 
+     *
      * This example shows how to modify an existing chart:
-     * 
+     *
      *      var sheet = SpreadsheetApp.getActiveSheet();
      *      var range = sheet.getRange("A2:B8")
      *      var chart = sheet.getCharts()[0];
@@ -231,9 +231,9 @@ declare module GoogleAppsScript {
      *          .setPosition(2,2,0,0)
      *          .build();
      *      sheet.updateChart(chart);
-     * 
+     *
      * This example shows how to create a new chart:
-     * 
+     *
      *      function newChart(range, sheet) {
      *        var sheet = SpreadsheetApp.getActiveSheet();
      *        var chartBuilder = sheet.newChart();
@@ -258,7 +258,7 @@ declare module GoogleAppsScript {
     /**
      * This builder allows you to edit an EmbeddedChart. Make sure to call
      *  sheet.updateChart(builder.build()) to save your changes.
-     * 
+     *
      *      var sheet = SpreadsheetApp.getActiveSheet();
      *      var range = sheet.getRange("A1:B8");
      *      var chart = sheet.getCharts()[0];
@@ -292,7 +292,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for column charts. For more details, see the Gviz 
+     * Builder for column charts. For more details, see the Gviz
      *  documentation.
      */
     export interface EmbeddedColumnChartBuilder {
@@ -333,7 +333,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for combo charts. For more details, see the Gviz 
+     * Builder for combo charts. For more details, see the Gviz
      *  documentation.
      */
     export interface EmbeddedComboChartBuilder {
@@ -374,7 +374,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for histogram charts. For more details, see the Gviz 
+     * Builder for histogram charts. For more details, see the Gviz
      *  documentation.
      */
     export interface EmbeddedHistogramChartBuilder {
@@ -415,7 +415,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for line charts. For more details, see the Gviz 
+     * Builder for line charts. For more details, see the Gviz
      *  documentation.
      */
     export interface EmbeddedLineChartBuilder {
@@ -457,7 +457,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for pie charts. For more details, see the Gviz 
+     * Builder for pie charts. For more details, see the Gviz
      *  documentation.
      */
     export interface EmbeddedPieChartBuilder {
@@ -490,7 +490,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for scatter charts. For more details, see the Gviz 
+     * Builder for scatter charts. For more details, see the Gviz
      *  documentation.
      */
     export interface EmbeddedScatterChartBuilder {
@@ -532,7 +532,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * Builder for table charts. For more details, see the Gviz 
+     * Builder for table charts. For more details, see the Gviz
      *  documentation.
      */
     export interface EmbeddedTableChartBuilder {
@@ -581,7 +581,7 @@ declare module GoogleAppsScript {
     }
 
     /**
-     * 
+     *
      * Deprecated. For spreadsheets created in the newer version of Google Sheets, use the more powerful
      *      Protection class instead. Although this class is deprecated, it will remain
      *      available for compatibility with the older version of Sheets.
@@ -600,12 +600,12 @@ declare module GoogleAppsScript {
      *  range of cells or a named range. A protected sheet may include unprotected regions. For
      *  spreadsheets created with the older version of Google Sheets, use the PageProtection
      *  class instead.
-     * 
+     *
      *      // Protect range A1:B10, then remove all other users from the list of editors.
      *      var ss = SpreadsheetApp.getActive();
      *      var range = ss.getRange('A1:B10');
      *      var protection = range.protect().setDescription('Sample protected range');
-     *     
+     *
      *      // Ensure the current user is an editor before removing others. Otherwise, if the user's edit
      *      // permission comes from a group, the script will throw an exception upon removing the group.
      *      var me = Session.getEffectiveUser();
@@ -614,7 +614,7 @@ declare module GoogleAppsScript {
      *      if (protection.canDomainEdit()) {
      *        protection.setDomainEdit(false);
      *      }
-     * 
+     *
      *      // Remove all range protections in the spreadsheet that the user has permission to edit.
      *      var ss = SpreadsheetApp.getActive();
      *      var protections = ss.getProtections(SpreadsheetApp.ProtectionType.RANGE);
@@ -624,11 +624,11 @@ declare module GoogleAppsScript {
      *          protection.remove();
      *        }
      *      }
-     * 
+     *
      *      // Protect the active sheet, then remove all other users from the list of editors.
      *      var sheet = SpreadsheetApp.getActiveSheet();
      *      var protection = sheet.protect().setDescription('Sample protected sheet');
-     *     
+     *
      *      // Ensure the current user is an editor before removing others. Otherwise, if the user's edit
      *      // permission comes from a group, the script will throw an exception upon removing the group.
      *      var me = Session.getEffectiveUser();
@@ -666,7 +666,7 @@ declare module GoogleAppsScript {
 
     /**
      * An enumeration representing the parts of a spreadsheet that can be protected from edits.
-     * 
+     *
      *      // Remove all range protections in the spreadsheet that the user has permission to edit.
      *      var ss = SpreadsheetApp.getActive();
      *      var protections = ss.getProtections(SpreadsheetApp.ProtectionType.RANGE);
@@ -676,7 +676,7 @@ declare module GoogleAppsScript {
      *          protection.remove();
      *        }
      *      }
-     * 
+     *
      *      // Removes sheet protection from the active sheet, if the user has permission to edit it.
      *      var sheet = SpreadsheetApp.getActiveSheet();
      *      var protection = sheet.getProtections(SpreadsheetApp.ProtectionType.SHEET)[0];
@@ -688,7 +688,7 @@ declare module GoogleAppsScript {
 
     /**
      * Access and modify spreadsheet ranges.
-     * 
+     *
      *  This class allows users to access and modify ranges in Google Sheets. A range can be
      *  a single cell in a sheet or a range of cells in a sheet.
      */
@@ -1021,9 +1021,9 @@ declare module GoogleAppsScript {
      *  the parent class for the Spreadsheet service.
      */
     export interface SpreadsheetApp {
-      BorderStyle: typeof BorderStyle
-      DataValidationCriteria: typeof DataValidationCriteria
-      ProtectionType: typeof ProtectionType
+      BorderStyle: typeof BorderStyle;
+      DataValidationCriteria: typeof DataValidationCriteria;
+      ProtectionType: typeof ProtectionType;
       create(name: string): Spreadsheet;
       create(name: string, rows: Integer, columns: Integer): Spreadsheet;
       flush(): void;

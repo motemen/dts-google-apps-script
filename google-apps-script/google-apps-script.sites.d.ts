@@ -6,22 +6,22 @@
 /// <reference path="google-apps-script.types.d.ts" />
 /// <reference path="google-apps-script.base.d.ts" />
 
-declare module GoogleAppsScript {
+declare namespace GoogleAppsScript {
   export module Sites {
     /**
      * A Sites Attachment such as a file attached to a page.
-     * 
+     *
      *  Note that an Attachment is a Blob and can be used anywhere Blob input is expected.
      *  A
      *  rebuilt
      *  version of Sites was launched on November 22, 2016. Apps Script cannot currently access or
      *  modify Sites made with this version, but script can still access
-     *  
+     *
      *    classic Sites.
-     * 
+     *
      *      var filesPage = SitesApp.getSite('example.com', 'mysite').getChildByName("files");
      *      var attachments = filesPage.getAttachments();
-     *     
+     *
      *      // DocsList.createFile accepts a blob input. Since an Attachment is just a blob, we can
      *      // just pass it directly to that method
      *      var file = DocsList.createFile(attachments[0]);
@@ -52,7 +52,7 @@ declare module GoogleAppsScript {
      *  rebuilt
      *  version of Sites was launched on November 22, 2016. Apps Script cannot currently access or
      *  modify Sites made with this version, but script can still access
-     *  
+     *
      *    classic Sites.
      */
     export enum AttachmentType { WEB, HOSTED }
@@ -63,7 +63,7 @@ declare module GoogleAppsScript {
      *  rebuilt
      *  version of Sites was launched on November 22, 2016. Apps Script cannot currently access or
      *  modify Sites made with this version, but script can still access
-     *  
+     *
      *    classic Sites.
      */
     export interface Column {
@@ -79,7 +79,7 @@ declare module GoogleAppsScript {
      *  rebuilt
      *  version of Sites was launched on November 22, 2016. Apps Script cannot currently access or
      *  modify Sites made with this version, but script can still access
-     *  
+     *
      *    classic Sites.
      */
     export interface Comment {
@@ -100,7 +100,7 @@ declare module GoogleAppsScript {
      *  rebuilt
      *  version of Sites was launched on November 22, 2016. Apps Script cannot currently access or
      *  modify Sites made with this version, but script can still access
-     *  
+     *
      *    classic Sites.
      */
     export interface ListItem {
@@ -121,7 +121,7 @@ declare module GoogleAppsScript {
      *  rebuilt
      *  version of Sites was launched on November 22, 2016. Apps Script cannot currently access or
      *  modify Sites made with this version, but script can still access
-     *  
+     *
      *    classic Sites.
      */
     export interface Page {
@@ -185,7 +185,7 @@ declare module GoogleAppsScript {
      *  rebuilt
      *  version of Sites was launched on November 22, 2016. Apps Script cannot currently access or
      *  modify Sites made with this version, but script can still access
-     *  
+     *
      *    classic Sites.
      */
     export enum PageType { WEB_PAGE, LIST_PAGE, ANNOUNCEMENT, ANNOUNCEMENTS_PAGE, FILE_CABINET_PAGE }
@@ -196,7 +196,7 @@ declare module GoogleAppsScript {
      *  rebuilt
      *  version of Sites was launched on November 22, 2016. Apps Script cannot currently access or
      *  modify Sites made with this version, but script can still access
-     *  
+     *
      *    classic Sites.
      */
     export interface Site {
@@ -267,12 +267,12 @@ declare module GoogleAppsScript {
      *  rebuilt
      *  version of Sites was launched on November 22, 2016. Apps Script cannot currently access or
      *  modify Sites made with this version, but script can still access
-     *  
+     *
      *    classic Sites.
      */
     export interface SitesApp {
-      AttachmentType: typeof AttachmentType
-      PageType: typeof PageType
+      AttachmentType: typeof AttachmentType;
+      PageType: typeof PageType;
       copySite(domain: string, name: string, title: string, summary: string, site: Site): Site;
       createSite(domain: string, name: string, title: string, summary: string): Site;
       getActivePage(): Page;

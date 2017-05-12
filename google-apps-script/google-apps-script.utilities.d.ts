@@ -6,7 +6,7 @@
 /// <reference path="google-apps-script.types.d.ts" />
 /// <reference path="google-apps-script.base.d.ts" />
 
-declare module GoogleAppsScript {
+declare namespace GoogleAppsScript {
   export module Utilities {
     /**
      * A typesafe enum for character sets.
@@ -28,9 +28,9 @@ declare module GoogleAppsScript {
      *  and other miscellaneous tasks.
      */
     export interface Utilities {
-      Charset: typeof Charset
-      DigestAlgorithm: typeof DigestAlgorithm
-      MacAlgorithm: typeof MacAlgorithm
+      Charset: typeof Charset;
+      DigestAlgorithm: typeof DigestAlgorithm;
+      MacAlgorithm: typeof MacAlgorithm;
       base64Decode(encoded: string): Byte[];
       base64Decode(encoded: string, charset: Charset): Byte[];
       base64DecodeWebSafe(encoded: string): Byte[];

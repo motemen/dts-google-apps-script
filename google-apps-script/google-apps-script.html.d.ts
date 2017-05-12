@@ -6,17 +6,17 @@
 /// <reference path="google-apps-script.types.d.ts" />
 /// <reference path="google-apps-script.base.d.ts" />
 
-declare module GoogleAppsScript {
+declare namespace GoogleAppsScript {
   export module HTML {
     /**
      * An HtmlOutput object that can be served from a script. Due to security considerations,
      *  scripts cannot directly return HTML to a browser. Instead, they must sanitize it so that it
      *  cannot perform malicious actions. You can return sanitized HTML like this:
-     * 
+     *
      *      function doGet() {
      *        return HtmlService.createHtmlOutput('<b>Hello, world!</b>');
      *      }
-     * 
+     *
      * HtmlOutput
      * Google Caja
      * guide to restrictions in HTML service
@@ -47,10 +47,10 @@ declare module GoogleAppsScript {
     /**
      * An object that represents a meta tag added to the page by calling
      *  HtmlOutput.addMetaTag(name, content).
-     * 
+     *
      *      var output = HtmlService.createHtmlOutput('<b>Hello, world!</b>');
      *      output.addMetaTag('viewport', 'width=device-width, initial-scale=1');
-     *     
+     *
      *      var tags = output.getMetaTags();
      *      Logger.log('<meta name="%s" content="%s"/>', tags[0].getName(), tags[0].getContent());
      */
@@ -61,14 +61,14 @@ declare module GoogleAppsScript {
 
     /**
      * Service for returning HTML and other text content from a script.
-     * 
+     *
      * Due to security considerations, scripts cannot directly return content to a browser. Instead,
      *  they must sanitize the HTML so that it cannot perform malicious actions. See the description of
      *  HtmlOutput for what limitations this implies on what can be returned.
      */
     export interface HtmlService {
-      SandboxMode: typeof SandboxMode
-      XFrameOptionsMode: typeof XFrameOptionsMode
+      SandboxMode: typeof SandboxMode;
+      XFrameOptionsMode: typeof XFrameOptionsMode;
       createHtmlOutput(): HtmlOutput;
       createHtmlOutput(blob: Base.BlobSource): HtmlOutput;
       createHtmlOutput(html: string): HtmlOutput;
@@ -94,7 +94,7 @@ declare module GoogleAppsScript {
      * An enum representing the sandbox modes that can be used for client-side HtmlService
      *  scripts. These values can be accessed from HtmlService.SandboxMode, and set by calling
      *  HtmlOutput.setSandboxMode(mode).
-     * 
+     *
      * The NATIVE and EMULATED modes were
      *  deprecated on October 13, 2015 and both are
      *  now sunset.
@@ -106,9 +106,9 @@ declare module GoogleAppsScript {
      *  guide to restrictions in HTML service.
      * The IFRAME mode imposes many fewer restrictions than the other sandbox modes and runs
      *  fastest, but does not work at all in certain older browsers, including Internet Explorer 9.
-     *  
+     *
      * google.script.sandbox.mode
-     * 
+     *
      *      <!-- Read the sandbox mode (in a client-side script). -->
      *      <script>
      *        alert(google.script.sandbox.mode);
@@ -121,12 +121,12 @@ declare module GoogleAppsScript {
      *  HtmlService scripts. These values can be accessed from
      *  HtmlService.XFrameOptionsMode, and set by calling
      *  HtmlOutput.setXFrameOptionsMode(mode).
-     * 
+     *
      * Setting XFrameOptionsMode.ALLOWALL will let any site iframe the page, so the developer
      *  should implement their own protection against clickjacking.
      * If a script does not set an X-Frame-Options mode, Apps Script uses DEFAULT
      *  mode as the default.
-     * 
+     *
      *      // Serve HTML with no X-Frame-Options header (in Apps Script server-side code).
      *      var output = HtmlService.createHtmlOutput('<b>Hello, world!</b>');
      *      output.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
