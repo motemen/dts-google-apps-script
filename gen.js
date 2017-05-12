@@ -76,11 +76,17 @@ process.stdin.on('end', () => {
       if (!decl) return;
 
       var lines = mkDoc(decl.doc);
+
+      var names = name.split(/\./);
+      name = names.pop();
+      names.forEach(function (ns) {
+        lines.push('namespace ' + ns + ' {');
+      });
+
       if (decl.kind === 'enum') {
-        lines.push('export enum ' + decl.name + ' { ' + decl.properties.map((p) => p.name).join(', ') + ' }');
-        lines.push('');
+        lines.push('export enum ' + name + ' { ' + decl.properties.map((p) => p.name).join(', ') + ' }');
       } else {
-        lines.push('export interface ' + decl.name + ' {');
+        lines.push('export interface ' + name + ' {');
         lines.push.apply(lines, decl.properties.map(p => mkTypedName(p, true)).map(indent))
         lines.push.apply(lines,
           decl.methods.map((method) =>
@@ -94,8 +100,13 @@ process.stdin.on('end', () => {
           ).map(indent)
         )
         lines.push('}');
-        lines.push('');
       }
+
+      names.forEach(function (ns) {
+        lines.push('}');
+      });
+
+      lines.push('');
 
       if (data.services[decl.url]) {
         exports[name] = true;

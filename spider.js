@@ -53,7 +53,7 @@ function* visit (url) {
   var $ = cheerio.load(result.body);
 
   var headingText = $('h1').text();
-  var m = headingText.match(/(Class|Enum|Interface) (\w+)/);
+  var m = headingText.match(/(Class|Enum|Interface) ([a-zA-Z0-9_.]+)/);
   if (!m) {
     var m = headingText.match(/^\s*(.+) Service/);
     if (m) {

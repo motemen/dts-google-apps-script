@@ -142,9 +142,22 @@ declare module GoogleAppsScript {
     }
 
     /**
+     * Access and manipulate script publishing.
+     */
+    export interface Service {
+      Restriction: typeof Service.Restriction
+      disable(): void;
+      getUrl(): string;
+      isEnabled(): boolean;
+      enable(restriction: Service.Restriction): void;
+    }
+
+    /**
      * 
      */
-    export enum Service { MYSELF, DOMAIN, ALL }
+    namespace Service {
+    export enum Restriction { MYSELF, DOMAIN, ALL }
+    }
 
     /**
      * Builder for spreadsheet triggers.
