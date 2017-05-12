@@ -271,8 +271,8 @@ declare module GoogleAppsScript {
      *    classic Sites.
      */
     export interface SitesApp {
-      AttachmentType: AttachmentType
-      PageType: PageType
+      AttachmentType: typeof AttachmentType
+      PageType: typeof PageType
       copySite(domain: string, name: string, title: string, summary: string, site: Site): Site;
       createSite(domain: string, name: string, title: string, summary: string): Site;
       getActivePage(): Page;

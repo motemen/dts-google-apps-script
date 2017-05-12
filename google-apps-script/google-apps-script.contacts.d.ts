@@ -136,12 +136,12 @@ declare module GoogleAppsScript {
      *  contacts listed therein.
      */
     export interface ContactsApp {
-      ExtendedField: ExtendedField
-      Field: Field
-      Gender: Gender
-      Month: Base.Month
-      Priority: Priority
-      Sensitivity: Sensitivity
+      ExtendedField: typeof ExtendedField
+      Field: typeof Field
+      Gender: typeof Gender
+      Month: Base.typeof Month
+      Priority: typeof Priority
+      Sensitivity: typeof Sensitivity
       createContact(givenName: string, familyName: string, email: string): Contact;
       createContactGroup(name: string): ContactGroup;
       deleteContact(contact: Contact): void;

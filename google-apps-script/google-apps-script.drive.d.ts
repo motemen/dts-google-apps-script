@@ -31,8 +31,8 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface DriveApp {
-      Access: Access
-      Permission: Permission
+      Access: typeof Access
+      Permission: typeof Permission
       addFile(child: File): Folder;
       addFolder(child: Folder): Folder;
       continueFileIterator(continuationToken: string): FileIterator;

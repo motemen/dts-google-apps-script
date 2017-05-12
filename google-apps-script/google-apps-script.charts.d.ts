@@ -265,14 +265,14 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface Charts {
-      ChartType: ChartType
-      ColumnType: ColumnType
-      CurveStyle: CurveStyle
-      MatchType: MatchType
-      Orientation: Orientation
-      PickerValuesLayout: PickerValuesLayout
-      PointStyle: PointStyle
-      Position: Position
+      ChartType: typeof ChartType
+      ColumnType: typeof ColumnType
+      CurveStyle: typeof CurveStyle
+      MatchType: typeof MatchType
+      Orientation: typeof Orientation
+      PickerValuesLayout: typeof PickerValuesLayout
+      PointStyle: typeof PointStyle
+      Position: typeof Position
       newAreaChart(): AreaChartBuilder;
       newBarChart(): BarChartBuilder;
       newCategoryFilter(): CategoryFilterBuilder;

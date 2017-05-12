@@ -232,15 +232,15 @@ declare module GoogleAppsScript {
      *      doc = DocumentApp.create('Document Name');
      */
     export interface DocumentApp {
-      Attribute: Attribute
-      ElementType: ElementType
-      FontFamily: FontFamily
-      GlyphType: GlyphType
-      HorizontalAlignment: HorizontalAlignment
-      ParagraphHeading: ParagraphHeading
-      PositionedLayout: PositionedLayout
-      TextAlignment: TextAlignment
-      VerticalAlignment: VerticalAlignment
+      Attribute: typeof Attribute
+      ElementType: typeof ElementType
+      FontFamily: typeof FontFamily
+      GlyphType: typeof GlyphType
+      HorizontalAlignment: typeof HorizontalAlignment
+      ParagraphHeading: typeof ParagraphHeading
+      PositionedLayout: typeof PositionedLayout
+      TextAlignment: typeof TextAlignment
+      VerticalAlignment: typeof VerticalAlignment
       create(name: string): Document;
       getActiveDocument(): Document;
       getUi(): Base.Ui;

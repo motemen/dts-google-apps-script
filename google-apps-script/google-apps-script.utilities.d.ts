@@ -28,9 +28,9 @@ declare module GoogleAppsScript {
      *  and other miscellaneous tasks.
      */
     export interface Utilities {
-      Charset: Charset
-      DigestAlgorithm: DigestAlgorithm
-      MacAlgorithm: MacAlgorithm
+      Charset: typeof Charset
+      DigestAlgorithm: typeof DigestAlgorithm
+      MacAlgorithm: typeof MacAlgorithm
       base64Decode(encoded: string): Byte[];
       base64Decode(encoded: string, charset: Charset): Byte[];
       base64DecodeWebSafe(encoded: string): Byte[];

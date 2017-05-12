@@ -3266,10 +3266,10 @@ declare module GoogleAppsScript {
      * Create user interfaces for use inside G Suite or as standalone services.
      */
     export interface UiApp {
-      DateTimeFormat: DateTimeFormat
-      FileType: FileType
-      HorizontalAlignment: HorizontalAlignment
-      VerticalAlignment: VerticalAlignment
+      DateTimeFormat: typeof DateTimeFormat
+      FileType: typeof FileType
+      HorizontalAlignment: typeof HorizontalAlignment
+      VerticalAlignment: typeof VerticalAlignment
       createApplication(): UiInstance;
       getActiveApplication(): UiInstance;
       getUserAgent(): string;

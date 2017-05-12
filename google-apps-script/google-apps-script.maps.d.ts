@@ -93,8 +93,8 @@ declare module GoogleAppsScript {
      * A collection of enums used by DirectionFinder.
      */
     export interface DirectionFinderEnums {
-      Avoid: Avoid
-      Mode: Mode
+      Avoid: typeof Avoid
+      Mode: typeof Mode
     }
 
     /**
@@ -299,10 +299,10 @@ declare module GoogleAppsScript {
      * A collection of enums used by StaticMap.
      */
     export interface StaticMapEnums {
-      Color: Color
-      Format: Format
-      MarkerSize: MarkerSize
-      Type: Type
+      Color: typeof Color
+      Format: typeof Format
+      MarkerSize: typeof MarkerSize
+      Type: typeof Type
     }
 
     /**

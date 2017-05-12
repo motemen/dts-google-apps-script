@@ -147,8 +147,8 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface LinearOptimizationService {
-      Status: Status
-      VariableType: VariableType
+      Status: typeof Status
+      VariableType: typeof VariableType
       createEngine(): LinearOptimizationEngine;
     }
 

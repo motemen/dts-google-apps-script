@@ -400,11 +400,11 @@ declare module GoogleAppsScript {
      *      var newForm = FormApp.create('Form Name');
      */
     export interface FormApp {
-      Alignment: Alignment
-      DestinationType: DestinationType
-      FeedbackType: FeedbackType
-      ItemType: ItemType
-      PageNavigationType: PageNavigationType
+      Alignment: typeof Alignment
+      DestinationType: typeof DestinationType
+      FeedbackType: typeof FeedbackType
+      ItemType: typeof ItemType
+      PageNavigationType: typeof PageNavigationType
       create(title: string): Form;
       createCheckboxValidation(): CheckboxValidationBuilder;
       createFeedback(): QuizFeedbackBuilder;

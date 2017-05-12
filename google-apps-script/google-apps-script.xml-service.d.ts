@@ -320,7 +320,7 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface XmlService {
-      ContentTypes: ContentType
+      ContentTypes: typeof ContentType
       createCdata(text: string): Cdata;
       createComment(text: string): Comment;
       createDocType(elementName: string): DocType;

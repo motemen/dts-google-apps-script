@@ -51,12 +51,12 @@ declare module GoogleAppsScript {
      *  that the user owns or is subscribed to.
      */
     export interface CalendarApp {
-      Color: Color
-      EventColor: EventColor
-      GuestStatus: GuestStatus
-      Month: Base.Month
-      Visibility: Visibility
-      Weekday: Base.Weekday
+      Color: typeof Color
+      EventColor: typeof EventColor
+      GuestStatus: typeof GuestStatus
+      Month: Base.typeof Month
+      Visibility: typeof Visibility
+      Weekday: Base.typeof Weekday
       createAllDayEvent(title: string, date: Date): CalendarEvent;
       createAllDayEvent(title: string, date: Date, options: Object): CalendarEvent;
       createAllDayEventSeries(title: string, startDate: Date, recurrence: EventRecurrence): CalendarEventSeries;

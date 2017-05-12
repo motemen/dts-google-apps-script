@@ -1021,9 +1021,9 @@ declare module GoogleAppsScript {
      *  the parent class for the Spreadsheet service.
      */
     export interface SpreadsheetApp {
-      BorderStyle: BorderStyle
-      DataValidationCriteria: DataValidationCriteria
-      ProtectionType: ProtectionType
+      BorderStyle: typeof BorderStyle
+      DataValidationCriteria: typeof DataValidationCriteria
+      ProtectionType: typeof ProtectionType
       create(name: string): Spreadsheet;
       create(name: string, rows: Integer, columns: Integer): Spreadsheet;
       flush(): void;

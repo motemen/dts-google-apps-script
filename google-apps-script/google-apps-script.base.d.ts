@@ -78,7 +78,7 @@ declare module GoogleAppsScript {
      * ButtonSet
      */
     export interface Browser {
-      Buttons: ButtonSet
+      Buttons: typeof ButtonSet
       inputBox(prompt: string): string;
       inputBox(prompt: string, buttons: ButtonSet): string;
       inputBox(title: string, prompt: string, buttons: ButtonSet): string;
@@ -247,8 +247,8 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface Ui {
-      Button: Button
-      ButtonSet: ButtonSet
+      Button: typeof Button
+      ButtonSet: typeof ButtonSet
       alert(prompt: string): Button;
       alert(prompt: string, buttons: ButtonSet): Button;
       alert(title: string, prompt: string, buttons: ButtonSet): Button;

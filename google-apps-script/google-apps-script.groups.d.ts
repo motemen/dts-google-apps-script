@@ -46,7 +46,7 @@ declare module GoogleAppsScript {
      *        Logger.log('You belong to ' + groups.length + ' groups.');
      */
     export interface GroupsApp {
-      Role: Role
+      Role: typeof Role
       getGroupByEmail(email: string): Group;
       getGroups(): Group[];
     }

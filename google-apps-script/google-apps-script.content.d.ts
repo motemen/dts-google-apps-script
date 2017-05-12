@@ -17,7 +17,7 @@ declare module GoogleAppsScript {
      *      }
      */
     export interface ContentService {
-      MimeType: MimeType
+      MimeType: typeof MimeType
       createTextOutput(): TextOutput;
       createTextOutput(content: string): TextOutput;
     }

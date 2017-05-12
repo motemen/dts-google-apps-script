@@ -67,8 +67,8 @@ declare module GoogleAppsScript {
      *  HtmlOutput for what limitations this implies on what can be returned.
      */
     export interface HtmlService {
-      SandboxMode: SandboxMode
-      XFrameOptionsMode: XFrameOptionsMode
+      SandboxMode: typeof SandboxMode
+      XFrameOptionsMode: typeof XFrameOptionsMode
       createHtmlOutput(): HtmlOutput;
       createHtmlOutput(blob: Base.BlobSource): HtmlOutput;
       createHtmlOutput(html: string): HtmlOutput;
