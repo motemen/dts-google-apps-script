@@ -207,7 +207,7 @@ declare namespace GoogleAppsScript {
      *  charts embedded in spreadsheets, see
      *  EmbeddedChart.
      */
-    export interface Chart {
+    export interface Chart extends Base.BlobSource {
       getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
       getId(): string;

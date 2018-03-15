@@ -243,7 +243,7 @@ declare namespace GoogleAppsScript {
      *        sheet.insertChart(chartBuilder.build());
      *      }
      */
-    export interface EmbeddedChart {
+    export interface EmbeddedChart extends Base.BlobSource {
       getAs(contentType: string): Base.Blob;
       getBlob(): Base.Blob;
       getContainerInfo(): ContainerInfo;

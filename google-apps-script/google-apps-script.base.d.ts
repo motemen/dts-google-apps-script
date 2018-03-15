@@ -10,7 +10,7 @@ declare namespace GoogleAppsScript {
     /**
      * A data interchange object for Apps Script services.
      */
-    export interface Blob {
+    export interface Blob implements BlobSource {
       copyBlob(): Blob;
       getAs(contentType: string): Blob;
       getBytes(): Byte[];

@@ -93,7 +93,7 @@ declare namespace GoogleAppsScript {
      *        }
      *      }
      */
-    export interface GmailAttachment {
+    export interface GmailAttachment extends Base.BlobSource {
       copyBlob(): Base.Blob;
       getAs(contentType: string): Base.Blob;
       getBytes(): Byte[];

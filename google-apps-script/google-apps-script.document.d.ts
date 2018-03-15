@@ -181,7 +181,7 @@ declare namespace GoogleAppsScript {
      *      // Create and open a document.
      *      doc = DocumentApp.create("Document Title");
      */
-    export interface Document {
+    export interface Document extends Base.BlobSource {
       addBookmark(position: Position): Bookmark;
       addEditor(emailAddress: string): Document;
       addEditor(user: Base.User): Document;

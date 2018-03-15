@@ -71,7 +71,7 @@ declare namespace GoogleAppsScript {
      *        }
      *      }
      */
-    export interface File {
+    export interface File extends Base.BlobSource {
       addCommenter(emailAddress: string): File;
       addCommenter(user: Base.User): File;
       addCommenters(emailAddresses: String[]): File;
