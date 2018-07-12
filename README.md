@@ -12,8 +12,9 @@ node spider.js >> out.json # Scrape the Apps Script Reference Docs and create JS
 cat out.json | node gen.js # Pipe the output from above into a generator. New d.ts files are written to google-apps-script/
 ```
 
-2. Create a PR to [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) with these updated files.
-3. Wait for the DefinitelyTyped reviewers to merge your PR and update the [@types/google-apps-script](https://www.npmjs.com/package/@types/google-apps-script) repo.
+2. Lowercase `String` with a find-and-replace tool.
+3. Create a PR to [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) with these updated files.
+4. Wait for the DefinitelyTyped reviewers to merge your PR and update the [@types/google-apps-script](https://www.npmjs.com/package/@types/google-apps-script) repo.
 
 ## Included in DefinitelyTyped
 
