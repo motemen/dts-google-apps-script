@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+
+    "target": "es2017",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    // "removeComments": false,
+    // "sourceMap": true,
+    // "declaration": true,
+    "newLine": "LF",
+    "noEmitOnError": true,
+    "noUnusedLocals": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "lib": ["es2017"]
+  }
+}
