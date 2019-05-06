@@ -7,7 +7,7 @@ const header = fs.readFileSync('HEADER', { encoding: 'utf-8' }).replace(/{date}/
     return `${date.getFullYear()}-${`0${date.getMonth() + 1}`.substr(-2)}-${`0${date.getDate()}`.substr(-2)}`;
 });
 let input = '';
-process.stdin.on('data', buf => (input += buf.toString()));
+process.stdin.on('data', (buf) => (input += buf.toString()));
 process.stdin.on('end', () => {
     const data = JSON.parse(input);
     const makeDocComment = (docComment) => {
@@ -17,7 +17,7 @@ process.stdin.on('end', () => {
             .replace(/( *\n){3,}/g, '\n\n')
             .replace(/\s+$/, '')
             .split(/\n/)
-            .forEach(line => lines.push(` * ${line}`));
+            .forEach((line) => lines.push(` * ${line}`));
         lines.push(' */');
         return lines;
     };
@@ -65,7 +65,7 @@ process.stdin.on('end', () => {
                 const lines = makeDocComment(decl.doc);
                 const names = key.split(/\./);
                 const name = names.pop();
-                names.forEach(ns => lines.push(`namespace ${ns} {`));
+                names.forEach((ns) => lines.push(`namespace ${ns} {`));
                 if (decl.kind === 'enum') {
                     lines.push(`export enum ${name} { ${decl.properties.map((p) => p.name).join(', ')} }`);
                 }
@@ -106,7 +106,7 @@ process.stdin.on('end', () => {
             }
         });
         result = [header]
-            .concat(references.map(ref => `/// <reference path="google-apps-script.${ref}.d.ts" />`))
+            .concat(references.map((ref) => `/// <reference path="google-apps-script.${ref}.d.ts" />`))
             .concat('', result);
         const filename = `google-apps-script/google-apps-script.${key}.d.ts`;
         const fd = fs.openSync(filename, 'w');

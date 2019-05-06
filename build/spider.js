@@ -49,7 +49,7 @@ const getDoc = ($) => {
             return `\n${$(this)
                 .text()
                 .split(/\n/)
-                .map(line => `    ${line}`)
+                .map((line) => `    ${line}`)
                 .join('\n')}\n\n`;
         }
         return $(this).text();
@@ -210,8 +210,8 @@ co_1.default(function* () {
     while (Scraper.queue.length > 0) {
         const urls = Scraper.queue.splice(0, CONCURRENCY);
         yield Promise.all(urls
-            .map(url => visit(url))
-            .concat(new Promise(ok => setTimeout(ok, MIN_WAIT))));
+            .map((url) => visit(url))
+            .concat(new Promise((ok) => setTimeout(ok, MIN_WAIT))));
     }
     return;
 })
