@@ -1,8 +1,10 @@
+// tslint:disable: no-console
+
 'use strict';
 
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import co from 'co';
 import * as cheerio from 'cheerio';
+import co from 'co';
 import * as URL from 'url';
 
 const CONCURRENCY = 4;
@@ -15,7 +17,7 @@ interface INode {
 
 interface IType {
   name: string;
-  category: string;
+  category: string | null;
 }
 
 interface IProperty extends INode {
@@ -45,26 +47,30 @@ interface ICategories {
 }
 
 class Scraper {
-  static categories: ICategories = {};
-  static queue: string[] = [];
-  static services: any = {};
-  // tslint:disable-next-line: variable-name
-  private static _queueued: any = {};
+  public static categories: ICategories = {};
+  public static queue: string[] = [];
+  public static services: any = {};
 
-  static enqueue(url: string) {
+  public static enqueue(url: string) {
     // tslint:disable-next-line: no-parameter-reassignment
     url = url.replace(/#.*/, '').replace(/\.html$/, '');
 
-    if (url in this._queueued) return;
+    if (url in this._queueued) {
+      return;
+    }
+
     this._queueued[url] = true;
 
     console.error(`<-- <${url}>`);
 
     this.queue.push(url);
   }
+
+  // tslint:disable-next-line: variable-name
+  private static _queueued: any = {};
 }
 
-const categoryFromUrl = (url: string) => {
+const categoryFromUrl = (url: string | undefined) => {
   const m = url && url.match(/^https:\/\/developers\.google\.com\/apps-script\/reference\/([^/]+)/);
   //  const m = url && url.match(/^https:\/\/developers\.google\.com\/apps-script\/advanced\/([^/]+)/);
 
@@ -110,13 +116,13 @@ const resolveHref = (link: Cheerio, url: string) => {
   return href ? URL.resolve(url, href) : undefined;
 };
 
-const createProperty = (cells: Cheerio, typeHref: string) => {
-  return <IProperty>{
-    name: cells.eq(0).text(),
+const createProperty = (cells: Cheerio, typeHref: string | undefined): IProperty => {
+  return {
     doc: cells.eq(2).text(),
+    name: cells.eq(0).text(),
     type: {
-      name: cells.eq(1).text(),
       category: categoryFromUrl(typeHref),
+      name: cells.eq(1).text(),
     },
   };
 };
@@ -132,27 +138,27 @@ const addPropertiesToDecl = ($: CheerioStatic, decl: IDecl, url: string) => {
         Scraper.enqueue(typeHref);
       }
 
-      decl.properties.push(createProperty(cells, <string>typeHref));
+      decl.properties.push(createProperty(cells, typeHref));
     }
   });
 };
 
-const createMethod = (cells: Cheerio, typeHref: string) => {
-  return <IMethod>{
+const createMethod = (cells: Cheerio, typeHref: string | undefined): IMethod => {
+  return {
+    doc: cells.eq(2).text(),
     name: cells
       .eq(0)
       .text()
       .replace(/\(.*$/, ''),
-    doc: cells.eq(2).text(),
     params: [],
     returnType: {
-      name: cells.eq(1).text(),
       category: categoryFromUrl(typeHref),
+      name: cells.eq(1).text(),
     },
   };
 };
 
-const getMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string, url: string) => {
+const getMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string | undefined, url: string) => {
   const detailId = cells
     .eq(0)
     .find('a')
@@ -166,16 +172,16 @@ const getMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string, url: stri
     })
     .find('table.function.param tr:not(:first-child)')
     .each(function(this: Cheerio) {
-      const cells = $(this).find('td');
-      if (cells.length === 3) {
-        const type = cells.eq(1);
-        const typeHref = resolveHref(type.find('a'), url);
+      const paramCells = $(this).find('td');
+      if (paramCells.length === 3) {
+        const type = paramCells.eq(1);
+        const paramTypeHref = resolveHref(type.find('a'), url);
 
-        if (typeHref) {
-          Scraper.enqueue(typeHref);
+        if (paramTypeHref) {
+          Scraper.enqueue(paramTypeHref);
         }
 
-        method.params.push(createProperty(cells, <string>typeHref));
+        method.params.push(createProperty(paramCells, paramTypeHref));
       }
     });
 
@@ -193,19 +199,19 @@ const addMethodsToDecl = ($: CheerioStatic, decl: IDecl, url: string) => {
         Scraper.enqueue(typeHref);
       }
 
-      decl.methods.push(getMethod($, cells, <string>typeHref, url));
+      decl.methods.push(getMethod($, cells, typeHref, url));
     }
   });
 };
 
-const createDecl = ($: CheerioStatic, matchHeading: RegExpMatchArray, url: string) => {
-  return <IDecl>{
-    url,
+const createDecl = ($: CheerioStatic, matchHeading: RegExpMatchArray, url: string): IDecl => {
+  return {
     doc: getDoc($),
     kind: matchHeading[1].toLowerCase(),
+    methods: [],
     name: matchHeading[2],
     properties: [],
-    methods: [],
+    url,
   };
 };
 
