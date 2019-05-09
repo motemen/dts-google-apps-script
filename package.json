@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "tsc --project src",
+    "build": "tsc --build src",
     "fetch": "node build/spider.js > out.json",
     "format": "prettier --write src/**.ts **/*.json",
     "generate": "node build/gen.js < out.json",
