@@ -1,21 +1,9 @@
 {
   "defaultSeverity": "error",
-  // "extends": ["tslint:recommended"],
-  "extends": [
-    "tslint-config-airbnb",
-    "tslint-config-prettier"
-  ],
+  "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
-    // "prettier": true
+    "prettier": true
   },
-  "jsRules": {}
-  // "rules": {
-  //   "max-line-length": [true, 120],
-  //   "arrow-parens": false
-  // }
-  // "jsRules": {},
-  // // "rules": {
-  // //   "quotemark": [true, "single", "avoid-escape"]
-  // // },
-  // "rulesDirectory": []
+  "jsRules": {},
+  "rulesDirectory": ["tslint-plugin-prettier"]
 }
