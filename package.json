@@ -1,6 +1,6 @@
 {
-  "name": "dts-google-apps-script",
   "private": true,
+  "name": "dts-google-apps-script",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -14,14 +14,14 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "cheerio": "^1.0.0-rc.2",
-    "co": "^4.5.4"
+    "cheerio": "^1.0.0-rc.3",
+    "co": "^4.6.0"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.11",
-    "@types/co": "^4.6.0",
-    "@types/node": "^11.13.8",
-    "prettier": "^1.17.0",
+    "@types/co": "^4.6.1",
+    "@types/node": "^10.0.0",
+    "prettier": "^1.17.1",
     "tslint": "^5.16.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
