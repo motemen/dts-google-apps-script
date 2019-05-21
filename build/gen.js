@@ -1,5 +1,6 @@
 #!/usr/bin/env node --harmony
 "use strict";
+// tslint:disable: no-console
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const header = fs.readFileSync('HEADER', { encoding: 'utf-8' }).replace(/{date}/, () => {
@@ -24,10 +25,10 @@ process.stdin.on('end', () => {
     const indent = (text) => text.replace(/^./, '  $&');
     Object.keys(data.categories)
         .sort()
-        .forEach((key) => {
+        .forEach((categoryKey) => {
         let result = [];
         const exports = {};
-        const category = data.categories[key];
+        const category = data.categories[categoryKey];
         const categoryName = category.name.replace(/\W/g, '_');
         const decls = category.decls;
         let references;
@@ -40,7 +41,7 @@ process.stdin.on('end', () => {
                 dataCategory &&
                 dataCategory.decls[typeName] &&
                 dataCategory.decls[typeName].kind === 'enum';
-            if (typeCategory && typeCategory !== key) {
+            if (typeCategory && typeCategory !== categoryKey) {
                 typeName = `${dataCategory.name.replace(/\W/g, '_')}.${typeName}`;
                 if (references.indexOf(typeCategory) === -1) {
                     references.push(typeCategory);
@@ -59,11 +60,11 @@ process.stdin.on('end', () => {
         result.push('declare namespace GoogleAppsScript {', `  export module ${categoryName} {`);
         Object.keys(decls)
             .sort()
-            .forEach((key) => {
-            const decl = decls[key];
+            .forEach((declsKey) => {
+            const decl = decls[declsKey];
             if (decl) {
                 const lines = makeDocComment(decl.doc);
-                const names = key.split(/\./);
+                const names = declsKey.split(/\./);
                 const name = names.pop();
                 names.forEach((ns) => lines.push(`namespace ${ns} {`));
                 if (decl.kind === 'enum') {
@@ -95,9 +96,9 @@ process.stdin.on('end', () => {
         result.push('  }', '}', '');
         Object.keys(exports)
             .sort()
-            .forEach((key) => {
-            const line = `declare var ${key}: GoogleAppsScript.${categoryName}.${key};`;
-            if (key === 'MimeType') {
+            .forEach((declsKey) => {
+            const line = `declare var ${declsKey}: GoogleAppsScript.${categoryName}.${declsKey};`;
+            if (declsKey === 'MimeType') {
                 result.push('// conflicts with MimeType in lib.d.ts');
                 result.push(`// ${line}`);
             }
@@ -108,7 +109,7 @@ process.stdin.on('end', () => {
         result = [header]
             .concat(references.map((ref) => `/// <reference path="google-apps-script.${ref}.d.ts" />`))
             .concat('', result);
-        const filename = `google-apps-script/google-apps-script.${key}.d.ts`;
+        const filename = `google-apps-script/google-apps-script.${categoryKey}.d.ts`;
         const fd = fs.openSync(filename, 'w');
         fs.writeSync(fd, `${result.join('\n').replace(/ +$/gm, '')}\n`);
         console.error(`Wrote to ${filename}`);

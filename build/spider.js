@@ -1,8 +1,9 @@
+// tslint:disable: no-console
 'use strict';
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
-const co_1 = require("co");
 const cheerio = require("cheerio");
+const co_1 = require("co");
 const URL = require("url");
 const CONCURRENCY = 4;
 const MIN_WAIT = 1 * 1000;
@@ -10,8 +11,9 @@ class Scraper {
     static enqueue(url) {
         // tslint:disable-next-line: no-parameter-reassignment
         url = url.replace(/#.*/, '').replace(/\.html$/, '');
-        if (url in this._queueued)
+        if (url in this._queueued) {
             return;
+        }
         this._queueued[url] = true;
         console.error(`<-- <${url}>`);
         this.queue.push(url);
@@ -63,11 +65,11 @@ const resolveHref = (link, url) => {
 };
 const createProperty = (cells, typeHref) => {
     return {
-        name: cells.eq(0).text(),
         doc: cells.eq(2).text(),
+        name: cells.eq(0).text(),
         type: {
-            name: cells.eq(1).text(),
             category: categoryFromUrl(typeHref),
+            name: cells.eq(1).text(),
         },
     };
 };
@@ -86,15 +88,15 @@ const addPropertiesToDecl = ($, decl, url) => {
 };
 const createMethod = (cells, typeHref) => {
     return {
+        doc: cells.eq(2).text(),
         name: cells
             .eq(0)
             .text()
             .replace(/\(.*$/, ''),
-        doc: cells.eq(2).text(),
         params: [],
         returnType: {
-            name: cells.eq(1).text(),
             category: categoryFromUrl(typeHref),
+            name: cells.eq(1).text(),
         },
     };
 };
@@ -111,14 +113,14 @@ const getMethod = ($, cells, typeHref, url) => {
     })
         .find('table.function.param tr:not(:first-child)')
         .each(function () {
-        const cells = $(this).find('td');
-        if (cells.length === 3) {
-            const type = cells.eq(1);
-            const typeHref = resolveHref(type.find('a'), url);
-            if (typeHref) {
-                Scraper.enqueue(typeHref);
+        const paramCells = $(this).find('td');
+        if (paramCells.length === 3) {
+            const type = paramCells.eq(1);
+            const paramTypeHref = resolveHref(type.find('a'), url);
+            if (paramTypeHref) {
+                Scraper.enqueue(paramTypeHref);
             }
-            method.params.push(createProperty(cells, typeHref));
+            method.params.push(createProperty(paramCells, paramTypeHref));
         }
     });
     return method;
@@ -138,12 +140,12 @@ const addMethodsToDecl = ($, decl, url) => {
 };
 const createDecl = ($, matchHeading, url) => {
     return {
-        url,
         doc: getDoc($),
         kind: matchHeading[1].toLowerCase(),
+        methods: [],
         name: matchHeading[2],
         properties: [],
-        methods: [],
+        url,
     };
 };
 function visit(url) {
