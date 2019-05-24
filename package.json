@@ -5,6 +5,7 @@
   "description": "",
   "scripts": {
     "build": "tsc --build src",
+    "dryrun": "npm publish --dry-run",
     "fetch": "node build/spider.js > out.json",
     "format": "prettier --write src/**.ts **/*.json",
     "generate": "node build/gen.js < out.json",
@@ -20,7 +21,7 @@
   "devDependencies": {
     "@types/cheerio": "^0.22.11",
     "@types/co": "^4.6.1",
-    "@types/node": "^10.0.0",
+    "@types/node": "^10.14.7",
     "prettier": "^1.17.1",
     "tslint": "^5.16.0",
     "tslint-config-airbnb": "^5.11.1",

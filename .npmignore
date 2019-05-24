@@ -1,0 +1,7 @@
+.editorconfig
+.prettierrc.json
+out.json
+tsconfig.json
+tslint.json
+google-apps-script
+src
