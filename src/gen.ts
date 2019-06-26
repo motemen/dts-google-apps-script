@@ -2,7 +2,7 @@
 
 // tslint:disable: no-console
 
-import * as fs from 'fs';
+import fs from 'fs';
 
 const header = fs.readFileSync('HEADER', { encoding: 'utf-8' }).replace(/{date}/, () => {
   const date = new Date();

@@ -3,9 +3,10 @@
 'use strict';
 
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import * as cheerio from 'cheerio';
+
+import URL from 'url';
+import cheerio from 'cheerio';
 import co from 'co';
-import * as URL from 'url';
 
 const CONCURRENCY = 4;
 const MIN_WAIT = 1 * 1000;
