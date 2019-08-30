@@ -19,14 +19,14 @@
     "co": "^4.6.0"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.11",
+    "@types/cheerio": "^0.22.13",
     "@types/co": "^4.6.2",
-    "@types/node": "^10.14.10",
+    "@types/node": "^10.14.17",
     "prettier": "^1.18.2",
-    "tslint": "^5.18.0",
+    "tslint": "^5.19.0",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.5.2"
+    "typescript": "^3.6.2"
   }
 }
