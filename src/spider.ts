@@ -4,9 +4,9 @@
 
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import URL from 'url';
 import cheerio from 'cheerio';
 import co from 'co';
+import URL from 'url';
 
 const CONCURRENCY = 4;
 const MIN_WAIT = 1 * 1000;
@@ -221,7 +221,8 @@ function visit(url: string) {
 
   if (name) {
     const categories = Scraper.categories;
-    categories[name] = categories[name] || { decls: {} };
+    categories[name] = categories[name] || { decls: {}, debugUrl: url, debugName: name };
+    // categories[name] = categories[name] || { decls: {} };
     const category = categories[name];
 
     console.error(`==> ${url}`);
@@ -260,6 +261,20 @@ function visit(url: string) {
   return;
 }
 
+/*
+Argument of type '
+() => Generator<AxiosPromise<any> | Promise<any[]>, void, AxiosResponse<any>>
+' is not assignable to parameter of type '(...args: any[]) => Iterator<any, any, undefined>'.
+  Type 'Generator<AxiosPromise<any> | Promise<any[]>, void, AxiosResponse<any>>' is not assignable to type 'Iterator<any, any, undefined>'.
+    Types of property 'next' are incompatible.
+      Type '(...args: [] | [AxiosResponse<any>]) => IteratorResult<AxiosPromise<any> | Promise<any[]>, void>' is not assignable to type '(...args: [] | [undefined]) => IteratorResult<any, any>'.
+        Types of parameters 'args' and 'args' are incompatible.
+          Type '[] | [undefined]' is not assignable to type '[] | [AxiosResponse<any>]'.
+            Type '[undefined]' is not assignable to type '[] | [AxiosResponse<any>]'.
+              Type '[undefined]' is not assignable to type '[AxiosResponse<any>]'.
+                Type 'undefined' is not assignable to type 'AxiosResponse<any>'.
+*/
+
 co(function*() {
   const startURL = 'https://developers.google.com/apps-script/reference/';
 
@@ -276,14 +291,16 @@ co(function*() {
   const $ = cheerio.load(response.data);
 
   let inServices = true;
-  $('.devsite-section-nav li li li').each(function(this: Cheerio) {
+  // $('.devsite-section-nav li li li').each(function(this: Cheerio) {
+  const selector = 'ul.devsite-nav-section li.devsite-nav-item a.devsite-nav-title';
+  $(selector).each(function(this: Cheerio) {
     const name = $(this).text();
 
     if (name === 'Classes') {
       inServices = false;
     } else {
       let url = $(this)
-        .find('a[href]')
+        // .find('a[href]')
         .attr('href');
       if (url) {
         url = URL.resolve(startURL, url);
@@ -323,7 +340,7 @@ co(function*() {
 
     process.exit(0);
   })
-  .catch((err) => {
+  .catch((err: any) => {
     console.error(`ERR ${err}`);
 
     process.exit(1);

@@ -1,9 +1,12 @@
 #!/usr/bin/env node --harmony
 "use strict";
 // tslint:disable: no-console
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs = require("fs");
-const header = fs.readFileSync('HEADER', { encoding: 'utf-8' }).replace(/{date}/, () => {
+const fs_1 = __importDefault(require("fs"));
+const header = fs_1.default.readFileSync('HEADER', { encoding: 'utf-8' }).replace(/{date}/, () => {
     const date = new Date();
     return `${date.getFullYear()}-${`0${date.getMonth() + 1}`.substr(-2)}-${`0${date.getDate()}`.substr(-2)}`;
 });
@@ -29,7 +32,8 @@ process.stdin.on('end', () => {
         let result = [];
         const exports = {};
         const category = data.categories[categoryKey];
-        const categoryName = category.name.replace(/\W/g, '_');
+        // const categoryName = category.name.replace(/\W/g, '_');
+        const categoryName = category.name ? category.name.replace(/\W/g, '_') : 'UNKNOWN';
         const decls = category.decls;
         let references;
         const makeTypedName = (o, isField) => {
@@ -42,7 +46,7 @@ process.stdin.on('end', () => {
                 dataCategory.decls[typeName] &&
                 dataCategory.decls[typeName].kind === 'enum';
             if (typeCategory && typeCategory !== categoryKey) {
-                typeName = `${dataCategory.name.replace(/\W/g, '_')}.${typeName}`;
+                typeName = dataCategory.name ? `${dataCategory.name.replace(/\W/g, '_')}.${typeName}` : `UNKNOWN.${typeName}`;
                 if (references.indexOf(typeCategory) === -1) {
                     references.push(typeCategory);
                 }
@@ -51,7 +55,7 @@ process.stdin.on('end', () => {
                 typeName = `${RegExp.$1}[]`;
                 name = `...${o.name}`;
             }
-            if (typeName.match(/^(String|Boolean)\W*$/)) {
+            if (typeName.match(/^(Boolean|Number|Object|String)\W*$/)) {
                 typeName = typeName.toLowerCase();
             }
             return `${name}: ${typeIsEnum ? 'typeof ' : ''}${typeName}`;
@@ -110,8 +114,8 @@ process.stdin.on('end', () => {
             .concat(references.map((ref) => `/// <reference path="google-apps-script.${ref}.d.ts" />`))
             .concat('', result);
         const filename = `google-apps-script/google-apps-script.${categoryKey}.d.ts`;
-        const fd = fs.openSync(filename, 'w');
-        fs.writeSync(fd, `${result.join('\n').replace(/ +$/gm, '')}\n`);
+        const fd = fs_1.default.openSync(filename, 'w');
+        fs_1.default.writeSync(fd, `${result.join('\n').replace(/ +$/gm, '')}\n`);
         console.error(`Wrote to ${filename}`);
     });
 });

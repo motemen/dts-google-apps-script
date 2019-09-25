@@ -37,7 +37,8 @@ process.stdin.on('end', () => {
       let result: string[] = [];
       const exports: any = {};
       const category = data.categories[categoryKey];
-      const categoryName = category.name.replace(/\W/g, '_');
+      // const categoryName = category.name.replace(/\W/g, '_');
+      const categoryName = category.name ? category.name.replace(/\W/g, '_') : 'UNKNOWN';
       const decls = category.decls;
       let references: string[];
 
@@ -54,7 +55,7 @@ process.stdin.on('end', () => {
           dataCategory.decls[typeName].kind === 'enum';
 
         if (typeCategory && typeCategory !== categoryKey) {
-          typeName = `${dataCategory.name.replace(/\W/g, '_')}.${typeName}`;
+          typeName = dataCategory.name ? `${dataCategory.name.replace(/\W/g, '_')}.${typeName}` : `UNKNOWN.${typeName}`;
           if (references.indexOf(typeCategory) === -1) {
             references.push(typeCategory);
           }
@@ -65,7 +66,7 @@ process.stdin.on('end', () => {
           name = `...${o.name}`;
         }
 
-        if (typeName.match(/^(String|Boolean)\W*$/)) {
+        if (typeName.match(/^(Boolean|Number|Object|String)\W*$/)) {
           typeName = typeName.toLowerCase();
         }
 

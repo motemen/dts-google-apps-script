@@ -1,10 +1,13 @@
 // tslint:disable: no-console
 'use strict';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = require("axios");
-const cheerio = require("cheerio");
-const co_1 = require("co");
-const URL = require("url");
+const axios_1 = __importDefault(require("axios"));
+const cheerio_1 = __importDefault(require("cheerio"));
+const co_1 = __importDefault(require("co"));
+const url_1 = __importDefault(require("url"));
 const CONCURRENCY = 4;
 const MIN_WAIT = 1 * 1000;
 class Scraper {
@@ -61,7 +64,7 @@ const getDoc = ($) => {
 };
 const resolveHref = (link, url) => {
     const href = link.attr('href');
-    return href ? URL.resolve(url, href) : undefined;
+    return href ? url_1.default.resolve(url, href) : undefined;
 };
 const createProperty = (cells, typeHref) => {
     return {
@@ -152,14 +155,15 @@ function visit(url) {
     const name = categoryFromUrl(url);
     if (name) {
         const categories = Scraper.categories;
-        categories[name] = categories[name] || { decls: {} };
+        categories[name] = categories[name] || { decls: {}, debugUrl: url, debugName: name };
+        // categories[name] = categories[name] || { decls: {} };
         const category = categories[name];
         console.error(`==> ${url}`);
         const config = {
             url,
         };
         return axios_1.default(config).then((response) => {
-            const $ = cheerio.load(response.data);
+            const $ = cheerio_1.default.load(response.data);
             let matchHeading = matchClassEnumInterfaceHeading($);
             if (matchHeading) {
                 const decl = createDecl($, matchHeading, url);
@@ -180,25 +184,40 @@ function visit(url) {
     }
     return;
 }
+/*
+Argument of type '
+() => Generator<AxiosPromise<any> | Promise<any[]>, void, AxiosResponse<any>>
+' is not assignable to parameter of type '(...args: any[]) => Iterator<any, any, undefined>'.
+  Type 'Generator<AxiosPromise<any> | Promise<any[]>, void, AxiosResponse<any>>' is not assignable to type 'Iterator<any, any, undefined>'.
+    Types of property 'next' are incompatible.
+      Type '(...args: [] | [AxiosResponse<any>]) => IteratorResult<AxiosPromise<any> | Promise<any[]>, void>' is not assignable to type '(...args: [] | [undefined]) => IteratorResult<any, any>'.
+        Types of parameters 'args' and 'args' are incompatible.
+          Type '[] | [undefined]' is not assignable to type '[] | [AxiosResponse<any>]'.
+            Type '[undefined]' is not assignable to type '[] | [AxiosResponse<any>]'.
+              Type '[undefined]' is not assignable to type '[AxiosResponse<any>]'.
+                Type 'undefined' is not assignable to type 'AxiosResponse<any>'.
+*/
 co_1.default(function* () {
     const startURL = 'https://developers.google.com/apps-script/reference/';
     const config = {
         url: startURL,
     };
     const response = yield axios_1.default(config);
-    const $ = cheerio.load(response.data);
+    const $ = cheerio_1.default.load(response.data);
     let inServices = true;
-    $('.devsite-section-nav li li li').each(function () {
+    // $('.devsite-section-nav li li li').each(function(this: Cheerio) {
+    const selector = 'ul.devsite-nav-section li.devsite-nav-item a.devsite-nav-title';
+    $(selector).each(function () {
         const name = $(this).text();
         if (name === 'Classes') {
             inServices = false;
         }
         else {
             let url = $(this)
-                .find('a[href]')
+                // .find('a[href]')
                 .attr('href');
             if (url) {
-                url = URL.resolve(startURL, url);
+                url = url_1.default.resolve(startURL, url);
                 Scraper.enqueue(url);
                 if (inServices) {
                     Scraper.services[url] = true;
