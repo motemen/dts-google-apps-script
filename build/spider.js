@@ -187,7 +187,9 @@ function visit(url) {
 /*
 Argument of type '
 () => Generator<AxiosPromise<any> | Promise<any[]>, void, AxiosResponse<any>>
-' is not assignable to parameter of type '(...args: any[]) => Iterator<any, any, undefined>'.
+' is not assignable to parameter of type '
+(...args: any[]) => Iterator<any, any, undefined>
+'.
   Type 'Generator<AxiosPromise<any> | Promise<any[]>, void, AxiosResponse<any>>' is not assignable to type 'Iterator<any, any, undefined>'.
     Types of property 'next' are incompatible.
       Type '(...args: [] | [AxiosResponse<any>]) => IteratorResult<AxiosPromise<any> | Promise<any[]>, void>' is not assignable to type '(...args: [] | [undefined]) => IteratorResult<any, any>'.
