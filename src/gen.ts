@@ -4,6 +4,9 @@
 
 import fs from 'fs';
 
+const GasNamespace = 'GoogleAppsScript';
+const deprecationNotice = '/** @deprecated DO NOT USE */ ';
+
 const header = fs.readFileSync('HEADER', { encoding: 'utf-8' }).replace(/{date}/, () => {
   const date = new Date();
 
@@ -74,7 +77,7 @@ process.stdin.on('end', () => {
       };
 
       references = ['types'];
-      result.push('declare namespace GoogleAppsScript {', `  export module ${categoryName} {`);
+      result.push(`declare namespace ${GasNamespace} {`, `  namespace ${categoryName} {`);
 
       Object.keys(decls)
         .sort()
@@ -89,15 +92,19 @@ process.stdin.on('end', () => {
             names.forEach((ns) => lines.push(`namespace ${ns} {`));
 
             if (decl.kind === 'enum') {
-              lines.push(`export enum ${name} { ${decl.properties.map((p: any) => p.name).join(', ')} }`);
+              lines.push(`enum ${name} { ${decl.properties.map((p: any) => p.name).join(', ')} }`);
             } else {
-              lines.push(`export interface ${name} {`);
-              lines.push(...decl.properties.map((p: any) => `${makeTypedName(p, true)};`).map(indent));
+              lines.push(`interface ${name} {`);
+              lines.push(
+                ...decl.properties
+                  .map((p: any) => `${p.isDeprecated ? deprecationNotice : ''}${makeTypedName(p, true)};`)
+                  .map(indent),
+              );
               lines.push(
                 ...decl.methods
                   .map(
                     (method: any) =>
-                      `${makeTypedName({
+                      `${method.isDeprecated ? deprecationNotice : ''}${makeTypedName({
                         name: `${method.name}(${
                           method.params
                             .map(makeTypedName)
@@ -113,7 +120,7 @@ process.stdin.on('end', () => {
             }
 
             names.forEach(() => lines.push('}'));
-            lines.push('');
+            // lines.push('');
 
             if (data.services[decl.url]) {
               exports[name] = true;
@@ -128,7 +135,7 @@ process.stdin.on('end', () => {
       Object.keys(exports)
         .sort()
         .forEach((declsKey) => {
-          const line = `declare var ${declsKey}: GoogleAppsScript.${categoryName}.${declsKey};`;
+          const line = `declare var ${declsKey}: ${GasNamespace}.${categoryName}.${declsKey};`;
           if (declsKey === 'MimeType') {
             result.push('// conflicts with MimeType in lib.d.ts');
             result.push(`// ${line}`);
