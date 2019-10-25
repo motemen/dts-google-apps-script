@@ -12,6 +12,7 @@ const CONCURRENCY = 4;
 const MIN_WAIT = 1 * 1000;
 
 interface INode {
+  isDeprecated: boolean;
   name: string;
   doc: string;
 }
@@ -117,9 +118,15 @@ const resolveHref = (link: Cheerio, url: string) => {
   return href ? URL.resolve(url, href) : undefined;
 };
 
-const createProperty = (cells: Cheerio, typeHref: string | undefined): IProperty => {
+const createProperty = ($: CheerioStatic, cells: Cheerio, typeHref: string | undefined): IProperty => {
+  const propertyName = cells.eq(0);
+  const isDeprecated =
+    $(propertyName)
+      .find('s')
+      .text().length > 0;
   return {
     doc: cells.eq(2).text(),
+    isDeprecated,
     name: cells.eq(0).text(),
     type: {
       category: categoryFromUrl(typeHref),
@@ -139,14 +146,20 @@ const addPropertiesToDecl = ($: CheerioStatic, decl: IDecl, url: string) => {
         Scraper.enqueue(typeHref);
       }
 
-      decl.properties.push(createProperty(cells, typeHref));
+      decl.properties.push(createProperty($, cells, typeHref));
     }
   });
 };
 
-const createMethod = (cells: Cheerio, typeHref: string | undefined): IMethod => {
+const createMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string | undefined): IMethod => {
+  const methodName = cells.eq(0);
+  const isDeprecated =
+    $(methodName)
+      .find('s')
+      .text().length > 0;
   return {
     doc: cells.eq(2).text(),
+    isDeprecated,
     name: cells
       .eq(0)
       .text()
@@ -165,7 +178,7 @@ const getMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string | undefine
     .find('a')
     .attr('href')
     .substring(1);
-  const method = createMethod(cells, typeHref);
+  const method = createMethod($, cells, typeHref);
 
   $('*[id]')
     .filter(function(this: Cheerio) {
@@ -182,7 +195,7 @@ const getMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string | undefine
           Scraper.enqueue(paramTypeHref);
         }
 
-        method.params.push(createProperty(paramCells, paramTypeHref));
+        method.params.push(createProperty($, paramCells, paramTypeHref));
       }
     });
 
@@ -208,6 +221,7 @@ const addMethodsToDecl = ($: CheerioStatic, decl: IDecl, url: string) => {
 const createDecl = ($: CheerioStatic, matchHeading: RegExpMatchArray, url: string): IDecl => {
   return {
     doc: getDoc($),
+    isDeprecated: false, // TODO: implement
     kind: matchHeading[1].toLowerCase(),
     methods: [],
     name: matchHeading[2],
@@ -293,8 +307,7 @@ co(function*(): any {
   const $ = cheerio.load(response.data);
 
   let inServices = true;
-  // $('.devsite-section-nav li li li').each(function(this: Cheerio) {
-  const selector = 'ul.devsite-nav-section li.devsite-nav-item a.devsite-nav-title';
+  const selector = 'ul.devsite-nav-section li.devsite-nav-item ul li.devsite-nav-item';
   $(selector).each(function(this: Cheerio) {
     const name = $(this).text();
 
@@ -302,7 +315,7 @@ co(function*(): any {
       inServices = false;
     } else {
       let url = $(this)
-        // .find('a[href]')
+        .find('a[href]')
         .attr('href');
       if (url) {
         url = URL.resolve(startURL, url);
