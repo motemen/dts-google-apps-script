@@ -66,9 +66,17 @@ const resolveHref = (link, url) => {
     const href = link.attr('href');
     return href ? url_1.default.resolve(url, href) : undefined;
 };
-const createProperty = (cells, typeHref) => {
+const createProperty = ($, cells, typeHref) => {
+    const propertyName = cells.eq(0);
+    const isDeprecated = $(propertyName)
+        .find('s')
+        .text().length > 0;
+    if (isDeprecated) {
+        console.error(`DEPRECATED ${propertyName.text()}`);
+    }
     return {
         doc: cells.eq(2).text(),
+        isDeprecated,
         name: cells.eq(0).text(),
         type: {
             category: categoryFromUrl(typeHref),
@@ -85,13 +93,21 @@ const addPropertiesToDecl = ($, decl, url) => {
             if (typeHref) {
                 Scraper.enqueue(typeHref);
             }
-            decl.properties.push(createProperty(cells, typeHref));
+            decl.properties.push(createProperty($, cells, typeHref));
         }
     });
 };
-const createMethod = (cells, typeHref) => {
+const createMethod = ($, cells, typeHref) => {
+    const methodName = cells.eq(0);
+    const isDeprecated = $(methodName)
+        .find('s')
+        .text().length > 0;
+    if (isDeprecated) {
+        console.error(`DEPRECATED ${methodName.text()}`);
+    }
     return {
         doc: cells.eq(2).text(),
+        isDeprecated,
         name: cells
             .eq(0)
             .text()
@@ -109,7 +125,7 @@ const getMethod = ($, cells, typeHref, url) => {
         .find('a')
         .attr('href')
         .substring(1);
-    const method = createMethod(cells, typeHref);
+    const method = createMethod($, cells, typeHref);
     $('*[id]')
         .filter(function () {
         return $(this).attr('id') === detailId;
@@ -123,7 +139,7 @@ const getMethod = ($, cells, typeHref, url) => {
             if (paramTypeHref) {
                 Scraper.enqueue(paramTypeHref);
             }
-            method.params.push(createProperty(paramCells, paramTypeHref));
+            method.params.push(createProperty($, paramCells, paramTypeHref));
         }
     });
     return method;
@@ -144,6 +160,7 @@ const addMethodsToDecl = ($, decl, url) => {
 const createDecl = ($, matchHeading, url) => {
     return {
         doc: getDoc($),
+        isDeprecated: false,
         kind: matchHeading[1].toLowerCase(),
         methods: [],
         name: matchHeading[2],
@@ -208,7 +225,7 @@ co_1.default(function* () {
     const $ = cheerio_1.default.load(response.data);
     let inServices = true;
     // $('.devsite-section-nav li li li').each(function(this: Cheerio) {
-    const selector = 'ul.devsite-nav-section li.devsite-nav-item a.devsite-nav-title';
+    const selector = 'ul.devsite-nav-section li.devsite-nav-item ul li.devsite-nav-item';
     $(selector).each(function () {
         const name = $(this).text();
         if (name === 'Classes') {
@@ -216,7 +233,7 @@ co_1.default(function* () {
         }
         else {
             let url = $(this)
-                // .find('a[href]')
+                .find('a[href]')
                 .attr('href');
             if (url) {
                 url = url_1.default.resolve(startURL, url);

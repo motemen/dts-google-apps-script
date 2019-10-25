@@ -6,6 +6,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
+const GasNamespace = 'GoogleAppsScript';
 const header = fs_1.default.readFileSync('HEADER', { encoding: 'utf-8' }).replace(/{date}/, () => {
     const date = new Date();
     return `${date.getFullYear()}-${`0${date.getMonth() + 1}`.substr(-2)}-${`0${date.getDate()}`.substr(-2)}`;
@@ -61,7 +62,7 @@ process.stdin.on('end', () => {
             return `${name}: ${typeIsEnum ? 'typeof ' : ''}${typeName}`;
         };
         references = ['types'];
-        result.push('declare namespace GoogleAppsScript {', `  export module ${categoryName} {`);
+        result.push(`declare namespace ${GasNamespace} {`, `  namespace ${categoryName} {`);
         Object.keys(decls)
             .sort()
             .forEach((declsKey) => {
@@ -72,13 +73,15 @@ process.stdin.on('end', () => {
                 const name = names.pop();
                 names.forEach((ns) => lines.push(`namespace ${ns} {`));
                 if (decl.kind === 'enum') {
-                    lines.push(`export enum ${name} { ${decl.properties.map((p) => p.name).join(', ')} }`);
+                    lines.push(`enum ${name} { ${decl.properties.map((p) => p.name).join(', ')} }`);
                 }
                 else {
-                    lines.push(`export interface ${name} {`);
-                    lines.push(...decl.properties.map((p) => `${makeTypedName(p, true)};`).map(indent));
+                    lines.push(`interface ${name} {`);
+                    lines.push(...decl.properties
+                        .map((p) => `${p.isDeprecated ? '/** @deprecated DO NOT USE */' : ''}${makeTypedName(p, true)};`)
+                        .map(indent));
                     lines.push(...decl.methods
-                        .map((method) => `${makeTypedName({
+                        .map((method) => `${method.isDeprecated ? '/** @deprecated DO NOT USE */' : ''}${makeTypedName({
                         name: `${method.name}(${method.params
                             .map(makeTypedName)
                             .join(', ')
@@ -90,7 +93,7 @@ process.stdin.on('end', () => {
                     lines.push('}');
                 }
                 names.forEach(() => lines.push('}'));
-                lines.push('');
+                // lines.push('');
                 if (data.services[decl.url]) {
                     exports[name] = true;
                 }
@@ -101,7 +104,7 @@ process.stdin.on('end', () => {
         Object.keys(exports)
             .sort()
             .forEach((declsKey) => {
-            const line = `declare var ${declsKey}: GoogleAppsScript.${categoryName}.${declsKey};`;
+            const line = `declare var ${declsKey}: ${GasNamespace}.${categoryName}.${declsKey};`;
             if (declsKey === 'MimeType') {
                 result.push('// conflicts with MimeType in lib.d.ts');
                 result.push(`// ${line}`);
