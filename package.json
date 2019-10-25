@@ -1,17 +1,20 @@
 {
-  "private": true,
+  "author": "motemen <motemen@gmail.com>",
   "name": "dts-google-apps-script",
-  "version": "1.0.0",
   "description": "",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">= 10.16.0"
+  },
   "scripts": {
     "build": "tsc --build src",
+    "format": "prettier --write src/**.ts **/*.json",
+    "lint": "tslint --project src",
     "dryrun": "npm publish --dry-run",
     "fetch": "node build/spider.js > out.json",
-    "format": "prettier --write src/**.ts **/*.json",
-    "generate": "node build/gen.js < out.json",
-    "lint": "tslint --project src"
+    "generate": "node build/gen.js < out.json"
   },
-  "author": "motemen <motemen@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.0",
@@ -21,12 +24,11 @@
   "devDependencies": {
     "@types/cheerio": "^0.22.13",
     "@types/co": "^4.6.2",
-    "@types/node": "^10.14.19",
+    "@types/node": "^10.17.0",
     "prettier": "^1.18.2",
     "tslint": "^5.20.0",
-    "tslint-config-airbnb": "^5.11.2",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.4"
   }
 }
