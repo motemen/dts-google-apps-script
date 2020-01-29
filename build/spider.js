@@ -71,9 +71,6 @@ const createProperty = ($, cells, typeHref) => {
     const isDeprecated = $(propertyName)
         .find('s')
         .text().length > 0;
-    if (isDeprecated) {
-        console.error(`DEPRECATED ${propertyName.text()}`);
-    }
     return {
         doc: cells.eq(2).text(),
         isDeprecated,
@@ -97,16 +94,15 @@ const addPropertiesToDecl = ($, decl, url) => {
         }
     });
 };
-const createMethod = ($, cells, typeHref) => {
+const createMethod = ($, cells, typeHref, methodUrl) => {
     const methodName = cells.eq(0);
     const isDeprecated = $(methodName)
         .find('s')
         .text().length > 0;
-    if (isDeprecated) {
-        console.error(`DEPRECATED ${methodName.text()}`);
-    }
     return {
         doc: cells.eq(2).text(),
+        docDetailed: '',
+        url: methodUrl,
         isDeprecated,
         name: cells
             .eq(0)
@@ -125,13 +121,34 @@ const getMethod = ($, cells, typeHref, url) => {
         .find('a')
         .attr('href')
         .substring(1);
-    const method = createMethod($, cells, typeHref);
-    $('*[id]')
+    const method = createMethod($, cells, typeHref, `${url}#${detailId}`);
+    const methodSection = $('*[id]')
         .filter(function () {
         return $(this).attr('id') === detailId;
-    })
-        .find('table.function.param tr:not(:first-child)')
+    });
+    const detailedDocsLines = [];
+    methodSection
+        .children('div')
+        .children()
         .each(function () {
+        if ($(this).is('p')) {
+            detailedDocsLines.push($(this).text());
+        }
+        else if ($(this).is('pre')) {
+            // indent code part
+            detailedDocsLines.push(`${$(this)
+                .text()
+                .split(/\n/)
+                .map((line) => `    ${line}`)
+                .join('\n')}`);
+        }
+        else {
+            return false;
+        }
+    });
+    if (detailedDocsLines.length)
+        method.docDetailed = detailedDocsLines.join('\n');
+    methodSection.find('table.function.param tr:not(:first-child)').each(function () {
         const paramCells = $(this).find('td');
         if (paramCells.length === 3) {
             const type = paramCells.eq(1);
@@ -224,7 +241,6 @@ co_1.default(function* () {
     const response = yield axios_1.default(config);
     const $ = cheerio_1.default.load(response.data);
     let inServices = true;
-    // $('.devsite-section-nav li li li').each(function(this: Cheerio) {
     const selector = 'ul.devsite-nav-section li.devsite-nav-item ul li.devsite-nav-item';
     $(selector).each(function () {
         const name = $(this).text();

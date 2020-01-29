@@ -7,6 +7,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __importDefault(require("fs"));
 const GasNamespace = 'GoogleAppsScript';
+const deprecationNotice = '/** @deprecated DO NOT USE */ ';
 const header = fs_1.default.readFileSync('HEADER', { encoding: 'utf-8' }).replace(/{date}/, () => {
     const date = new Date();
     return `${date.getFullYear()}-${`0${date.getMonth() + 1}`.substr(-2)}-${`0${date.getDate()}`.substr(-2)}`;
@@ -15,6 +16,7 @@ let input = '';
 process.stdin.on('data', (buf) => (input += buf.toString()));
 process.stdin.on('end', () => {
     const data = JSON.parse(input);
+    const indent = (text) => text.replace(/^./, '  $&');
     const makeDocComment = (docComment) => {
         const lines = [];
         lines.push('/**');
@@ -26,7 +28,18 @@ process.stdin.on('end', () => {
         lines.push(' */');
         return lines;
     };
-    const indent = (text) => text.replace(/^./, '  $&');
+    const makeMethodDoc = (method) => {
+        const { docDetailed, url, isDeprecated, params } = method;
+        if (isDeprecated)
+            return [];
+        const lines = [];
+        lines.push(`\n      /**`);
+        lines.push(...docDetailed.split('\n').map((detailLine) => `     * ${detailLine}`));
+        lines.push(`     * ${url}`);
+        params.map((param) => lines.push(`     * @param ${param.name} ${param.doc.replace(/\n\s*/g, ' ')}`));
+        lines.push('     */\n    ');
+        return lines;
+    };
     Object.keys(data.categories)
         .sort()
         .forEach((categoryKey) => {
@@ -78,18 +91,19 @@ process.stdin.on('end', () => {
                 else {
                     lines.push(`interface ${name} {`);
                     lines.push(...decl.properties
-                        .map((p) => `${p.isDeprecated ? '/** @deprecated DO NOT USE */' : ''}${makeTypedName(p, true)};`)
+                        .map((p) => `${p.isDeprecated ? deprecationNotice : ''}${makeTypedName(p, true)};`)
                         .map(indent));
-                    lines.push(...decl.methods
-                        .map((method) => `${method.isDeprecated ? '/** @deprecated DO NOT USE */' : ''}${makeTypedName({
-                        name: `${method.name}(${method.params
-                            .map(makeTypedName)
-                            .join(', ')
-                            .replace(/(\bsql:.*)\bsql:/g, '$1sql_:') // ad-hoc fix for same-named arguments in jdbc
-                        })`,
-                        type: method.returnType,
-                    })};`)
-                        .map(indent));
+                    lines.push(...decl.methods.map((method) => [
+                        makeMethodDoc(method).map(indent).join('\n'),
+                        indent(`${method.isDeprecated ? deprecationNotice : ''}${makeTypedName({
+                            name: `${method.name}(${method.params
+                                .map(makeTypedName)
+                                .join(', ')
+                                .replace(/(\bsql:.*)\bsql:/g, '$1sql_:') // ad-hoc fix for same-named arguments in jdbc
+                            })`,
+                            type: method.returnType,
+                        })};`),
+                    ].join('')));
                     lines.push('}');
                 }
                 names.forEach(() => lines.push('}'));

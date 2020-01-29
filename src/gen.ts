@@ -18,6 +18,8 @@ process.stdin.on('data', (buf) => (input += buf.toString()));
 process.stdin.on('end', () => {
   const data = JSON.parse(input);
 
+  const indent = (text: string) => text.replace(/^./, '  $&');
+
   const makeDocComment = (docComment: string) => {
     const lines: string[] = [];
     lines.push('/**');
@@ -32,7 +34,17 @@ process.stdin.on('end', () => {
     return lines;
   };
 
-  const indent = (text: string) => text.replace(/^./, '  $&');
+  const makeMethodDoc = (method: {docDetailed: string, url: string, isDeprecated: boolean, params: any}) => {
+    const { docDetailed, url, isDeprecated, params } = method;
+    if (isDeprecated) return [];
+    const lines: string[] = [];
+    lines.push(`\n      /**`);
+    lines.push(...docDetailed.split('\n').map((detailLine) => `     * ${detailLine}`));
+    lines.push(`     * ${url}`);
+    params.map((param: any) => lines.push(`     * @param ${param.name} ${param.doc.replace(/\n\s*/g, ' ')}`));
+    lines.push('     */\n    ');
+    return lines;
+  }
 
   Object.keys(data.categories)
     .sort()
@@ -101,9 +113,10 @@ process.stdin.on('end', () => {
                   .map(indent),
               );
               lines.push(
-                ...decl.methods
-                  .map(
-                    (method: any) =>
+                ...decl.methods.map((method: any) =>
+                  [
+                    makeMethodDoc(method).map(indent).join('\n'),
+                    indent(
                       `${method.isDeprecated ? deprecationNotice : ''}${makeTypedName({
                         name: `${method.name}(${
                           method.params
@@ -113,8 +126,9 @@ process.stdin.on('end', () => {
                         })`,
                         type: method.returnType,
                       })};`,
-                  )
-                  .map(indent),
+                    ),
+                  ].join(''),
+                ),
               );
               lines.push('}');
             }

@@ -28,6 +28,8 @@ interface IProperty extends INode {
 
 interface IMethod extends INode {
   params: IProperty[];
+  docDetailed: string;
+  url: string;
   returnType: IType;
 }
 
@@ -141,7 +143,6 @@ const addPropertiesToDecl = ($: CheerioStatic, decl: IDecl, url: string) => {
     if (cells.length === 3) {
       const type = cells.eq(1);
       const typeHref = resolveHref(type.find('a'), url);
-
       if (typeHref) {
         Scraper.enqueue(typeHref);
       }
@@ -151,7 +152,7 @@ const addPropertiesToDecl = ($: CheerioStatic, decl: IDecl, url: string) => {
   });
 };
 
-const createMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string | undefined): IMethod => {
+const createMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string | undefined, methodUrl: string): IMethod => {
   const methodName = cells.eq(0);
   const isDeprecated =
     $(methodName)
@@ -159,6 +160,8 @@ const createMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string | undef
       .text().length > 0;
   return {
     doc: cells.eq(2).text(),
+    docDetailed: '',
+    url: methodUrl,
     isDeprecated,
     name: cells
       .eq(0)
@@ -178,14 +181,35 @@ const getMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string | undefine
     .find('a')
     .attr('href')
     .substring(1);
-  const method = createMethod($, cells, typeHref);
-
-  $('*[id]')
+  const method = createMethod($, cells, typeHref, `${url}#${detailId}`);
+  const methodSection = $('*[id]')
     .filter(function(this: Cheerio) {
       return $(this).attr('id') === detailId;
-    })
-    .find('table.function.param tr:not(:first-child)')
+    });
+
+  const detailedDocsLines: string[] = [];
+  methodSection
+    .children('div')
+    .children()
     .each(function(this: Cheerio) {
+      if ($(this).is('p')) {
+        detailedDocsLines.push($(this).text());
+      } else if ($(this).is('pre')) {
+        // indent code part
+        detailedDocsLines.push(`${$(this)
+          .text()
+          .split(/\n/)
+          .map((line) => `    ${line}`)
+          .join('\n')}`);
+      } else {
+        return false;
+      }
+      
+    });
+
+  if (detailedDocsLines.length) method.docDetailed = detailedDocsLines.join('\n');
+
+  methodSection.find('table.function.param tr:not(:first-child)').each(function(this: Cheerio) {
       const paramCells = $(this).find('td');
       if (paramCells.length === 3) {
         const type = paramCells.eq(1);
@@ -198,7 +222,6 @@ const getMethod = ($: CheerioStatic, cells: Cheerio, typeHref: string | undefine
         method.params.push(createProperty($, paramCells, paramTypeHref));
       }
     });
-
   return method;
 };
 
