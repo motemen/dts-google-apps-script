@@ -1,17 +1,34 @@
 {
-  "name": "generate-gas-dts",
-  "version": "0.0.0",
-  "description": "",
-  "scripts": {
-    "fetch": "node --harmony spider.js > out.json",
-    "generate": "node --harmony gen.js < out.json"
-  },
   "author": "motemen <motemen@gmail.com>",
+  "name": "dts-google-apps-script",
+  "description": "",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">= 10.16.0"
+  },
+  "scripts": {
+    "build": "tsc --build src",
+    "format": "prettier --write src/**.ts **/*.json",
+    "lint": "tslint --project src",
+    "dryrun": "npm publish --dry-run",
+    "fetch": "node build/spider.js > out.json",
+    "generate": "node build/gen.js < out.json"
+  },
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^0.19.0",
-    "co": "^4.5.4",
-    "co-request": "^0.2.1"
+    "axios": "^0.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "co": "^4.6.0"
   },
-  "private": true
+  "devDependencies": {
+    "@types/cheerio": "^0.22.13",
+    "@types/co": "^4.6.2",
+    "@types/node": "^10.17.0",
+    "prettier": "^1.18.2",
+    "tslint": "^5.20.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.6.4"
+  }
 }
