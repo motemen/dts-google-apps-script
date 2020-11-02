@@ -167,7 +167,7 @@ co(function* () {
   var $ = cheerio.load(result.body);
 
   var inServices = true;
-  $('.devsite-section-nav li li li').each(function () {
+  $('.devsite-nav-item.devsite-nav-expandable.devsite-nav-accordion li li').each(function () {
     var name = $(this).text();
 
     if (name === 'Classes') {
