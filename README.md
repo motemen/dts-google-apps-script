@@ -1,3 +1,5 @@
+# DEPRECATED; use [@types/google-apps-script](https://www.npmjs.com/package/@types/google-apps-script)
+
 # dts-google-apps-script
 
 d.ts files generator for [Google Apps Script](https://developers.google.com/apps-script/)
